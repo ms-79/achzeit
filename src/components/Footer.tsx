@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import logoAchzeit from '@/assets/logo-achzeit.png';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -10,12 +11,11 @@ const Footer = () => {
         <div className="text-center">
           {/* Logo */}
           <div className="mb-6">
-            <h3 className="font-display text-3xl md:text-4xl font-semibold tracking-wider">
-              ACHZEIT
-            </h3>
-            <p className="text-xs tracking-[0.3em] uppercase text-primary-foreground/70 mt-1">
-              Family Retreat
-            </p>
+            <img 
+              src={logoAchzeit} 
+              alt="ACHZEIT" 
+              className="h-14 md:h-16 w-auto mx-auto brightness-0 invert"
+            />
           </div>
 
           {/* Tagline */}

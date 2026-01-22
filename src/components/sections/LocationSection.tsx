@@ -1,5 +1,8 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { MapPin, Mountain, TreePine, Snowflake } from 'lucide-react';
+import locationVillage from '@/assets/location-village.jpg';
+import locationRiver from '@/assets/location-river.jpg';
+import locationCountryside from '@/assets/location-countryside.jpg';
 
 const LocationSection = () => {
   const { t } = useLanguage();
@@ -8,6 +11,12 @@ const LocationSection = () => {
     { icon: Mountain, label: 'Hiking' },
     { icon: Snowflake, label: 'Skiing' },
     { icon: TreePine, label: 'Nature' },
+  ];
+
+  const locationImages = [
+    { src: locationVillage, alt: 'St. Verena Kirche, Fischen im Allgäu' },
+    { src: locationRiver, alt: 'Iller River, Fischen im Allgäu' },
+    { src: locationCountryside, alt: 'Alpine Meadows, Fischen im Allgäu' },
   ];
 
   return (
@@ -23,6 +32,19 @@ const LocationSection = () => {
             {t('location.subtitle')}
           </p>
           <div className="alpine-divider mt-6" />
+        </div>
+
+        {/* Location Images Gallery */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          {locationImages.map((image, index) => (
+            <div key={index} className="aspect-[4/3] rounded-lg overflow-hidden shadow-medium">
+              <img 
+                src={image.src} 
+                alt={image.alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          ))}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">

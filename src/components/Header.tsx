@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import logoAchzeit from '@/assets/logo-achzeit.png';
 
 const Header = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -46,18 +47,15 @@ const Header = () => {
         {/* Logo */}
         <button
           onClick={() => scrollToSection('#home')}
-          className="flex flex-col items-start"
+          className="flex items-center"
         >
-          <span className={`font-display text-2xl md:text-3xl font-semibold tracking-wider transition-colors duration-300 ${
-            isScrolled ? 'text-foreground' : 'text-alpine-snow'
-          }`}>
-            ACHZEIT
-          </span>
-          <span className={`text-xs tracking-[0.3em] uppercase transition-colors duration-300 ${
-            isScrolled ? 'text-muted-foreground' : 'text-alpine-snow/80'
-          }`}>
-            Family Retreat
-          </span>
+          <img 
+            src={logoAchzeit} 
+            alt="ACHZEIT" 
+            className={`h-10 md:h-12 w-auto transition-all duration-300 ${
+              isScrolled ? '' : 'brightness-0 invert'
+            }`}
+          />
         </button>
 
         {/* Desktop Navigation */}
