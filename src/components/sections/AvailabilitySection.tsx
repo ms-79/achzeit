@@ -1,7 +1,52 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useEffect } from 'react';
 
 const AvailabilitySection = () => {
   const { t } = useLanguage();
+
+  useEffect(() => {
+    // Load the Hostaway calendar script
+    const script = document.createElement('script');
+    script.src = 'https://d2q3n06xhbi0am.cloudfront.net/calendar.js';
+    script.async = true;
+    script.onload = () => {
+      // Initialize the widget after script loads
+      if ((window as any).hostawayCalendarWidget) {
+        (window as any).hostawayCalendarWidget({
+          baseUrl: 'https://achzeit.holidayfuture.com/',
+          listingId: 463607,
+          numberOfMonths: 2,
+          openInNewTab: true,
+          font: 'Inter',
+          rounded: true,
+          button: {
+            action: 'checkout',
+            text: t('availability.bookNow') || 'Jetzt buchen',
+          },
+          clearButtonText: t('availability.clearDates') || 'Daten löschen',
+          color: {
+            mainColor: '#2d5a27',
+            frameColor: '#1a1a1a',
+            textColor: '#1a1a1a',
+          },
+        });
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script on unmount
+      const existingScript = document.querySelector(`script[src="${script.src}"]`);
+      if (existingScript) {
+        existingScript.remove();
+      }
+      // Clear the widget container
+      const container = document.getElementById('hostaway-calendar-widget');
+      if (container) {
+        container.innerHTML = '';
+      }
+    };
+  }, [t]);
 
   return (
     <section id="availability" className="section-padding bg-gradient-section">
@@ -17,16 +62,10 @@ const AvailabilitySection = () => {
           <div className="alpine-divider mt-6" />
         </div>
 
-        {/* Hostaway Calendar Embed */}
+        {/* Hostaway Calendar Widget */}
         <div className="max-w-4xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
-          <div className="bg-card rounded-lg shadow-medium overflow-hidden border border-border/50">
-            <iframe
-              src="https://achzeit.holidayfuture.com/listings/463607"
-              className="w-full h-[600px] md:h-[700px]"
-              title="ACHZEIT Availability Calendar"
-              frameBorder="0"
-              loading="lazy"
-            />
+          <div className="bg-card rounded-lg shadow-medium overflow-hidden border border-border/50 p-6">
+            <div id="hostaway-calendar-widget" />
           </div>
         </div>
       </div>
