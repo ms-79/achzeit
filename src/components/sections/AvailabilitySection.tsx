@@ -21,9 +21,9 @@ const AvailabilitySection = () => {
           rounded: true,
           button: {
             action: 'checkout',
-            text: t('availability.bookNow') || 'Jetzt buchen',
+            text: t('availability.apply'),
           },
-          clearButtonText: t('availability.clearDates') || 'Daten löschen',
+          clearButtonText: t('availability.clearDates'),
           color: {
             mainColor: '#2d5a27',
             frameColor: '#1a1a1a',
