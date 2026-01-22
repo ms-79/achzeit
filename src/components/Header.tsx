@@ -60,7 +60,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navItems.map((item) => (
+          {navItems.filter(item => item.key !== 'nav.book').map((item) => (
             <button
               key={item.key}
               onClick={() => scrollToSection(item.href)}
@@ -73,7 +73,7 @@ const Header = () => {
           ))}
           
           {/* Language Toggle */}
-          <div className="flex items-center gap-1 ml-4">
+          <div className="flex items-center gap-1 ml-2">
             <button
               onClick={() => setLanguage('de')}
               className={`text-sm px-2 py-1 rounded transition-all ${
@@ -95,6 +95,14 @@ const Header = () => {
               EN
             </button>
           </div>
+
+          {/* Book Button - Always visible */}
+          <Button
+            onClick={() => scrollToSection('#booking')}
+            className="ml-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+          >
+            {t('nav.book')}
+          </Button>
         </nav>
 
         {/* Mobile Menu Button */}
