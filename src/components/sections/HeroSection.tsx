@@ -63,20 +63,12 @@ const HeroSection = () => {
             {t('hero.description')}
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* CTA Button */}
+          <div className="flex justify-center">
             <Button
               variant="hero"
               size="lg"
               onClick={() => scrollToSection('#availability')}
-              className="text-base tracking-wide"
-            >
-              {t('hero.cta.availability')}
-            </Button>
-            <Button
-              variant="heroOutline"
-              size="lg"
-              onClick={() => scrollToSection('#booking')}
               className="text-base tracking-wide"
             >
               {t('hero.cta.book')}
