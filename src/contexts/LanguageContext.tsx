@@ -61,6 +61,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Availability
     'availability.title': 'Verfügbarkeit',
     'availability.subtitle': 'Prüfen Sie freie Termine',
+    'availability.clearDates': 'Daten löschen',
+    'availability.apply': 'Anwenden',
     
     // Booking
     'booking.title': 'Jetzt Buchen',
@@ -136,6 +138,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Availability
     'availability.title': 'Availability',
     'availability.subtitle': 'Check Available Dates',
+    'availability.clearDates': 'Clear dates',
+    'availability.apply': 'Apply',
     
     // Booking
     'booking.title': 'Book Now',
