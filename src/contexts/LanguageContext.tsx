@@ -49,7 +49,7 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.kitchen': 'Küche & Essen',
     'gallery.bedrooms': 'Schlafzimmer',
     'gallery.bathrooms': 'Badezimmer',
-    'gallery.sauna': 'Sauna & Wellness',
+    'gallery.sauna': 'Badezimmer en Suite / Schlafzimmer 1',
     'gallery.garden': 'Garten & Außenbereich',
     
     // Availability
@@ -118,7 +118,7 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.kitchen': 'Kitchen & Dining',
     'gallery.bedrooms': 'Bedrooms',
     'gallery.bathrooms': 'Bathrooms',
-    'gallery.sauna': 'Sauna & Wellness',
+    'gallery.sauna': 'En Suite Bathroom / Bedroom 1',
     'gallery.garden': 'Garden & Exterior',
     
     // Availability
