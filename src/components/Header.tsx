@@ -105,15 +105,24 @@ const Header = () => {
           </Button>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={`lg:hidden p-2 transition-colors ${
-            isScrolled ? 'text-foreground' : 'text-alpine-snow'
-          }`}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile: Book Button + Menu Button */}
+        <div className="lg:hidden flex items-center gap-2">
+          <Button
+            onClick={() => scrollToSection('#booking')}
+            size="sm"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+          >
+            {t('nav.book')}
+          </Button>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className={`p-2 transition-colors ${
+              isScrolled ? 'text-foreground' : 'text-alpine-snow'
+            }`}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
