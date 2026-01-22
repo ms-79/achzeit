@@ -139,7 +139,7 @@ const GallerySection = () => {
           <img
             src={galleryItems[selectedIndex].src}
             alt={t(galleryItems[selectedIndex].labelKey)}
-            className="max-w-full max-h-[85vh] object-contain rounded"
+            className="max-w-full max-h-[75vh] object-contain rounded"
             onClick={(e) => e.stopPropagation()}
           />
 
@@ -151,9 +151,14 @@ const GallerySection = () => {
             <ChevronRight size={32} />
           </button>
 
-          {/* Image counter */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-alpine-snow/80 text-sm">
-            {selectedIndex + 1} / {galleryItems.length}
+          {/* Image description and counter */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
+            <p className="text-alpine-snow font-medium text-lg mb-1">
+              {t(galleryItems[selectedIndex].labelKey)}
+            </p>
+            <span className="text-alpine-snow/60 text-sm">
+              {selectedIndex + 1} / {galleryItems.length}
+            </span>
           </div>
         </div>
       )}
