@@ -1,10 +1,21 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
-import heroImage from '@/assets/hero-alpine-house.jpg';
+import heroWinter from '@/assets/hero-winter.webp';
+import heroSummer from '@/assets/hero-summer.jpg';
+import logoAchzeit from '@/assets/logo-achzeit.png';
 
 const HeroSection = () => {
   const { t } = useLanguage();
+
+  // Determine which hero image to show based on current month
+  // Winter: October (10) - March (3)
+  // Summer: April (4) - September (9)
+  const getSeasonalHeroImage = () => {
+    const month = new Date().getMonth() + 1; // getMonth() returns 0-11
+    const isWinter = month >= 10 || month <= 3;
+    return isWinter ? heroWinter : heroSummer;
+  };
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -18,8 +29,8 @@ const HeroSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
-          alt="ACHZEIT Family Retreat - Modern Alpine House"
+          src={getSeasonalHeroImage()}
+          alt="ACHZEIT Family Retreat - Alpine House"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-alpine-charcoal/60 via-alpine-charcoal/40 to-alpine-charcoal/70" />
@@ -28,15 +39,19 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto animate-fade-up">
-          {/* Logo Mark */}
-          <div className="mb-8">
-            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-semibold text-alpine-snow tracking-wider">
-              {t('hero.title')}
-            </h1>
-            <p className="text-lg md:text-xl tracking-[0.4em] uppercase text-alpine-snow/80 mt-2">
-              {t('hero.subtitle')}
-            </p>
+          {/* Logo */}
+          <div className="mb-8 flex justify-center">
+            <img
+              src={logoAchzeit}
+              alt="ACHZEIT"
+              className="w-48 sm:w-56 md:w-64 lg:w-72 h-auto"
+            />
           </div>
+
+          {/* Subtitle */}
+          <p className="text-lg md:text-xl tracking-[0.4em] uppercase text-alpine-snow/80 mb-6">
+            {t('hero.subtitle')}
+          </p>
 
           {/* Divider */}
           <div className="w-24 h-px bg-alpine-snow/40 mx-auto mb-8" />
