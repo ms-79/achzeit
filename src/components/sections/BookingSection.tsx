@@ -1,7 +1,42 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useEffect } from 'react';
 
 const BookingSection = () => {
   const { t } = useLanguage();
+
+  useEffect(() => {
+    // Load the Hostaway search bar script
+    const script = document.createElement('script');
+    script.src = 'https://d2q3n06xhbi0am.cloudfront.net/widget.js?1640277196';
+    script.async = true;
+    script.onload = () => {
+      // Initialize the search bar widget after script loads
+      if ((window as any).searchBar) {
+        (window as any).searchBar({
+          baseUrl: 'https://achzeit.holidayfuture.com/',
+          showLocation: true,
+          color: '#2d5a27',
+          rounded: true,
+          openInNewTab: true,
+          font: 'Inter',
+        });
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script on unmount
+      const existingScript = document.querySelector(`script[src="${script.src}"]`);
+      if (existingScript) {
+        existingScript.remove();
+      }
+      // Clear the widget container
+      const container = document.getElementById('hostaway-booking-widget');
+      if (container) {
+        container.innerHTML = '';
+      }
+    };
+  }, []);
 
   return (
     <section id="booking" className="section-padding bg-background">
@@ -17,16 +52,10 @@ const BookingSection = () => {
           <div className="alpine-divider mt-6" />
         </div>
 
-        {/* Hostaway Booking Engine Embed */}
+        {/* Hostaway Search Bar Widget */}
         <div className="max-w-4xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
-          <div className="bg-card rounded-lg shadow-medium overflow-hidden border border-border/50">
-            <iframe
-              src="https://achzeit.holidayfuture.com/listings/463607"
-              className="w-full h-[700px] md:h-[800px]"
-              title="ACHZEIT Booking Engine"
-              frameBorder="0"
-              loading="lazy"
-            />
+          <div className="bg-card rounded-lg shadow-medium overflow-hidden border border-border/50 p-6">
+            <div id="hostaway-booking-widget" />
           </div>
         </div>
       </div>
