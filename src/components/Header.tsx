@@ -43,19 +43,20 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <button
-          onClick={() => scrollToSection('#home')}
-          className="flex items-center"
-        >
-          <img 
-            src={logoAchzeit} 
-            alt="ACHZEIT" 
-            className={`h-10 md:h-12 w-auto transition-all duration-300 ${
-              isScrolled ? '' : 'brightness-0 invert'
-            }`}
-          />
-        </button>
+        {/* Logo - only visible when scrolled */}
+        {isScrolled && (
+          <button
+            onClick={() => scrollToSection('#home')}
+            className="flex items-center"
+          >
+            <img 
+              src={logoAchzeit} 
+              alt="ACHZEIT" 
+              className="h-10 md:h-12 w-auto transition-all duration-300"
+            />
+          </button>
+        )}
+        {!isScrolled && <div className="h-10 md:h-12" />}
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
