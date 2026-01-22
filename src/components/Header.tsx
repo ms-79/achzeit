@@ -22,7 +22,6 @@ const Header = () => {
     { key: 'nav.house', href: '#house' },
     { key: 'nav.gallery', href: '#gallery' },
     { key: 'nav.availability', href: '#availability' },
-    { key: 'nav.book', href: '#booking' },
     { key: 'nav.location', href: '#location' },
     { key: 'nav.contact', href: '#contact' },
   ];
@@ -98,7 +97,7 @@ const Header = () => {
 
           {/* Book Button - Always visible */}
           <Button
-            onClick={() => scrollToSection('#booking')}
+            onClick={() => scrollToSection('#availability')}
             className="ml-2 bg-primary hover:bg-primary/90 text-primary-foreground"
           >
             {t('nav.book')}
@@ -108,7 +107,7 @@ const Header = () => {
         {/* Mobile: Book Button + Menu Button */}
         <div className="lg:hidden flex items-center gap-2">
           <Button
-            onClick={() => scrollToSection('#booking')}
+            onClick={() => scrollToSection('#availability')}
             size="sm"
             className="bg-primary hover:bg-primary/90 text-primary-foreground"
           >
