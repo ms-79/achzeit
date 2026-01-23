@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import ScrollReveal from '@/components/ScrollReveal';
+import { motion } from 'framer-motion';
 
 // Living & Fireplace
 import galleryLiving from '@/assets/gallery-living.jpg';
@@ -8,7 +10,6 @@ import galleryLivingSofa from '@/assets/gallery-living-sofa.jpg';
 
 // Kitchen
 import galleryKitchen from '@/assets/gallery-kitchen.jpg';
-import galleryKitchenBora from '@/assets/gallery-kitchen-bora.jpg';
 import galleryKitchenSmeg from '@/assets/gallery-kitchen-smeg.jpg';
 
 // Bedrooms
@@ -77,7 +78,7 @@ const GallerySection = () => {
     <section id="gallery" className="section-padding bg-background">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-up">
+        <ScrollReveal className="text-center mb-16">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
             {t('gallery.title')}
           </h2>
@@ -85,13 +86,21 @@ const GallerySection = () => {
             {t('gallery.subtitle')}
           </p>
           <div className="alpine-divider mt-6" />
-        </div>
+        </ScrollReveal>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {galleryItems.map((item, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.05,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
               className={`${item.span} relative group cursor-pointer overflow-hidden rounded`}
               onClick={() => setSelectedIndex(index)}
             >
@@ -108,7 +117,7 @@ const GallerySection = () => {
                   {t(item.labelKey)}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

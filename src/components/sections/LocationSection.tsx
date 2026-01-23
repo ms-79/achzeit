@@ -3,6 +3,8 @@ import { MapPin, Mountain, TreePine, Snowflake } from 'lucide-react';
 import locationVillage from '@/assets/location-village.jpg';
 import locationRiver from '@/assets/location-river.jpg';
 import locationCountryside from '@/assets/location-countryside.jpg';
+import ScrollReveal from '@/components/ScrollReveal';
+import { motion } from 'framer-motion';
 
 const LocationSection = () => {
   const { t } = useLanguage();
@@ -23,7 +25,7 @@ const LocationSection = () => {
     <section id="location" className="section-padding bg-gradient-section">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-12 animate-fade-up">
+        <ScrollReveal className="text-center mb-12">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
             {t('location.title')}
           </h2>
@@ -32,24 +34,35 @@ const LocationSection = () => {
             {t('location.subtitle')}
           </p>
           <div className="alpine-divider mt-6" />
-        </div>
+        </ScrollReveal>
 
         {/* Location Images Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
           {locationImages.map((image, index) => (
-            <div key={index} className="aspect-[4/3] rounded-lg overflow-hidden shadow-medium">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
+              className="aspect-[4/3] rounded-lg overflow-hidden shadow-medium"
+            >
               <img 
                 src={image.src} 
                 alt={image.alt}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
-            </div>
+            </motion.div>
           ))}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Map */}
-          <div className="animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <ScrollReveal direction="left" delay={0.1}>
             <a 
               href="https://maps.app.goo.gl/N46eWmKxw8XKva8G9" 
               target="_blank" 
@@ -66,10 +79,10 @@ const LocationSection = () => {
                 title="ACHZEIT - Achweg 5a, Fischen im Allgäu"
               />
             </a>
-          </div>
+          </ScrollReveal>
 
           {/* Description */}
-          <div className="animate-fade-up" style={{ animationDelay: '0.4s' }}>
+          <ScrollReveal direction="right" delay={0.2}>
             <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-8 font-light">
               {t('location.description')}
             </p>
@@ -77,15 +90,26 @@ const LocationSection = () => {
             {/* Activity Highlights */}
             <div className="flex gap-6">
               {highlights.map((item, index) => (
-                <div key={index} className="flex flex-col items-center gap-2 text-center">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 0.4, 
+                    delay: 0.3 + index * 0.1,
+                    ease: [0.25, 0.1, 0.25, 1]
+                  }}
+                  className="flex flex-col items-center gap-2 text-center"
+                >
                   <div className="w-16 h-16 rounded-full bg-card border border-border/50 flex items-center justify-center shadow-soft">
                     <item.icon className="w-7 h-7 text-alpine-wood" />
                   </div>
                   <span className="text-sm font-medium text-muted-foreground">{item.label}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
