@@ -88,63 +88,61 @@ const handler = async (req: Request): Promise<Response> => {
     if (guests) fullMessage += `Gäste: ${guests}\n`;
     fullMessage += `\nNachricht:\n${message}`;
 
-    // Create a new conversation/inquiry in Hostaway
-    const hostawayResponse = await fetch(
-      "https://api.hostaway.com/v1/conversations",
+    // Generate placeholder dates if not provided (required by Hostaway)
+    // Use tomorrow and day after as placeholder for inquiries without dates
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 30); // 30 days from now
+    const dayAfter = new Date(tomorrow);
+    dayAfter.setDate(dayAfter.getDate() + 7); // 7 days stay
+
+    const formatDate = (date: Date) => date.toISOString().split('T')[0];
+    
+    const effectiveArrivalDate = arrivalDate || formatDate(tomorrow);
+    const effectiveDepartureDate = departureDate || formatDate(dayAfter);
+
+    // Create a reservation inquiry in Hostaway
+    console.log("Creating reservation inquiry...");
+    const reservationBody = {
+      listingMapId: 463607,
+      channelId: 2000, // Direct/Website channel
+      source: "manual",
+      guestName: name,
+      guestFirstName: name.split(' ')[0],
+      guestLastName: name.split(' ').slice(1).join(' ') || name,
+      guestEmail: email,
+      guestPhone: phone || "",
+      status: "inquiry",
+      arrivalDate: effectiveArrivalDate,
+      departureDate: effectiveDepartureDate,
+      numberOfGuests: guests || 1,
+      adults: guests || 1,
+      children: 0,
+      infants: 0,
+      pets: 0,
+      guestNote: fullMessage,
+      hostNote: arrivalDate ? "" : "HINWEIS: Kunde hat keine Daten angegeben - Platzhalterdaten verwendet.",
+    };
+
+    console.log("Reservation body:", JSON.stringify(reservationBody));
+
+    const inquiryResponse = await fetch(
+      "https://api.hostaway.com/v1/reservations",
       {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          listingMapId: 463607,
-          guestName: name,
-          guestEmail: email,
-          guestPhone: phone || "",
-          body: fullMessage,
-          channelId: 2000, // Direct/Website channel
-          isInquiry: true,
-        }),
+        body: JSON.stringify(reservationBody),
       }
     );
 
-    const responseText = await hostawayResponse.text();
-    console.log("Hostaway response:", hostawayResponse.status, responseText);
+    const inquiryText = await inquiryResponse.text();
+    console.log("Inquiry response:", inquiryResponse.status, inquiryText);
 
-    if (!hostawayResponse.ok) {
-      // Try alternative: create a reservation inquiry
-      console.log("Trying reservation inquiry endpoint...");
-      const inquiryResponse = await fetch(
-        "https://api.hostaway.com/v1/reservations",
-        {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            listingMapId: 463607,
-            channelId: 2000,
-            guestName: name,
-            guestEmail: email,
-            guestPhone: phone || "",
-            status: "inquiry",
-            source: "website",
-            arrivalDate: arrivalDate || null,
-            departureDate: departureDate || null,
-            numberOfGuests: guests || 1,
-            guestNote: fullMessage,
-          }),
-        }
-      );
-
-      const inquiryText = await inquiryResponse.text();
-      console.log("Inquiry response:", inquiryResponse.status, inquiryText);
-
-      if (!inquiryResponse.ok) {
-        throw new Error(`Hostaway API error: ${inquiryResponse.status} - ${inquiryText}`);
-      }
+    if (!inquiryResponse.ok) {
+      throw new Error(`Hostaway API error: ${inquiryResponse.status} - ${inquiryText}`);
     }
 
     console.log("Message sent to Hostaway successfully");
