@@ -1,1 +1,4 @@
 project_id = "ubtfmbzlpywvtljkxooy"
+
+[functions.hostaway-contact]
+verify_jwt = false
