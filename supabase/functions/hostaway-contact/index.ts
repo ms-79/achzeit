@@ -15,6 +15,36 @@ interface ContactRequest {
   guests?: number;
 }
 
+interface TokenResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+}
+
+async function getAccessToken(accountId: string, apiKey: string): Promise<string> {
+  const response = await fetch("https://api.hostaway.com/v1/accessTokens", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      grant_type: "client_credentials",
+      client_id: accountId,
+      client_secret: apiKey,
+      scope: "general",
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Failed to get access token:", response.status, errorText);
+    throw new Error(`Failed to authenticate with Hostaway: ${response.status}`);
+  }
+
+  const data: TokenResponse = await response.json();
+  return data.access_token;
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -23,8 +53,13 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const HOSTAWAY_API_KEY = Deno.env.get("HOSTAWAY_API_KEY");
+    const HOSTAWAY_ACCOUNT_ID = Deno.env.get("HOSTAWAY_ACCOUNT_ID");
+    
     if (!HOSTAWAY_API_KEY) {
       throw new Error("HOSTAWAY_API_KEY is not configured");
+    }
+    if (!HOSTAWAY_ACCOUNT_ID) {
+      throw new Error("HOSTAWAY_ACCOUNT_ID is not configured");
     }
 
     const body: ContactRequest = await req.json();
@@ -38,6 +73,11 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
+    // Get OAuth access token
+    console.log("Getting access token...");
+    const accessToken = await getAccessToken(HOSTAWAY_ACCOUNT_ID, HOSTAWAY_API_KEY);
+    console.log("Access token obtained successfully");
+
     // Build the message content for Hostaway
     let fullMessage = `Neue Anfrage von der Website:\n\n`;
     fullMessage += `Name: ${name}\n`;
@@ -48,14 +88,13 @@ const handler = async (req: Request): Promise<Response> => {
     if (guests) fullMessage += `Gäste: ${guests}\n`;
     fullMessage += `\nNachricht:\n${message}`;
 
-    // Send to Hostaway Inbox API
-    // Using the conversations/messages endpoint to create a new conversation
+    // Create a new conversation/inquiry in Hostaway
     const hostawayResponse = await fetch(
       "https://api.hostaway.com/v1/conversations",
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${HOSTAWAY_API_KEY}`,
+          "Authorization": `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -70,32 +109,41 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
 
+    const responseText = await hostawayResponse.text();
+    console.log("Hostaway response:", hostawayResponse.status, responseText);
+
     if (!hostawayResponse.ok) {
-      const errorText = await hostawayResponse.text();
-      console.error("Hostaway API error:", hostawayResponse.status, errorText);
-      
-      // Try alternative endpoint for creating inbox messages
-      const altResponse = await fetch(
-        `https://api.hostaway.com/v1/listings/463607/inbox`,
+      // Try alternative: create a reservation inquiry
+      console.log("Trying reservation inquiry endpoint...");
+      const inquiryResponse = await fetch(
+        "https://api.hostaway.com/v1/reservations",
         {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${HOSTAWAY_API_KEY}`,
+            "Authorization": `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            listingMapId: 463607,
+            channelId: 2000,
             guestName: name,
             guestEmail: email,
             guestPhone: phone || "",
-            message: fullMessage,
+            status: "inquiry",
+            source: "website",
+            arrivalDate: arrivalDate || null,
+            departureDate: departureDate || null,
+            numberOfGuests: guests || 1,
+            guestNote: fullMessage,
           }),
         }
       );
 
-      if (!altResponse.ok) {
-        const altErrorText = await altResponse.text();
-        console.error("Hostaway alt API error:", altResponse.status, altErrorText);
-        throw new Error(`Hostaway API error: ${altResponse.status}`);
+      const inquiryText = await inquiryResponse.text();
+      console.log("Inquiry response:", inquiryResponse.status, inquiryText);
+
+      if (!inquiryResponse.ok) {
+        throw new Error(`Hostaway API error: ${inquiryResponse.status} - ${inquiryText}`);
       }
     }
 
