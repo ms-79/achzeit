@@ -3,13 +3,10 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Send, CheckCircle, Loader2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-import { toast } from 'sonner';
+import { Send, CheckCircle } from 'lucide-react';
 
 const ContactSection = () => {
   const { t, language } = useLanguage();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -18,38 +15,27 @@ const ContactSection = () => {
     message: '',
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { data, error } = await supabase.functions.invoke('hostaway-contact', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || undefined,
-          message: formData.message,
-        },
-      });
-
-      if (error) throw error;
-
-      setIsSubmitted(true);
-      toast.success(
-        language === 'de' 
-          ? 'Ihre Anfrage wurde erfolgreich gesendet!' 
-          : 'Your inquiry has been sent successfully!'
-      );
-    } catch (error: any) {
-      console.error('Contact form error:', error);
-      toast.error(
-        language === 'de'
-          ? 'Fehler beim Senden. Bitte versuchen Sie es erneut.'
-          : 'Error sending message. Please try again.'
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
+    
+    // Build email body
+    let body = `Name: ${formData.name}\n`;
+    body += `E-Mail: ${formData.email}\n`;
+    if (formData.phone) body += `Telefon: ${formData.phone}\n`;
+    body += `\nNachricht:\n${formData.message}`;
+    
+    // Create mailto link
+    const subject = encodeURIComponent(
+      language === 'de' 
+        ? `Anfrage von ${formData.name} - Achzeit Website`
+        : `Inquiry from ${formData.name} - Achzeit Website`
+    );
+    const encodedBody = encodeURIComponent(body);
+    
+    // Open email client
+    window.location.href = `mailto:info@achzeit.de?subject=${subject}&body=${encodedBody}`;
+    
+    setIsSubmitted(true);
   };
 
   return (
@@ -72,13 +58,20 @@ const ContactSection = () => {
             <div className="text-center py-12 bg-card rounded-lg border border-border/50 shadow-soft">
               <CheckCircle className="w-16 h-16 text-alpine-forest mx-auto mb-4" />
               <p className="text-xl text-foreground font-medium">
-                {language === 'de' ? 'Vielen Dank für Ihre Anfrage!' : 'Thank you for your inquiry!'}
+                {language === 'de' ? 'Ihr E-Mail-Programm wurde geöffnet!' : 'Your email client has been opened!'}
               </p>
               <p className="text-muted-foreground mt-2">
                 {language === 'de' 
-                  ? 'Wir melden uns schnellstmöglich bei Ihnen.' 
-                  : 'We will get back to you as soon as possible.'}
+                  ? 'Bitte senden Sie die E-Mail ab, um Ihre Anfrage zu übermitteln.' 
+                  : 'Please send the email to submit your inquiry.'}
               </p>
+              <Button
+                variant="outline"
+                className="mt-4"
+                onClick={() => setIsSubmitted(false)}
+              >
+                {language === 'de' ? 'Neue Anfrage' : 'New Inquiry'}
+              </Button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -148,24 +141,12 @@ const ContactSection = () => {
                 variant="alpine" 
                 size="lg" 
                 className="w-full"
-                disabled={isSubmitting}
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    {language === 'de' ? 'Wird gesendet...' : 'Sending...'}
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4 mr-2" />
-                    {language === 'de' ? 'Anfrage senden' : 'Send Inquiry'}
-                  </>
-                )}
+                <Send className="w-4 h-4 mr-2" />
+                {language === 'de' ? 'Anfrage senden' : 'Send Inquiry'}
               </Button>
             </form>
           )}
-
-          {/* Direct Email */}
         </div>
       </div>
     </section>
