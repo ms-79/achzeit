@@ -6,12 +6,23 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
+import { Cookie, Shield, BarChart3, Megaphone, Cog } from 'lucide-react';
+import {
+  COOKIE_CATEGORIES,
+  CONSENT_STORAGE_KEY,
+  type CookieConsent,
+} from '@/constants/legal';
+import { getStoredConsent } from '@/components/CookieConsentBanner';
 
 const CookieSettingsContent = () => {
   const { language } = useLanguage();
-  const [necessary, setNecessary] = useState(true);
-  const [functional, setFunctional] = useState(false);
-  const [analytics, setAnalytics] = useState(false);
+  const [consent, setConsent] = useState<CookieConsent>({
+    necessary: true,
+    functional: false,
+    statistics: false,
+    marketing: false,
+    timestamp: '',
+  });
 
   useEffect(() => {
     // Set noindex meta tag
@@ -19,116 +30,186 @@ const CookieSettingsContent = () => {
     metaRobots.name = 'robots';
     metaRobots.content = 'noindex, nofollow';
     document.head.appendChild(metaRobots);
+
+    // Load stored consent
+    const stored = getStoredConsent();
+    if (stored) {
+      setConsent(stored);
+    }
     
     return () => {
       document.head.removeChild(metaRobots);
     };
   }, []);
 
+  const saveConsent = (newConsent: CookieConsent) => {
+    const consentWithTimestamp = {
+      ...newConsent,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(consentWithTimestamp));
+    setConsent(consentWithTimestamp);
+    window.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consentWithTimestamp }));
+  };
+
   const handleSaveSettings = () => {
-    localStorage.setItem('cookie-consent', JSON.stringify({
-      necessary: true,
-      functional,
-      analytics,
-      timestamp: new Date().toISOString()
-    }));
+    saveConsent(consent);
     toast.success(language === 'de' ? 'Einstellungen gespeichert' : 'Settings saved');
   };
 
   const handleAcceptAll = () => {
-    setFunctional(true);
-    setAnalytics(true);
-    localStorage.setItem('cookie-consent', JSON.stringify({
+    const allAccepted = {
       necessary: true,
       functional: true,
-      analytics: true,
-      timestamp: new Date().toISOString()
-    }));
+      statistics: true,
+      marketing: true,
+      timestamp: '',
+    };
+    saveConsent(allAccepted);
     toast.success(language === 'de' ? 'Alle Cookies akzeptiert' : 'All cookies accepted');
   };
 
   const handleNecessaryOnly = () => {
-    setFunctional(false);
-    setAnalytics(false);
-    localStorage.setItem('cookie-consent', JSON.stringify({
+    const necessaryOnly = {
       necessary: true,
       functional: false,
-      analytics: false,
-      timestamp: new Date().toISOString()
-    }));
+      statistics: false,
+      marketing: false,
+      timestamp: '',
+    };
+    saveConsent(necessaryOnly);
     toast.success(language === 'de' ? 'Nur notwendige Cookies aktiv' : 'Only necessary cookies active');
   };
+
+  const toggleCategory = (category: keyof Omit<CookieConsent, 'timestamp'>) => {
+    if (category === 'necessary') return;
+    setConsent(prev => ({
+      ...prev,
+      [category]: !prev[category],
+    }));
+  };
+
+  const categoryIcons = {
+    necessary: Shield,
+    functional: Cog,
+    statistics: BarChart3,
+    marketing: Megaphone,
+  };
+
+  const t = {
+    de: {
+      title: 'Cookie-Einstellungen',
+      intro: 'Diese Website verwendet Cookies, um Funktionen wie Buchungskalender, Karten und Analyse zu ermöglichen. Sie können Ihre Einwilligung jederzeit anpassen.',
+      whatAreCookies: 'Was sind Cookies?',
+      whatAreCookiesText: 'Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden. Sie helfen dabei, die Website zu verbessern und bestimmte Funktionen bereitzustellen.',
+      categories: 'Cookie-Kategorien',
+      required: 'Erforderlich',
+      saveSettings: 'Einstellungen speichern',
+      acceptAll: 'Alle akzeptieren',
+      necessaryOnly: 'Nur notwendige',
+      lastUpdated: 'Zuletzt aktualisiert',
+      notYetSet: 'Noch nicht festgelegt',
+    },
+    en: {
+      title: 'Cookie Settings',
+      intro: 'This website uses cookies to enable features like booking calendar, maps, and analytics. You can adjust your consent at any time.',
+      whatAreCookies: 'What are Cookies?',
+      whatAreCookiesText: 'Cookies are small text files stored on your device. They help improve the website and provide certain features.',
+      categories: 'Cookie Categories',
+      required: 'Required',
+      saveSettings: 'Save Settings',
+      acceptAll: 'Accept All',
+      necessaryOnly: 'Necessary Only',
+      lastUpdated: 'Last updated',
+      notYetSet: 'Not yet set',
+    },
+  };
+
+  const texts = t[language] || t.de;
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main className="flex-1 pt-24 pb-16">
         <div className="container mx-auto px-6 max-w-3xl">
-          <h1 className="font-display text-3xl md:text-4xl font-light text-foreground mb-4">
-            {language === 'de' ? 'Cookie-Einstellungen' : 'Cookie Settings'}
-          </h1>
+          {/* Header */}
+          <div className="flex items-center gap-3 mb-4">
+            <Cookie className="w-8 h-8 text-primary" />
+            <h1 className="font-display text-3xl md:text-4xl font-light text-foreground">
+              {texts.title}
+            </h1>
+          </div>
+          
           <p className="text-foreground/70 mb-8">
-            {language === 'de'
-              ? 'Diese Website verwendet Cookies, um Funktionen wie Buchungskalender, Karten und Analyse zu ermöglichen. Sie können Ihre Einwilligung jederzeit anpassen.'
-              : 'This website uses cookies to enable features like booking calendar, maps, and analytics. You can adjust your consent at any time.'}
+            {texts.intro}
           </p>
 
-          <div className="space-y-6 mb-8">
-            {/* Necessary Cookies */}
-            <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border">
-              <div>
-                <h3 className="font-medium text-foreground">
-                  {language === 'de' ? 'Notwendige Cookies' : 'Necessary Cookies'}
-                </h3>
-                <p className="text-sm text-foreground/60">
-                  {language === 'de'
-                    ? 'Diese Cookies sind für den Betrieb der Website erforderlich.'
-                    : 'These cookies are required for the website to function.'}
-                </p>
-              </div>
-              <Switch checked={necessary} disabled className="opacity-50" />
-            </div>
+          {/* What are Cookies */}
+          <section className="mb-8 p-6 bg-muted/30 rounded-lg border border-border">
+            <h2 className="font-semibold text-foreground mb-2">{texts.whatAreCookies}</h2>
+            <p className="text-sm text-foreground/70">{texts.whatAreCookiesText}</p>
+          </section>
 
-            {/* Functional Cookies */}
-            <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border">
-              <div>
-                <h3 className="font-medium text-foreground">
-                  {language === 'de' ? 'Funktionale Cookies' : 'Functional Cookies'}
-                </h3>
-                <p className="text-sm text-foreground/60">
-                  {language === 'de'
-                    ? 'Für Buchungskalender, Karten und externe Dienste.'
-                    : 'For booking calendar, maps, and external services.'}
-                </p>
-              </div>
-              <Switch checked={functional} onCheckedChange={setFunctional} />
+          {/* Categories */}
+          <section className="mb-8">
+            <h2 className="font-semibold text-foreground mb-4">{texts.categories}</h2>
+            <div className="space-y-4">
+              {Object.entries(COOKIE_CATEGORIES).map(([key, category]) => {
+                const Icon = categoryIcons[key as keyof typeof categoryIcons];
+                const isChecked = consent[key as keyof Omit<CookieConsent, 'timestamp'>];
+                
+                return (
+                  <div 
+                    key={category.id}
+                    className="flex items-start gap-4 p-4 bg-muted/30 rounded-lg border border-border"
+                  >
+                    <div className="mt-1">
+                      <Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-medium text-foreground">
+                          {category.name[language] || category.name.de}
+                        </h3>
+                        {category.required && (
+                          <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">
+                            {texts.required}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-foreground/60">
+                        {category.description[language] || category.description.de}
+                      </p>
+                    </div>
+                    <Switch
+                      checked={isChecked}
+                      onCheckedChange={() => toggleCategory(key as keyof Omit<CookieConsent, 'timestamp'>)}
+                      disabled={category.required}
+                      className={category.required ? 'opacity-50' : ''}
+                    />
+                  </div>
+                );
+              })}
             </div>
+          </section>
 
-            {/* Analytics Cookies */}
-            <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg border border-border">
-              <div>
-                <h3 className="font-medium text-foreground">
-                  {language === 'de' ? 'Analyse-Cookies' : 'Analytics Cookies'}
-                </h3>
-                <p className="text-sm text-foreground/60">
-                  {language === 'de'
-                    ? 'Helfen uns, die Website zu verbessern.'
-                    : 'Help us improve the website.'}
-                </p>
-              </div>
-              <Switch checked={analytics} onCheckedChange={setAnalytics} />
-            </div>
-          </div>
+          {/* Last Updated */}
+          {consent.timestamp && (
+            <p className="text-xs text-muted-foreground mb-6">
+              {texts.lastUpdated}: {new Date(consent.timestamp).toLocaleString(language === 'de' ? 'de-DE' : 'en-US')}
+            </p>
+          )}
 
+          {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Button onClick={handleSaveSettings} variant="default">
-              {language === 'de' ? 'Einstellungen speichern' : 'Save Settings'}
+              {texts.saveSettings}
             </Button>
             <Button onClick={handleAcceptAll} variant="outline">
-              {language === 'de' ? 'Alle akzeptieren' : 'Accept All'}
+              {texts.acceptAll}
             </Button>
             <Button onClick={handleNecessaryOnly} variant="ghost">
-              {language === 'de' ? 'Nur notwendige' : 'Necessary Only'}
+              {texts.necessaryOnly}
             </Button>
           </div>
         </div>
