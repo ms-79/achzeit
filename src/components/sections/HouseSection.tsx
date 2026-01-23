@@ -35,7 +35,7 @@ const HouseSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image */}
           <div className="relative animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            <div className="aspect-[4/3] rounded overflow-hidden shadow-elevated">
+            <div className="aspect-[3/4] rounded overflow-hidden shadow-elevated">
               <img
                 src={houseExterior}
                 alt="ACHZEIT Haus - Außenansicht"
