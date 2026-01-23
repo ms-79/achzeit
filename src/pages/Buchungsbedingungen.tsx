@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -5,6 +6,18 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const BuchungsbedingungenContent = () => {
   const { language } = useLanguage();
+
+  useEffect(() => {
+    // Set noindex meta tag
+    const metaRobots = document.createElement('meta');
+    metaRobots.name = 'robots';
+    metaRobots.content = 'noindex, nofollow';
+    document.head.appendChild(metaRobots);
+    
+    return () => {
+      document.head.removeChild(metaRobots);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
