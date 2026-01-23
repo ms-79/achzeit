@@ -22,8 +22,8 @@ const BuchungsbedingungenContent = () => {
               </h2>
               <p className="text-foreground/70">
                 {language === 'de'
-                  ? 'Die Buchung wird mit Erhalt der Buchungsbestätigung verbindlich. Die Anzahlung in Höhe von 30% des Gesamtbetrags ist innerhalb von 7 Tagen nach Buchung fällig. Die Restzahlung ist 14 Tage vor Anreise zu leisten.'
-                  : 'The booking becomes binding upon receipt of the booking confirmation. A deposit of 30% of the total amount is due within 7 days of booking. The remaining payment is due 14 days before arrival.'}
+                  ? 'Die Buchung wird mit Erhalt der Buchungsbestätigung verbindlich. Der Gesamtbetrag (100%) ist bei Buchung fällig.'
+                  : 'The booking becomes binding upon receipt of the booking confirmation. The full amount (100%) is due upon booking.'}
               </p>
             </section>
 
@@ -58,7 +58,7 @@ const BuchungsbedingungenContent = () => {
                 </li>
                 <li>
                   <strong>Check-out:</strong>{' '}
-                  {language === 'de' ? 'Bis 10:00 Uhr' : 'Until 10:00 AM'}
+                  {language === 'de' ? 'Bis 11:00 Uhr' : 'Until 11:00 AM'}
                 </li>
               </ul>
             </section>
@@ -75,16 +75,6 @@ const BuchungsbedingungenContent = () => {
               </ul>
             </section>
 
-            <section>
-              <h2 className="font-display text-xl font-medium text-foreground mb-4">
-                {language === 'de' ? 'Kaution' : 'Security Deposit'}
-              </h2>
-              <p className="text-foreground/70">
-                {language === 'de'
-                  ? 'Eine Kaution in Höhe von 300€ wird vor Anreise hinterlegt und nach Abreise bei ordnungsgemäßem Zustand des Hauses zurückerstattet.'
-                  : 'A security deposit of €300 is required before arrival and will be refunded after departure if the house is in proper condition.'}
-              </p>
-            </section>
 
             <section>
               <h2 className="font-display text-xl font-medium text-foreground mb-4">
