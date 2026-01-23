@@ -166,15 +166,6 @@ const ContactSection = () => {
           )}
 
           {/* Direct Email */}
-          <div className="mt-8 text-center">
-            <a
-              href="mailto:markus.siegmann@gmail.com"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-              markus.siegmann@gmail.com
-            </a>
-          </div>
         </div>
       </div>
     </section>
