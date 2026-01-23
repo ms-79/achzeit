@@ -7,6 +7,7 @@ import AvailabilitySection from '@/components/sections/AvailabilitySection';
 import LocationSection from '@/components/sections/LocationSection';
 import ContactSection from '@/components/sections/ContactSection';
 import Footer from '@/components/Footer';
+import CookieConsentBanner from '@/components/CookieConsentBanner';
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
           <ContactSection />
         </main>
         <Footer />
+        <CookieConsentBanner />
       </div>
     </LanguageProvider>
   );
