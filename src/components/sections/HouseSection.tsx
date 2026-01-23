@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Users, Bed, Bath, Flame, Home, UtensilsCrossed, TreePine, Heart, MapPin } from 'lucide-react';
-import houseInterior from '@/assets/house-interior.jpg';
+import houseExterior from '@/assets/house-exterior.jpg';
 
 const HouseSection = () => {
   const { t } = useLanguage();
@@ -37,8 +37,8 @@ const HouseSection = () => {
           <div className="relative animate-fade-up" style={{ animationDelay: '0.2s' }}>
             <div className="aspect-[4/3] rounded overflow-hidden shadow-elevated">
               <img
-                src={houseInterior}
-                alt="ACHZEIT Interior - Modern Alpine Living"
+                src={houseExterior}
+                alt="ACHZEIT Haus - Außenansicht"
                 className="w-full h-full object-cover"
               />
             </div>
