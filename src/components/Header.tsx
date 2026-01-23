@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import logoAchzeit from '@/assets/logo-achzeit.png';
+import logoAchzeit from '@/assets/logo-achzeit-transparent.png';
 
 const Header = () => {
   const { language, setLanguage, t } = useLanguage();

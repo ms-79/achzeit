@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
 import heroWinter from '@/assets/hero-winter.webp';
 import heroSummer from '@/assets/hero-summer.jpg';
-import AchzeitLogo from '@/components/AchzeitLogo';
+import logoAchzeit from '@/assets/logo-achzeit-transparent.png';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -41,9 +41,10 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto animate-fade-up">
           {/* Logo */}
           <div className="mb-8 flex justify-center">
-            <AchzeitLogo 
-              className="w-48 sm:w-56 md:w-64 lg:w-72 h-auto" 
-              color="hsl(var(--alpine-snow))"
+            <img 
+              src={logoAchzeit} 
+              alt="ACHZEIT" 
+              className="w-48 sm:w-56 md:w-64 lg:w-72 h-auto brightness-0 invert"
             />
           </div>
 
