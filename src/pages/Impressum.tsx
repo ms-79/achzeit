@@ -61,7 +61,7 @@ const ImpressumContent = () => {
                     {language === 'de' ? 'Kontakt' : 'Contact'}
                   </h3>
                   <p className="text-foreground/70">
-                    E-Mail: markus.siegmann@gmail.com
+                    E-Mail: info@achzeit.de
                   </p>
                 </div>
 

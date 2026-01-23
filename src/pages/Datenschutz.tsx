@@ -42,7 +42,7 @@ const DatenschutzContent = () => {
                 M. und M. Siegmann GbR<br />
                 Hofheimer Str. 17<br />
                 65824 Schwalbach<br />
-                E-Mail: markus.siegmann@gmail.com
+                E-Mail: info@achzeit.de
               </p>
             </section>
 
