@@ -57,13 +57,13 @@ const LocationSection = () => {
               className="block aspect-[4/3] rounded-lg overflow-hidden shadow-medium border border-border/50 hover:shadow-elevated transition-shadow duration-300"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d10.2692!3d47.4597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c7f9ce8e8e8e9%3A0x1234567890abcdef!2sACHZEIT!5e0!3m2!1sde!2sde!4v1705000000000!5m2!1sde!2sde"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d10.2655!3d47.4605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c7f9c8d8e8e8e%3A0xabcdef1234567890!2sAchweg%205a%2C%2087538%20Fischen%20im%20Allg%C3%A4u%2C%20Germany!5e0!3m2!1sde!2sde!4v1705000000000!5m2!1sde!2sde"
                 className="w-full h-full pointer-events-none"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="ACHZEIT - Fischen im Allgäu"
+                title="ACHZEIT - Achweg 5a, Fischen im Allgäu"
               />
             </a>
           </div>
