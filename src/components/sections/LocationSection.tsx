@@ -50,17 +50,22 @@ const LocationSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Map */}
           <div className="animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            <div className="aspect-[4/3] rounded-lg overflow-hidden shadow-medium border border-border/50">
+            <a 
+              href="https://maps.app.goo.gl/N46eWmKxw8XKva8G9" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block aspect-[4/3] rounded-lg overflow-hidden shadow-medium border border-border/50 hover:shadow-elevated transition-shadow duration-300"
+            >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d681.8726!2d10.2692!3d47.4597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c7f9d1b5c8c6d%3A0x8c9a1e4f3b2d0e7a!2sAchweg%205a%2C%2087538%20Fischen%20im%20Allg%C3%A4u!5e0!3m2!1sde!2sde!4v1705000000000!5m2!1sde!2sde"
-                className="w-full h-full"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d10.2692!3d47.4597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c7f9ce8e8e8e9%3A0x1234567890abcdef!2sACHZEIT!5e0!3m2!1sde!2sde!4v1705000000000!5m2!1sde!2sde"
+                className="w-full h-full pointer-events-none"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="ACHZEIT - Achweg 5a, Fischen im Allgäu"
+                title="ACHZEIT - Fischen im Allgäu"
               />
-            </div>
+            </a>
           </div>
 
           {/* Description */}
