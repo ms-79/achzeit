@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.png';
@@ -8,6 +9,11 @@ const Header = () => {
   const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Check if we're on a subpage (not the homepage)
+  const isSubpage = location.pathname !== '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,26 +33,43 @@ const Header = () => {
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
     setIsMobileMenuOpen(false);
+    
+    if (isSubpage) {
+      // Navigate to homepage with hash
+      navigate('/' + href);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
+
+  const goHome = () => {
+    if (isSubpage) {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // On subpages, always show the "scrolled" style
+  const showScrolledStyle = isScrolled || isSubpage;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
+        showScrolledStyle
           ? 'bg-[#f5f0e8]/95 backdrop-blur-md shadow-soft py-3'
           : 'bg-transparent py-6'
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Logo - only visible when scrolled */}
-        {isScrolled && (
+        {/* Logo - visible when scrolled or on subpages */}
+        {showScrolledStyle ? (
           <button
-            onClick={() => scrollToSection('#home')}
+            onClick={goHome}
             className="flex items-center"
           >
             <img 
@@ -55,8 +78,9 @@ const Header = () => {
               className="h-10 md:h-12 w-auto transition-all duration-300"
             />
           </button>
+        ) : (
+          <div className="h-10 md:h-12" />
         )}
-        {!isScrolled && <div className="h-10 md:h-12" />}
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
@@ -65,7 +89,7 @@ const Header = () => {
               key={item.key}
               onClick={() => scrollToSection(item.href)}
               className={`text-sm tracking-wide transition-colors duration-300 hover:opacity-70 ${
-                isScrolled ? 'text-foreground' : 'text-alpine-snow'
+                showScrolledStyle ? 'text-foreground' : 'text-alpine-snow'
               }`}
             >
               {t(item.key)}
@@ -78,8 +102,8 @@ const Header = () => {
               onClick={() => setLanguage('de')}
               className={`text-sm px-2 py-1 rounded transition-all ${
                 language === 'de'
-                  ? isScrolled ? 'bg-primary text-primary-foreground' : 'bg-alpine-snow/20 text-alpine-snow'
-                  : isScrolled ? 'text-muted-foreground hover:text-foreground' : 'text-alpine-snow/60 hover:text-alpine-snow'
+                  ? showScrolledStyle ? 'bg-primary text-primary-foreground' : 'bg-alpine-snow/20 text-alpine-snow'
+                  : showScrolledStyle ? 'text-muted-foreground hover:text-foreground' : 'text-alpine-snow/60 hover:text-alpine-snow'
               }`}
             >
               DE
@@ -88,8 +112,8 @@ const Header = () => {
               onClick={() => setLanguage('en')}
               className={`text-sm px-2 py-1 rounded transition-all ${
                 language === 'en'
-                  ? isScrolled ? 'bg-primary text-primary-foreground' : 'bg-alpine-snow/20 text-alpine-snow'
-                  : isScrolled ? 'text-muted-foreground hover:text-foreground' : 'text-alpine-snow/60 hover:text-alpine-snow'
+                  ? showScrolledStyle ? 'bg-primary text-primary-foreground' : 'bg-alpine-snow/20 text-alpine-snow'
+                  : showScrolledStyle ? 'text-muted-foreground hover:text-foreground' : 'text-alpine-snow/60 hover:text-alpine-snow'
               }`}
             >
               EN
@@ -117,7 +141,7 @@ const Header = () => {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`p-2 transition-colors ${
-              isScrolled ? 'text-foreground' : 'text-alpine-snow'
+              showScrolledStyle ? 'text-foreground' : 'text-alpine-snow'
             }`}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
