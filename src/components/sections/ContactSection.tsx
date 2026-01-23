@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Send, CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const ContactSection = () => {
   const { t, language } = useLanguage();
@@ -56,7 +57,7 @@ const ContactSection = () => {
     <section id="contact" className="section-padding bg-background">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-12 animate-fade-up">
+        <ScrollReveal className="text-center mb-12">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
             {t('contact.title')}
           </h2>
@@ -64,10 +65,10 @@ const ContactSection = () => {
             {t('contact.subtitle')}
           </p>
           <div className="alpine-divider mt-6" />
-        </div>
+        </ScrollReveal>
 
         {/* Contact Form */}
-        <div className="max-w-xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
+        <ScrollReveal delay={0.2} className="max-w-xl mx-auto">
           {isSubmitted ? (
             <div className="text-center py-12 bg-card rounded-lg border border-border/50 shadow-soft">
               <CheckCircle className="w-16 h-16 text-alpine-forest mx-auto mb-4" />
@@ -171,7 +172,7 @@ const ContactSection = () => {
               </Button>
             </form>
           )}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

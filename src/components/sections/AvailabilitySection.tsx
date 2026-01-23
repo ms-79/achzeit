@@ -1,5 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useEffect } from 'react';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const AvailabilitySection = () => {
   const { t } = useLanguage();
@@ -52,7 +53,7 @@ const AvailabilitySection = () => {
     <section id="availability" className="section-padding bg-gradient-section">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-12 animate-fade-up">
+        <ScrollReveal className="text-center mb-12">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
             {t('availability.title')}
           </h2>
@@ -60,14 +61,16 @@ const AvailabilitySection = () => {
             {t('availability.subtitle')}
           </p>
           <div className="alpine-divider mt-6" />
-        </div>
+        </ScrollReveal>
 
         {/* Hostaway Calendar Widget */}
-        <div className="max-w-4xl mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
-          <div className="bg-card rounded-lg shadow-medium overflow-hidden border border-border/50 p-6">
-            <div id="hostaway-calendar-widget" />
+        <ScrollReveal delay={0.2}>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-card rounded-lg shadow-medium overflow-hidden border border-border/50 p-6">
+              <div id="hostaway-calendar-widget" />
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

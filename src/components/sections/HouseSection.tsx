@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Users, Bed, Bath, Flame, Home, UtensilsCrossed, TreePine, Heart, MapPin } from 'lucide-react';
 import houseExterior from '@/assets/house-exterior.jpg';
+import ScrollReveal from '@/components/ScrollReveal';
 
 const HouseSection = () => {
   const { t } = useLanguage();
@@ -21,7 +22,7 @@ const HouseSection = () => {
     <section id="house" className="section-padding bg-gradient-section">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-up">
+        <ScrollReveal className="text-center mb-16">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
             {t('house.title')}
           </h2>
@@ -29,25 +30,27 @@ const HouseSection = () => {
             {t('house.subtitle')}
           </p>
           <div className="alpine-divider mt-6" />
-        </div>
+        </ScrollReveal>
 
         {/* Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image */}
-          <div className="relative animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            <div className="aspect-[4/3] rounded overflow-hidden shadow-elevated">
-              <img
-                src={houseExterior}
-                alt="ACHZEIT Haus - Außenansicht"
-                className="w-full h-full object-cover object-center"
-              />
+          <ScrollReveal direction="left" delay={0.1}>
+            <div className="relative">
+              <div className="aspect-[4/3] rounded overflow-hidden shadow-elevated">
+                <img
+                  src={houseExterior}
+                  alt="ACHZEIT Haus - Außenansicht"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-alpine-stone/30 rounded -z-10" />
             </div>
-            {/* Decorative element */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-alpine-stone/30 rounded -z-10" />
-          </div>
+          </ScrollReveal>
 
           {/* Text & Features */}
-          <div className="animate-fade-up" style={{ animationDelay: '0.4s' }}>
+          <ScrollReveal direction="right" delay={0.2}>
             <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-10 font-light">
               {t('house.description')}
             </p>
@@ -67,7 +70,7 @@ const HouseSection = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

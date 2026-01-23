@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 import heroWinter from '@/assets/hero-winter.webp';
 import heroSummer from '@/assets/hero-summer.jpg';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.png';
@@ -28,44 +29,77 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <motion.img
           src={getSeasonalHeroImage()}
           alt="ACHZEIT Family Retreat - Alpine House"
           className="w-full h-full object-cover"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-alpine-charcoal/60 via-alpine-charcoal/40 to-alpine-charcoal/70" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="max-w-4xl mx-auto animate-fade-up">
+        <div className="max-w-4xl mx-auto">
           {/* Logo */}
-          <div className="mb-8 flex justify-center">
+          <motion.div 
+            className="mb-8 flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <img 
               src={logoAchzeit} 
               alt="ACHZEIT" 
               className="w-48 sm:w-56 md:w-64 lg:w-72 h-auto brightness-0 invert"
             />
-          </div>
+          </motion.div>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl tracking-[0.4em] uppercase text-alpine-snow/80 mb-6">
+          <motion.p 
+            className="text-lg md:text-xl tracking-[0.4em] uppercase text-alpine-snow/80 mb-6"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             {t('hero.subtitle')}
-          </p>
+          </motion.p>
 
           {/* Divider */}
-          <div className="w-24 h-px bg-alpine-snow/40 mx-auto mb-8" />
+          <motion.div 
+            className="w-24 h-px bg-alpine-snow/40 mx-auto mb-8"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          />
 
           {/* Tagline */}
-          <p className="font-display text-2xl md:text-3xl lg:text-4xl text-alpine-snow/95 mb-4">
+          <motion.p 
+            className="font-display text-2xl md:text-3xl lg:text-4xl text-alpine-snow/95 mb-4"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
             {t('hero.tagline')}
-          </p>
-          <p className="text-lg md:text-xl text-alpine-snow/80 max-w-2xl mx-auto mb-12 font-light">
+          </motion.p>
+          <motion.p 
+            className="text-lg md:text-xl text-alpine-snow/80 max-w-2xl mx-auto mb-12 font-light"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
             {t('hero.description')}
-          </p>
+          </motion.p>
 
           {/* CTA Button */}
-          <div className="flex justify-center">
+          <motion.div 
+            className="flex justify-center"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+          >
             <Button
               variant="hero"
               size="lg"
@@ -74,17 +108,23 @@ const HeroSection = () => {
             >
               {t('hero.cta.book')}
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <button
+      <motion.button
         onClick={() => scrollToSection('#house')}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-alpine-snow/60 hover:text-alpine-snow transition-colors animate-bounce"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-alpine-snow/60 hover:text-alpine-snow transition-colors"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 8, 0] }}
+        transition={{ 
+          opacity: { duration: 0.5, delay: 1.2 },
+          y: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
+        }}
       >
         <ChevronDown size={32} />
-      </button>
+      </motion.button>
     </section>
   );
 };
