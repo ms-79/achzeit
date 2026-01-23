@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -12,6 +12,18 @@ const CookieSettingsContent = () => {
   const [necessary, setNecessary] = useState(true);
   const [functional, setFunctional] = useState(false);
   const [analytics, setAnalytics] = useState(false);
+
+  useEffect(() => {
+    // Set noindex meta tag
+    const metaRobots = document.createElement('meta');
+    metaRobots.name = 'robots';
+    metaRobots.content = 'noindex, nofollow';
+    document.head.appendChild(metaRobots);
+    
+    return () => {
+      document.head.removeChild(metaRobots);
+    };
+  }, []);
 
   const handleSaveSettings = () => {
     localStorage.setItem('cookie-consent', JSON.stringify({

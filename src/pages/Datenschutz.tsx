@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -5,6 +6,18 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const DatenschutzContent = () => {
   const { language } = useLanguage();
+
+  useEffect(() => {
+    // Set noindex meta tag
+    const metaRobots = document.createElement('meta');
+    metaRobots.name = 'robots';
+    metaRobots.content = 'noindex, nofollow';
+    document.head.appendChild(metaRobots);
+    
+    return () => {
+      document.head.removeChild(metaRobots);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -26,9 +39,9 @@ const DatenschutzContent = () => {
                 {language === 'de' ? '1. Verantwortlicher' : '1. Controller'}
               </h2>
               <p className="text-foreground/70">
-                Markus Siegmann<br />
-                Achweg 5a<br />
-                87538 Fischen im Allgäu<br />
+                M. und M. Siegmann GbR<br />
+                Hofheimer Str. 17<br />
+                65824 Schwalbach<br />
                 E-Mail: markus.siegmann@gmail.com
               </p>
             </section>

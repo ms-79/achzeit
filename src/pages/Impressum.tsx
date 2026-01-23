@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -5,6 +6,18 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const ImpressumContent = () => {
   const { language } = useLanguage();
+
+  useEffect(() => {
+    // Set noindex meta tag
+    const metaRobots = document.createElement('meta');
+    metaRobots.name = 'robots';
+    metaRobots.content = 'noindex, nofollow';
+    document.head.appendChild(metaRobots);
+    
+    return () => {
+      document.head.removeChild(metaRobots);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -27,10 +40,19 @@ const ImpressumContent = () => {
                     {language === 'de' ? 'Anbieter' : 'Provider'}
                   </h3>
                   <p className="text-foreground/70">
-                    Markus Siegmann<br />
-                    Achweg 5a<br />
-                    87538 Fischen im Allgäu<br />
+                    M. und M. Siegmann GbR<br />
+                    Hofheimer Str. 17<br />
+                    65824 Schwalbach<br />
                     Deutschland
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-medium text-foreground mb-2">
+                    {language === 'de' ? 'Vertreten durch' : 'Represented by'}
+                  </h3>
+                  <p className="text-foreground/70">
+                    Markus Siegmann
                   </p>
                 </div>
 
@@ -48,7 +70,7 @@ const ImpressumContent = () => {
                     {language === 'de' ? 'Rechtsform' : 'Legal Form'}
                   </h3>
                   <p className="text-foreground/70">
-                    {language === 'de' ? 'Privatvermietung' : 'Private rental'}
+                    {language === 'de' ? 'Gesellschaft bürgerlichen Rechts (GbR)' : 'Civil law partnership (GbR)'}
                   </p>
                 </div>
 
@@ -58,8 +80,8 @@ const ImpressumContent = () => {
                   </h3>
                   <p className="text-foreground/70">
                     Markus Siegmann<br />
-                    Achweg 5a<br />
-                    87538 Fischen im Allgäu
+                    Hofheimer Str. 17<br />
+                    65824 Schwalbach
                   </p>
                 </div>
               </div>
