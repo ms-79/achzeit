@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.png';
 
 const Header = () => {
@@ -96,29 +102,35 @@ const Header = () => {
             </button>
           ))}
           
-          {/* Language Toggle */}
-          <div className="flex items-center gap-1 ml-2">
-            <button
-              onClick={() => setLanguage('de')}
-              className={`text-sm px-2 py-1 rounded transition-all ${
-                language === 'de'
-                  ? showScrolledStyle ? 'bg-primary text-primary-foreground' : 'bg-alpine-snow/20 text-alpine-snow'
-                  : showScrolledStyle ? 'text-muted-foreground hover:text-foreground' : 'text-alpine-snow/60 hover:text-alpine-snow'
-              }`}
-            >
-              DE
-            </button>
-            <button
-              onClick={() => setLanguage('en')}
-              className={`text-sm px-2 py-1 rounded transition-all ${
-                language === 'en'
-                  ? showScrolledStyle ? 'bg-primary text-primary-foreground' : 'bg-alpine-snow/20 text-alpine-snow'
-                  : showScrolledStyle ? 'text-muted-foreground hover:text-foreground' : 'text-alpine-snow/60 hover:text-alpine-snow'
-              }`}
-            >
-              EN
-            </button>
-          </div>
+          {/* Language Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={`text-sm px-2 py-1 rounded transition-all flex items-center gap-1 ${
+                  showScrolledStyle 
+                    ? 'text-foreground hover:bg-muted' 
+                    : 'text-alpine-snow hover:bg-alpine-snow/10'
+                }`}
+              >
+                {language.toUpperCase()}
+                <ChevronDown size={14} />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="min-w-[80px]">
+              <DropdownMenuItem 
+                onClick={() => setLanguage('de')}
+                className={language === 'de' ? 'bg-muted' : ''}
+              >
+                Deutsch
+              </DropdownMenuItem>
+              <DropdownMenuItem 
+                onClick={() => setLanguage('en')}
+                className={language === 'en' ? 'bg-muted' : ''}
+              >
+                English
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {/* Book Button - Always visible */}
           <Button
@@ -166,23 +178,32 @@ const Header = () => {
             </button>
           ))}
           
-          <div className="flex items-center gap-2 pt-4">
-            <button
-              onClick={() => setLanguage('de')}
-              className={`text-sm px-3 py-2 rounded ${
-                language === 'de' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
-              }`}
-            >
-              Deutsch
-            </button>
-            <button
-              onClick={() => setLanguage('en')}
-              className={`text-sm px-3 py-2 rounded ${
-                language === 'en' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
-              }`}
-            >
-              English
-            </button>
+          <div className="pt-4 border-t border-border/50">
+            <p className="text-sm text-muted-foreground mb-2">{language === 'de' ? 'Sprache' : 'Language'}</p>
+            <div className="flex flex-col gap-1">
+              <button
+                onClick={() => {
+                  setLanguage('de');
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`text-left text-sm px-3 py-2 rounded transition-colors ${
+                  language === 'de' ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-muted'
+                }`}
+              >
+                Deutsch
+              </button>
+              <button
+                onClick={() => {
+                  setLanguage('en');
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`text-left text-sm px-3 py-2 rounded transition-colors ${
+                  language === 'en' ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-muted'
+                }`}
+              >
+                English
+              </button>
+            </div>
           </div>
         </nav>
       </div>
