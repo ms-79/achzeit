@@ -7,23 +7,30 @@ import { motion } from 'framer-motion';
 // Living & Fireplace
 import galleryLiving from '@/assets/gallery-living.jpg';
 import galleryLivingSofa from '@/assets/gallery-living-sofa.jpg';
+import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 
 // Kitchen
 import galleryKitchen from '@/assets/gallery-kitchen.jpg';
 import galleryKitchenSmeg from '@/assets/gallery-kitchen-smeg.jpg';
+import galleryKitchenView from '@/assets/gallery-kitchen-view.jpg';
+import galleryNespresso from '@/assets/gallery-nespresso.jpg';
+import galleryBoraCooktop from '@/assets/gallery-bora-cooktop.jpg';
 
 // Bedrooms
 import galleryBedroom from '@/assets/gallery-bedroom.jpg';
 import galleryBedroom1 from '@/assets/gallery-bedroom1.jpg';
 import galleryBedroom2 from '@/assets/gallery-bedroom2.jpg';
 import galleryBedroom3 from '@/assets/gallery-bedroom3.png';
+import galleryBedroomMain from '@/assets/gallery-bedroom-main.jpg';
 
 // Bathroom
 import galleryBathroom from '@/assets/gallery-bathroom.jpg';
+import galleryBathroomUpstairs from '@/assets/gallery-bathroom-upstairs.jpg';
 
 // Sauna
 import gallerySauna from '@/assets/gallery-sauna.jpg';
 import gallerySaunaInterior from '@/assets/gallery-sauna-interior.jpg';
+import gallerySaunaShower from '@/assets/gallery-sauna-shower.jpg';
 
 // Garden & Nature
 import galleryGarden from '@/assets/gallery-garden.jpg';
@@ -44,19 +51,25 @@ const GallerySection = () => {
     { src: galleryKitchen, labelKey: 'gallery.kitchen', span: 'col-span-1' },
     { src: gallerySauna, labelKey: 'gallery.sauna', span: 'col-span-1' },
     
-    // Row 2 - Bedrooms
-    { src: galleryBedroom2, labelKey: 'gallery.bedroom2', span: 'col-span-1' },
+    // Row 2 - Bedrooms & Bathroom
+    { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', span: 'col-span-1' },
     { src: galleryBathroom, labelKey: 'gallery.bathrooms', span: 'col-span-1' },
     
-    // Row 3 - More rooms
-    { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', span: 'col-span-1' },
+    // Row 3 - Dining, Sauna, Bedrooms
+    { src: galleryDiningFireplace, labelKey: 'gallery.diningfireplace', span: 'col-span-1' },
     { src: gallerySaunaInterior, labelKey: 'gallery.saunainterior', span: 'col-span-1' },
     { src: galleryBedroom3, labelKey: 'gallery.bedroom3', span: 'col-span-1' },
-    { src: galleryBedroom1, labelKey: 'gallery.bedroom1', span: 'col-span-1' },
+    { src: galleryBedroom2, labelKey: 'gallery.bedroom2', span: 'col-span-1' },
     
-    // Row 4 - Details & Garden
+    // Row 4 - Kitchen details
+    { src: galleryKitchenView, labelKey: 'gallery.kitchenview', span: 'col-span-1' },
+    { src: galleryNespresso, labelKey: 'gallery.nespresso', span: 'col-span-1' },
+    { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', span: 'col-span-1' },
     { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', span: 'col-span-1' },
-    { src: galleryBedroom, labelKey: 'gallery.workspace', span: 'col-span-1' },
+    
+    // Row 5 - Sauna shower & Bathrooms
+    { src: gallerySaunaShower, labelKey: 'gallery.saunashower', span: 'col-span-1' },
+    { src: galleryBathroomUpstairs, labelKey: 'gallery.bathroomupstairs', span: 'col-span-1' },
     { src: galleryGarden, labelKey: 'gallery.garden', span: 'col-span-2' },
   ];
 

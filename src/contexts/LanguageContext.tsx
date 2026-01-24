@@ -49,7 +49,7 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.livingsofa': 'Gemütliche Sitzecke',
     'gallery.kitchen': 'Küche & Essbereich',
     'gallery.kitchendetails': 'Hochwertige Ausstattung',
-    'gallery.bedroom1': 'Schlafzimmer 1 mit Arbeitsbereich',
+    'gallery.bedroom1': 'Schlafzimmer 1',
     'gallery.bedroom2': 'Schlafzimmer 2 – Doppelbett',
     'gallery.bedroom3': 'Kinderzimmer – Etagenbett',
     'gallery.workspace': 'Home-Office mit Bergblick',
@@ -57,6 +57,12 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.sauna': 'Private Sauna',
     'gallery.saunainterior': 'Sauna Innenansicht',
     'gallery.garden': 'Natur & Umgebung',
+    'gallery.diningfireplace': 'Esstisch direkt am Kamin',
+    'gallery.kitchenview': 'Blick in die Küche',
+    'gallery.nespresso': 'Nespresso Kaffeemaschine',
+    'gallery.saunashower': 'Dusche im Saunabereich',
+    'gallery.boracooktop': 'BORA Kochfeld',
+    'gallery.bathroomupstairs': 'Bad im OG',
     
     // Availability
     'availability.title': 'Verfügbarkeit',
@@ -126,7 +132,7 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.livingsofa': 'Cozy Lounge Area',
     'gallery.kitchen': 'Kitchen & Dining',
     'gallery.kitchendetails': 'Premium Appliances',
-    'gallery.bedroom1': 'Bedroom 1 with Workspace',
+    'gallery.bedroom1': 'Bedroom 1',
     'gallery.bedroom2': 'Bedroom 2 – Double Bed',
     'gallery.bedroom3': 'Kids Room – Bunk Beds',
     'gallery.workspace': 'Home Office with Mountain View',
@@ -134,6 +140,12 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.sauna': 'Private Sauna',
     'gallery.saunainterior': 'Sauna Interior',
     'gallery.garden': 'Nature & Surroundings',
+    'gallery.diningfireplace': 'Dining Table by the Fireplace',
+    'gallery.kitchenview': 'Kitchen View',
+    'gallery.nespresso': 'Nespresso Coffee Machine',
+    'gallery.saunashower': 'Shower in Sauna Area',
+    'gallery.boracooktop': 'BORA Cooktop',
+    'gallery.bathroomupstairs': 'Upstairs Bathroom',
     
     // Availability
     'availability.title': 'Availability',
