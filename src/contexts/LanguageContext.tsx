@@ -15,7 +15,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.house': 'Das Haus',
     'nav.gallery': 'Galerie',
     'nav.availability': 'Verfügbarkeit',
-    'nav.book': 'Jetzt Buchen',
+    'nav.book': 'Jetzt buchen',
     'nav.location': 'Lage',
     'nav.contact': 'Kontakt',
     
@@ -73,7 +73,7 @@ const translations: Record<Language, Record<string, string>> = {
     'availability.apply': 'Anwenden',
     
     // Booking
-    'booking.title': 'Jetzt Buchen',
+    'booking.title': 'Jetzt buchen',
     'booking.subtitle': 'Reservieren Sie Ihren Aufenthalt',
     
     // Location
