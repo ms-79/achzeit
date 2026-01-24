@@ -17,11 +17,11 @@ import galleryNespresso from '@/assets/gallery-nespresso.jpg';
 import galleryBoraCooktop from '@/assets/gallery-bora-cooktop.jpg';
 
 // Bedrooms
-import galleryBedroom from '@/assets/gallery-bedroom.jpg';
 import galleryBedroom1 from '@/assets/gallery-bedroom1.jpg';
 import galleryBedroom2 from '@/assets/gallery-bedroom2.jpg';
 import galleryBedroom3 from '@/assets/gallery-bedroom3.png';
 import galleryBedroomMain from '@/assets/gallery-bedroom-main.jpg';
+import galleryBedroomSingle from '@/assets/gallery-bedroom-single.png';
 
 // Bathroom
 import galleryBathroom from '@/assets/gallery-bathroom.jpg';
@@ -38,44 +38,40 @@ import galleryGarden from '@/assets/gallery-garden.jpg';
 interface GalleryItem {
   src: string;
   labelKey: string;
-  span: string;
+  visibleInGrid: boolean; // Show in 3x3 grid on page
 }
 
 const GallerySection = () => {
   const { t } = useLanguage();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+  // All gallery items - first 9 are visible in grid, all accessible in lightbox
   const galleryItems: GalleryItem[] = [
-    // Row 1 - Living room (large) + Kamin + Sauna
-    { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', span: 'col-span-2 row-span-2' }, // 1. Gemütliche Sitzecke im Wohnzimmer
-    { src: galleryLiving, labelKey: 'gallery.living', span: 'col-span-1' }, // 2. Kamin im Wohnzimmer
-    { src: gallerySauna, labelKey: 'gallery.sauna', span: 'col-span-1' }, // 3. Private Sauna
+    // Visible in 3x3 grid (positions 1-9)
+    { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', visibleInGrid: true }, // 1. Gemütliche Sitzecke im Wohnzimmer
+    { src: galleryLiving, labelKey: 'gallery.living', visibleInGrid: true }, // 2. Kamin im Wohnzimmer
+    { src: gallerySauna, labelKey: 'gallery.sauna', visibleInGrid: true }, // 3. Private Sauna
+    { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', visibleInGrid: true }, // 4. Schlafzimmer 1
+    { src: galleryBedroom1, labelKey: 'gallery.workspace', visibleInGrid: true }, // 5. Arbeitsplatz direkt an Schlafzimmer 1
+    { src: galleryBathroom, labelKey: 'gallery.bathrooms', visibleInGrid: true }, // 6. Badezimmer en Suite (Schlafzimmer 1)
+    { src: galleryBedroom2, labelKey: 'gallery.bedroom2', visibleInGrid: true }, // 7. Schlafzimmer 2 – Doppelbett
+    { src: galleryBedroom3, labelKey: 'gallery.bedroom3', visibleInGrid: true }, // 8. Schlafzimmer 3 (Kinderzimmer) – Etagenbett
+    { src: galleryBedroomSingle, labelKey: 'gallery.bedroomsingle', visibleInGrid: true }, // 9. Einzelbett in Schlafzimmer 3
     
-    // Row 2 - Bedroom 1 & Bathroom
-    { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', span: 'col-span-1' }, // 4. Schlafzimmer 1
-    { src: galleryBathroom, labelKey: 'gallery.bathrooms', span: 'col-span-1' }, // 5. Badezimmer en Suite
-    
-    // Row 3 - Dining, Sauna interior, Bedrooms
-    { src: galleryDiningFireplace, labelKey: 'gallery.diningfireplace', span: 'col-span-1' }, // 6. Esstisch direkt am Kamin
-    { src: gallerySaunaInterior, labelKey: 'gallery.saunainterior', span: 'col-span-1' }, // 7. Sauna Innenansicht
-    { src: galleryBedroom3, labelKey: 'gallery.bedroom3', span: 'col-span-1' }, // 8. Schlafzimmer 3 (Kinderzimmer)
-    { src: galleryBedroom2, labelKey: 'gallery.bedroom2', span: 'col-span-1' }, // 9. Schlafzimmer 2 – Doppelbett
-    
-    // Row 4 - Kitchen details
-    { src: galleryKitchen, labelKey: 'gallery.kitchenview', span: 'col-span-1' }, // 10. Blick in die Küche
-    { src: galleryNespresso, labelKey: 'gallery.nespresso', span: 'col-span-1' }, // 11. Nespresso Kaffeemaschine
-    { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', span: 'col-span-1' }, // 12. BORA Kochfeld
-    { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', span: 'col-span-1' }, // 13. SMEG Ausstattung
-    
-    // Row 5 - Kitchen & Workspace
-    { src: galleryKitchenView, labelKey: 'gallery.kitchen', span: 'col-span-1' }, // 14. Küche & Essbereich
-    { src: galleryBedroom1, labelKey: 'gallery.workspace', span: 'col-span-1' }, // 15. Arbeitsplatz direkt an Schlafzimmer 1
-    { src: gallerySaunaShower, labelKey: 'gallery.saunashower', span: 'col-span-1' }, // 16. Dusche im Saunabereich
-    { src: galleryBathroomUpstairs, labelKey: 'gallery.bathroomupstairs', span: 'col-span-1' }, // 17. Bad im OG
-    
-    // Row 6 - Garden wide
-    { src: galleryGarden, labelKey: 'gallery.garden', span: 'col-span-2 md:col-span-4' }, // 18. Natur & Umgebung
+    // Only in lightbox (positions 10-19)
+    { src: galleryDiningFireplace, labelKey: 'gallery.diningfireplace', visibleInGrid: false }, // 10. Esstisch direkt am Kamin
+    { src: gallerySaunaInterior, labelKey: 'gallery.saunainterior', visibleInGrid: false }, // 11. Sauna Innenansicht
+    { src: gallerySaunaShower, labelKey: 'gallery.saunashower', visibleInGrid: false }, // 12. Dusche im Saunabereich
+    { src: galleryBathroomUpstairs, labelKey: 'gallery.bathroomupstairs', visibleInGrid: false }, // 13. Bad im OG
+    { src: galleryKitchen, labelKey: 'gallery.kitchenview', visibleInGrid: false }, // 14. Blick in die Küche
+    { src: galleryKitchenView, labelKey: 'gallery.kitchen', visibleInGrid: false }, // 15. Küche & Essbereich
+    { src: galleryNespresso, labelKey: 'gallery.nespresso', visibleInGrid: false }, // 16. Nespresso Kaffeemaschine
+    { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', visibleInGrid: false }, // 17. BORA Kochfeld
+    { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', visibleInGrid: false }, // 18. SMEG Ausstattung
+    { src: galleryGarden, labelKey: 'gallery.garden', visibleInGrid: false }, // 19. Natur & Umgebung
   ];
+
+  const gridItems = galleryItems.filter(item => item.visibleInGrid);
 
   const handlePrev = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -105,37 +101,39 @@ const GallerySection = () => {
           <div className="alpine-divider mt-6" />
         </ScrollReveal>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-          {galleryItems.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: '-30px' }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.05,
-                ease: [0.25, 0.1, 0.25, 1]
-              }}
-              className={`${item.span} relative group cursor-pointer overflow-hidden rounded`}
-              onClick={() => setSelectedIndex(index)}
-            >
-              <div className="aspect-square md:aspect-auto md:h-full min-h-[200px]">
+        {/* Gallery Grid - 3x3 */}
+        <div className="grid grid-cols-3 gap-3 md:gap-4">
+          {gridItems.map((item, gridIndex) => {
+            // Find the actual index in galleryItems for lightbox navigation
+            const actualIndex = galleryItems.findIndex(g => g.src === item.src);
+            return (
+              <motion.div
+                key={gridIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: gridIndex * 0.05,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                className="relative group cursor-pointer overflow-hidden rounded aspect-square"
+                onClick={() => setSelectedIndex(actualIndex)}
+              >
                 <img
                   src={item.src}
                   alt={t(item.labelKey)}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-              </div>
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-alpine-charcoal/0 group-hover:bg-alpine-charcoal/40 transition-all duration-300 flex items-end">
-                <span className="text-alpine-snow text-sm font-medium p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
-                  {t(item.labelKey)}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-alpine-charcoal/0 group-hover:bg-alpine-charcoal/40 transition-all duration-300 flex items-end">
+                  <span className="text-alpine-snow text-sm font-medium p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
+                    {t(item.labelKey)}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
