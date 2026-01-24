@@ -63,6 +63,7 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.saunashower': 'Dusche im Saunabereich',
     'gallery.boracooktop': 'BORA Kochfeld',
     'gallery.bathroomupstairs': 'Bad im OG',
+    'gallery.bedroomsingle': 'Einzelbett (180x80) in Schlafzimmer 3 (Kinderzimmer)',
     
     // Availability
     'availability.title': 'Verfügbarkeit',
@@ -146,6 +147,7 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.saunashower': 'Shower in Sauna Area',
     'gallery.boracooktop': 'BORA Cooktop',
     'gallery.bathroomupstairs': 'Upstairs Bathroom',
+    'gallery.bedroomsingle': 'Single Bed (180x80) in Bedroom 3 (Kids Room)',
     
     // Availability
     'availability.title': 'Availability',
