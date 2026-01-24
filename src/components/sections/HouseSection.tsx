@@ -1,5 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Users, Bed, Bath, Flame, Home, UtensilsCrossed, TreePine, Heart, MapPin } from 'lucide-react';
+import { Users, Bed, Bath, Flame, Home, UtensilsCrossed, TreePine, Heart, MapPin, PawPrint } from 'lucide-react';
 import houseExterior from '@/assets/house-exterior.jpg';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -16,6 +16,7 @@ const HouseSection = () => {
     { icon: TreePine, label: t('house.garden') },
     { icon: Heart, label: t('house.family') },
     { icon: MapPin, label: t('house.location') },
+    { icon: PawPrint, label: t('house.nopets') },
   ];
 
   return (
