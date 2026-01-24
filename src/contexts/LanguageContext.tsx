@@ -41,6 +41,7 @@ const translations: Record<Language, Record<string, string>> = {
     'house.garden': 'Garten & Terrasse',
     'house.family': 'Familienfreundlich',
     'house.location': 'Ruhige Lage in Fischen',
+    'house.nopets': 'Keine Haustiere',
     
     // Gallery
     'gallery.title': 'Galerie',
@@ -125,6 +126,7 @@ const translations: Record<Language, Record<string, string>> = {
     'house.garden': 'Garden & Terrace',
     'house.family': 'Family Friendly',
     'house.location': 'Quiet Location in Fischen',
+    'house.nopets': 'No Pets Allowed',
     
     // Gallery
     'gallery.title': 'Gallery',
