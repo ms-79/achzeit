@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { LanguageProvider } from '@/contexts/LanguageContext';
 
-const BuchungsbedingungenContent = () => {
+const Buchungsbedingungen = () => {
   const { language } = useLanguage();
 
   useEffect(() => {
@@ -115,14 +114,6 @@ const BuchungsbedingungenContent = () => {
       </main>
       <Footer />
     </div>
-  );
-};
-
-const Buchungsbedingungen = () => {
-  return (
-    <LanguageProvider>
-      <BuchungsbedingungenContent />
-    </LanguageProvider>
   );
 };
 
