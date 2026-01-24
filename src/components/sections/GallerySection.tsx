@@ -67,10 +67,14 @@ const GallerySection = () => {
     { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', span: 'col-span-1' },
     { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', span: 'col-span-1' },
     
-    // Row 5 - Sauna shower & Bathrooms
+    // Row 5 - Living sofa & Home office
+    { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', span: 'col-span-1' },
+    { src: galleryBedroom, labelKey: 'gallery.workspace', span: 'col-span-1' },
     { src: gallerySaunaShower, labelKey: 'gallery.saunashower', span: 'col-span-1' },
     { src: galleryBathroomUpstairs, labelKey: 'gallery.bathroomupstairs', span: 'col-span-1' },
-    { src: galleryGarden, labelKey: 'gallery.garden', span: 'col-span-2' },
+    
+    // Row 6 - Garden wide
+    { src: galleryGarden, labelKey: 'gallery.garden', span: 'col-span-2 md:col-span-4' },
   ];
 
   const handlePrev = (e: React.MouseEvent) => {
