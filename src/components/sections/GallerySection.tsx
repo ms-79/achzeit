@@ -46,30 +46,30 @@ const GallerySection = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const galleryItems: GalleryItem[] = [
-    // Row 1 - Living room large + Kitchen
-    { src: galleryLiving, labelKey: 'gallery.living', span: 'col-span-2 row-span-2' },
-    { src: galleryKitchen, labelKey: 'gallery.kitchen', span: 'col-span-1' },
+    // Row 1 - Living room large + Sauna
+    { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', span: 'col-span-2 row-span-2' },
+    { src: galleryLiving, labelKey: 'gallery.living', span: 'col-span-1' },
     { src: gallerySauna, labelKey: 'gallery.sauna', span: 'col-span-1' },
     
-    // Row 2 - Bedrooms & Bathroom
+    // Row 2 - Bedroom 1 & Bathroom
     { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', span: 'col-span-1' },
     { src: galleryBathroom, labelKey: 'gallery.bathrooms', span: 'col-span-1' },
     
-    // Row 3 - Dining, Sauna, Bedrooms
+    // Row 3 - Dining, Sauna interior, Bedrooms
     { src: galleryDiningFireplace, labelKey: 'gallery.diningfireplace', span: 'col-span-1' },
     { src: gallerySaunaInterior, labelKey: 'gallery.saunainterior', span: 'col-span-1' },
     { src: galleryBedroom3, labelKey: 'gallery.bedroom3', span: 'col-span-1' },
     { src: galleryBedroom2, labelKey: 'gallery.bedroom2', span: 'col-span-1' },
     
     // Row 4 - Kitchen details
-    { src: galleryKitchenView, labelKey: 'gallery.kitchenview', span: 'col-span-1' },
+    { src: galleryKitchen, labelKey: 'gallery.kitchenview', span: 'col-span-1' },
     { src: galleryNespresso, labelKey: 'gallery.nespresso', span: 'col-span-1' },
     { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', span: 'col-span-1' },
     { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', span: 'col-span-1' },
     
-    // Row 5 - Living sofa & Home office
-    { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', span: 'col-span-1' },
-    { src: galleryBedroom, labelKey: 'gallery.workspace', span: 'col-span-1' },
+    // Row 5 - Kitchen view, Workspace, Sauna shower, Bathroom upstairs
+    { src: galleryKitchenView, labelKey: 'gallery.kitchen', span: 'col-span-1' },
+    { src: galleryBedroom1, labelKey: 'gallery.workspace', span: 'col-span-1' },
     { src: gallerySaunaShower, labelKey: 'gallery.saunashower', span: 'col-span-1' },
     { src: galleryBathroomUpstairs, labelKey: 'gallery.bathroomupstairs', span: 'col-span-1' },
     
