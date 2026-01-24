@@ -46,35 +46,35 @@ const GallerySection = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const galleryItems: GalleryItem[] = [
-    // Row 1 - Living room large + Sauna
-    { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', span: 'col-span-2 row-span-2' },
-    { src: galleryLiving, labelKey: 'gallery.living', span: 'col-span-1' },
-    { src: gallerySauna, labelKey: 'gallery.sauna', span: 'col-span-1' },
+    // Row 1 - Living room (large) + Kamin + Sauna
+    { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', span: 'col-span-2 row-span-2' }, // 1. Gemütliche Sitzecke im Wohnzimmer
+    { src: galleryLiving, labelKey: 'gallery.living', span: 'col-span-1' }, // 2. Kamin im Wohnzimmer
+    { src: gallerySauna, labelKey: 'gallery.sauna', span: 'col-span-1' }, // 3. Private Sauna
     
     // Row 2 - Bedroom 1 & Bathroom
-    { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', span: 'col-span-1' },
-    { src: galleryBathroom, labelKey: 'gallery.bathrooms', span: 'col-span-1' },
+    { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', span: 'col-span-1' }, // 4. Schlafzimmer 1
+    { src: galleryBathroom, labelKey: 'gallery.bathrooms', span: 'col-span-1' }, // 5. Badezimmer en Suite
     
     // Row 3 - Dining, Sauna interior, Bedrooms
-    { src: galleryDiningFireplace, labelKey: 'gallery.diningfireplace', span: 'col-span-1' },
-    { src: gallerySaunaInterior, labelKey: 'gallery.saunainterior', span: 'col-span-1' },
-    { src: galleryBedroom3, labelKey: 'gallery.bedroom3', span: 'col-span-1' },
-    { src: galleryBedroom2, labelKey: 'gallery.bedroom2', span: 'col-span-1' },
+    { src: galleryDiningFireplace, labelKey: 'gallery.diningfireplace', span: 'col-span-1' }, // 6. Esstisch direkt am Kamin
+    { src: gallerySaunaInterior, labelKey: 'gallery.saunainterior', span: 'col-span-1' }, // 7. Sauna Innenansicht
+    { src: galleryBedroom3, labelKey: 'gallery.bedroom3', span: 'col-span-1' }, // 8. Schlafzimmer 3 (Kinderzimmer)
+    { src: galleryBedroom2, labelKey: 'gallery.bedroom2', span: 'col-span-1' }, // 9. Schlafzimmer 2 – Doppelbett
     
     // Row 4 - Kitchen details
-    { src: galleryKitchen, labelKey: 'gallery.kitchenview', span: 'col-span-1' },
-    { src: galleryNespresso, labelKey: 'gallery.nespresso', span: 'col-span-1' },
-    { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', span: 'col-span-1' },
-    { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', span: 'col-span-1' },
+    { src: galleryKitchen, labelKey: 'gallery.kitchenview', span: 'col-span-1' }, // 10. Blick in die Küche
+    { src: galleryNespresso, labelKey: 'gallery.nespresso', span: 'col-span-1' }, // 11. Nespresso Kaffeemaschine
+    { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', span: 'col-span-1' }, // 12. BORA Kochfeld
+    { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', span: 'col-span-1' }, // 13. SMEG Ausstattung
     
-    // Row 5 - Kitchen view, Workspace, Sauna shower, Bathroom upstairs
-    { src: galleryKitchenView, labelKey: 'gallery.kitchen', span: 'col-span-1' },
-    { src: galleryBedroom1, labelKey: 'gallery.workspace', span: 'col-span-1' },
-    { src: gallerySaunaShower, labelKey: 'gallery.saunashower', span: 'col-span-1' },
-    { src: galleryBathroomUpstairs, labelKey: 'gallery.bathroomupstairs', span: 'col-span-1' },
+    // Row 5 - Kitchen & Workspace
+    { src: galleryKitchenView, labelKey: 'gallery.kitchen', span: 'col-span-1' }, // 14. Küche & Essbereich
+    { src: galleryBedroom1, labelKey: 'gallery.workspace', span: 'col-span-1' }, // 15. Arbeitsplatz direkt an Schlafzimmer 1
+    { src: gallerySaunaShower, labelKey: 'gallery.saunashower', span: 'col-span-1' }, // 16. Dusche im Saunabereich
+    { src: galleryBathroomUpstairs, labelKey: 'gallery.bathroomupstairs', span: 'col-span-1' }, // 17. Bad im OG
     
     // Row 6 - Garden wide
-    { src: galleryGarden, labelKey: 'gallery.garden', span: 'col-span-2 md:col-span-4' },
+    { src: galleryGarden, labelKey: 'gallery.garden', span: 'col-span-2 md:col-span-4' }, // 18. Natur & Umgebung
   ];
 
   const handlePrev = (e: React.MouseEvent) => {
