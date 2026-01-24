@@ -83,7 +83,7 @@ const BuchungsbedingungenContent = () => {
               <ul className="list-disc list-inside text-foreground/70 space-y-1">
                 <li>{language === 'de' ? 'Rauchverbot im gesamten Haus' : 'No smoking in the entire house'}</li>
                 <li>{language === 'de' ? 'Keine Partys oder lauten Veranstaltungen' : 'No parties or loud events'}</li>
-                <li>{language === 'de' ? 'Haustiere auf Anfrage' : 'Pets on request'}</li>
+                <li>{language === 'de' ? 'Keine Haustiere erlaubt' : 'No pets allowed'}</li>
                 <li>{language === 'de' ? 'Ruhezeiten von 22:00 bis 07:00 Uhr' : 'Quiet hours from 10:00 PM to 7:00 AM'}</li>
               </ul>
             </section>
