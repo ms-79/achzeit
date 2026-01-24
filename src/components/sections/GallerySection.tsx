@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -44,6 +44,7 @@ interface GalleryItem {
 const GallerySection = () => {
   const { t } = useLanguage();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [imagesPreloaded, setImagesPreloaded] = useState(false);
 
   // All gallery items - first 9 are visible in grid, all accessible in lightbox
   const galleryItems: GalleryItem[] = [
@@ -72,6 +73,23 @@ const GallerySection = () => {
   ];
 
   const gridItems = galleryItems.filter(item => item.visibleInGrid);
+
+  // Preload all images in background for smooth lightbox experience
+  useEffect(() => {
+    if (imagesPreloaded) return;
+
+    const preloadImages = () => {
+      galleryItems.forEach((item) => {
+        const img = new Image();
+        img.src = item.src;
+      });
+      setImagesPreloaded(true);
+    };
+
+    // Start preloading after a short delay to prioritize visible content
+    const timer = setTimeout(preloadImages, 1000);
+    return () => clearTimeout(timer);
+  }, [imagesPreloaded]);
 
   const handlePrev = (e: React.MouseEvent) => {
     e.stopPropagation();
