@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
@@ -14,7 +13,7 @@ import {
 } from '@/constants/legal';
 import { getStoredConsent } from '@/components/CookieConsentBanner';
 
-const CookieSettingsContent = () => {
+const CookieSettings = () => {
   const { language } = useLanguage();
   const [consent, setConsent] = useState<CookieConsent>({
     necessary: true,
@@ -216,14 +215,6 @@ const CookieSettingsContent = () => {
       </main>
       <Footer />
     </div>
-  );
-};
-
-const CookieSettings = () => {
-  return (
-    <LanguageProvider>
-      <CookieSettingsContent />
-    </LanguageProvider>
   );
 };
 

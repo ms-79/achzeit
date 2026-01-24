@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { LanguageProvider } from '@/contexts/LanguageContext';
 
-const ImpressumContent = () => {
+const Impressum = () => {
   const { language } = useLanguage();
 
   useEffect(() => {
@@ -113,14 +112,6 @@ const ImpressumContent = () => {
       </main>
       <Footer />
     </div>
-  );
-};
-
-const Impressum = () => {
-  return (
-    <LanguageProvider>
-      <ImpressumContent />
-    </LanguageProvider>
   );
 };
 

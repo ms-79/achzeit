@@ -1,4 +1,3 @@
-import { LanguageProvider } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import HeroSection from '@/components/sections/HeroSection';
 import HouseSection from '@/components/sections/HouseSection';
@@ -11,21 +10,19 @@ import CookieConsentBanner from '@/components/CookieConsentBanner';
 
 const Index = () => {
   return (
-    <LanguageProvider>
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main>
-          <HeroSection />
-          <HouseSection />
-          <GallerySection />
-          <AvailabilitySection />
-          <LocationSection />
-          <ContactSection />
-        </main>
-        <Footer />
-        <CookieConsentBanner />
-      </div>
-    </LanguageProvider>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <HeroSection />
+        <HouseSection />
+        <GallerySection />
+        <AvailabilitySection />
+        <LocationSection />
+        <ContactSection />
+      </main>
+      <Footer />
+      <CookieConsentBanner />
+    </div>
   );
 };
 

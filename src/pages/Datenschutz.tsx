@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { LanguageProvider } from '@/contexts/LanguageContext';
 
-const DatenschutzContent = () => {
+const Datenschutz = () => {
   const { language } = useLanguage();
 
   useEffect(() => {
@@ -125,14 +124,6 @@ const DatenschutzContent = () => {
       </main>
       <Footer />
     </div>
-  );
-};
-
-const Datenschutz = () => {
-  return (
-    <LanguageProvider>
-      <DatenschutzContent />
-    </LanguageProvider>
   );
 };
 
