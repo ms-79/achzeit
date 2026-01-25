@@ -45,7 +45,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto">
           {/* Logo */}
           <motion.div 
-            className="mb-8 flex justify-center"
+            className="mb-4 flex justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
