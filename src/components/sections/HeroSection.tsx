@@ -40,8 +40,8 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-alpine-charcoal/60 via-alpine-charcoal/40 to-alpine-charcoal/70" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      {/* Content - positioned higher with padding-bottom for scroll indicator */}
+      <div className="relative z-10 container mx-auto px-6 text-center pb-24">
         <div className="max-w-4xl mx-auto">
           {/* Logo */}
           <motion.div 
@@ -85,7 +85,7 @@ const HeroSection = () => {
             {t('hero.tagline')}
           </motion.p>
           <motion.p 
-            className="text-lg md:text-xl text-alpine-snow/80 max-w-2xl mx-auto mb-12 font-light"
+            className="text-lg md:text-xl text-alpine-snow/80 max-w-2xl mx-auto mb-8 font-light"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -112,10 +112,10 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - positioned at bottom */}
       <motion.button
         onClick={() => scrollToSection('#house')}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-alpine-snow/60 hover:text-alpine-snow transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-alpine-snow/60 hover:text-alpine-snow transition-colors"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 8, 0] }}
         transition={{ 
