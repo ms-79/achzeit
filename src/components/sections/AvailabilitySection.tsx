@@ -26,9 +26,9 @@ const AvailabilitySection = () => {
           },
           clearButtonText: t('availability.clearDates'),
           color: {
-            mainColor: '#2d5a27',
-            frameColor: '#1a1a1a',
-            textColor: '#1a1a1a',
+            mainColor: '#363330',
+            frameColor: '#363330',
+            textColor: '#363330',
           },
         });
       }
