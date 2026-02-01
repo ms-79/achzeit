@@ -74,22 +74,18 @@ const GallerySection = () => {
 
   const gridItems = galleryItems.filter(item => item.visibleInGrid);
 
-  // Preload all images in background for smooth lightbox experience
+  // Preload lightbox-only images when user opens the lightbox
   useEffect(() => {
-    if (imagesPreloaded) return;
+    if (selectedIndex === null || imagesPreloaded) return;
 
-    const preloadImages = () => {
-      galleryItems.forEach((item) => {
-        const img = new Image();
-        img.src = item.src;
-      });
-      setImagesPreloaded(true);
-    };
-
-    // Start preloading after a short delay to prioritize visible content
-    const timer = setTimeout(preloadImages, 1000);
-    return () => clearTimeout(timer);
-  }, [imagesPreloaded]);
+    // Only preload non-grid images (they're not lazy loaded on page)
+    const lightboxOnlyImages = galleryItems.filter(item => !item.visibleInGrid);
+    lightboxOnlyImages.forEach((item) => {
+      const img = new Image();
+      img.src = item.src;
+    });
+    setImagesPreloaded(true);
+  }, [selectedIndex, imagesPreloaded]);
 
   const handlePrev = (e: React.MouseEvent) => {
     e.stopPropagation();

@@ -33,6 +33,8 @@ const HeroSection = () => {
           src={getSeasonalHeroImage()}
           alt="ACHZEIT Family Retreat - Alpine House"
           className="w-full h-full object-cover"
+          fetchPriority="high"
+          decoding="async"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: 'easeOut' }}
