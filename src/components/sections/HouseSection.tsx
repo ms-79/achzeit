@@ -41,6 +41,8 @@ const HouseSection = () => {
                 <img
                   src={houseExterior}
                   alt="ACHZEIT Haus - Außenansicht"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center"
                 />
               </div>

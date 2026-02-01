@@ -141,6 +141,8 @@ const GallerySection = () => {
                 <img
                   src={item.src}
                   alt={t(item.labelKey)}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 {/* Overlay */}
