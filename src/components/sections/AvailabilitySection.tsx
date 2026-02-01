@@ -1,17 +1,41 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const AvailabilitySection = () => {
   const { t } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
+  // Only load script when section becomes visible (Intersection Observer)
   useEffect(() => {
-    // Load the Hostaway calendar script
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' } // Start loading 200px before visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Load script only when section is visible
+  useEffect(() => {
+    if (!isVisible || scriptLoaded) return;
+
     const script = document.createElement('script');
     script.src = 'https://d2q3n06xhbi0am.cloudfront.net/calendar.js';
     script.async = true;
     script.onload = () => {
-      // Initialize the widget after script loads
+      setScriptLoaded(true);
       if ((window as any).hostawayCalendarWidget) {
         (window as any).hostawayCalendarWidget({
           baseUrl: 'https://achzeit.holidayfuture.com/',
@@ -36,21 +60,19 @@ const AvailabilitySection = () => {
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup script on unmount
       const existingScript = document.querySelector(`script[src="${script.src}"]`);
       if (existingScript) {
         existingScript.remove();
       }
-      // Clear the widget container
       const container = document.getElementById('hostaway-calendar-widget');
       if (container) {
         container.innerHTML = '';
       }
     };
-  }, [t]);
+  }, [isVisible, scriptLoaded, t]);
 
   return (
-    <section id="availability" className="section-padding bg-gradient-section">
+    <section ref={sectionRef} id="availability" className="section-padding bg-gradient-section">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
