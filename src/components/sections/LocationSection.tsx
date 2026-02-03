@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { MapPin, Mountain, TreePine, Snowflake } from 'lucide-react';
 import locationVillage from '@/assets/location-village.webp';
@@ -8,6 +9,27 @@ import { motion } from 'framer-motion';
 
 const LocationSection = () => {
   const { t } = useLanguage();
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const mapContainerRef = useRef<HTMLAnchorElement>(null);
+
+  // Lazy load Google Maps when section comes into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setMapLoaded(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' } // Load 200px before visible
+    );
+
+    if (mapContainerRef.current) {
+      observer.observe(mapContainerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const highlights = [
     { icon: Mountain, label: 'Hiking' },
@@ -63,23 +85,33 @@ const LocationSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Map */}
+          {/* Map - Lazy loaded */}
           <ScrollReveal direction="left" delay={0.1}>
             <a 
+              ref={mapContainerRef}
               href="https://maps.app.goo.gl/N46eWmKxw8XKva8G9" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block aspect-[4/3] rounded-lg overflow-hidden shadow-medium border border-border/50 hover:shadow-elevated transition-shadow duration-300"
+              className="block aspect-[4/3] rounded-lg overflow-hidden shadow-medium border border-border/50 hover:shadow-elevated transition-shadow duration-300 bg-muted"
             >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d10.2655!3d47.4605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c7f9c8d8e8e8e%3A0xabcdef1234567890!2sAchweg%205a%2C%2087538%20Fischen%20im%20Allg%C3%A4u%2C%20Germany!5e0!3m2!1sde!2sde!4v1705000000000!5m2!1sde!2sde"
-                className="w-full h-full pointer-events-none"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="ACHZEIT - Achweg 5a, Fischen im Allgäu"
-              />
+              {mapLoaded ? (
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d10.2655!3d47.4605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c7f9c8d8e8e8e%3A0xabcdef1234567890!2sAchweg%205a%2C%2087538%20Fischen%20im%20Allg%C3%A4u%2C%20Germany!5e0!3m2!1sde!2sde!4v1705000000000!5m2!1sde!2sde"
+                  className="w-full h-full pointer-events-none"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="ACHZEIT - Achweg 5a, Fischen im Allgäu"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-muted">
+                  <div className="text-center text-muted-foreground">
+                    <MapPin className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                    <span className="text-sm">Karte wird geladen...</span>
+                  </div>
+                </div>
+              )}
             </a>
           </ScrollReveal>
 
