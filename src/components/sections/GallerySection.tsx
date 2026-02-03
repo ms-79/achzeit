@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 // Living & Fireplace
 import galleryLiving from '@/assets/gallery-living.jpg';
-import galleryLivingSofa from '@/assets/gallery-living-sofa.jpg';
+import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 
 // Kitchen
