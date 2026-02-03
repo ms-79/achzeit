@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import logoAchzeit from '@/assets/logo-achzeit-transparent.png';
+import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 
 const Footer = () => {
   const { t, language } = useLanguage();
