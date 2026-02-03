@@ -27,17 +27,16 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <motion.img
+      {/* Background Image - Native img for better LCP */}
+      <div className="absolute inset-0 w-full h-full">
+        <img
           src={getSeasonalHeroImage()}
           alt="ACHZEIT Family Retreat - Alpine House"
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
           fetchPriority="high"
-          decoding="async"
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5, ease: 'easeOut' }}
+          loading="eager"
+          decoding="sync"
+          style={{ minHeight: '100%', minWidth: '100%' }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-alpine-charcoal/60 via-alpine-charcoal/40 to-alpine-charcoal/70" />
       </div>
