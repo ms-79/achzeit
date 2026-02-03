@@ -56,6 +56,7 @@ const HeroSection = () => {
               src={logoAchzeit} 
               alt="ACHZEIT" 
               className="w-48 sm:w-56 md:w-64 lg:w-72 h-auto brightness-0 invert"
+              fetchPriority="high"
             />
           </motion.div>
 
