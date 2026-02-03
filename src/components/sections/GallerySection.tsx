@@ -20,7 +20,7 @@ import galleryBoraCooktop from '@/assets/gallery-bora-cooktop.jpg';
 import galleryBedroom1 from '@/assets/gallery-bedroom1.webp';
 import galleryBedroom2 from '@/assets/gallery-bedroom2.webp';
 import galleryBedroom3 from '@/assets/gallery-bedroom3.webp';
-import galleryBedroomMain from '@/assets/gallery-bedroom-main.jpg';
+import galleryBedroomMain from '@/assets/gallery-bedroom-main.webp';
 import galleryBedroomSingle from '@/assets/gallery-bedroom-single.webp';
 
 // Bathroom
