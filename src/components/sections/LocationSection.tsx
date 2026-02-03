@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { MapPin, Mountain, TreePine, Snowflake } from 'lucide-react';
-import locationVillage from '@/assets/location-village.jpg';
-import locationRiver from '@/assets/location-river.jpg';
+import locationVillage from '@/assets/location-village.webp';
+import locationRiver from '@/assets/location-river.webp';
 import locationCountryside from '@/assets/location-countryside.jpg';
 import ScrollReveal from '@/components/ScrollReveal';
 import { motion } from 'framer-motion';

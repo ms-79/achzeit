@@ -24,8 +24,8 @@ import galleryBedroomMain from '@/assets/gallery-bedroom-main.jpg';
 import galleryBedroomSingle from '@/assets/gallery-bedroom-single.webp';
 
 // Bathroom
-import galleryBathroom from '@/assets/gallery-bathroom.jpg';
-import galleryBathroomUpstairs from '@/assets/gallery-bathroom-upstairs.jpg';
+import galleryBathroom from '@/assets/gallery-bathroom.webp';
+import galleryBathroomUpstairs from '@/assets/gallery-bathroom-upstairs.webp';
 
 // Sauna
 import gallerySauna from '@/assets/gallery-sauna.jpg';
