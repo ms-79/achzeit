@@ -5,7 +5,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 import { motion } from 'framer-motion';
 
 // Living & Fireplace
-import galleryLiving from '@/assets/gallery-living.jpg';
+import galleryLiving from '@/assets/gallery-living.webp';
 import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 
@@ -20,7 +20,7 @@ import galleryBoraCooktop from '@/assets/gallery-bora-cooktop.jpg';
 import galleryBedroom1 from '@/assets/gallery-bedroom1.webp';
 import galleryBedroom2 from '@/assets/gallery-bedroom2.webp';
 import galleryBedroom3 from '@/assets/gallery-bedroom3.webp';
-import galleryBedroomMain from '@/assets/gallery-bedroom-main.jpg';
+import galleryBedroomMain from '@/assets/gallery-bedroom-main.webp';
 import galleryBedroomSingle from '@/assets/gallery-bedroom-single.webp';
 
 // Bathroom
@@ -28,7 +28,7 @@ import galleryBathroom from '@/assets/gallery-bathroom.webp';
 import galleryBathroomUpstairs from '@/assets/gallery-bathroom-upstairs.webp';
 
 // Sauna
-import gallerySauna from '@/assets/gallery-sauna.jpg';
+import gallerySauna from '@/assets/gallery-sauna.webp';
 import gallerySaunaInterior from '@/assets/gallery-sauna-interior.jpg';
 import gallerySaunaShower from '@/assets/gallery-sauna-shower.jpg';
 
