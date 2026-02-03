@@ -17,9 +17,9 @@ import galleryNespresso from '@/assets/gallery-nespresso.jpg';
 import galleryBoraCooktop from '@/assets/gallery-bora-cooktop.jpg';
 
 // Bedrooms
-import galleryBedroom1 from '@/assets/gallery-bedroom1.jpg';
-import galleryBedroom2 from '@/assets/gallery-bedroom2.jpg';
-import galleryBedroom3 from '@/assets/gallery-bedroom3.png';
+import galleryBedroom1 from '@/assets/gallery-bedroom1.webp';
+import galleryBedroom2 from '@/assets/gallery-bedroom2.webp';
+import galleryBedroom3 from '@/assets/gallery-bedroom3.webp';
 import galleryBedroomMain from '@/assets/gallery-bedroom-main.jpg';
 import galleryBedroomSingle from '@/assets/gallery-bedroom-single.png';
 
