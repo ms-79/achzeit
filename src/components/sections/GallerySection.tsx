@@ -21,7 +21,7 @@ import galleryBedroom1 from '@/assets/gallery-bedroom1.webp';
 import galleryBedroom2 from '@/assets/gallery-bedroom2.webp';
 import galleryBedroom3 from '@/assets/gallery-bedroom3.webp';
 import galleryBedroomMain from '@/assets/gallery-bedroom-main.jpg';
-import galleryBedroomSingle from '@/assets/gallery-bedroom-single.png';
+import galleryBedroomSingle from '@/assets/gallery-bedroom-single.webp';
 
 // Bathroom
 import galleryBathroom from '@/assets/gallery-bathroom.jpg';
