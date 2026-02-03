@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Users, Bed, Bath, Flame, Home, UtensilsCrossed, TreePine, Heart, MapPin } from 'lucide-react';
-import houseExterior from '@/assets/house-exterior.jpg';
+import houseExterior from '@/assets/house-exterior.webp';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const HouseSection = () => {

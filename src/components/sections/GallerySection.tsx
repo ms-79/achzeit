@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 // Living & Fireplace
 import galleryLiving from '@/assets/gallery-living.jpg';
-import galleryLivingSofa from '@/assets/gallery-living-sofa.jpg';
+import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 
 // Kitchen
@@ -17,15 +17,15 @@ import galleryNespresso from '@/assets/gallery-nespresso.jpg';
 import galleryBoraCooktop from '@/assets/gallery-bora-cooktop.jpg';
 
 // Bedrooms
-import galleryBedroom1 from '@/assets/gallery-bedroom1.jpg';
-import galleryBedroom2 from '@/assets/gallery-bedroom2.jpg';
-import galleryBedroom3 from '@/assets/gallery-bedroom3.png';
+import galleryBedroom1 from '@/assets/gallery-bedroom1.webp';
+import galleryBedroom2 from '@/assets/gallery-bedroom2.webp';
+import galleryBedroom3 from '@/assets/gallery-bedroom3.webp';
 import galleryBedroomMain from '@/assets/gallery-bedroom-main.jpg';
-import galleryBedroomSingle from '@/assets/gallery-bedroom-single.png';
+import galleryBedroomSingle from '@/assets/gallery-bedroom-single.webp';
 
 // Bathroom
-import galleryBathroom from '@/assets/gallery-bathroom.jpg';
-import galleryBathroomUpstairs from '@/assets/gallery-bathroom-upstairs.jpg';
+import galleryBathroom from '@/assets/gallery-bathroom.webp';
+import galleryBathroomUpstairs from '@/assets/gallery-bathroom-upstairs.webp';
 
 // Sauna
 import gallerySauna from '@/assets/gallery-sauna.jpg';
