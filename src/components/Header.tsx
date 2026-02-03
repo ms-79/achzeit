@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import logoAchzeit from '@/assets/logo-achzeit-transparent.png';
+import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 
 const Header = () => {
   const { language, setLanguage, t } = useLanguage();
