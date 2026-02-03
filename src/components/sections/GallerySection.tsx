@@ -5,7 +5,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 import { motion } from 'framer-motion';
 
 // Living & Fireplace
-import galleryLiving from '@/assets/gallery-living.jpg';
+import galleryLiving from '@/assets/gallery-living.webp';
 import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 
