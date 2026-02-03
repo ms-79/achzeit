@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroWinter from '@/assets/hero-winter.webp';
 import heroSummer from '@/assets/hero-summer.jpg';
-import logoAchzeit from '@/assets/logo-achzeit-transparent.png';
+import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 
 const HeroSection = () => {
   const { t } = useLanguage();
