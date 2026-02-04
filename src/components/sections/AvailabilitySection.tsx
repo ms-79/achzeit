@@ -1,14 +1,52 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
 
-const AvailabilitySection = () => {
-  const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
+const HOSTAWAY_SCRIPT_URL = 'https://d2q3n06xhbi0am.cloudfront.net/calendar.js';
 
-  // Only load script when section becomes visible (Intersection Observer)
+const AvailabilitySection = () => {
+  const { t, language } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
+  const widgetContainerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [widgetInitialized, setWidgetInitialized] = useState(false);
+  const initAttemptedRef = useRef(false);
+
+  // Initialize the Hostaway widget
+  const initializeWidget = useCallback(() => {
+    if (initAttemptedRef.current || widgetInitialized) return;
+    
+    const hostawayWidget = (window as any).hostawayCalendarWidget;
+    if (!hostawayWidget || !widgetContainerRef.current) return;
+    
+    initAttemptedRef.current = true;
+    
+    // Clear any existing content
+    widgetContainerRef.current.innerHTML = '';
+    
+    hostawayWidget({
+      baseUrl: 'https://achzeit.holidayfuture.com/',
+      listingId: 463607,
+      numberOfMonths: 2,
+      openInNewTab: true,
+      font: 'Inter',
+      rounded: true,
+      button: {
+        action: 'checkout',
+        text: t('availability.apply'),
+      },
+      clearButtonText: t('availability.clearDates'),
+      color: {
+        mainColor: '#363330',
+        frameColor: '#363330',
+        textColor: '#363330',
+      },
+    });
+    
+    setWidgetInitialized(true);
+  }, [t, widgetInitialized]);
+
+  // Observe when section becomes visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -17,7 +55,7 @@ const AvailabilitySection = () => {
           observer.disconnect();
         }
       },
-      { rootMargin: '200px' } // Start loading 200px before visible
+      { rootMargin: '300px', threshold: 0 }
     );
 
     if (sectionRef.current) {
@@ -27,49 +65,54 @@ const AvailabilitySection = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Load script only when section is visible
+  // Load script and initialize widget when visible
   useEffect(() => {
-    if (!isVisible || scriptLoaded) return;
+    if (!isVisible) return;
+
+    // Check if script already exists
+    const existingScript = document.querySelector(`script[src="${HOSTAWAY_SCRIPT_URL}"]`);
+    
+    if (existingScript) {
+      // Script already loaded, just initialize
+      if ((window as any).hostawayCalendarWidget) {
+        initializeWidget();
+      }
+      return;
+    }
 
     const script = document.createElement('script');
-    script.src = 'https://d2q3n06xhbi0am.cloudfront.net/calendar.js';
+    script.src = HOSTAWAY_SCRIPT_URL;
     script.async = true;
     script.onload = () => {
-      setScriptLoaded(true);
-      if ((window as any).hostawayCalendarWidget) {
-        (window as any).hostawayCalendarWidget({
-          baseUrl: 'https://achzeit.holidayfuture.com/',
-          listingId: 463607,
-          numberOfMonths: 2,
-          openInNewTab: true,
-          font: 'Inter',
-          rounded: true,
-          button: {
-            action: 'checkout',
-            text: t('availability.apply'),
-          },
-          clearButtonText: t('availability.clearDates'),
-          color: {
-            mainColor: '#363330',
-            frameColor: '#363330',
-            textColor: '#363330',
-          },
-        });
-      }
+      // Small delay to ensure the widget function is available
+      setTimeout(() => {
+        initializeWidget();
+      }, 100);
+    };
+    script.onerror = () => {
+      console.error('Failed to load Hostaway calendar script');
     };
     document.body.appendChild(script);
 
-    return () => {
-      const existingScript = document.querySelector(`script[src="${script.src}"]`);
-      if (existingScript) {
-        existingScript.remove();
+    // No cleanup - we want the script and widget to persist
+  }, [isVisible, initializeWidget]);
+
+  // Re-initialize widget when language changes (if already initialized)
+  useEffect(() => {
+    if (widgetInitialized && (window as any).hostawayCalendarWidget) {
+      initAttemptedRef.current = false;
+      setWidgetInitialized(false);
+      
+      // Clear and reinitialize with new language
+      if (widgetContainerRef.current) {
+        widgetContainerRef.current.innerHTML = '';
       }
-      const container = document.getElementById('hostaway-calendar-widget');
-      if (container) {
-        container.innerHTML = '';
-      }
-    };
-  }, [isVisible, scriptLoaded, t]);
+      
+      setTimeout(() => {
+        initializeWidget();
+      }, 100);
+    }
+  }, [language]); // Only re-run when language changes
 
   return (
     <section ref={sectionRef} id="availability" className="section-padding bg-gradient-section">
@@ -89,7 +132,11 @@ const AvailabilitySection = () => {
         <ScrollReveal delay={0.2}>
           <div className="max-w-4xl mx-auto">
             <div className="bg-card rounded-lg shadow-medium overflow-hidden border border-border/50 p-6">
-              <div id="hostaway-calendar-widget" />
+              <div 
+                id="hostaway-calendar-widget" 
+                ref={widgetContainerRef}
+                className="min-h-[200px]"
+              />
             </div>
           </div>
         </ScrollReveal>
