@@ -1,43 +1,36 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
+
+const HOSTAWAY_SCRIPT_URL = 'https://d2q3n06xhbi0am.cloudfront.net/calendar.js';
 
 const AvailabilitySection = () => {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const widgetContainerRef = useRef<HTMLDivElement>(null);
+  const initializingRef = useRef(false);
 
-  // Only load script when section becomes visible (Intersection Observer)
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '200px' } // Start loading 200px before visible
-    );
+    // Prevent multiple initializations
+    if (initializingRef.current) return;
+    initializingRef.current = true;
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Load script only when section is visible
-  useEffect(() => {
-    if (!isVisible || scriptLoaded) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://d2q3n06xhbi0am.cloudfront.net/calendar.js';
-    script.async = true;
-    script.onload = () => {
-      setScriptLoaded(true);
-      if ((window as any).hostawayCalendarWidget) {
-        (window as any).hostawayCalendarWidget({
+    const initializeWidget = () => {
+      const hostawayWidget = (window as any).hostawayCalendarWidget;
+      if (!hostawayWidget) {
+        console.error('Hostaway widget function not available');
+        return;
+      }
+      
+      if (!widgetContainerRef.current) {
+        console.error('Widget container not found');
+        return;
+      }
+      
+      // Clear container
+      widgetContainerRef.current.innerHTML = '';
+      
+      try {
+        hostawayWidget({
           baseUrl: 'https://achzeit.holidayfuture.com/',
           listingId: 463607,
           numberOfMonths: 2,
@@ -55,24 +48,52 @@ const AvailabilitySection = () => {
             textColor: '#363330',
           },
         });
+      } catch (error) {
+        console.error('Failed to initialize Hostaway widget:', error);
       }
     };
-    document.body.appendChild(script);
 
-    return () => {
-      const existingScript = document.querySelector(`script[src="${script.src}"]`);
+    const loadScript = () => {
+      // Check if already loaded
+      if ((window as any).hostawayCalendarWidget) {
+        initializeWidget();
+        return;
+      }
+
+      // Check if script is already in document
+      const existingScript = document.querySelector(`script[src="${HOSTAWAY_SCRIPT_URL}"]`);
       if (existingScript) {
-        existingScript.remove();
+        // Wait for it to load
+        const checkReady = setInterval(() => {
+          if ((window as any).hostawayCalendarWidget) {
+            clearInterval(checkReady);
+            initializeWidget();
+          }
+        }, 100);
+        setTimeout(() => clearInterval(checkReady), 10000);
+        return;
       }
-      const container = document.getElementById('hostaway-calendar-widget');
-      if (container) {
-        container.innerHTML = '';
-      }
+
+      // Add script
+      const script = document.createElement('script');
+      script.src = HOSTAWAY_SCRIPT_URL;
+      script.async = true;
+      script.onload = () => {
+        // Wait a bit for the function to be available
+        setTimeout(initializeWidget, 200);
+      };
+      script.onerror = (e) => {
+        console.error('Failed to load Hostaway script:', e);
+      };
+      document.body.appendChild(script);
     };
-  }, [isVisible, scriptLoaded, t]);
+
+    // Run after component has mounted
+    loadScript();
+  }, [t]);
 
   return (
-    <section ref={sectionRef} id="availability" className="section-padding bg-gradient-section">
+    <section id="availability" className="section-padding bg-gradient-section">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-12">
@@ -89,7 +110,13 @@ const AvailabilitySection = () => {
         <ScrollReveal delay={0.2}>
           <div className="max-w-4xl mx-auto">
             <div className="bg-card rounded-lg shadow-medium overflow-hidden border border-border/50 p-6">
-              <div id="hostaway-calendar-widget" />
+              <div 
+                id="hostaway-calendar-widget" 
+                ref={widgetContainerRef}
+                className="min-h-[350px] flex items-center justify-center"
+              >
+                <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              </div>
             </div>
           </div>
         </ScrollReveal>
