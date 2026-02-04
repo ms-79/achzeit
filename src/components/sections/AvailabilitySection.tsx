@@ -8,18 +8,17 @@ const AvailabilitySection = () => {
   const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const widgetContainerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [widgetInitialized, setWidgetInitialized] = useState(false);
-  const initAttemptedRef = useRef(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const widgetInitializedRef = useRef(false);
 
   // Initialize the Hostaway widget
   const initializeWidget = useCallback(() => {
-    if (initAttemptedRef.current || widgetInitialized) return;
+    if (widgetInitializedRef.current) return;
     
     const hostawayWidget = (window as any).hostawayCalendarWidget;
     if (!hostawayWidget || !widgetContainerRef.current) return;
     
-    initAttemptedRef.current = true;
+    widgetInitializedRef.current = true;
     
     // Clear any existing content
     widgetContainerRef.current.innerHTML = '';
@@ -42,20 +41,24 @@ const AvailabilitySection = () => {
         textColor: '#363330',
       },
     });
-    
-    setWidgetInitialized(true);
-  }, [t, widgetInitialized]);
+  }, [t]);
 
-  // Observe when section becomes visible
+  // Observe when section becomes visible OR load immediately if navigated to via hash
   useEffect(() => {
+    // Check if we should load immediately (hash navigation or already visible)
+    if (window.location.hash === '#availability') {
+      setShouldLoad(true);
+      return;
+    }
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setShouldLoad(true);
           observer.disconnect();
         }
       },
-      { rootMargin: '300px', threshold: 0 }
+      { rootMargin: '400px', threshold: 0 }
     );
 
     if (sectionRef.current) {
@@ -65,21 +68,34 @@ const AvailabilitySection = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Load script and initialize widget when visible
+  // Load script and initialize widget when shouldLoad is true
   useEffect(() => {
-    if (!isVisible) return;
+    if (!shouldLoad) return;
 
-    // Check if script already exists
-    const existingScript = document.querySelector(`script[src="${HOSTAWAY_SCRIPT_URL}"]`);
-    
-    if (existingScript) {
-      // Script already loaded, just initialize
-      if ((window as any).hostawayCalendarWidget) {
-        initializeWidget();
-      }
+    // Check if widget function already exists
+    if ((window as any).hostawayCalendarWidget) {
+      initializeWidget();
       return;
     }
 
+    // Check if script is already loading/loaded
+    const existingScript = document.querySelector(`script[src="${HOSTAWAY_SCRIPT_URL}"]`);
+    
+    if (existingScript) {
+      // Wait for it to load
+      const checkInterval = setInterval(() => {
+        if ((window as any).hostawayCalendarWidget) {
+          clearInterval(checkInterval);
+          initializeWidget();
+        }
+      }, 100);
+      
+      // Cleanup interval after 10 seconds
+      setTimeout(() => clearInterval(checkInterval), 10000);
+      return;
+    }
+
+    // Load the script
     const script = document.createElement('script');
     script.src = HOSTAWAY_SCRIPT_URL;
     script.async = true;
@@ -93,26 +109,20 @@ const AvailabilitySection = () => {
       console.error('Failed to load Hostaway calendar script');
     };
     document.body.appendChild(script);
+  }, [shouldLoad, initializeWidget]);
 
-    // No cleanup - we want the script and widget to persist
-  }, [isVisible, initializeWidget]);
-
-  // Re-initialize widget when language changes (if already initialized)
+  // Re-initialize widget when language changes
   useEffect(() => {
-    if (widgetInitialized && (window as any).hostawayCalendarWidget) {
-      initAttemptedRef.current = false;
-      setWidgetInitialized(false);
-      
-      // Clear and reinitialize with new language
-      if (widgetContainerRef.current) {
-        widgetContainerRef.current.innerHTML = '';
-      }
+    if (widgetInitializedRef.current && (window as any).hostawayCalendarWidget && widgetContainerRef.current) {
+      // Reset and reinitialize
+      widgetInitializedRef.current = false;
+      widgetContainerRef.current.innerHTML = '';
       
       setTimeout(() => {
         initializeWidget();
       }, 100);
     }
-  }, [language]); // Only re-run when language changes
+  }, [language, initializeWidget]);
 
   return (
     <section ref={sectionRef} id="availability" className="section-padding bg-gradient-section">
@@ -135,7 +145,7 @@ const AvailabilitySection = () => {
               <div 
                 id="hostaway-calendar-widget" 
                 ref={widgetContainerRef}
-                className="min-h-[200px]"
+                className="min-h-[300px]"
               />
             </div>
           </div>
