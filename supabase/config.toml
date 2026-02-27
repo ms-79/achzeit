@@ -1,4 +1,7 @@
 project_id = "ubtfmbzlpywvtljkxooy"
 
-[functions.hostaway-contact]
+[functions.send-contact]
+verify_jwt = false
+
+[functions.reservation]
 verify_jwt = false
