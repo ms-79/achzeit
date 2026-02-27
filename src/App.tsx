@@ -10,6 +10,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import CookieSettings from "./pages/CookieSettings";
 import Buchungsbedingungen from "./pages/Buchungsbedingungen";
+import GuestGuide from "./pages/GuestGuide";
 
 const queryClient = new QueryClient();
 
