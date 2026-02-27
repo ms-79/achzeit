@@ -27,6 +27,7 @@ const App = () => (
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/cookies" element={<CookieSettings />} />
             <Route path="/buchungsbedingungen" element={<Buchungsbedingungen />} />
+            <Route path="/guide/achzeit" element={<GuestGuide />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
