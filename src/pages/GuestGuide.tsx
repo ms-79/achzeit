@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import {
   Accordion,
@@ -21,56 +19,16 @@ import {
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 
-interface GuideData {
-  guest_name: string;
-  checkin: string;
-  checkout: string;
-  box_code: string;
-}
+// Placeholder data – will be replaced by Hostaway API later
+const guestData = {
+  guestName: 'Familie Müller',
+  checkin: '2026-03-01',
+  checkout: '2026-03-08',
+  boxCode: '4 7 2 1',
+};
 
 const GuestGuide = () => {
-  const [searchParams] = useSearchParams();
-  const [data, setData] = useState<GuideData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const token = searchParams.get('t');
-    if (!token) {
-      setError(true);
-      setLoading(false);
-      return;
-    }
-
-    const fetchGuide = async () => {
-      try {
-        const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-        const res = await fetch(
-          `https://${projectId}.supabase.co/functions/v1/guide?t=${encodeURIComponent(token)}`,
-          {
-            headers: {
-              apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-            },
-          }
-        );
-
-        if (!res.ok) {
-          setError(true);
-          setLoading(false);
-          return;
-        }
-
-        const json = await res.json();
-        setData(json);
-      } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGuide();
-  }, [searchParams]);
+  const { guestName, checkin, checkout, boxCode } = guestData;
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -84,50 +42,6 @@ const GuestGuide = () => {
       year: 'numeric',
     });
   };
-
-  // Loading
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center"
-        >
-          <img src={logoAchzeit} alt="ACHZEIT" className="w-32 mx-auto mb-6 opacity-40" />
-          <div className="w-8 h-8 border-2 border-alpine-stone border-t-alpine-charcoal rounded-full animate-spin mx-auto" />
-        </motion.div>
-      </div>
-    );
-  }
-
-  // Error
-  if (error || !data) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center max-w-md"
-        >
-          <img src={logoAchzeit} alt="ACHZEIT" className="w-32 mx-auto mb-8 opacity-40" />
-          <h1 className="font-display text-2xl text-foreground mb-3">
-            Dieser Link ist ungültig oder abgelaufen.
-          </h1>
-          <p className="text-muted-foreground mb-8">
-            Bitte kontaktiere deinen Gastgeber für einen neuen Zugangslink.
-          </p>
-          <Button
-            variant="alpine"
-            size="lg"
-            onClick={() => window.location.href = '/#contact'}
-          >
-            Gastgeber kontaktieren
-          </Button>
-        </motion.div>
-      </div>
-    );
-  }
 
   const quickActions = [
     { icon: Key, label: 'Zugang', target: 'zugang' },
@@ -158,7 +72,7 @@ const GuestGuide = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Willkommen {data.guest_name}
+            Willkommen {guestName}
           </motion.h1>
 
           <motion.p
@@ -178,7 +92,7 @@ const GuestGuide = () => {
           >
             <p className="text-sm text-alpine-snow/60 uppercase tracking-widest mb-1">Aufenthalt</p>
             <p className="text-alpine-snow/90 font-medium">
-              {formatDate(data.checkin)} – {formatDate(data.checkout)}
+              {formatDate(checkin)} – {formatDate(checkout)}
             </p>
           </motion.div>
 
@@ -229,7 +143,7 @@ const GuestGuide = () => {
 
               <div className="bg-muted rounded-lg p-4">
                 <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Schlüsselbox-Code</p>
-                <p className="text-2xl font-mono font-bold text-foreground tracking-[0.3em]">{data.box_code}</p>
+                <p className="text-2xl font-mono font-bold text-foreground tracking-[0.3em]">{boxCode}</p>
               </div>
 
               <div className="space-y-2 text-sm">
@@ -398,7 +312,7 @@ const GuestGuide = () => {
                 >
                   <Phone size={18} className="text-alpine-wood" />
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-muted-foreground">Ärztlicher Bereitschaftsdienst</p>
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground">Ärztl. Bereitschaftsdienst</p>
                     <p className="text-lg font-bold text-foreground">116 117</p>
                   </div>
                 </a>
