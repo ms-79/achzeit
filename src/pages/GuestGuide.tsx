@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
-import { supabase } from '@/integrations/supabase/client';
 import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
 
