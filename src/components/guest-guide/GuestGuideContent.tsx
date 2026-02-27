@@ -14,6 +14,8 @@ import {
   Car,
   UtensilsCrossed,
   Phone,
+  MapPin,
+  Star,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 
