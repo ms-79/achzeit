@@ -44,14 +44,6 @@ const GuestGuide = () => {
 
     const fetchGuide = async () => {
       try {
-        const { data: responseData, error: fnError } = await supabase.functions.invoke('guide', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          body: undefined,
-        });
-
-        // supabase.functions.invoke doesn't support query params easily,
-        // so we use fetch directly
         const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
         const res = await fetch(
           `https://${projectId}.supabase.co/functions/v1/guide?t=${encodeURIComponent(token)}`,
