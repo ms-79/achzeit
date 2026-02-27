@@ -30,14 +30,6 @@ const GuestGuide = () => {
     const fetchReservation = async () => {
       try {
         setLoading(true);
-        const { data, error: fnError } = await supabase.functions.invoke('get-reservation', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          body: null,
-        });
-
-        // supabase.functions.invoke doesn't support query params natively,
-        // so we use a direct fetch instead
         const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
         const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
