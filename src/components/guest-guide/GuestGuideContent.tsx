@@ -159,6 +159,80 @@ const GuestGuideContent = ({ guestData }: Props) => {
           </AccordionContent>
         </AccordionItem>
 
+        {/* Restaurant-Empfehlungen */}
+        <AccordionItem value="restaurants" id="restaurants" className="border border-border rounded-lg px-6 overflow-hidden">
+          <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
+            <span className="flex items-center gap-3">
+              <UtensilsCrossed size={20} className="text-alpine-wood" />
+              Restaurant-Empfehlungen
+            </span>
+          </AccordionTrigger>
+          <AccordionContent className="text-muted-foreground leading-relaxed space-y-5">
+            <p className="text-sm">Unsere persönlichen Tipps für euren Aufenthalt – von regional bis gehoben.</p>
+
+            <div className="space-y-4">
+              {/* Gaisbock */}
+              <a href="https://www.dorfalpe.de/gaisbock/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">Gaisbock</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Fischen im Allgäu · Regionale Küche</p>
+                  </div>
+                  <span className="flex items-center gap-1 text-xs text-alpine-wood whitespace-nowrap">
+                    <Star size={12} className="fill-alpine-wood" /> Top-Empfehlung
+                  </span>
+                </div>
+                <p className="text-sm mt-2">Traditionelle Allgäuer Gastlichkeit mit modernen Akzenten. Regionale Küche mit besten Zutaten aus der Heimat – gemütlich und herzlich.</p>
+              </a>
+
+              {/* Ondersch */}
+              <a href="https://ondersch.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">Ondersch</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Fine Dining & Genusswirtschaft</p>
+                  </div>
+                  <span className="flex items-center gap-1 text-xs text-alpine-wood whitespace-nowrap">
+                    <Star size={12} className="fill-alpine-wood" /> Sterne-Niveau
+                  </span>
+                </div>
+                <p className="text-sm mt-2">Zwei Konzepte unter einem Dach – gehobene Küche und entspannte Genusswirtschaft. Perfekt für einen besonderen Abend.</p>
+              </a>
+
+              {/* Alte Sennküche */}
+              <a href="https://altesennkueche.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div>
+                  <h4 className="font-display text-base text-foreground">Alte Sennküche</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Traditionell bayerisch</p>
+                </div>
+                <p className="text-sm mt-2">Gemütliche Stuben, deftige Schmankerl und gut gezapftes Bier – bodenständig und authentisch Oberstdorf.</p>
+              </a>
+
+              {/* Zum wilde Männle */}
+              <a href="https://wilde-maennle.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div>
+                  <h4 className="font-display text-base text-foreground">Zum wilde Männle</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Traditionsgaststätte</p>
+                </div>
+                <p className="text-sm mt-2">Institution in der Fußgängerzone seit 1937. Hier trifft sich Jung und Alt – urgemütlich mit Brauereiausschank.</p>
+              </a>
+
+              {/* Bei Alberto */}
+              <a href="https://pizzeria-beialberto.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div>
+                  <h4 className="font-display text-base text-foreground">Bei Alberto</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Italienisch</p>
+                </div>
+                <p className="text-sm mt-2">Familienbetrieb in zweiter Generation – Pizza, Pasta und italienisches Lebensgefühl mit großer Sonnenterrasse.</p>
+              </a>
+            </div>
+
+            <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
+              <MapPin size={12} /> Alle Restaurants sind in 5–15 Minuten mit dem Auto erreichbar.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+
         {/* Check-out */}
         <AccordionItem value="checkout" id="checkout" className="border border-border rounded-lg px-6 overflow-hidden">
           <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
