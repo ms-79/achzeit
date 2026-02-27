@@ -34,7 +34,7 @@ const GuestGuide = () => {
         const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
         const res = await fetch(
-          `https://${projectId}.supabase.co/functions/v1/get-reservation?reservationId=${reservationId}`,
+          `https://${projectId}.supabase.co/functions/v1/reservation?reservationId=${reservationId}`,
           {
             headers: {
               'apikey': anonKey,
