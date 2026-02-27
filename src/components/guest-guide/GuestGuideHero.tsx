@@ -7,6 +7,7 @@ import {
   Trash2,
   AlertTriangle,
   UtensilsCrossed,
+  Mountain,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import type { GuestData } from '@/pages/GuestGuide';
@@ -17,6 +18,7 @@ const quickActions = [
   { icon: Baby, label: 'Familie', target: 'familie' },
   { icon: Flame, label: 'Sauna & Kamin', target: 'sauna' },
   { icon: UtensilsCrossed, label: 'Restaurants', target: 'restaurants' },
+  { icon: Mountain, label: 'Ausflüge', target: 'ausfluege' },
   { icon: Trash2, label: 'Check-out', target: 'checkout' },
   { icon: AlertTriangle, label: 'Notfall', target: 'notfall' },
 ];

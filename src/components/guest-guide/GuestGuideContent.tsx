@@ -16,6 +16,8 @@ import {
   Phone,
   MapPin,
   Star,
+  Mountain,
+  ExternalLink,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 
@@ -229,6 +231,83 @@ const GuestGuideContent = ({ guestData }: Props) => {
 
             <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
               <MapPin size={12} /> Alle Restaurants sind in 5–15 Minuten mit dem Auto erreichbar.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+
+        {/* Ausflugstipps */}
+        <AccordionItem value="ausfluege" id="ausfluege" className="border border-border rounded-lg px-6 overflow-hidden">
+          <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
+            <span className="flex items-center gap-3">
+              <Mountain size={20} className="text-alpine-wood" />
+              Ausflugstipps
+            </span>
+          </AccordionTrigger>
+          <AccordionContent className="text-muted-foreground leading-relaxed space-y-5">
+            <p className="text-sm">Rund um ACHZEIT gibt es viel zu entdecken – hier unsere Favoriten.</p>
+
+            <div className="space-y-4">
+              <a href="https://www.breitachklamm.com/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">Breitachklamm</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Tiefenbach · Naturwunder</p>
+                  </div>
+                  <span className="flex items-center gap-1 text-xs text-alpine-wood whitespace-nowrap">
+                    <Star size={12} className="fill-alpine-wood" /> Top-Ausflug
+                  </span>
+                </div>
+                <p className="text-sm mt-2">Die tiefste und eine der beeindruckendsten Felsschluchten Mitteleuropas. Im Sommer tosende Wasserfälle, im Winter magische Eisformationen. Ca. 10 Min. mit dem Auto.</p>
+              </a>
+
+              <a href="https://www.ok-bergbahnen.com/nebelhorn" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">Nebelhorn (2.224 m)</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Bergbahn & Panorama</p>
+                  </div>
+                  <span className="flex items-center gap-1 text-xs text-alpine-wood whitespace-nowrap">
+                    <Star size={12} className="fill-alpine-wood" /> 400er Gipfelblick
+                  </span>
+                </div>
+                <p className="text-sm mt-2">Mit der Gondel auf 2.224 m – 400 Gipfel im Blick. Nordwandsteig und Panorama-Rundweg. Im Winter herrliches Skigebiet. Ca. 15 Min. zur Talstation.</p>
+              </a>
+
+              <a href="https://www.ok-bergbahnen.com/fellhorn-kanzelwand" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div>
+                  <h4 className="font-display text-base text-foreground">Fellhorn / Kanzelwand</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Wandern & Skifahren</p>
+                </div>
+                <p className="text-sm mt-2">Blumenreiche Bergwiesen im Sommer, erstklassiges Skigebiet im Winter. Die Zwei-Länder-Wanderung (DE/AT) ist ein Highlight. Ca. 20 Min. Fahrzeit.</p>
+              </a>
+
+              <a href="https://www.sturmannshoehle.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div>
+                  <h4 className="font-display text-base text-foreground">Sturmannshöhle</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">Obermaiselstein · Tropfsteinhöhle</p>
+                </div>
+                <p className="text-sm mt-2">Die einzige begehbare Höhle im Allgäu – beeindruckende Tropfsteinformationen tief im Berg. Tolles Erlebnis auch für Kinder. Ca. 5 Min. Fahrzeit.</p>
+              </a>
+
+              <a href="https://www.ok-bergbahnen.com/soellereck" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div>
+                  <h4 className="font-display text-base text-foreground">Söllereck</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Familienberg</p>
+                </div>
+                <p className="text-sm mt-2">Der Familienberg: Sommerrodelbahn, kurze Wanderwege und ein tolles Panorama. Ideal mit Kindern. Ca. 15 Min. Fahrzeit.</p>
+              </a>
+
+              <a href="https://maps.google.com/?q=Christlessee+Trettachtal" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div>
+                  <h4 className="font-display text-base text-foreground">Christlessee</h4>
+                  <p className="text-xs text-muted-foreground mt-0.5">Trettachtal · Bergsee</p>
+                </div>
+                <p className="text-sm mt-2">Kristallklarer Bergsee mit türkisem Wasser – ein Geheimtipp zum Staunen. Leichte Wanderung ab Parkplatz Trettachtal. Ca. 20 Min. Fahrzeit.</p>
+              </a>
+            </div>
+
+            <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
+              <MapPin size={12} /> Alle Ausflugsziele sind in 5–20 Minuten mit dem Auto erreichbar.
             </p>
           </AccordionContent>
         </AccordionItem>
