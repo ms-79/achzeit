@@ -10,6 +10,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import CookieSettings from "./pages/CookieSettings";
 import Buchungsbedingungen from "./pages/Buchungsbedingungen";
+import GuestGuide from "./pages/GuestGuide";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/cookies" element={<CookieSettings />} />
             <Route path="/buchungsbedingungen" element={<Buchungsbedingungen />} />
+            <Route path="/guide/achzeit" element={<GuestGuide />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
