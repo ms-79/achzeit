@@ -16,6 +16,8 @@ import {
   Phone,
   MapPin,
   Star,
+  Mountain,
+  ExternalLink,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 
