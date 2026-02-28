@@ -63,13 +63,27 @@ const GuestGuide = () => {
       token = tok || null;
     }
 
+    const fetchWithRetry = async (url: string, opts: RequestInit, retries = 2): Promise<Response> => {
+      for (let i = 0; i <= retries; i++) {
+        try {
+          return await fetch(url, opts);
+        } catch (err) {
+          if (i === retries) throw err;
+          await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+        }
+      }
+      throw new Error('Netzwerkfehler');
+    };
+
+    const headers = { apikey: anonKey, 'Content-Type': 'application/json' };
+
     const load = async () => {
       try {
         // Mode 1: Direct access via reservationId + token
         if (reservationId && token) {
-          const res = await fetch(
+          const res = await fetchWithRetry(
             `${baseUrl}?reservationId=${reservationId}&token=${token}`,
-            { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
+            { headers },
           );
           const body = await res.json();
 
@@ -81,10 +95,7 @@ const GuestGuide = () => {
         }
 
         // Mode 2: Check for active reservation → PIN
-        const res = await fetch(
-          `${baseUrl}`,
-          { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
-        );
+        const res = await fetchWithRetry(`${baseUrl}`, { headers });
         const body = await res.json();
 
         if (res.ok && body.status === 'pin_required') {
@@ -96,7 +107,7 @@ const GuestGuide = () => {
           setState('error');
         }
       } catch (err: any) {
-        setErrorMsg(err.message);
+        setErrorMsg('Verbindungsfehler. Bitte Seite neu laden.');
         setState('error');
       }
     };
@@ -106,11 +117,20 @@ const GuestGuide = () => {
 
   const handlePinSubmit = async (pin: string) => {
     setState('loading');
+    const headers = { apikey: anonKey, 'Content-Type': 'application/json' };
+    const fetchWithRetry = async (url: string, opts: RequestInit, retries = 2): Promise<Response> => {
+      for (let i = 0; i <= retries; i++) {
+        try {
+          return await fetch(url, opts);
+        } catch (err) {
+          if (i === retries) throw err;
+          await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+        }
+      }
+      throw new Error('Netzwerkfehler');
+    };
     try {
-      const res = await fetch(
-        `${baseUrl}?pin=${pin}`,
-        { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
-      );
+      const res = await fetchWithRetry(`${baseUrl}?pin=${pin}`, { headers });
       const body = await res.json();
 
       if (res.ok && body.status === 'ok') {
@@ -123,7 +143,7 @@ const GuestGuide = () => {
         setState('error');
       }
     } catch (err: any) {
-      setErrorMsg(err.message);
+      setErrorMsg('Verbindungsfehler. Bitte erneut versuchen.');
       setState('error');
     }
     return 'ok';
