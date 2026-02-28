@@ -180,11 +180,8 @@ const GuestGuide = () => {
     return <GuestGuidePinEntry onSubmit={handlePinSubmit} />;
   }
 
-  const [activeSection, setActiveSection] = useState('zugang');
-
   const handleNavClick = (section: string) => {
     setActiveSection(section);
-    // Scroll after a brief delay so the accordion opens first
     setTimeout(() => {
       const el = document.getElementById(section);
       if (el) {
