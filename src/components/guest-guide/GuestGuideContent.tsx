@@ -344,7 +344,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Apotheke im Ortszentrum von Fischen.</p>
-                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 5 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 1 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 11 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
               </a>
             </div>
 
