@@ -38,12 +38,9 @@ const formatDate = (dateStr: string) => {
   });
 };
 
-const scrollToSection = (id: string) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-};
-
 interface Props {
   guestData: GuestData;
+  onNavClick?: (section: string) => void;
 }
 
 const GuestGuideHero = ({ guestData }: Props) => {
