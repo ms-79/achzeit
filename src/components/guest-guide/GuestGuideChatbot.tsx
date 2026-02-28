@@ -140,8 +140,8 @@ const GuestGuideChatbot = () => {
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[200px]">
             {messages.length === 0 && (
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">Hallo! 👋 Wie kann ich euch helfen? Hier ein paar Ideen:</p>
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground">Willkommen – wie kann ich behilflich sein?</p>
                 <div className="flex flex-wrap gap-2">
                   {SUGGESTIONS.map((s) => (
                     <button
