@@ -78,9 +78,9 @@ const GuestGuide = () => {
     const headers = { apikey: anonKey, 'Content-Type': 'application/json' };
 
     const load = async () => {
-      try {
-        // Mode 1: Direct access via reservationId + token
-        if (reservationId && token) {
+      // Mode 1: Direct access via reservationId + token
+      if (reservationId && token) {
+        try {
           const res = await fetchWithRetry(
             `${baseUrl}?reservationId=${reservationId}&token=${token}`,
             { headers },
@@ -91,25 +91,13 @@ const GuestGuide = () => {
             applyGuestData(body);
             return;
           }
+        } catch (err: any) {
           // Token invalid/expired → fall through to PIN flow
         }
-
-        // Mode 2: Check for active reservation → PIN
-        const res = await fetchWithRetry(`${baseUrl}`, { headers });
-        const body = await res.json();
-
-        if (res.ok && body.status === 'pin_required') {
-          setState('pin');
-        } else if (body.error === 'no_active_reservation') {
-          setState('no_reservation');
-        } else {
-          setErrorMsg(body.message || body.error || 'Unbekannter Fehler');
-          setState('error');
-        }
-      } catch (err: any) {
-        setErrorMsg('Verbindungsfehler. Bitte Seite neu laden.');
-        setState('error');
       }
+
+      // No token or token failed → show PIN immediately (no API call)
+      setState('pin');
     };
 
     load();
