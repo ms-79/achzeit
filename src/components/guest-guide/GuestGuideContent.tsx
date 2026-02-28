@@ -476,6 +476,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <li>• Parkplatz Fischen-Au, Illerstr. 11 – 11–22 kW (New Motion)</li>
                   <li>• NaturGut Allgäu, Maderhalm 2 – 22 kW (Heel-Energie)</li>
                 </ul>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 10 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
               </div>
 
               <div className="bg-muted rounded-lg p-4">
@@ -485,6 +486,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <li>• McDonald's, An der Breitach 1 – 50 kW (AllgäuStrom)</li>
                   <li>• Haus des Gastes, Dorfstr. 19 – 11–22 kW (New Motion)</li>
                 </ul>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 5 Min.</span></div>
               </div>
 
               <div className="bg-muted rounded-lg p-4">
@@ -493,6 +495,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <li>• Parkplatz P2, Sonthofener Str. 20 – 22 kW (AllgäuStrom)</li>
                   <li>• Nebelhornbahn, Nebelhornstr. 67 – 22 kW (AllgäuStrom)</li>
                 </ul>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
               </div>
             </div>
 
