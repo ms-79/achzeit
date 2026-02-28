@@ -67,6 +67,7 @@ const GuestGuide = () => {
           checkin: result.checkin || '',
           checkout: result.checkout || '',
           boxCode: result.doorCode || '– – – –',
+          wifiPassword: result.wifiPassword || '',
         });
       } catch (err: any) {
         console.error('Failed to fetch reservation:', err);
