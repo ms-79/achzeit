@@ -253,6 +253,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Italienisch</p>
                 </div>
                 <p className="text-sm mt-2">Familienbetrieb in zweiter Generation – Pizza, Pasta und italienisches Lebensgefühl mit großer Sonnenterrasse.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
               </a>
             </div>
 
