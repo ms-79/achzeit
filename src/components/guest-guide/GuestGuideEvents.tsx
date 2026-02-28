@@ -102,7 +102,9 @@ const PdfViewerModal = ({
         </button>
       </div>
       <iframe
-        src={`https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`}
+        src={`https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(
+          `https://ubtfmbzlpywvtljkxooy.supabase.co/functions/v1/check-pdf?url=${encodeURIComponent(url)}`
+        )}`}
         className="flex-1 w-full border-0"
         title={title}
         allow="fullscreen"
