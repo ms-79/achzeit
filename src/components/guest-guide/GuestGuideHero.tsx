@@ -38,15 +38,12 @@ const formatDate = (dateStr: string) => {
   });
 };
 
-const scrollToSection = (id: string) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-};
-
 interface Props {
   guestData: GuestData;
+  onNavClick?: (section: string) => void;
 }
 
-const GuestGuideHero = ({ guestData }: Props) => {
+const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
   const { guestName, checkin, checkout } = guestData;
 
   return (
@@ -113,7 +110,7 @@ const GuestGuideHero = ({ guestData }: Props) => {
           {quickActions.map((action) => (
             <button
               key={action.target}
-              onClick={() => scrollToSection(action.target)}
+              onClick={() => onNavClick?.(action.target)}
               className="flex items-center gap-2 bg-alpine-snow/10 hover:bg-alpine-snow/20 text-alpine-snow/80 hover:text-alpine-snow px-4 py-2.5 rounded-lg text-sm transition-all duration-200"
             >
               <action.icon size={16} />

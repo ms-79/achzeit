@@ -193,7 +193,7 @@ const GuestGuide = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GuestGuideHero guestData={guestData} />
+      <GuestGuideHero guestData={guestData} onNavClick={handleNavClick} />
       <GuestGuideStickyNav activeSection={activeSection} onNavClick={handleNavClick} />
       <GuestGuideContent guestData={guestData} activeSection={activeSection} onSectionChange={setActiveSection} />
 
