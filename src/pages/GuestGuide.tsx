@@ -102,7 +102,7 @@ const GuestGuide = () => {
     };
 
     load();
-  }, [slug]);
+  }, []);
 
   const handlePinSubmit = async (pin: string) => {
     setState('loading');
