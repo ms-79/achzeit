@@ -117,11 +117,20 @@ const GuestGuide = () => {
 
   const handlePinSubmit = async (pin: string) => {
     setState('loading');
+    const headers = { apikey: anonKey, 'Content-Type': 'application/json' };
+    const fetchWithRetry = async (url: string, opts: RequestInit, retries = 2): Promise<Response> => {
+      for (let i = 0; i <= retries; i++) {
+        try {
+          return await fetch(url, opts);
+        } catch (err) {
+          if (i === retries) throw err;
+          await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+        }
+      }
+      throw new Error('Netzwerkfehler');
+    };
     try {
-      const res = await fetch(
-        `${baseUrl}?pin=${pin}`,
-        { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
-      );
+      const res = await fetchWithRetry(`${baseUrl}?pin=${pin}`, { headers });
       const body = await res.json();
 
       if (res.ok && body.status === 'ok') {
@@ -134,7 +143,7 @@ const GuestGuide = () => {
         setState('error');
       }
     } catch (err: any) {
-      setErrorMsg(err.message);
+      setErrorMsg('Verbindungsfehler. Bitte erneut versuchen.');
       setState('error');
     }
     return 'ok';
