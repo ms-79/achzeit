@@ -51,7 +51,6 @@ const GuestGuide = () => {
   };
 
   useEffect(() => {
-    if (!slug) return;
 
     // Support format: ?t=RESID.TOKEN
     const params = new URLSearchParams(window.location.search);
