@@ -5,6 +5,7 @@ import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
 import GuestGuideStickyNav from '@/components/guest-guide/GuestGuideStickyNav';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
 import GuestGuidePinEntry from '@/components/guest-guide/GuestGuidePinEntry';
+import GuestGuideChatbot from '@/components/guest-guide/GuestGuideChatbot';
 
 export interface GuestData {
   guestName: string;
@@ -196,6 +197,9 @@ const GuestGuide = () => {
       <GuestGuideHero guestData={guestData} onNavClick={handleNavClick} />
       <GuestGuideStickyNav activeSection={activeSection} onNavClick={handleNavClick} />
       <GuestGuideContent guestData={guestData} activeSection={activeSection} onSectionChange={setActiveSection} />
+
+      {/* Chatbot */}
+      <GuestGuideChatbot />
 
       {/* Footer */}
       <div className="max-w-3xl mx-auto px-6 text-center mt-16 pb-12 pt-8 border-t border-border">
