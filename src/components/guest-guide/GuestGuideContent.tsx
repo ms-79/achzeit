@@ -20,7 +20,7 @@ import {
   Mountain,
   ExternalLink,
   ShoppingCart,
-  
+  HelpCircle,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 import GuestGuideEvents from './GuestGuideEvents';
@@ -562,6 +562,94 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
             <p className="text-sm italic text-muted-foreground pt-2">
               Vielen Dank für euren Aufenthalt im ACHZEIT.
             </p>
+          </AccordionContent>
+        </AccordionItem>
+
+        {/* Troubleshooting / Anleitungen */}
+        <AccordionItem value="anleitungen" id="anleitungen" className="border border-border rounded-lg px-6 overflow-hidden">
+          <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
+            <span className="flex items-center gap-3">
+              <HelpCircle size={20} className="text-alpine-wood" />
+              Hilfe & Anleitungen
+            </span>
+          </AccordionTrigger>
+          <AccordionContent className="text-muted-foreground leading-relaxed space-y-6">
+            <p className="text-sm">Schritt-für-Schritt-Anleitungen für die wichtigsten Geräte und Funktionen im Haus.</p>
+
+            {/* BORA Kochfeld */}
+            <div className="bg-muted rounded-lg p-4 space-y-2">
+              <h4 className="font-display text-base text-foreground">🍳 BORA-Kochfeld bedienen</h4>
+              <ol className="list-decimal list-inside text-sm space-y-1">
+                <li>Kochfeld am Hauptschalter (rechte Seite) einschalten.</li>
+                <li>Kochzone durch Berühren des +-Symbols aktivieren.</li>
+                <li>Temperatur mit Schieberegler oder +/- einstellen.</li>
+                <li>Absaugung startet automatisch – Stufe kann manuell angepasst werden.</li>
+                <li>Nach dem Kochen: Kochzone auf 0 stellen, Absaugung läuft automatisch nach.</li>
+              </ol>
+              <p className="text-xs text-muted-foreground italic">📌 Bitte keine Alufolie oder Töpfe direkt auf die Absaugöffnung stellen.</p>
+            </div>
+
+            {/* Sauna */}
+            <div className="bg-muted rounded-lg p-4 space-y-2">
+              <h4 className="font-display text-base text-foreground">🧖 Sauna einschalten</h4>
+              <ol className="list-decimal list-inside text-sm space-y-1">
+                <li>Saunaofen am Drehregler (außen an der Kabine) einschalten.</li>
+                <li>Gewünschte Temperatur einstellen (empfohlen: 70–85 °C).</li>
+                <li>Aufheizzeit ca. 30–45 Minuten abwarten.</li>
+                <li>Immer auf einem Handtuch sitzen.</li>
+                <li>Nach der Nutzung: Regler auf 0 drehen und kurz lüften.</li>
+              </ol>
+              <p className="text-xs text-muted-foreground italic">📌 Bitte kein Wasser direkt auf die Steuereinheit gießen.</p>
+            </div>
+
+            {/* Kamin */}
+            <div className="bg-muted rounded-lg p-4 space-y-2">
+              <h4 className="font-display text-base text-foreground">🔥 Kamin anzünden</h4>
+              <ol className="list-decimal list-inside text-sm space-y-1">
+                <li>Kaminzufuhr (Hebel unten) vollständig öffnen.</li>
+                <li>Anzünder und kleines Holz als Basis schichten.</li>
+                <li>Von oben nach unten anzünden.</li>
+                <li>Erst nach ca. 15 Min. größere Scheite nachlegen.</li>
+                <li>Zufuhr nach dem Anbrennen halb schließen für gleichmäßige Wärme.</li>
+              </ol>
+              <p className="text-xs text-muted-foreground italic">📌 Nur trockenes Holz verwenden. Asche erst kalt entsorgen.</p>
+            </div>
+
+            {/* Kaffeemaschine */}
+            <div className="bg-muted rounded-lg p-4 space-y-2">
+              <h4 className="font-display text-base text-foreground">☕ Kaffeemaschine (Nespresso)</h4>
+              <ol className="list-decimal list-inside text-sm space-y-1">
+                <li>Maschine am Knopf oben einschalten – Aufheizen abwarten.</li>
+                <li>Kapsel einlegen und Hebel schließen.</li>
+                <li>Tasse unterstellen und gewünschte Größe drücken (klein/groß).</li>
+                <li>Nach dem Brühen: Hebel öffnen, Kapsel fällt automatisch in den Behälter.</li>
+              </ol>
+              <p className="text-xs text-muted-foreground italic">📌 Kapseln findet ihr in der Küchenschublade. Auffangbehälter bitte bei Bedarf leeren.</p>
+            </div>
+
+            {/* Geschirrspüler */}
+            <div className="bg-muted rounded-lg p-4 space-y-2">
+              <h4 className="font-display text-base text-foreground">🍽️ Geschirrspüler starten</h4>
+              <ol className="list-decimal list-inside text-sm space-y-1">
+                <li>Tab in das Fach in der Innentür einlegen.</li>
+                <li>Tür schließen.</li>
+                <li>Einschaltknopf drücken und Programm wählen (Eco oder Auto empfohlen).</li>
+                <li>Start drücken.</li>
+              </ol>
+              <p className="text-xs text-muted-foreground italic">📌 Tabs befinden sich unter der Spüle.</p>
+            </div>
+
+            {/* Heizung / Thermostat */}
+            <div className="bg-muted rounded-lg p-4 space-y-2">
+              <h4 className="font-display text-base text-foreground">🌡️ Heizung & Thermostat</h4>
+              <ol className="list-decimal list-inside text-sm space-y-1">
+                <li>Die Fußbodenheizung wird zentral gesteuert.</li>
+                <li>Thermostat im Wohnbereich auf gewünschte Temperatur einstellen.</li>
+                <li>Änderungen wirken sich erst nach ca. 1–2 Stunden aus.</li>
+              </ol>
+              <p className="text-xs text-muted-foreground italic">📌 Bitte nicht über 23 °C einstellen – die Fußbodenheizung reagiert langsam.</p>
+            </div>
+
           </AccordionContent>
         </AccordionItem>
 
