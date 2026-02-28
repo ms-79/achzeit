@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const BASE_URL =
   'https://www.hoernerdoerfer.de/fileadmin/thd/x_partner_info/dateien/gaesteinfos/Fischen/dateien/Wochenprogramm_KW';
 
-/** Returns ISO week number for a given date */
+/** Returns ISO 8601 week number */
 function getISOWeek(date: Date): number {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
@@ -22,7 +23,12 @@ function getMondayOfWeek(year: number, week: number): Date {
 }
 
 function formatDate(d: Date): string {
-  return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  return d.toLocaleDateString('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
 }
 
 function getWeekRange(year: number, week: number): string {
@@ -34,18 +40,21 @@ function getWeekRange(year: number, week: number): string {
 
 type Status = 'loading' | 'available' | 'unavailable';
 
-function usePdfAvailability(url: string): Status {
+function useCheckPdf(url: string): Status {
   const [status, setStatus] = useState<Status>('loading');
 
   useEffect(() => {
     let cancelled = false;
 
-    // Use HEAD to check if the PDF exists without downloading it
-    fetch(url, { method: 'HEAD', mode: 'no-cors' })
-      .then((res) => {
-        // no-cors returns opaque response (status 0) – treat as available
-        // If it truly 404s with CORS, we'd get a network error
-        if (!cancelled) setStatus('available');
+    supabase.functions
+      .invoke('check-pdf', { body: { url } })
+      .then(({ data, error }) => {
+        if (cancelled) return;
+        if (error || !data?.available) {
+          setStatus('unavailable');
+        } else {
+          setStatus('available');
+        }
       })
       .catch(() => {
         if (!cancelled) setStatus('unavailable');
@@ -68,7 +77,8 @@ interface WeekRowProps {
 const WeekRow = ({ kwNumber, year, label }: WeekRowProps) => {
   const kwStr = String(kwNumber).padStart(2, '0');
   const url = `${BASE_URL}${kwStr}.pdf`;
-  const status = usePdfAvailability(url);
+  const viewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
+  const status = useCheckPdf(url);
   const dateRange = getWeekRange(year, kwNumber);
 
   if (status === 'loading') {
@@ -95,8 +105,6 @@ const WeekRow = ({ kwNumber, year, label }: WeekRowProps) => {
       </div>
     );
   }
-
-  const viewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
 
   return (
     <a
