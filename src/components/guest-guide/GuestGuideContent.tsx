@@ -20,10 +20,18 @@ import {
   Mountain,
   ExternalLink,
   ShoppingCart,
-  PersonStanding,
+  
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 import GuestGuideEvents from './GuestGuideEvents';
+
+const WalkingIcon = ({ size = 14 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="13" cy="4" r="2.5" />
+    <path d="M17 22l-3-8-2.5-1v-4l-4 4-3-1.5" />
+    <path d="M7 12l4-4 2 1 3 3 2-1" />
+  </svg>
+);
 
 interface Props {
   guestData: GuestData;
@@ -265,7 +273,7 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><PersonStanding size={14} strokeWidth={2.5} className="rotate-[20deg] -skew-x-[10deg]" /> 6 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 6 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Bäckerei+Härle+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -277,7 +285,7 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Hier wird noch alles von Hand gemacht – frische Semmeln, Brot und Gebäck. Auch sonntags geöffnet.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><PersonStanding size={14} strokeWidth={2.5} className="rotate-[20deg] -skew-x-[10deg]" /> 6 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 6 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Metzgerei+Hubert+Schmid+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -289,7 +297,7 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Regionale Fleisch- und Wurstwaren vom Allgäuer Metzger.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><PersonStanding size={14} strokeWidth={2.5} className="rotate-[20deg] -skew-x-[10deg]" /> 12 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 12 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Feneberg+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
