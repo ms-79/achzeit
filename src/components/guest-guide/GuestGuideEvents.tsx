@@ -96,9 +96,11 @@ const WeekRow = ({ kwNumber, year, label }: WeekRowProps) => {
     );
   }
 
+  const viewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
+
   return (
     <a
-      href={url}
+      href={viewerUrl}
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors"
