@@ -17,6 +17,7 @@ const FALLBACK_DATA: GuestData = {
   checkin: '',
   checkout: '',
   boxCode: '– – – –',
+  wifiPassword: '',
 };
 
 const parseToken = (t: string | null): { reservationId: string; token: string } | null => {
