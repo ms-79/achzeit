@@ -242,7 +242,7 @@ const WeekRowDirect = ({
 
   return (
     <a
-      href={viewerUrl}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors"
