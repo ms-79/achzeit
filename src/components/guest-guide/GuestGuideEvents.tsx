@@ -157,7 +157,7 @@ const GuestGuideEvents = () => {
 
   const nextKwStr = String(nextWeek).padStart(2, '0');
   const nextUrl = `${BASE_URL}${nextKwStr}.pdf`;
-  const nextViewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(nextUrl)}`;
+  
   const nextResult = useCheckPdf(nextUrl);
 
   // Determine displayed dates
