@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, ArrowUp, Loader2 } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { MessageCircle, ArrowUp, Mic } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
 
