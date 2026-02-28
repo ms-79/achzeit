@@ -8,6 +8,7 @@ import {
   AlertTriangle,
   UtensilsCrossed,
   Mountain,
+  Zap,
   MessageCircle,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
@@ -20,6 +21,7 @@ const quickActions = [
   { icon: Flame, label: 'Sauna & Kamin', target: 'sauna' },
   { icon: UtensilsCrossed, label: 'Restaurants', target: 'restaurants' },
   { icon: Mountain, label: 'Ausflüge', target: 'ausfluege' },
+  { icon: Zap, label: 'E-Auto', target: 'e-auto' },
   { icon: Trash2, label: 'Check-out', target: 'checkout' },
   { icon: AlertTriangle, label: 'Notfall', target: 'notfall' },
 ];
