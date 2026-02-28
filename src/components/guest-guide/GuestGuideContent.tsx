@@ -279,7 +279,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 6 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 6 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Bäckerei+Härle+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -291,7 +291,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Hier wird noch alles von Hand gemacht – frische Semmeln, Brot und Gebäck. Auch sonntags geöffnet.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 6 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 6 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Metzgerei+Hubert+Schmid+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -303,7 +303,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Regionale Fleisch- und Wurstwaren vom Allgäuer Metzger.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 12 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 12 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Feneberg+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -339,7 +339,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Apotheke im Ortszentrum von Fischen.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 5 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 5 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 1 Min.</span></div>
               </a>
             </div>
 
