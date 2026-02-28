@@ -102,9 +102,10 @@ const PdfViewerModal = ({
         </button>
       </div>
       <iframe
-        src={url}
+        src={`https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`}
         className="flex-1 w-full border-0"
         title={title}
+        allow="fullscreen"
       />
     </div>
   );
