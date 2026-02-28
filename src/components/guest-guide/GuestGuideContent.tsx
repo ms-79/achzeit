@@ -242,18 +242,21 @@ const GuestGuideContent = ({ guestData }: Props) => {
           </AccordionContent>
         </AccordionItem>
 
-        {/* Ausflugstipps */}
+        {/* Ausflüge & Veranstaltungen */}
         <AccordionItem value="ausfluege" id="ausfluege" className="border border-border rounded-lg px-6 overflow-hidden">
           <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
             <span className="flex items-center gap-3">
               <Mountain size={20} className="text-alpine-wood" />
-              Ausflugstipps
+              Ausflüge & Veranstaltungen
             </span>
           </AccordionTrigger>
           <AccordionContent className="text-muted-foreground leading-relaxed space-y-5">
             <p className="text-sm">Rund um ACHZEIT gibt es viel zu entdecken – hier unsere Favoriten.</p>
 
             <div className="space-y-4">
+              {/* Veranstaltungskalender – immer als erster Eintrag */}
+              <GuestGuideEvents />
+
               {/* Stinesser Lift – nur während der Saison anzeigen */}
               {new Date() <= new Date('2026-03-08T23:59:59') && (
                 <a href="https://www.stinesser-lifte.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -332,19 +335,6 @@ const GuestGuideContent = ({ guestData }: Props) => {
             <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
               <MapPin size={12} /> Alle Ausflugsziele sind in 5–20 Minuten mit dem Auto erreichbar.
             </p>
-          </AccordionContent>
-        </AccordionItem>
-
-        {/* Veranstaltungen */}
-        <AccordionItem value="veranstaltungen" id="veranstaltungen" className="border border-border rounded-lg px-6 overflow-hidden">
-          <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
-            <span className="flex items-center gap-3">
-              <Star size={20} className="text-alpine-wood" />
-              Veranstaltungen in Fischen
-            </span>
-          </AccordionTrigger>
-          <AccordionContent className="text-muted-foreground leading-relaxed">
-            <GuestGuideEvents />
           </AccordionContent>
         </AccordionItem>
 
