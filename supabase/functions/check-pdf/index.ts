@@ -6,18 +6,13 @@ const corsHeaders = {
 
 /**
  * Extract the week date range from raw PDF text.
- * PDFs store text in fragments, so dates may appear as separate elements.
- * We look for two date patterns (dd.mm. and dd.mm.yyyy) near each other.
  */
 function extractDateRange(text: string): string | null {
-  // Strategy 1: dates connected with separator (dd.mm. – dd.mm.yyyy)
   const connected =
     /(\d{1,2}\.\d{1,2}\.(?:\d{4})?)\s*[–\-—]\s*(\d{1,2}\.\d{1,2}\.\d{4})/;
   const m1 = text.match(connected);
   if (m1) return m1[0].trim();
 
-  // Strategy 2: Find first short date (dd.mm.) and first full date (dd.mm.yyyy)
-  // These are typically the start and end of the program week
   const shortDatePattern = /(\d{1,2})\.(\d{1,2})\.\s/g;
   const fullDatePattern = /(\d{1,2})\.(\d{1,2})\.(\d{4})/g;
 
@@ -30,18 +25,47 @@ function extractDateRange(text: string): string | null {
     const endDay = fullMatch[1].padStart(2, '0');
     const endMonth = fullMatch[2].padStart(2, '0');
     const year = fullMatch[3];
-
     return `${startDay}.${startMonth}. – ${endDay}.${endMonth}.${year}`;
   }
 
   return null;
 }
 
+/** Allowed URL prefix for proxying */
+const ALLOWED_PREFIX =
+  'https://www.hoernerdoerfer.de/fileadmin/thd/x_partner_info/dateien/gaesteinfos/Fischen/dateien/';
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
+  const urlObj = new URL(req.url);
+
+  // GET = proxy mode: serve PDF inline with correct headers
+  if (req.method === 'GET') {
+    const fileUrl = urlObj.searchParams.get('url');
+    if (!fileUrl || !fileUrl.startsWith(ALLOWED_PREFIX)) {
+      return new Response('Bad request', { status: 400, headers: corsHeaders });
+    }
+
+    const pdfRes = await fetch(fileUrl, { redirect: 'follow' });
+    if (!pdfRes.ok) {
+      return new Response('Not found', { status: 404, headers: corsHeaders });
+    }
+
+    const pdfBody = await pdfRes.arrayBuffer();
+    return new Response(pdfBody, {
+      headers: {
+        ...corsHeaders,
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'inline',
+        'Cache-Control': 'public, max-age=3600',
+      },
+    });
+  }
+
+  // POST = check mode (existing behavior)
   try {
     const { url } = await req.json();
 
