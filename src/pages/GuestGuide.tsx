@@ -5,6 +5,7 @@ import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
 import GuestGuideStickyNav from '@/components/guest-guide/GuestGuideStickyNav';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
 import GuestGuidePinEntry from '@/components/guest-guide/GuestGuidePinEntry';
+import GuestGuideChatbot from '@/components/guest-guide/GuestGuideChatbot';
 
 export interface GuestData {
   guestName: string;
