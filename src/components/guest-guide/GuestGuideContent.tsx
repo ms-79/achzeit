@@ -320,7 +320,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Großer Allgäuer Supermarkt mit breiter Auswahl.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 9 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=V-Markt+Fischen+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
