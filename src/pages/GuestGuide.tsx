@@ -40,6 +40,7 @@ const GuestGuide = () => {
   const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
   const [errorMsg, setErrorMsg] = useState('');
+  const [activeSection, setActiveSection] = useState('zugang');
 
   // Store the preloaded warmup promise so the PIN submit can await it
   const warmupPromiseRef = useRef<Promise<void> | null>(null);
