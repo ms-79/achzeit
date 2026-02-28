@@ -243,7 +243,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Traditionsgaststätte</p>
                 </div>
                 <p className="text-sm mt-2">Institution in der Fußgängerzone seit 1937. Hier trifft sich Jung und Alt – urgemütlich mit Brauereiausschank.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 13 Min.</span></div>
               </a>
 
               {/* Bei Alberto */}
