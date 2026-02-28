@@ -209,9 +209,9 @@ const GuestGuideChatbot = () => {
               type="button"
               onClick={() => send(input)}
               disabled={!input.trim() || isLoading}
-              className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-opacity shrink-0"
+              className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-30 transition-opacity shrink-0"
             >
-              <Send size={16} />
+              <ArrowUp size={16} strokeWidth={2.5} />
             </button>
           </div>
         </DialogContent>

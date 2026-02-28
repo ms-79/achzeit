@@ -114,9 +114,9 @@ NOTFALL:
 - Feuerlöscher im Hauswirtschaftsraum
 
 KONTAKT GASTGEBER:
-- WhatsApp: +49 15679 656368
+- WhatsApp: [Gastgeber kontaktieren](https://wa.me/4915679656368)
 
-Wenn du etwas nicht weißt oder die Frage nicht mit den obigen Informationen beantworten kannst, sage freundlich, dass du die Antwort nicht kennst und empfehle dem Gast, den Gastgeber per WhatsApp zu kontaktieren.`;
+Wenn du etwas nicht weißt oder die Frage nicht mit den obigen Informationen beantworten kannst, sage freundlich, dass du die Antwort nicht kennst und empfehle dem Gast, den [Gastgeber per WhatsApp zu kontaktieren](https://wa.me/4915679656368).`;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
