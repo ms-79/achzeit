@@ -20,6 +20,7 @@ import {
   Mountain,
   ExternalLink,
   ShoppingCart,
+  Footprints,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 import GuestGuideEvents from './GuestGuideEvents';
