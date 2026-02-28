@@ -390,9 +390,6 @@ const GuestGuideContent = ({ guestData }: Props) => {
           <MessageCircle size={20} />
           <span>Fragen? Schreibt uns per WhatsApp</span>
         </a>
-        <p className="text-xs text-muted-foreground mt-3">
-          Wir antworten in der Regel innerhalb weniger Stunden.
-        </p>
       </div>
     </main>
   );
