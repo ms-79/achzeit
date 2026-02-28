@@ -59,7 +59,6 @@ const GuestGuideContent = ({ guestData }: Props) => {
               </h4>
               <ul className="space-y-1 text-sm">
                 <li>• Carport direkt am Haus.</li>
-                <li>• E-Ladestation vorhanden (bitte Kabel nach Nutzung ordentlich verstauen).</li>
               </ul>
             </div>
 
