@@ -71,19 +71,10 @@ Deno.serve(async (req) => {
 
   try {
     const url = new URL(req.url);
-    const slug = url.searchParams.get("slug");
     const pin = url.searchParams.get("pin");
     const reservationId = url.searchParams.get("reservationId");
     const token = url.searchParams.get("token");
-
-    if (!slug) {
-      return json({ error: "slug parameter required" }, 400);
-    }
-
-    const listingId = LISTING_MAP[slug];
-    if (!listingId) {
-      return json({ error: "Unbekanntes Listing" }, 404);
-    }
+    const listingId = LISTING_ID;
 
     const accountId = Deno.env.get("HOSTAWAY_ACCOUNT_ID");
     const apiKey = Deno.env.get("HOSTAWAY_API_KEY");
