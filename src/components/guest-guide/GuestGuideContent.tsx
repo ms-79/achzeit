@@ -452,7 +452,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
             </div>
 
             <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
-              <MapPin size={12} /> Alle Ausflugsziele sind in 5–20 Minuten mit dem Auto erreichbar.
+              <MapPin size={12} /> Alle Ausflugsziele sind in 2–19 Minuten mit dem Auto erreichbar.
             </p>
           </AccordionContent>
         </AccordionItem>
