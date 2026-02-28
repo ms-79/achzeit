@@ -65,6 +65,7 @@ Deno.serve(async (req) => {
     const accessToken = tokenData.access_token;
 
     // Step 2: Get reservation
+    // Step 2: Get reservation
     const resRes = await fetch(
       `https://api.hostaway.com/v1/reservations/${reservationId}`,
       { headers: { Authorization: `Bearer ${accessToken}` } }
@@ -81,6 +82,26 @@ Deno.serve(async (req) => {
     const resData = await resRes.json();
     const r = resData.result;
 
+    let doorCode = r.doorCode || r.doorSecurityCode || "";
+
+    // Step 3: Fallback – get door code from listing if not on reservation
+    if (!doorCode) {
+      const listingId = r.listingMapId || r.listingId || "463607";
+      try {
+        const listingRes = await fetch(
+          `https://api.hostaway.com/v1/listings/${listingId}`,
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+        if (listingRes.ok) {
+          const listingData = await listingRes.json();
+          const l = listingData.result;
+          doorCode = l.doorCode || l.doorSecurityCode || "";
+        }
+      } catch (e) {
+        console.error("Failed to fetch listing door code:", e);
+      }
+    }
+
     const guestName = r.guestName ||
       [r.guestFirstName, r.guestLastName].filter(Boolean).join(" ") ||
       "Gast";
@@ -90,7 +111,7 @@ Deno.serve(async (req) => {
       checkin: r.arrivalDate || "",
       checkout: r.departureDate || "",
       numberOfGuests: r.numberOfGuests || 0,
-      doorCode: r.doorCode || r.doorSecurityCode || "",
+      doorCode,
     };
 
     return new Response(JSON.stringify(guideData), {
