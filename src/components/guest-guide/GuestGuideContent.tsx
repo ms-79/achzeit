@@ -526,7 +526,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     <p className="text-sm">Parkplatz P2, Sonthofener Str. 20 – 22 kW (AllgäuStrom)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 8 Min.</span></div>
                 </a>
                 <a href="https://maps.google.com/?q=Nebelhornbahn+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
