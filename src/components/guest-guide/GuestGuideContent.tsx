@@ -19,6 +19,7 @@ import {
   Star,
   Mountain,
   ExternalLink,
+  ShoppingCart,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 import GuestGuideEvents from './GuestGuideEvents';
