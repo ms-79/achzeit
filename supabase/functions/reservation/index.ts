@@ -62,8 +62,9 @@ async function getActiveReservations(accessToken: string): Promise<any[]> {
   }
 
   const today = todayUTC();
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 86_400_000).toISOString().slice(0, 10);
   const reservationsRes = await fetch(
-    `https://api.hostaway.com/v1/reservations?listingId=${LISTING_ID}&arrivalEndDate=${today}&departureStartDate=${today}&limit=10&sortOrder=arrivalDate&sortDirection=asc`,
+    `https://api.hostaway.com/v1/reservations?listingId=${LISTING_ID}&arrivalStartDate=${thirtyDaysAgo}&arrivalEndDate=${today}&departureStartDate=${today}&limit=5&sortOrder=arrivalDate&sortDirection=desc`,
     { headers: { Authorization: `Bearer ${accessToken}` } },
   );
 
