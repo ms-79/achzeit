@@ -44,7 +44,7 @@ const GuestGuide = () => {
 
     // Persist token in URL so the guest can bookmark/share the direct link
     if (body.reservationId && body.token) {
-      window.history.replaceState(null, '', `${window.location.pathname}?${body.reservationId}.${body.token}`);
+      window.history.replaceState(null, '', `${window.location.pathname}?t=${body.reservationId}.${body.token}`);
     }
 
     setState('loaded');
@@ -53,12 +53,13 @@ const GuestGuide = () => {
   useEffect(() => {
     if (!slug) return;
 
-    // Support format: ?RESID.TOKEN (single query key with dot separator)
-    const rawQuery = window.location.search.replace('?', '');
+    // Support format: ?t=RESID.TOKEN
+    const params = new URLSearchParams(window.location.search);
+    const tParam = params.get('t');
     let reservationId: string | null = null;
     let token: string | null = null;
-    if (rawQuery.includes('.')) {
-      const [id, tok] = rawQuery.split('.', 2);
+    if (tParam && tParam.includes('.')) {
+      const [id, tok] = tParam.split('.', 2);
       reservationId = id || null;
       token = tok || null;
     }
