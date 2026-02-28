@@ -25,7 +25,6 @@ type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
 
 const GuestGuide = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
   const [errorMsg, setErrorMsg] = useState('');
