@@ -109,7 +109,7 @@ const GuestGuide = () => {
     setState('loading');
     try {
       const res = await fetch(
-        `${baseUrl}?slug=${slug}&pin=${pin}`,
+        `${baseUrl}?pin=${pin}`,
         { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
       );
       const body = await res.json();
