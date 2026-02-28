@@ -23,6 +23,7 @@ const navItems = [
   { icon: Mountain, label: 'Ausflüge', target: 'ausfluege' },
   { icon: Zap, label: 'E-Auto', target: 'e-auto' },
   { icon: Trash2, label: 'Check-out', target: 'checkout' },
+  { icon: HelpCircle, label: 'Anleitungen', target: 'anleitungen' },
   { icon: AlertTriangle, label: 'Notfall', target: 'notfall' },
 ];
 
