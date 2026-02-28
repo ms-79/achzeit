@@ -110,7 +110,8 @@ const GuestGuide = () => {
   }, []);
 
   const handlePinSubmit = async (pin: string) => {
-    setState('loading');
+    // Don't switch to full-screen loading – keep PIN form visible
+    // so the user sees inline feedback on invalid PIN
 
     // Wait for warmup to finish (if still running) so the PIN request
     // hits a warm edge function with a cached Hostaway token
@@ -124,9 +125,9 @@ const GuestGuide = () => {
       const body = await res.json();
 
       if (res.ok && body.status === 'ok') {
+        setState('loading'); // brief transition before showing content
         applyGuestData(body);
       } else if (body.error === 'invalid_pin') {
-        setState('pin');
         return 'invalid';
       } else {
         setErrorMsg(body.message || body.error || 'Fehler');
