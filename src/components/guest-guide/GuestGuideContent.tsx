@@ -266,15 +266,15 @@ const GuestGuideContent = ({ guestData }: Props) => {
                 <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten. Ca. 6 Min. zu Fuß.</p>
               </a>
 
-              <a href="https://maps.google.com/?q=Bäckerei+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+              <a href="https://maps.google.com/?q=Bäckerei+Härle+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h4 className="font-display text-base text-foreground">Bäckerei</h4>
-                    <p className="text-xs text-muted-foreground mt-0.5">Fischen · Frische Backwaren</p>
+                    <h4 className="font-display text-base text-foreground">Bäckerei Härle</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Fischen · Traditionelle Handwerksbäckerei</p>
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Frische Semmeln und Brot – auch sonntags. Ca. 6 Min. zu Fuß.</p>
+                <p className="text-sm mt-2">Hier wird noch alles von Hand gemacht – frische Semmeln, Brot und Gebäck. Auch sonntags geöffnet. Ca. 6 Min. zu Fuß.</p>
               </a>
 
               <a href="https://maps.google.com/?q=Metzgerei+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
