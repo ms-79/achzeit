@@ -62,39 +62,6 @@ const GuestGuideContent = ({ guestData }: Props) => {
               </ul>
             </div>
 
-            <div className="pt-2" id="e-auto">
-              <h4 className="font-display text-base text-foreground mb-2 flex items-center gap-2">
-                <Zap size={16} className="text-alpine-wood" /> E-Auto Ladestationen in der Nähe
-              </h4>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm font-medium text-foreground mb-1">Fischen</p>
-                  <ul className="space-y-1 text-sm">
-                    <li>• Kurhaus Fiskina, Bahnhofstr. 3 – 22 kW (New Motion)</li>
-                    <li>• Parkplatz Fischen-Au, Illerstr. 11 – 11–22 kW (New Motion)</li>
-                    <li>• NaturGut Allgäu, Maderhalm 2 – 22 kW (Heel-Energie)</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground mb-1">Fischen-Langenwang</p>
-                  <ul className="space-y-1 text-sm">
-                    <li>• Trigema, Dorfstr. 25 – <strong className="text-foreground">150 kW</strong> (EnBW)</li>
-                    <li>• McDonald's, An der Breitach 1 – 50 kW (AllgäuStrom)</li>
-                    <li>• Haus des Gastes, Dorfstr. 19 – 11–22 kW (New Motion)</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground mb-1">Oberstdorf</p>
-                  <ul className="space-y-1 text-sm">
-                    <li>• Parkplatz P2, Sonthofener Str. 20 – 22 kW (AllgäuStrom)</li>
-                    <li>• Nebelhornbahn, Nebelhornstr. 67 – 22 kW (AllgäuStrom)</li>
-                  </ul>
-                </div>
-              </div>
-              <p className="text-xs text-muted-foreground italic pt-2">
-                Quelle: Hörnerdörfer Tourismus · Stand kann abweichen.
-              </p>
-            </div>
           </AccordionContent>
         </AccordionItem>
 
