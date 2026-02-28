@@ -318,7 +318,51 @@ const GuestGuideContent = ({ guestData }: Props) => {
           </AccordionContent>
         </AccordionItem>
 
-        {/* Check-out */}
+        {/* E-Auto Ladestationen */}
+        <AccordionItem value="e-auto" id="e-auto" className="border border-border rounded-lg px-6 overflow-hidden">
+          <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
+            <span className="flex items-center gap-3">
+              <Zap size={20} className="text-alpine-wood" />
+              E-Auto Ladestationen
+            </span>
+          </AccordionTrigger>
+          <AccordionContent className="text-muted-foreground leading-relaxed space-y-5">
+            <p className="text-sm">Öffentliche Ladestationen in der Nähe – am Haus selbst ist keine Ladestation vorhanden.</p>
+
+            <div className="space-y-4">
+              <div className="bg-muted rounded-lg p-4">
+                <h4 className="font-display text-base text-foreground mb-2">Fischen</h4>
+                <ul className="space-y-1.5 text-sm">
+                  <li>• Kurhaus Fiskina, Bahnhofstr. 3 – 22 kW (New Motion)</li>
+                  <li>• Parkplatz Fischen-Au, Illerstr. 11 – 11–22 kW (New Motion)</li>
+                  <li>• NaturGut Allgäu, Maderhalm 2 – 22 kW (Heel-Energie)</li>
+                </ul>
+              </div>
+
+              <div className="bg-muted rounded-lg p-4">
+                <h4 className="font-display text-base text-foreground mb-2">Fischen-Langenwang</h4>
+                <ul className="space-y-1.5 text-sm">
+                  <li>• Trigema, Dorfstr. 25 – <strong className="text-foreground">150 kW Schnelllader</strong> (EnBW)</li>
+                  <li>• McDonald's, An der Breitach 1 – 50 kW (AllgäuStrom)</li>
+                  <li>• Haus des Gastes, Dorfstr. 19 – 11–22 kW (New Motion)</li>
+                </ul>
+              </div>
+
+              <div className="bg-muted rounded-lg p-4">
+                <h4 className="font-display text-base text-foreground mb-2">Oberstdorf</h4>
+                <ul className="space-y-1.5 text-sm">
+                  <li>• Parkplatz P2, Sonthofener Str. 20 – 22 kW (AllgäuStrom)</li>
+                  <li>• Nebelhornbahn, Nebelhornstr. 67 – 22 kW (AllgäuStrom)</li>
+                </ul>
+              </div>
+            </div>
+
+            <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
+              <MapPin size={12} /> Alle Stationen 5–15 Min. Fahrzeit · Quelle: Hörnerdörfer Tourismus
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+
         <AccordionItem value="checkout" id="checkout" className="border border-border rounded-lg px-6 overflow-hidden">
           <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
             <span className="flex items-center gap-3">

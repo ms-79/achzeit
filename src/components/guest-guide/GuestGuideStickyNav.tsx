@@ -8,6 +8,7 @@ import {
   AlertTriangle,
   UtensilsCrossed,
   Mountain,
+  Zap,
 } from 'lucide-react';
 
 const navItems = [
@@ -17,6 +18,7 @@ const navItems = [
   { icon: Flame, label: 'Sauna', target: 'sauna' },
   { icon: UtensilsCrossed, label: 'Restaurants', target: 'restaurants' },
   { icon: Mountain, label: 'Ausflüge', target: 'ausfluege' },
+  { icon: Zap, label: 'E-Auto', target: 'e-auto' },
   { icon: Trash2, label: 'Check-out', target: 'checkout' },
   { icon: AlertTriangle, label: 'Notfall', target: 'notfall' },
 ];
