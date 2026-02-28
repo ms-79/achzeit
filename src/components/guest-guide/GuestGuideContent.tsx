@@ -515,7 +515,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     <p className="text-sm">Haus des Gastes, Dorfstr. 19 – 11–22 kW (New Motion)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 6 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
                 </a>
               </div>
 
