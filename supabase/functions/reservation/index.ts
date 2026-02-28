@@ -98,8 +98,7 @@ Deno.serve(async (req) => {
 
     // ── MODE 1: Direct access via reservationId + token ──
     if (reservationId && token) {
-      const expectedToken = await makeToken(reservationId, tokenSecret);
-      if (token !== expectedToken) {
+      if (!isValidToken(reservationId, token)) {
         return json({ error: "invalid_token", message: "Ungültiger Zugangslink." }, 403);
       }
 
