@@ -28,7 +28,6 @@ const App = () => (
             <Route path="/cookies" element={<CookieSettings />} />
             <Route path="/buchungsbedingungen" element={<Buchungsbedingungen />} />
             <Route path="/guide/achzeit" element={<GuestGuide />} />
-            <Route path="/guide/achzeit/:reservationId" element={<GuestGuide />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
