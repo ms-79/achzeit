@@ -45,7 +45,7 @@ const GuestGuide = () => {
 
     // Persist token in URL so the guest can bookmark/share the direct link
     if (body.reservationId && body.token) {
-      setSearchParams({ reservationId: body.reservationId, token: body.token }, { replace: true });
+      window.history.replaceState(null, '', `${window.location.pathname}?${body.reservationId}.${body.token}`);
     }
 
     setState('loaded');
