@@ -264,7 +264,7 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten. Ca. 6 Min. zu Fuß.</p>
+                <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten. <span className="inline-flex items-center gap-1 text-muted-foreground"><Footprints size={12} /> ca. 6 Min.</span></p>
               </a>
 
               <a href="https://maps.google.com/?q=Bäckerei+Härle+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
