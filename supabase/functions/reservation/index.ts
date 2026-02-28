@@ -1,3 +1,5 @@
+const VALID_TOKEN = "ABC321";
+
 Deno.serve(async (req) => {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -11,11 +13,19 @@ Deno.serve(async (req) => {
   try {
     const url = new URL(req.url);
     const reservationId = url.searchParams.get("reservationId");
+    const token = url.searchParams.get("token");
 
     if (!reservationId) {
       return new Response(
         JSON.stringify({ error: "reservationId parameter required" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (token !== VALID_TOKEN) {
+      return new Response(
+        JSON.stringify({ error: "Ungültiger Zugangstoken" }),
+        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
@@ -71,8 +81,8 @@ Deno.serve(async (req) => {
     const resData = await resRes.json();
     const r = resData.result;
 
-    const guestName = r.guestName || 
-      [r.guestFirstName, r.guestLastName].filter(Boolean).join(" ") || 
+    const guestName = r.guestName ||
+      [r.guestFirstName, r.guestLastName].filter(Boolean).join(" ") ||
       "Gast";
 
     const guideData = {
@@ -80,6 +90,7 @@ Deno.serve(async (req) => {
       checkin: r.arrivalDate || "",
       checkout: r.departureDate || "",
       numberOfGuests: r.numberOfGuests || 0,
+      doorCode: r.doorCode || r.doorSecurityCode || "",
     };
 
     return new Response(JSON.stringify(guideData), {

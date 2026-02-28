@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
@@ -18,14 +18,25 @@ const FALLBACK_DATA: GuestData = {
   boxCode: '– – – –',
 };
 
+const parseToken = (t: string | null): { reservationId: string; token: string } | null => {
+  if (!t) return null;
+  const dotIndex = t.indexOf('.');
+  if (dotIndex === -1) return null;
+  return {
+    reservationId: t.substring(0, dotIndex),
+    token: t.substring(dotIndex + 1),
+  };
+};
+
 const GuestGuide = () => {
-  const { reservationId } = useParams<{ reservationId?: string }>();
+  const [searchParams] = useSearchParams();
+  const parsed = parseToken(searchParams.get('t'));
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
-  const [loading, setLoading] = useState(!!reservationId);
+  const [loading, setLoading] = useState(!!parsed);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!reservationId) return;
+    if (!parsed) return;
 
     const fetchReservation = async () => {
       try {
@@ -34,7 +45,7 @@ const GuestGuide = () => {
         const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
         const res = await fetch(
-          `https://${projectId}.supabase.co/functions/v1/reservation?reservationId=${reservationId}`,
+          `https://${projectId}.supabase.co/functions/v1/reservation?reservationId=${parsed.reservationId}&token=${parsed.token}`,
           {
             headers: {
               'apikey': anonKey,
@@ -44,7 +55,8 @@ const GuestGuide = () => {
         );
 
         if (!res.ok) {
-          throw new Error(`Fehler beim Laden der Reservierung (${res.status})`);
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || `Fehler beim Laden der Reservierung (${res.status})`);
         }
 
         const result = await res.json();
@@ -52,7 +64,7 @@ const GuestGuide = () => {
           guestName: result.guestName || 'Gast',
           checkin: result.checkin || '',
           checkout: result.checkout || '',
-          boxCode: '– – – –', // Not available from API, will be set manually
+          boxCode: result.doorCode || '– – – –',
         });
       } catch (err: any) {
         console.error('Failed to fetch reservation:', err);
@@ -63,7 +75,7 @@ const GuestGuide = () => {
     };
 
     fetchReservation();
-  }, [reservationId]);
+  }, [parsed?.reservationId, parsed?.token]);
 
   if (loading) {
     return (
