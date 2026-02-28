@@ -83,7 +83,7 @@ const GuestGuide = () => {
 
         // Mode 2: Check for active reservation → PIN
         const res = await fetch(
-          `${baseUrl}?slug=${slug}`,
+          `${baseUrl}`,
           { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
         );
         const body = await res.json();
