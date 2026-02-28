@@ -108,7 +108,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.title': 'ACHZEIT',
     'hero.subtitle': 'Family Retreat',
     'hero.tagline': 'Your Modern Holiday Home in the Allgäu',
-    'hero.description': 'A modern holiday home with sauna, fireplace and space for time together.',
+    'hero.description': 'We designed ACHZEIT the way we ourselves want to vacation – peaceful, high-quality and family-friendly.',
     'hero.cta.availability': 'Check Availability',
     'hero.cta.book': 'Book Now',
     
