@@ -30,12 +30,12 @@ const quickActions = [
 
 const formatDate = (dateStr: string) => {
   if (!dateStr) return '–';
-  return new Date(dateStr).toLocaleDateString('de-DE', {
-    weekday: 'long',
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  });
+  const d = new Date(dateStr);
+  const weekday = d.toLocaleDateString('de-DE', { weekday: 'short' }).replace('.', '');
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const year = d.getFullYear();
+  return `${weekday}, ${day}.${month}.${year}`;
 };
 
 interface Props {
