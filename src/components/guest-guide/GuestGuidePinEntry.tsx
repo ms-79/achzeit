@@ -1,0 +1,81 @@
+import { useState } from 'react';
+import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
+import { Button } from '@/components/ui/button';
+import { Lock } from 'lucide-react';
+
+interface Props {
+  onSubmit: (pin: string) => Promise<'ok' | 'invalid'>;
+}
+
+const GuestGuidePinEntry = ({ onSubmit }: Props) => {
+  const [pin, setPin] = useState('');
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pin.length !== 4) return;
+
+    setLoading(true);
+    setError(false);
+
+    const result = await onSubmit(pin);
+    if (result === 'invalid') {
+      setError(true);
+      setPin('');
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center px-6">
+      <div className="w-full max-w-sm text-center">
+        <img src={logoAchzeit} alt="ACHZEIT" className="w-24 mx-auto mb-8 opacity-40" />
+
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <Lock size={18} className="text-muted-foreground" />
+          <h1 className="font-display text-xl text-foreground">Gästemappe</h1>
+        </div>
+        <p className="text-muted-foreground text-sm mb-8">
+          Bitte gib die letzten 4 Ziffern deiner Telefonnummer ein.
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            maxLength={4}
+            value={pin}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+              setPin(val);
+              setError(false);
+            }}
+            className="w-full text-center text-3xl font-mono tracking-[0.5em] bg-muted border border-border rounded-lg py-4 px-6 focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/30"
+            placeholder="• • • •"
+            autoFocus
+          />
+
+          {error && (
+            <p className="text-destructive text-sm">Ungültige PIN. Bitte versuche es erneut.</p>
+          )}
+
+          <Button
+            type="submit"
+            disabled={pin.length !== 4 || loading}
+            className="w-full"
+          >
+            {loading ? 'Prüfe…' : 'Weiter'}
+          </Button>
+        </form>
+
+        <p className="text-xs text-muted-foreground mt-6">
+          Die PIN entspricht den letzten 4 Ziffern der Telefonnummer, die bei der Buchung angegeben wurde.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default GuestGuidePinEntry;
