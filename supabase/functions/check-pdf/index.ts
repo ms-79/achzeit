@@ -5,16 +5,35 @@ const corsHeaders = {
 };
 
 /**
- * Extract date-like patterns from raw PDF text.
+ * Extract the week date range from raw PDF text.
+ * PDFs store text in fragments, so dates may appear as separate elements.
+ * We look for two date patterns (dd.mm. and dd.mm.yyyy) near each other.
  */
 function extractDateRange(text: string): string | null {
-  // Pattern: dd.mm. – dd.mm.yyyy  or  dd.mm.yyyy – dd.mm.yyyy
-  const pattern =
+  // Strategy 1: dates connected with separator (dd.mm. – dd.mm.yyyy)
+  const connected =
     /(\d{1,2}\.\d{1,2}\.(?:\d{4})?)\s*[–\-—]\s*(\d{1,2}\.\d{1,2}\.\d{4})/;
-  const match = text.match(pattern);
-  if (match) {
-    return match[0].trim();
+  const m1 = text.match(connected);
+  if (m1) return m1[0].trim();
+
+  // Strategy 2: Find first short date (dd.mm.) and first full date (dd.mm.yyyy)
+  // These are typically the start and end of the program week
+  const shortDatePattern = /(\d{1,2})\.(\d{1,2})\.\s/g;
+  const fullDatePattern = /(\d{1,2})\.(\d{1,2})\.(\d{4})/g;
+
+  const shortMatch = shortDatePattern.exec(text);
+  const fullMatch = fullDatePattern.exec(text);
+
+  if (shortMatch && fullMatch) {
+    const startDay = shortMatch[1].padStart(2, '0');
+    const startMonth = shortMatch[2].padStart(2, '0');
+    const endDay = fullMatch[1].padStart(2, '0');
+    const endMonth = fullMatch[2].padStart(2, '0');
+    const year = fullMatch[3];
+
+    return `${startDay}.${startMonth}. – ${endDay}.${endMonth}.${year}`;
   }
+
   return null;
 }
 
@@ -24,7 +43,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { url, debug } = await req.json();
+    const { url } = await req.json();
 
     if (!url || typeof url !== 'string') {
       return new Response(
@@ -41,39 +60,20 @@ Deno.serve(async (req) => {
       );
     }
 
-    // PDF is available – fetch and extract dates
     let dateRange: string | null = null;
-    let debugSnippets: string[] | undefined;
     try {
       const pdfRes = await fetch(url, { redirect: 'follow' });
       if (pdfRes.ok) {
         const buf = await pdfRes.arrayBuffer();
         const raw = new TextDecoder('latin1').decode(buf);
-
-        // If debug mode, collect all date-like patterns
-        if (debug) {
-          const datePatterns = raw.match(/\d{1,2}\.\d{1,2}\.\s*[-–—]?\s*\d{0,2}\.?\d{0,2}\.?\d{0,4}/g);
-          // Also grab text around "KW" or "Woche" or month names
-          const kwPatterns = raw.match(/.{0,40}(KW|Woche|Februar|März|Januar|April|Mai).{0,40}/gi);
-          debugSnippets = [
-            ...(datePatterns || []).slice(0, 10),
-            ...(kwPatterns || []).slice(0, 10),
-          ];
-        }
-
         dateRange = extractDateRange(raw);
       }
     } catch {
       // non-critical
     }
 
-    const result: Record<string, unknown> = { available: true, status: 200, dateRange };
-    if (debug && debugSnippets) {
-      result.debugSnippets = debugSnippets;
-    }
-
     return new Response(
-      JSON.stringify(result),
+      JSON.stringify({ available: true, status: 200, dateRange }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   } catch (error) {
