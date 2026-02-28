@@ -36,6 +36,40 @@ function todayUTC(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
+/** Build a simple HMAC-like token from reservation ID + a secret */
+async function makeToken(reservationId: string, secret: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    encoder.encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, encoder.encode(reservationId));
+  return Array.from(new Uint8Array(sig))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("")
+    .slice(0, 32);
+}
+
+function buildGuestResponse(reservation: any, doorCode: string, wifiPassword: string) {
+  const guestName =
+    reservation.guestName ||
+    [reservation.guestFirstName, reservation.guestLastName].filter(Boolean).join(" ") ||
+    "Gast";
+
+  return {
+    status: "ok",
+    guestName,
+    checkin: reservation.arrivalDate || "",
+    checkout: reservation.departureDate || "",
+    numberOfGuests: reservation.numberOfGuests || 0,
+    doorCode,
+    wifiPassword,
+  };
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -51,6 +85,8 @@ Deno.serve(async (req) => {
     const url = new URL(req.url);
     const slug = url.searchParams.get("slug");
     const pin = url.searchParams.get("pin");
+    const reservationId = url.searchParams.get("reservationId");
+    const token = url.searchParams.get("token");
 
     if (!slug) {
       return json({ error: "slug parameter required" }, 400);
@@ -68,12 +104,62 @@ Deno.serve(async (req) => {
     }
 
     const accessToken = await getHostawayToken(accountId, apiKey);
+    const tokenSecret = apiKey; // use API key as HMAC secret
+
+    // ── MODE 1: Direct access via reservationId + token ──
+    if (reservationId && token) {
+      const expectedToken = await makeToken(reservationId, tokenSecret);
+      if (token !== expectedToken) {
+        return json({ error: "invalid_token", message: "Ungültiger Zugangslink." }, 403);
+      }
+
+      // Fetch the specific reservation
+      const resRes = await fetch(
+        `https://api.hostaway.com/v1/reservations/${reservationId}`,
+        { headers: { Authorization: `Bearer ${accessToken}` } },
+      );
+
+      if (!resRes.ok) {
+        return json({ error: "reservation_not_found" }, 404);
+      }
+
+      const resData = await resRes.json();
+      const reservation = resData.result;
+
+      // Verify it belongs to this listing
+      if (String(reservation.listingMapId) !== listingId && String(reservation.listingId) !== listingId) {
+        return json({ error: "reservation_not_found" }, 404);
+      }
+
+      let doorCode = reservation.doorCode || reservation.doorSecurityCode || "";
+      let wifiPassword = "";
+
+      try {
+        const listingRes = await fetch(
+          `https://api.hostaway.com/v1/listings/${listingId}`,
+          { headers: { Authorization: `Bearer ${accessToken}` } },
+        );
+        if (listingRes.ok) {
+          const listingData = await listingRes.json();
+          const l = listingData.result;
+          if (!doorCode) doorCode = l.doorCode || l.doorSecurityCode || "";
+          wifiPassword = l.wifiPassword || "";
+        }
+      } catch (e) {
+        console.error("Failed to fetch listing:", e);
+      }
+
+      const resp = buildGuestResponse(reservation, doorCode, wifiPassword);
+      // Include token info so frontend knows it's a direct-access link
+      return json({ ...resp, reservationId, token });
+    }
+
+    // ── MODE 2: Date-based lookup with PIN ──
     const today = todayUTC();
 
-    // Find active reservation for this listing where today is between arrival and departure
     const reservationsRes = await fetch(
-      `https://api.hostaway.com/v1/reservations?listingId=${listingId}&arrivalEndDate=${today}&departureStartDate=${today}&limit=5&sortOrder=arrivalDate&sortDirection=asc`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      `https://api.hostaway.com/v1/reservations?listingId=${listingId}&arrivalEndDate=${today}&departureStartDate=${today}&limit=10&sortOrder=arrivalDate&sortDirection=asc`,
+      { headers: { Authorization: `Bearer ${accessToken}` } },
     );
 
     if (!reservationsRes.ok) {
@@ -84,8 +170,8 @@ Deno.serve(async (req) => {
     const reservationsData = await reservationsRes.json();
     const reservations = reservationsData.result || [];
 
-    // Filter to confirmed/new reservations where today falls within stay
-    const active = reservations.find((r: any) => {
+    // Filter to active reservations where today falls within stay
+    const activeReservations = reservations.filter((r: any) => {
       const status = r.status;
       if (status === "cancelled" || status === "declined") return false;
       const arrival = r.arrivalDate?.slice(0, 10);
@@ -93,60 +179,51 @@ Deno.serve(async (req) => {
       return arrival && departure && today >= arrival && today <= departure;
     });
 
-    if (!active) {
+    if (activeReservations.length === 0) {
       return json({ error: "no_active_reservation", message: "Aktuell kein aktiver Aufenthalt." }, 404);
     }
 
-    // If no PIN provided yet, ask for it (don't reveal guest data)
+    // No PIN yet → ask for it
     if (!pin) {
       return json({ status: "pin_required" });
     }
 
-    // Verify PIN against last 4 digits of guest phone
-    const guestPhone = active.guestPhone || active.phone || "";
-    const digits = guestPhone.replace(/\D/g, "");
-    const expectedPin = digits.slice(-4);
+    // Try to match PIN against each active reservation
+    const matched = activeReservations.find((r: any) => {
+      const guestPhone = r.guestPhone || r.phone || "";
+      const digits = guestPhone.replace(/\D/g, "");
+      const expectedPin = digits.slice(-4);
+      return expectedPin && pin === expectedPin;
+    });
 
-    if (!expectedPin || pin !== expectedPin) {
+    if (!matched) {
       return json({ error: "invalid_pin", message: "Ungültige PIN." }, 403);
     }
 
     // PIN valid – return guest data
-    let doorCode = active.doorCode || active.doorSecurityCode || "";
+    let doorCode = matched.doorCode || matched.doorSecurityCode || "";
     let wifiPassword = "";
 
-    // Fetch listing for fallback door code + wifi
     try {
       const listingRes = await fetch(
         `https://api.hostaway.com/v1/listings/${listingId}`,
-        { headers: { Authorization: `Bearer ${accessToken}` } }
+        { headers: { Authorization: `Bearer ${accessToken}` } },
       );
       if (listingRes.ok) {
         const listingData = await listingRes.json();
         const l = listingData.result;
-        if (!doorCode) {
-          doorCode = l.doorCode || l.doorSecurityCode || "";
-        }
+        if (!doorCode) doorCode = l.doorCode || l.doorSecurityCode || "";
         wifiPassword = l.wifiPassword || "";
       }
     } catch (e) {
       console.error("Failed to fetch listing:", e);
     }
 
-    const guestName =
-      active.guestName ||
-      [active.guestFirstName, active.guestLastName].filter(Boolean).join(" ") ||
-      "Gast";
-
-    return json({
-      status: "ok",
-      guestName,
-      checkin: active.arrivalDate || "",
-      checkout: active.departureDate || "",
-      numberOfGuests: active.numberOfGuests || 0,
-      doorCode,
-      wifiPassword,
-    });
+    const resp = buildGuestResponse(matched, doorCode, wifiPassword);
+    // Generate a token so the guest can bookmark the direct link
+    const matchedId = String(matched.id);
+    const directToken = await makeToken(matchedId, tokenSecret);
+    return json({ ...resp, reservationId: matchedId, token: directToken });
   } catch (error) {
     console.error("Error:", error);
     return json({ error: String(error) }, 500);

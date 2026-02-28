@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
@@ -25,24 +25,60 @@ type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
 
 const GuestGuide = () => {
   const { slug } = useParams<{ slug: string }>();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
   const [errorMsg, setErrorMsg] = useState('');
 
   const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
   const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  const baseUrl = `https://${projectId}.supabase.co/functions/v1/reservation`;
 
-  // Step 1: Check if there's an active reservation (no PIN yet)
+  const applyGuestData = (body: any) => {
+    setGuestData({
+      guestName: body.guestName || 'Gast',
+      checkin: body.checkin || '',
+      checkout: body.checkout || '',
+      boxCode: body.doorCode || '– – – –',
+      wifiPassword: body.wifiPassword || '',
+    });
+
+    // Persist token in URL so the guest can bookmark/share the direct link
+    if (body.reservationId && body.token) {
+      setSearchParams({ reservationId: body.reservationId, token: body.token }, { replace: true });
+    }
+
+    setState('loaded');
+  };
+
   useEffect(() => {
     if (!slug) return;
 
-    const checkReservation = async () => {
-      try {
-        const res = await fetch(
-          `https://${projectId}.supabase.co/functions/v1/reservation?slug=${slug}`,
-          { headers: { apikey: anonKey, 'Content-Type': 'application/json' } }
-        );
+    const reservationId = searchParams.get('reservationId');
+    const token = searchParams.get('token');
 
+    const load = async () => {
+      try {
+        // Mode 1: Direct access via reservationId + token
+        if (reservationId && token) {
+          const res = await fetch(
+            `${baseUrl}?slug=${slug}&reservationId=${reservationId}&token=${token}`,
+            { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
+          );
+          const body = await res.json();
+
+          if (res.ok && body.status === 'ok') {
+            applyGuestData(body);
+            return;
+          }
+          // Token invalid/expired → fall through to PIN flow
+        }
+
+        // Mode 2: Check for active reservation → PIN
+        const res = await fetch(
+          `${baseUrl}?slug=${slug}`,
+          { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
+        );
         const body = await res.json();
 
         if (res.ok && body.status === 'pin_required') {
@@ -59,29 +95,20 @@ const GuestGuide = () => {
       }
     };
 
-    checkReservation();
+    load();
   }, [slug]);
 
-  // Step 2: Submit PIN
   const handlePinSubmit = async (pin: string) => {
     setState('loading');
     try {
       const res = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/reservation?slug=${slug}&pin=${pin}`,
-        { headers: { apikey: anonKey, 'Content-Type': 'application/json' } }
+        `${baseUrl}?slug=${slug}&pin=${pin}`,
+        { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
       );
-
       const body = await res.json();
 
       if (res.ok && body.status === 'ok') {
-        setGuestData({
-          guestName: body.guestName || 'Gast',
-          checkin: body.checkin || '',
-          checkout: body.checkout || '',
-          boxCode: body.doorCode || '– – – –',
-          wifiPassword: body.wifiPassword || '',
-        });
-        setState('loaded');
+        applyGuestData(body);
       } else if (body.error === 'invalid_pin') {
         setState('pin');
         return 'invalid';
