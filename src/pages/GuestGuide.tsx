@@ -182,6 +182,7 @@ const GuestGuide = () => {
   return (
     <div className="min-h-screen bg-background">
       <GuestGuideHero guestData={guestData} />
+      <GuestGuideStickyNav />
       <GuestGuideContent guestData={guestData} />
 
       {/* Footer */}
