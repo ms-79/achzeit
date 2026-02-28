@@ -8,6 +8,7 @@ import {
   AlertTriangle,
   UtensilsCrossed,
   Mountain,
+  MessageCircle,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import type { GuestData } from '@/pages/GuestGuide';
