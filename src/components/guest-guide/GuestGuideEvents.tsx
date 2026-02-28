@@ -87,7 +87,6 @@ interface WeekRowProps {
 const WeekRow = ({ kwNumber, label, fallbackFromDateRange }: WeekRowProps) => {
   const kwStr = String(kwNumber).padStart(2, '0');
   const url = `${BASE_URL}${kwStr}.pdf`;
-  const viewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
   const { status, dateRange } = useCheckPdf(url);
 
   // Determine displayed date range
