@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
@@ -23,15 +23,30 @@ const FALLBACK_DATA: GuestData = {
 
 type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
 
+const fetchWithRetry = async (url: string, opts: RequestInit, retries = 2): Promise<Response> => {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      return await fetch(url, opts);
+    } catch (err) {
+      if (i === retries) throw err;
+      await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+    }
+  }
+  throw new Error('Netzwerkfehler');
+};
+
 const GuestGuide = () => {
-  
   const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
   const [errorMsg, setErrorMsg] = useState('');
 
+  // Store the preloaded warmup promise so the PIN submit can await it
+  const warmupPromiseRef = useRef<Promise<void> | null>(null);
+
   const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
   const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
   const baseUrl = `https://${projectId}.supabase.co/functions/v1/reservation`;
+  const headers = { apikey: anonKey, 'Content-Type': 'application/json' };
 
   const applyGuestData = (body: any) => {
     setGuestData({
@@ -42,7 +57,6 @@ const GuestGuide = () => {
       wifiPassword: body.wifiPassword || '',
     });
 
-    // Persist token in URL so the guest can bookmark/share the direct link
     if (body.reservationId && body.token) {
       window.history.replaceState(null, '', `${window.location.pathname}?t=${body.reservationId}.${body.token}`);
     }
@@ -51,8 +65,6 @@ const GuestGuide = () => {
   };
 
   useEffect(() => {
-
-    // Support format: ?t=RESID.TOKEN
     const params = new URLSearchParams(window.location.search);
     const tParam = params.get('t');
     let reservationId: string | null = null;
@@ -62,20 +74,6 @@ const GuestGuide = () => {
       reservationId = id || null;
       token = tok || null;
     }
-
-    const fetchWithRetry = async (url: string, opts: RequestInit, retries = 2): Promise<Response> => {
-      for (let i = 0; i <= retries; i++) {
-        try {
-          return await fetch(url, opts);
-        } catch (err) {
-          if (i === retries) throw err;
-          await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-        }
-      }
-      throw new Error('Netzwerkfehler');
-    };
-
-    const headers = { apikey: anonKey, 'Content-Type': 'application/json' };
 
     const load = async () => {
       // Mode 1: Direct access via reservationId + token
@@ -91,13 +89,21 @@ const GuestGuide = () => {
             applyGuestData(body);
             return;
           }
-        } catch (err: any) {
+        } catch {
           // Token invalid/expired → fall through to PIN flow
         }
       }
 
-      // No token or token failed → show PIN immediately (no API call)
+      // No token or token failed → show PIN immediately
       setState('pin');
+
+      // Fire a warmup request in the background (no PIN) to pre-heat
+      // the edge function cold start + Hostaway token fetch.
+      // The response will be `pin_required` but that's fine – the server
+      // will have cached the Hostaway access token for the next call.
+      warmupPromiseRef.current = fetchWithRetry(baseUrl, { headers })
+        .then(() => {})
+        .catch(() => {});
     };
 
     load();
@@ -105,18 +111,14 @@ const GuestGuide = () => {
 
   const handlePinSubmit = async (pin: string) => {
     setState('loading');
-    const headers = { apikey: anonKey, 'Content-Type': 'application/json' };
-    const fetchWithRetry = async (url: string, opts: RequestInit, retries = 2): Promise<Response> => {
-      for (let i = 0; i <= retries; i++) {
-        try {
-          return await fetch(url, opts);
-        } catch (err) {
-          if (i === retries) throw err;
-          await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-        }
-      }
-      throw new Error('Netzwerkfehler');
-    };
+
+    // Wait for warmup to finish (if still running) so the PIN request
+    // hits a warm edge function with a cached Hostaway token
+    if (warmupPromiseRef.current) {
+      await warmupPromiseRef.current;
+      warmupPromiseRef.current = null;
+    }
+
     try {
       const res = await fetchWithRetry(`${baseUrl}?pin=${pin}`, { headers });
       const body = await res.json();
@@ -130,7 +132,7 @@ const GuestGuide = () => {
         setErrorMsg(body.message || body.error || 'Fehler');
         setState('error');
       }
-    } catch (err: any) {
+    } catch {
       setErrorMsg('Verbindungsfehler. Bitte erneut versuchen.');
       setState('error');
     }
