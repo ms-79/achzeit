@@ -274,7 +274,7 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Frische Semmeln und Brot – auch sonntags. Direkt im Ortskern.</p>
+                <p className="text-sm mt-2">Frische Semmeln und Brot – auch sonntags. Ca. 6 Min. zu Fuß.</p>
               </a>
 
               <a href="https://maps.google.com/?q=Metzgerei+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
