@@ -446,7 +446,8 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <h4 className="font-display text-base text-foreground">Christlessee</h4>
                   <p className="text-xs text-muted-foreground mt-0.5">Trettachtal · Bergsee</p>
                 </div>
-                <p className="text-sm mt-2">Kristallklarer Bergsee mit türkisem Wasser – ein Geheimtipp zum Staunen. Leichte Wanderung ab Parkplatz Trettachtal. Ca. 20 Min. Fahrzeit.</p>
+                <p className="text-sm mt-2">Kristallklarer Bergsee mit türkisem Wasser – ein Geheimtipp zum Staunen. Leichte Wanderung ab Parkplatz Trettachtal.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 20 Min.</span></div>
               </a>
             </div>
 
