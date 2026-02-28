@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, ArrowUp, Loader2 } from 'lucide-react';
+import { MessageCircle, ArrowUp, Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
 
@@ -32,6 +32,14 @@ const GuestGuideChatbot = () => {
     }
   }, [messages]);
 
+  // Auto-resize textarea
+  useEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 150) + 'px';
+  }, [input]);
+
   const send = async (text: string) => {
     if (!text.trim() || isLoading) return;
     const userMsg: Msg = { role: 'user', content: text.trim() };
@@ -52,9 +60,7 @@ const GuestGuideChatbot = () => {
         body: JSON.stringify({ messages: allMessages }),
       });
 
-      if (!resp.ok || !resp.body) {
-        throw new Error('Stream failed');
-      }
+      if (!resp.ok || !resp.body) throw new Error('Stream failed');
 
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
@@ -101,7 +107,7 @@ const GuestGuideChatbot = () => {
       console.error('Chat error:', e);
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: 'Entschuldigung, es gab ein technisches Problem. Bitte versuche es erneut oder kontaktiere den Gastgeber per WhatsApp.' },
+        { role: 'assistant', content: 'Entschuldigung, es gab ein technisches Problem. Bitte versuche es erneut oder kontaktiere den [Gastgeber per WhatsApp](https://wa.me/4915679656368).' },
       ]);
     } finally {
       setIsLoading(false);
@@ -117,102 +123,105 @@ const GuestGuideChatbot = () => {
 
   return (
     <>
-      {/* Floating button – elevated with shadow + ring */}
+      {/* Floating button */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-xl ring-4 ring-primary/20 flex items-center justify-center transition-all duration-300 bg-primary text-primary-foreground hover:scale-105 hover:shadow-2xl"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 bg-foreground text-background hover:scale-105"
         aria-label="Fragen? Chat öffnen"
       >
-        <MessageCircle size={24} />
+        <MessageCircle size={22} />
       </button>
 
-      {/* Lightbox dialog */}
+      {/* Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[480px] max-h-[85dvh] p-0 gap-0 flex flex-col overflow-hidden">
+        <DialogContent className="sm:max-w-[540px] max-h-[80dvh] p-0 gap-0 flex flex-col overflow-hidden border-border/50 rounded-2xl shadow-2xl">
           <DialogTitle className="sr-only">ACHZEIT Concierge</DialogTitle>
 
-          {/* Header */}
-          <div className="px-5 py-4 border-b border-border bg-muted/50 shrink-0">
-            <h3 className="font-display text-sm text-foreground tracking-wide">ACHZEIT Concierge</h3>
-            <p className="text-xs text-muted-foreground">Frag mich alles rund ums Haus</p>
+          {/* Header – minimal */}
+          <div className="px-5 py-3.5 border-b border-border/40 shrink-0">
+            <p className="text-sm font-medium text-foreground">ACHZEIT Concierge</p>
           </div>
 
-          {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[200px]">
-            {messages.length === 0 && (
-              <div className="space-y-3">
-                <p className="text-sm text-muted-foreground">Willkommen – wie kann ich behilflich sein?</p>
-                <div className="flex flex-wrap gap-2">
-                  {SUGGESTIONS.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => send(s)}
-                      className="text-xs bg-muted hover:bg-accent text-foreground px-3 py-1.5 rounded-full border border-border transition-colors"
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                    msg.role === 'user'
-                      ? 'bg-primary text-primary-foreground rounded-br-md whitespace-pre-wrap'
-                      : 'bg-muted text-foreground rounded-bl-md'
-                  }`}
-                >
-                  {msg.role === 'assistant' ? (
-                    <div className="prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-a:text-primary prose-a:underline prose-strong:text-foreground">
-                      <ReactMarkdown
-                        components={{
-                          a: ({ href, children }) => (
-                            <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary underline hover:opacity-80">
-                              {children}
-                            </a>
-                          ),
-                        }}
+          {/* Messages area */}
+          <div ref={scrollRef} className="flex-1 overflow-y-auto min-h-[240px]">
+            <div className="max-w-[480px] mx-auto px-4 py-5 space-y-5">
+              {messages.length === 0 && (
+                <div className="pt-6 pb-2 space-y-5">
+                  <p className="text-base text-muted-foreground text-center">Wie kann ich behilflich sein?</p>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {SUGGESTIONS.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => send(s)}
+                        className="text-xs text-muted-foreground hover:text-foreground px-3.5 py-2 rounded-full border border-border/60 hover:border-border hover:bg-muted/50 transition-all"
                       >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {messages.map((msg, i) => (
+                <div key={i}>
+                  {msg.role === 'user' ? (
+                    <div className="flex justify-end">
+                      <div className="max-w-[80%] bg-muted rounded-3xl rounded-br-lg px-4 py-2.5 text-sm text-foreground whitespace-pre-wrap">
                         {msg.content}
-                      </ReactMarkdown>
+                      </div>
                     </div>
                   ) : (
-                    msg.content
+                    <div className="text-sm text-foreground leading-relaxed">
+                      <div className="prose prose-sm max-w-none prose-p:my-1.5 prose-ul:my-1.5 prose-ol:my-1.5 prose-li:my-0.5 prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-strong:text-foreground prose-headings:text-foreground prose-headings:text-sm prose-headings:font-semibold">
+                        <ReactMarkdown
+                          components={{
+                            a: ({ href, children }) => (
+                              <a href={href} target="_blank" rel="noopener noreferrer">
+                                {children}
+                              </a>
+                            ),
+                          }}
+                        >
+                          {msg.content}
+                        </ReactMarkdown>
+                      </div>
+                    </div>
                   )}
                 </div>
-              </div>
-            ))}
-            {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
-              <div className="flex justify-start">
-                <div className="bg-muted rounded-2xl rounded-bl-md px-4 py-2.5">
-                  <Loader2 size={16} className="animate-spin text-muted-foreground" />
+              ))}
+
+              {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
+                <div className="flex items-center gap-1.5 py-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 animate-pulse" style={{ animationDelay: '0ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 animate-pulse" style={{ animationDelay: '150ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 animate-pulse" style={{ animationDelay: '300ms' }} />
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
-          {/* Input – 4-line textarea */}
-          <div className="flex items-end gap-2 p-3 border-t border-border shrink-0">
-            <textarea
-              ref={textareaRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Frage stellen…"
-              disabled={isLoading}
-              rows={4}
-              className="flex-1 bg-muted rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-50 resize-none"
-            />
-            <button
-              type="button"
-              onClick={() => send(input)}
-              disabled={!input.trim() || isLoading}
-              className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-30 transition-opacity shrink-0"
-            >
-              <ArrowUp size={16} strokeWidth={2.5} />
-            </button>
+          {/* Input bar – ChatGPT style */}
+          <div className="p-3 shrink-0">
+            <div className="flex items-end gap-2 bg-muted rounded-2xl px-4 py-2.5 border border-border/40 focus-within:border-border/80 transition-colors">
+              <textarea
+                ref={textareaRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Nachricht an ACHZEIT Concierge"
+                disabled={isLoading}
+                rows={1}
+                className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none disabled:opacity-50 resize-none leading-relaxed max-h-[150px]"
+              />
+              <button
+                type="button"
+                onClick={() => send(input)}
+                disabled={!input.trim() || isLoading}
+                className="w-7 h-7 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-20 transition-opacity shrink-0 mb-0.5"
+              >
+                <ArrowUp size={14} strokeWidth={2.5} />
+              </button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
