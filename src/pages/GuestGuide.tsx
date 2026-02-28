@@ -9,6 +9,7 @@ export interface GuestData {
   checkin: string;
   checkout: string;
   boxCode: string;
+  wifiPassword: string;
 }
 
 const FALLBACK_DATA: GuestData = {
