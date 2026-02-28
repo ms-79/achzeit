@@ -21,6 +21,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
+import GuestGuideEvents from './GuestGuideEvents';
 
 interface Props {
   guestData: GuestData;
