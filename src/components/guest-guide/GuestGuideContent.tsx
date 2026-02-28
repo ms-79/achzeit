@@ -208,6 +208,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   </span>
                 </div>
                 <p className="text-sm mt-2">Traditionelle Allgäuer Gastlichkeit mit modernen Akzenten. Regionale Küche mit besten Zutaten aus der Heimat – gemütlich und herzlich.</p>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 10 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
               </a>
 
               {/* Ondersch */}
@@ -222,6 +223,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   </span>
                 </div>
                 <p className="text-sm mt-2">Zwei Konzepte unter einem Dach – gehobene Küche und entspannte Genusswirtschaft. Perfekt für einen besonderen Abend.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
               </a>
 
               {/* Alte Sennküche */}
@@ -231,6 +233,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Traditionell bayerisch</p>
                 </div>
                 <p className="text-sm mt-2">Gemütliche Stuben, deftige Schmankerl und gut gezapftes Bier – bodenständig und authentisch Oberstdorf.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
               </a>
 
               {/* Zum wilde Männle */}
@@ -240,6 +243,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Traditionsgaststätte</p>
                 </div>
                 <p className="text-sm mt-2">Institution in der Fußgängerzone seit 1937. Hier trifft sich Jung und Alt – urgemütlich mit Brauereiausschank.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
               </a>
 
               {/* Bei Alberto */}
@@ -249,6 +253,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Italienisch</p>
                 </div>
                 <p className="text-sm mt-2">Familienbetrieb in zweiter Generation – Pizza, Pasta und italienisches Lebensgefühl mit großer Sonnenterrasse.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
               </a>
             </div>
 
@@ -376,7 +381,8 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                       <Star size={12} className="fill-alpine-wood" /> Direkt im Ort
                     </span>
                   </div>
-                  <p className="text-sm mt-2">Kleines Skigebiet am Ortsrand – ideal für Anfänger und Familien. Mit Abendrodelbahn und gemütlichem Liftstadl. Zu Fuß oder in 2 Min. mit dem Auto erreichbar.</p>
+                  <p className="text-sm mt-2">Kleines Skigebiet am Ortsrand – ideal für Anfänger und Familien. Mit Abendrodelbahn und gemütlichem Liftstadl.</p>
+                  <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 15 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
                 </a>
               )}
 
@@ -390,7 +396,8 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     <Star size={12} className="fill-alpine-wood" /> Top-Ausflug
                   </span>
                 </div>
-                <p className="text-sm mt-2">Die tiefste und eine der beeindruckendsten Felsschluchten Mitteleuropas. Im Sommer tosende Wasserfälle, im Winter magische Eisformationen. Ca. 10 Min. mit dem Auto.</p>
+                <p className="text-sm mt-2">Die tiefste und eine der beeindruckendsten Felsschluchten Mitteleuropas. Im Sommer tosende Wasserfälle, im Winter magische Eisformationen.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
               </a>
 
               <a href="https://www.ok-bergbahnen.com/nebelhorn" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -403,7 +410,8 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     <Star size={12} className="fill-alpine-wood" /> 400er Gipfelblick
                   </span>
                 </div>
-                <p className="text-sm mt-2">Mit der Gondel auf 2.224 m – 400 Gipfel im Blick. Nordwandsteig und Panorama-Rundweg. Im Winter herrliches Skigebiet. Ca. 15 Min. zur Talstation.</p>
+                <p className="text-sm mt-2">Mit der Gondel auf 2.224 m – 400 Gipfel im Blick. Nordwandsteig und Panorama-Rundweg. Im Winter herrliches Skigebiet.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 15 Min.</span></div>
               </a>
 
               <a href="https://www.ok-bergbahnen.com/fellhorn-kanzelwand" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -411,7 +419,8 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <h4 className="font-display text-base text-foreground">Fellhorn / Kanzelwand</h4>
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Wandern & Skifahren</p>
                 </div>
-                <p className="text-sm mt-2">Blumenreiche Bergwiesen im Sommer, erstklassiges Skigebiet im Winter. Die Zwei-Länder-Wanderung (DE/AT) ist ein Highlight. Ca. 20 Min. Fahrzeit.</p>
+                <p className="text-sm mt-2">Blumenreiche Bergwiesen im Sommer, erstklassiges Skigebiet im Winter. Die Zwei-Länder-Wanderung (DE/AT) ist ein Highlight.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 20 Min.</span></div>
               </a>
 
               <a href="https://www.sturmannshoehle.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -419,7 +428,8 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <h4 className="font-display text-base text-foreground">Sturmannshöhle</h4>
                   <p className="text-xs text-muted-foreground mt-0.5">Obermaiselstein · Tropfsteinhöhle</p>
                 </div>
-                <p className="text-sm mt-2">Die einzige begehbare Höhle im Allgäu – beeindruckende Tropfsteinformationen tief im Berg. Tolles Erlebnis auch für Kinder. Ca. 5 Min. Fahrzeit.</p>
+                <p className="text-sm mt-2">Die einzige begehbare Höhle im Allgäu – beeindruckende Tropfsteinformationen tief im Berg. Tolles Erlebnis auch für Kinder.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 5 Min.</span></div>
               </a>
 
               <a href="https://www.ok-bergbahnen.com/soellereck" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -427,7 +437,8 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <h4 className="font-display text-base text-foreground">Söllereck</h4>
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Familienberg</p>
                 </div>
-                <p className="text-sm mt-2">Der Familienberg: Sommerrodelbahn, kurze Wanderwege und ein tolles Panorama. Ideal mit Kindern. Ca. 15 Min. Fahrzeit.</p>
+                <p className="text-sm mt-2">Der Familienberg: Sommerrodelbahn, kurze Wanderwege und ein tolles Panorama. Ideal mit Kindern.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 15 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Christlessee+Trettachtal" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -435,7 +446,8 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <h4 className="font-display text-base text-foreground">Christlessee</h4>
                   <p className="text-xs text-muted-foreground mt-0.5">Trettachtal · Bergsee</p>
                 </div>
-                <p className="text-sm mt-2">Kristallklarer Bergsee mit türkisem Wasser – ein Geheimtipp zum Staunen. Leichte Wanderung ab Parkplatz Trettachtal. Ca. 20 Min. Fahrzeit.</p>
+                <p className="text-sm mt-2">Kristallklarer Bergsee mit türkisem Wasser – ein Geheimtipp zum Staunen. Leichte Wanderung ab Parkplatz Trettachtal.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 20 Min.</span></div>
               </a>
             </div>
 
