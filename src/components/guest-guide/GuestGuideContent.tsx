@@ -318,6 +318,59 @@ const GuestGuideContent = ({ guestData }: Props) => {
           </AccordionContent>
         </AccordionItem>
 
+        {/* Veranstaltungen */}
+        <AccordionItem value="veranstaltungen" id="veranstaltungen" className="border border-border rounded-lg px-6 overflow-hidden">
+          <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
+            <span className="flex items-center gap-3">
+              <Star size={20} className="text-alpine-wood" />
+              Veranstaltungen in Fischen
+            </span>
+          </AccordionTrigger>
+          <AccordionContent className="text-muted-foreground leading-relaxed space-y-4">
+            <p className="text-sm">Das aktuelle Wochenprogramm mit Veranstaltungen, Führungen und Kursen in Fischen.</p>
+            {(() => {
+              const now = new Date();
+              const startOfYear = new Date(now.getFullYear(), 0, 1);
+              const dayOfYear = Math.floor((now.getTime() - startOfYear.getTime()) / 86400000);
+              const weekNumber = Math.ceil((dayOfYear + startOfYear.getDay() + 1) / 7);
+              const kwStr = String(weekNumber).padStart(2, '0');
+              const nextKwStr = String(weekNumber + 1).padStart(2, '0');
+              const baseUrl = 'https://www.hoernerdoerfer.de/fileadmin/thd/x_partner_info/dateien/gaesteinfos/Fischen/dateien/Wochenprogramm_KW';
+              return (
+                <div className="space-y-3">
+                  <a
+                    href={`${baseUrl}${kwStr}.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors"
+                  >
+                    <div>
+                      <h4 className="font-display text-base text-foreground">Wochenprogramm KW {kwStr}</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">Aktuelle Woche</p>
+                    </div>
+                    <ExternalLink size={16} className="text-alpine-wood shrink-0" />
+                  </a>
+                  <a
+                    href={`${baseUrl}${nextKwStr}.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors"
+                  >
+                    <div>
+                      <h4 className="font-display text-base text-foreground">Wochenprogramm KW {nextKwStr}</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">Nächste Woche (falls bereits verfügbar)</p>
+                    </div>
+                    <ExternalLink size={16} className="text-alpine-wood shrink-0" />
+                  </a>
+                </div>
+              );
+            })()}
+            <p className="text-xs text-muted-foreground italic pt-1">
+              Quelle: Hörnerdörfer Tourismus · PDF wird wöchentlich aktualisiert.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+
         {/* E-Auto Ladestationen */}
         <AccordionItem value="e-auto" id="e-auto" className="border border-border rounded-lg px-6 overflow-hidden">
           <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
