@@ -53,9 +53,9 @@ const GuestGuideStickyNav = ({ activeSection, onNavClick }: Props) => {
     >
       <div
         ref={scrollRef}
-        className="flex items-center gap-2 px-4 h-full overflow-x-auto scrollbar-hide mx-auto"
-        style={{ WebkitOverflowScrolling: 'touch', maxWidth: 'min(100%, 56rem)' }}
+        className="flex items-center gap-2 px-4 h-full overflow-x-auto scrollbar-hide mx-auto max-w-[56rem]"
         style={{ WebkitOverflowScrolling: 'touch' }}
+      >
       >
         {navItems.map((item) => {
           const isActive = activeSection === item.target;
