@@ -211,7 +211,7 @@ const WeekRowDirect = ({
   dateRange: string | null;
   url: string;
 }) => {
-  const viewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
+  
 
   if (status === 'loading') {
     return (
