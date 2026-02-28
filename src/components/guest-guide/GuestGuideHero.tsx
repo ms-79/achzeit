@@ -110,7 +110,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           {quickActions.map((action) => (
             <button
               key={action.target}
-              onClick={() => scrollToSection(action.target)}
+              onClick={() => onNavClick?.(action.target)}
               className="flex items-center gap-2 bg-alpine-snow/10 hover:bg-alpine-snow/20 text-alpine-snow/80 hover:text-alpine-snow px-4 py-2.5 rounded-lg text-sm transition-all duration-200"
             >
               <action.icon size={16} />
