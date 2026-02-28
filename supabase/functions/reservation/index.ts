@@ -4,10 +4,8 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-/** Map listing slug → Hostaway listing ID */
-const LISTING_MAP: Record<string, string> = {
-  achzeit: "463607",
-};
+/** Fixed listing ID */
+const LISTING_ID = "463607";
 
 async function getHostawayToken(accountId: string, apiKey: string): Promise<string> {
   const body = new URLSearchParams({
