@@ -378,6 +378,22 @@ const GuestGuideContent = ({ guestData }: Props) => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
+      {/* WhatsApp Kontakt */}
+      <div className="mt-10 text-center">
+        <a
+          href="https://wa.me/4915679656368"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe57] text-white font-medium px-6 py-3.5 rounded-lg transition-colors duration-200 shadow-soft hover:shadow-medium"
+        >
+          <MessageCircle size={20} />
+          <span>Fragen? Schreibt uns per WhatsApp</span>
+        </a>
+        <p className="text-xs text-muted-foreground mt-3">
+          Wir antworten in der Regel innerhalb weniger Stunden.
+        </p>
+      </div>
     </main>
   );
 };
