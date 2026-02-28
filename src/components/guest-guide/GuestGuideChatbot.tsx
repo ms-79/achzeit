@@ -244,14 +244,33 @@ const GuestGuideChatbot = () => {
                 rows={1}
                 className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none disabled:opacity-50 resize-none leading-relaxed max-h-[150px]"
               />
-              <button
-                type="button"
-                onClick={() => send(input)}
-                disabled={!input.trim() || isLoading}
-                className="w-7 h-7 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-20 transition-opacity shrink-0 mb-0.5"
-              >
-                <ArrowUp size={14} strokeWidth={2.5} />
-              </button>
+              {/* Mic button – shown when input is empty */}
+              {!input.trim() && (typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition)) && (
+                <button
+                  type="button"
+                  onClick={isListening ? stopListening : startListening}
+                  disabled={isLoading}
+                  className={`w-7 h-7 rounded-full flex items-center justify-center transition-all shrink-0 mb-0.5 ${
+                    isListening
+                      ? 'bg-destructive text-destructive-foreground animate-pulse'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                  aria-label={isListening ? 'Aufnahme stoppen' : 'Spracheingabe'}
+                >
+                  <Mic size={16} />
+                </button>
+              )}
+              {/* Send button – shown when there's text */}
+              {input.trim() && (
+                <button
+                  type="button"
+                  onClick={() => { stopListening(); send(input); }}
+                  disabled={isLoading}
+                  className="w-7 h-7 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-20 transition-opacity shrink-0 mb-0.5"
+                >
+                  <ArrowUp size={14} strokeWidth={2.5} />
+                </button>
+              )}
             </div>
           </div>
         </DialogContent>
