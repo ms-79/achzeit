@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
@@ -24,7 +24,7 @@ const FALLBACK_DATA: GuestData = {
 type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
 
 const GuestGuide = () => {
-  const { slug } = useParams<{ slug: string }>();
+  
   const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
   const [errorMsg, setErrorMsg] = useState('');
@@ -51,7 +51,6 @@ const GuestGuide = () => {
   };
 
   useEffect(() => {
-    if (!slug) return;
 
     // Support format: ?t=RESID.TOKEN
     const params = new URLSearchParams(window.location.search);
@@ -69,7 +68,7 @@ const GuestGuide = () => {
         // Mode 1: Direct access via reservationId + token
         if (reservationId && token) {
           const res = await fetch(
-            `${baseUrl}?slug=${slug}&reservationId=${reservationId}&token=${token}`,
+            `${baseUrl}?reservationId=${reservationId}&token=${token}`,
             { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
           );
           const body = await res.json();
@@ -83,7 +82,7 @@ const GuestGuide = () => {
 
         // Mode 2: Check for active reservation → PIN
         const res = await fetch(
-          `${baseUrl}?slug=${slug}`,
+          `${baseUrl}`,
           { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
         );
         const body = await res.json();
@@ -103,13 +102,13 @@ const GuestGuide = () => {
     };
 
     load();
-  }, [slug]);
+  }, []);
 
   const handlePinSubmit = async (pin: string) => {
     setState('loading');
     try {
       const res = await fetch(
-        `${baseUrl}?slug=${slug}&pin=${pin}`,
+        `${baseUrl}?pin=${pin}`,
         { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
       );
       const body = await res.json();

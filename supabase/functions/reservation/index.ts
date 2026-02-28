@@ -4,10 +4,8 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-/** Map listing slug → Hostaway listing ID */
-const LISTING_MAP: Record<string, string> = {
-  achzeit: "463607",
-};
+/** Fixed listing ID */
+const LISTING_ID = "463607";
 
 async function getHostawayToken(accountId: string, apiKey: string): Promise<string> {
   const body = new URLSearchParams({
@@ -73,19 +71,10 @@ Deno.serve(async (req) => {
 
   try {
     const url = new URL(req.url);
-    const slug = url.searchParams.get("slug");
     const pin = url.searchParams.get("pin");
     const reservationId = url.searchParams.get("reservationId");
     const token = url.searchParams.get("token");
-
-    if (!slug) {
-      return json({ error: "slug parameter required" }, 400);
-    }
-
-    const listingId = LISTING_MAP[slug];
-    if (!listingId) {
-      return json({ error: "Unbekanntes Listing" }, 404);
-    }
+    const listingId = LISTING_ID;
 
     const accountId = Deno.env.get("HOSTAWAY_ACCOUNT_ID");
     const apiKey = Deno.env.get("HOSTAWAY_API_KEY");
