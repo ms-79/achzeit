@@ -501,7 +501,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     <p className="text-sm"><strong className="text-foreground">150 kW Schnelllader</strong> – Trigema, Dorfstr. 25 (EnBW)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 5 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
                 </a>
                 <a href="https://maps.google.com/?q=McDonald's+Langenwang+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
