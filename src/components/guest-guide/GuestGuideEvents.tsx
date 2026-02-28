@@ -86,7 +86,7 @@ const PdfViewerModal = ({
 }) => {
   const proxyBase = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/check-pdf`;
   const proxyUrl = `${proxyBase}?url=${encodeURIComponent(url)}`;
-  const viewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(proxyUrl)}`;
+  const viewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(proxyUrl)}#pagemode=none&toolbar=0`;
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
