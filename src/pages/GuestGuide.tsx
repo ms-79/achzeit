@@ -54,8 +54,15 @@ const GuestGuide = () => {
   useEffect(() => {
     if (!slug) return;
 
-    const reservationId = searchParams.get('reservationId');
-    const token = searchParams.get('token');
+    // Support format: ?RESID.TOKEN (single query key with dot separator)
+    const rawQuery = window.location.search.replace('?', '');
+    let reservationId: string | null = null;
+    let token: string | null = null;
+    if (rawQuery.includes('.')) {
+      const [id, tok] = rawQuery.split('.', 2);
+      reservationId = id || null;
+      token = tok || null;
+    }
 
     const load = async () => {
       try {
