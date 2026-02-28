@@ -87,7 +87,6 @@ interface WeekRowProps {
 const WeekRow = ({ kwNumber, label, fallbackFromDateRange }: WeekRowProps) => {
   const kwStr = String(kwNumber).padStart(2, '0');
   const url = `${BASE_URL}${kwStr}.pdf`;
-  const viewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
   const { status, dateRange } = useCheckPdf(url);
 
   // Determine displayed date range
@@ -125,7 +124,7 @@ const WeekRow = ({ kwNumber, label, fallbackFromDateRange }: WeekRowProps) => {
 
   return (
     <a
-      href={viewerUrl}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors"
@@ -158,7 +157,7 @@ const GuestGuideEvents = () => {
 
   const nextKwStr = String(nextWeek).padStart(2, '0');
   const nextUrl = `${BASE_URL}${nextKwStr}.pdf`;
-  const nextViewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(nextUrl)}`;
+  
   const nextResult = useCheckPdf(nextUrl);
 
   // Determine displayed dates
@@ -212,7 +211,7 @@ const WeekRowDirect = ({
   dateRange: string | null;
   url: string;
 }) => {
-  const viewerUrl = `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(url)}`;
+  
 
   if (status === 'loading') {
     return (
@@ -243,7 +242,7 @@ const WeekRowDirect = ({
 
   return (
     <a
-      href={viewerUrl}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors"
