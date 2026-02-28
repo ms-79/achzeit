@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
+import GuestGuidePinEntry from '@/components/guest-guide/GuestGuidePinEntry';
 
 export interface GuestData {
   guestName: string;
@@ -20,67 +21,82 @@ const FALLBACK_DATA: GuestData = {
   wifiPassword: '',
 };
 
-const parseToken = (t: string | null): { reservationId: string; token: string } | null => {
-  if (!t) return null;
-  const dotIndex = t.indexOf('.');
-  if (dotIndex === -1) return null;
-  return {
-    reservationId: t.substring(0, dotIndex),
-    token: t.substring(dotIndex + 1),
-  };
-};
+type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
 
 const GuestGuide = () => {
-  const [searchParams] = useSearchParams();
-  const parsed = parseToken(searchParams.get('t'));
+  const { slug } = useParams<{ slug: string }>();
+  const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
-  const [loading, setLoading] = useState(!!parsed);
-  const [error, setError] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState('');
 
+  const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
+  const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+  // Step 1: Check if there's an active reservation (no PIN yet)
   useEffect(() => {
-    if (!parsed) return;
+    if (!slug) return;
 
-    const fetchReservation = async () => {
+    const checkReservation = async () => {
       try {
-        setLoading(true);
-        const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-        const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-
         const res = await fetch(
-          `https://${projectId}.supabase.co/functions/v1/reservation?reservationId=${parsed.reservationId}&token=${parsed.token}`,
-          {
-            headers: {
-              'apikey': anonKey,
-              'Content-Type': 'application/json',
-            },
-          }
+          `https://${projectId}.supabase.co/functions/v1/reservation?slug=${slug}`,
+          { headers: { apikey: anonKey, 'Content-Type': 'application/json' } }
         );
 
-        if (!res.ok) {
-          const body = await res.json().catch(() => ({}));
-          throw new Error(body.error || `Fehler beim Laden der Reservierung (${res.status})`);
-        }
+        const body = await res.json();
 
-        const result = await res.json();
-        setGuestData({
-          guestName: result.guestName || 'Gast',
-          checkin: result.checkin || '',
-          checkout: result.checkout || '',
-          boxCode: result.doorCode || '– – – –',
-          wifiPassword: result.wifiPassword || '',
-        });
+        if (res.ok && body.status === 'pin_required') {
+          setState('pin');
+        } else if (body.error === 'no_active_reservation') {
+          setState('no_reservation');
+        } else {
+          setErrorMsg(body.message || body.error || 'Unbekannter Fehler');
+          setState('error');
+        }
       } catch (err: any) {
-        console.error('Failed to fetch reservation:', err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
+        setErrorMsg(err.message);
+        setState('error');
       }
     };
 
-    fetchReservation();
-  }, [parsed?.reservationId, parsed?.token]);
+    checkReservation();
+  }, [slug]);
 
-  if (loading) {
+  // Step 2: Submit PIN
+  const handlePinSubmit = async (pin: string) => {
+    setState('loading');
+    try {
+      const res = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/reservation?slug=${slug}&pin=${pin}`,
+        { headers: { apikey: anonKey, 'Content-Type': 'application/json' } }
+      );
+
+      const body = await res.json();
+
+      if (res.ok && body.status === 'ok') {
+        setGuestData({
+          guestName: body.guestName || 'Gast',
+          checkin: body.checkin || '',
+          checkout: body.checkout || '',
+          boxCode: body.doorCode || '– – – –',
+          wifiPassword: body.wifiPassword || '',
+        });
+        setState('loaded');
+      } else if (body.error === 'invalid_pin') {
+        setState('pin');
+        return 'invalid';
+      } else {
+        setErrorMsg(body.message || body.error || 'Fehler');
+        setState('error');
+      }
+    } catch (err: any) {
+      setErrorMsg(err.message);
+      setState('error');
+    }
+    return 'ok';
+  };
+
+  if (state === 'loading') {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -89,6 +105,36 @@ const GuestGuide = () => {
         </div>
       </div>
     );
+  }
+
+  if (state === 'no_reservation') {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-6">
+        <div className="text-center max-w-md">
+          <img src={logoAchzeit} alt="ACHZEIT" className="w-24 mx-auto mb-6 opacity-40" />
+          <h1 className="font-display text-2xl text-foreground mb-3">Aktuell kein aktiver Aufenthalt</h1>
+          <p className="text-muted-foreground text-sm">
+            Die digitale Gästemappe ist nur während eures Aufenthalts verfügbar.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (state === 'error') {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center px-6">
+        <div className="text-center max-w-md">
+          <img src={logoAchzeit} alt="ACHZEIT" className="w-24 mx-auto mb-6 opacity-40" />
+          <h1 className="font-display text-2xl text-foreground mb-3">Fehler</h1>
+          <p className="text-muted-foreground text-sm">{errorMsg}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (state === 'pin') {
+    return <GuestGuidePinEntry onSubmit={handlePinSubmit} />;
   }
 
   return (
