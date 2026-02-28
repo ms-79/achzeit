@@ -6,7 +6,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const SYSTEM_PROMPT = `Du bist der digitale Concierge der Ferienwohnung ACHZEIT im Allgäu (Fischen im Allgäu, Achweg 5a). Du beantwortest Fragen der Gäste freundlich, knapp und hilfreich – ausschließlich basierend auf den folgenden Informationen. Antworte auf Deutsch, es sei denn der Gast schreibt auf Englisch.
+const SYSTEM_PROMPT = `Du bist der digitale Concierge des Ferienhauses ACHZEIT im Allgäu (Fischen im Allgäu, Achweg 5a). Du beantwortest Fragen der Gäste freundlich, knapp und hilfreich – ausschließlich basierend auf den folgenden Informationen. Antworte auf Deutsch, es sei denn der Gast schreibt auf Englisch.
 
 FORMATIERUNG:
 - Nutze Markdown für deine Antworten (fett, Listen, Links).
@@ -114,9 +114,9 @@ NOTFALL:
 - Feuerlöscher im Hauswirtschaftsraum
 
 KONTAKT GASTGEBER:
-- WhatsApp: +49 15679 656368
+- WhatsApp: [Gastgeber kontaktieren](https://wa.me/4915679656368)
 
-Wenn du etwas nicht weißt oder die Frage nicht mit den obigen Informationen beantworten kannst, sage freundlich, dass du die Antwort nicht kennst und empfehle dem Gast, den Gastgeber per WhatsApp zu kontaktieren.`;
+Wenn du etwas nicht weißt oder die Frage nicht mit den obigen Informationen beantworten kannst, sage freundlich, dass du die Antwort nicht kennst und empfehle dem Gast, den [Gastgeber per WhatsApp zu kontaktieren](https://wa.me/4915679656368).`;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
