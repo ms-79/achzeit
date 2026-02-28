@@ -117,6 +117,24 @@ const GuestGuideHero = ({ guestData }: Props) => {
             </button>
           ))}
         </motion.div>
+
+        {/* WhatsApp Button */}
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <a
+            href="https://wa.me/4915679656368"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe57] text-white font-medium px-6 py-3.5 rounded-lg transition-colors duration-200"
+          >
+            <MessageCircle size={20} />
+            <span>Fragen? Schreibt uns per WhatsApp</span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
