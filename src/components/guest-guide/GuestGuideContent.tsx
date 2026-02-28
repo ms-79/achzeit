@@ -254,6 +254,22 @@ const GuestGuideContent = ({ guestData }: Props) => {
             <p className="text-sm">Rund um ACHZEIT gibt es viel zu entdecken – hier unsere Favoriten.</p>
 
             <div className="space-y-4">
+              {/* Stinesser Lift – nur während der Saison anzeigen */}
+              {new Date() <= new Date('2026-03-08T23:59:59') && (
+                <a href="https://www.stinesser-lifte.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h4 className="font-display text-base text-foreground">Stinesser Lifte</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5">Fischen im Allgäu · Familienskigebiet</p>
+                    </div>
+                    <span className="flex items-center gap-1 text-xs text-alpine-wood whitespace-nowrap">
+                      <Star size={12} className="fill-alpine-wood" /> Direkt im Ort
+                    </span>
+                  </div>
+                  <p className="text-sm mt-2">Kleines Skigebiet am Ortsrand – ideal für Anfänger und Familien. Mit Abendrodelbahn und gemütlichem Liftstadl. Zu Fuß oder in 2 Min. mit dem Auto erreichbar.</p>
+                </a>
+              )}
+
               <a href="https://www.breitachklamm.com/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                 <div className="flex items-start justify-between gap-2">
                   <div>
