@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
+import GuestGuideStickyNav from '@/components/guest-guide/GuestGuideStickyNav';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
 import GuestGuidePinEntry from '@/components/guest-guide/GuestGuidePinEntry';
 
