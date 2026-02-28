@@ -223,7 +223,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   </span>
                 </div>
                 <p className="text-sm mt-2">Zwei Konzepte unter einem Dach – gehobene Küche und entspannte Genusswirtschaft. Perfekt für einen besonderen Abend.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 12 Min.</span></div>
               </a>
 
               {/* Alte Sennküche */}
@@ -233,7 +233,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Traditionell bayerisch</p>
                 </div>
                 <p className="text-sm mt-2">Gemütliche Stuben, deftige Schmankerl und gut gezapftes Bier – bodenständig und authentisch Oberstdorf.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 13 Min.</span></div>
               </a>
 
               {/* Zum wilde Männle */}
@@ -243,7 +243,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Traditionsgaststätte</p>
                 </div>
                 <p className="text-sm mt-2">Institution in der Fußgängerzone seit 1937. Hier trifft sich Jung und Alt – urgemütlich mit Brauereiausschank.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 13 Min.</span></div>
               </a>
 
               {/* Bei Alberto */}
@@ -253,12 +253,12 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Italienisch</p>
                 </div>
                 <p className="text-sm mt-2">Familienbetrieb in zweiter Generation – Pizza, Pasta und italienisches Lebensgefühl mit großer Sonnenterrasse.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 13 Min.</span></div>
               </a>
             </div>
 
             <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
-              <MapPin size={12} /> Alle Restaurants sind in 5–15 Minuten mit dem Auto erreichbar.
+              <MapPin size={12} /> Alle Restaurants sind in 3–13 Minuten mit dem Auto erreichbar.
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -284,7 +284,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten.</p>
-                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 6 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 11 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Bäckerei+Härle+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -296,7 +296,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Hier wird noch alles von Hand gemacht – frische Semmeln, Brot und Gebäck. Auch sonntags geöffnet.</p>
-                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 6 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 11 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Metzgerei+Hubert+Schmid+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -308,7 +308,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Regionale Fleisch- und Wurstwaren vom Allgäuer Metzger.</p>
-                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 12 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 12 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Feneberg+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -320,7 +320,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Großer Allgäuer Supermarkt mit breiter Auswahl.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 9 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=V-Markt+Fischen+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -344,7 +344,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
                 <p className="text-sm mt-2">Apotheke im Ortszentrum von Fischen.</p>
-                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 5 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 1 Min.</span></div>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 11 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
               </a>
             </div>
 
@@ -382,7 +382,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     </span>
                   </div>
                   <p className="text-sm mt-2">Kleines Skigebiet am Ortsrand – ideal für Anfänger und Familien. Mit Abendrodelbahn und gemütlichem Liftstadl.</p>
-                  <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 15 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
+                  <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 9 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
                 </a>
               )}
 
@@ -397,7 +397,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   </span>
                 </div>
                 <p className="text-sm mt-2">Die tiefste und eine der beeindruckendsten Felsschluchten Mitteleuropas. Im Sommer tosende Wasserfälle, im Winter magische Eisformationen.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 12 Min.</span></div>
               </a>
 
               <a href="https://www.ok-bergbahnen.com/nebelhorn" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -411,7 +411,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   </span>
                 </div>
                 <p className="text-sm mt-2">Mit der Gondel auf 2.224 m – 400 Gipfel im Blick. Nordwandsteig und Panorama-Rundweg. Im Winter herrliches Skigebiet.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 15 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 13 Min.</span></div>
               </a>
 
               <a href="https://www.ok-bergbahnen.com/fellhorn-kanzelwand" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -420,7 +420,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Wandern & Skifahren</p>
                 </div>
                 <p className="text-sm mt-2">Blumenreiche Bergwiesen im Sommer, erstklassiges Skigebiet im Winter. Die Zwei-Länder-Wanderung (DE/AT) ist ein Highlight.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 20 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 18 Min.</span></div>
               </a>
 
               <a href="https://www.sturmannshoehle.de/" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -429,7 +429,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Obermaiselstein · Tropfsteinhöhle</p>
                 </div>
                 <p className="text-sm mt-2">Die einzige begehbare Höhle im Allgäu – beeindruckende Tropfsteinformationen tief im Berg. Tolles Erlebnis auch für Kinder.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 5 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 7 Min.</span></div>
               </a>
 
               <a href="https://www.ok-bergbahnen.com/soellereck" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -438,7 +438,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Familienberg</p>
                 </div>
                 <p className="text-sm mt-2">Der Familienberg: Sommerrodelbahn, kurze Wanderwege und ein tolles Panorama. Ideal mit Kindern.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 15 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 9 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Christlessee+Trettachtal" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -447,12 +447,12 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Trettachtal · Bergsee</p>
                 </div>
                 <p className="text-sm mt-2">Kristallklarer Bergsee mit türkisem Wasser – ein Geheimtipp zum Staunen. Leichte Wanderung ab Parkplatz Trettachtal.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 20 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 19 Min.</span></div>
               </a>
             </div>
 
             <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
-              <MapPin size={12} /> Alle Ausflugsziele sind in 5–20 Minuten mit dem Auto erreichbar.
+              <MapPin size={12} /> Alle Ausflugsziele sind in 2–19 Minuten mit dem Auto erreichbar.
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -476,21 +476,21 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     <p className="text-sm">Kurhaus Fiskina, Bahnhofstr. 3 – 22 kW (New Motion)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 8 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 2 Min.</span></div>
+                  <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 11 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
                 </a>
                 <a href="https://maps.google.com/?q=Parkplatz+Fischen-Au+Illerstr+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-sm">Parkplatz Fischen-Au, Illerstr. 11 – 11–22 kW (New Motion)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 12 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
                 </a>
                 <a href="https://maps.google.com/?q=NaturGut+Allgäu+Maderhalm+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-sm">NaturGut Allgäu, Maderhalm 2 – 22 kW (Heel-Energie)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 15 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
                 </a>
               </div>
 
@@ -501,21 +501,21 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     <p className="text-sm"><strong className="text-foreground">150 kW Schnelllader</strong> – Trigema, Dorfstr. 25 (EnBW)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 5 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
                 </a>
                 <a href="https://maps.google.com/?q=McDonald's+Langenwang+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-sm">McDonald's, An der Breitach 1 – 50 kW (AllgäuStrom)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 5 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 6 Min.</span></div>
                 </a>
                 <a href="https://maps.google.com/?q=Haus+des+Gastes+Langenwang+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-sm">Haus des Gastes, Dorfstr. 19 – 11–22 kW (New Motion)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 6 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
                 </a>
               </div>
 
@@ -526,14 +526,14 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                     <p className="text-sm">Parkplatz P2, Sonthofener Str. 20 – 22 kW (AllgäuStrom)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 8 Min.</span></div>
                 </a>
                 <a href="https://maps.google.com/?q=Nebelhornbahn+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-sm">Nebelhornbahn, Nebelhornstr. 67 – 22 kW (AllgäuStrom)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 12 Min.</span></div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 13 Min.</span></div>
                 </a>
               </div>
             </div>
