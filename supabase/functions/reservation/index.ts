@@ -7,7 +7,30 @@ const corsHeaders = {
 /** Fixed listing ID */
 const LISTING_ID = "463607";
 
+/* ── In-memory cache ── */
+let cachedToken: string | null = null;
+let tokenExpiresAt = 0;
+
+interface CachedReservations {
+  data: any[];
+  fetchedAt: number;
+}
+let cachedReservations: CachedReservations | null = null;
+const RESERVATION_CACHE_TTL = 30_000; // 30s
+
+interface CachedListing {
+  doorCode: string;
+  wifiPassword: string;
+  fetchedAt: number;
+}
+let cachedListing: CachedListing | null = null;
+const LISTING_CACHE_TTL = 120_000; // 2min
+
 async function getHostawayToken(accountId: string, apiKey: string): Promise<string> {
+  if (cachedToken && Date.now() < tokenExpiresAt) {
+    return cachedToken;
+  }
+
   const body = new URLSearchParams({
     grant_type: "client_credentials",
     client_id: accountId,
@@ -27,7 +50,69 @@ async function getHostawayToken(accountId: string, apiKey: string): Promise<stri
   }
 
   const data = await res.json();
+  cachedToken = data.access_token;
+  tokenExpiresAt = Date.now() + 3500_000; // ~58min
   return data.access_token;
+}
+
+async function getActiveReservations(accessToken: string): Promise<any[]> {
+  const now = Date.now();
+  if (cachedReservations && (now - cachedReservations.fetchedAt) < RESERVATION_CACHE_TTL) {
+    return cachedReservations.data;
+  }
+
+  const today = todayUTC();
+  const reservationsRes = await fetch(
+    `https://api.hostaway.com/v1/reservations?listingId=${LISTING_ID}&arrivalEndDate=${today}&departureStartDate=${today}&limit=10&sortOrder=arrivalDate&sortDirection=asc`,
+    { headers: { Authorization: `Bearer ${accessToken}` } },
+  );
+
+  if (!reservationsRes.ok) {
+    const text = await reservationsRes.text();
+    throw new Error(`Hostaway error: ${reservationsRes.status} ${text}`);
+  }
+
+  const reservationsData = await reservationsRes.json();
+  const all = reservationsData.result || [];
+
+  const active = all.filter((r: any) => {
+    const status = r.status;
+    if (status === "cancelled" || status === "declined") return false;
+    const arrival = r.arrivalDate?.slice(0, 10);
+    const departure = r.departureDate?.slice(0, 10);
+    return arrival && departure && today >= arrival && today <= departure;
+  });
+
+  cachedReservations = { data: active, fetchedAt: now };
+  return active;
+}
+
+async function getListingDetails(accessToken: string): Promise<{ doorCode: string; wifiPassword: string }> {
+  const now = Date.now();
+  if (cachedListing && (now - cachedListing.fetchedAt) < LISTING_CACHE_TTL) {
+    return cachedListing;
+  }
+
+  try {
+    const res = await fetch(
+      `https://api.hostaway.com/v1/listings/${LISTING_ID}`,
+      { headers: { Authorization: `Bearer ${accessToken}` } },
+    );
+    if (res.ok) {
+      const data = await res.json();
+      const l = data.result;
+      const result = {
+        doorCode: l.doorCode || l.doorSecurityCode || "",
+        wifiPassword: l.wifiPassword || "",
+        fetchedAt: now,
+      };
+      cachedListing = result;
+      return result;
+    }
+  } catch (e) {
+    console.error("Failed to fetch listing:", e);
+  }
+  return { doorCode: "", wifiPassword: "" };
 }
 
 function todayUTC(): string {
