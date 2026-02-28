@@ -1,7 +1,25 @@
-import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, ArrowUp, Loader2 } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { MessageCircle, ArrowUp, Mic } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
+
+interface ISpeechRecognition extends EventTarget {
+  lang: string;
+  interimResults: boolean;
+  continuous: boolean;
+  onresult: ((event: SpeechRecognitionEvent) => void) | null;
+  onend: (() => void) | null;
+  onerror: (() => void) | null;
+  start(): void;
+  stop(): void;
+}
+
+declare global {
+  interface Window {
+    SpeechRecognition: new () => ISpeechRecognition;
+    webkitSpeechRecognition: new () => ISpeechRecognition;
+  }
+}
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
@@ -19,8 +37,39 @@ const GuestGuideChatbot = () => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = useRef<ISpeechRecognition | null>(null);
+
+  const stopListening = useCallback(() => {
+    recognitionRef.current?.stop();
+    setIsListening(false);
+  }, []);
+
+  const startListening = useCallback(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return;
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'de-DE';
+    recognition.interimResults = true;
+    recognition.continuous = false;
+    recognitionRef.current = recognition;
+
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      const transcript = Array.from(event.results)
+        .map((r) => r[0].transcript)
+        .join('');
+      setInput(transcript);
+    };
+
+    recognition.onend = () => setIsListening(false);
+    recognition.onerror = () => setIsListening(false);
+
+    recognition.start();
+    setIsListening(true);
+  }, []);
 
   useEffect(() => {
     if (open && textareaRef.current) textareaRef.current.focus();
@@ -213,14 +262,33 @@ const GuestGuideChatbot = () => {
                 rows={1}
                 className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none disabled:opacity-50 resize-none leading-relaxed max-h-[150px]"
               />
-              <button
-                type="button"
-                onClick={() => send(input)}
-                disabled={!input.trim() || isLoading}
-                className="w-7 h-7 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-20 transition-opacity shrink-0 mb-0.5"
-              >
-                <ArrowUp size={14} strokeWidth={2.5} />
-              </button>
+              {/* Mic button – shown when input is empty */}
+              {!input.trim() && (typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition)) && (
+                <button
+                  type="button"
+                  onClick={isListening ? stopListening : startListening}
+                  disabled={isLoading}
+                  className={`w-7 h-7 rounded-full flex items-center justify-center transition-all shrink-0 mb-0.5 ${
+                    isListening
+                      ? 'bg-destructive text-destructive-foreground animate-pulse'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                  aria-label={isListening ? 'Aufnahme stoppen' : 'Spracheingabe'}
+                >
+                  <Mic size={16} />
+                </button>
+              )}
+              {/* Send button – shown when there's text */}
+              {input.trim() && (
+                <button
+                  type="button"
+                  onClick={() => { stopListening(); send(input); }}
+                  disabled={isLoading}
+                  className="w-7 h-7 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-20 transition-opacity shrink-0 mb-0.5"
+                >
+                  <ArrowUp size={14} strokeWidth={2.5} />
+                </button>
+              )}
             </div>
           </div>
         </DialogContent>
