@@ -84,6 +84,10 @@ const PdfViewerModal = ({
   title: string;
   onClose: () => void;
 }) => {
+  const proxyBase = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/check-pdf`;
+  const proxyUrl = `${proxyBase}?url=${encodeURIComponent(url)}`;
+  const viewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(proxyUrl)}`;
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
@@ -102,9 +106,7 @@ const PdfViewerModal = ({
         </button>
       </div>
       <iframe
-        src={`https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(
-          `https://ubtfmbzlpywvtljkxooy.supabase.co/functions/v1/check-pdf?url=${encodeURIComponent(url)}`
-        )}`}
+        src={viewerUrl}
         className="flex-1 w-full border-0"
         title={title}
         allow="fullscreen"
