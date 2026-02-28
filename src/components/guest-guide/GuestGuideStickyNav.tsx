@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   Key,
   Wifi,
@@ -27,36 +27,14 @@ const navItems = [
 
 const NAV_HEIGHT = 56;
 
-const GuestGuideStickyNav = () => {
-  const [activeSection, setActiveSection] = useState('zugang');
+interface Props {
+  activeSection: string;
+  onNavClick: (section: string) => void;
+}
+
+const GuestGuideStickyNav = ({ activeSection, onNavClick }: Props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
-
-  // Track active section via IntersectionObserver
-  useEffect(() => {
-    const ids = navItems.map((n) => n.target);
-    const elements = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Find the topmost visible section
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible.length > 0) {
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      {
-        rootMargin: `-${NAV_HEIGHT + 8}px 0px -60% 0px`,
-        threshold: 0,
-      },
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   // Auto-scroll the nav strip so the active button is visible
   useEffect(() => {
@@ -67,14 +45,6 @@ const GuestGuideStickyNav = () => {
       container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
     }
   }, [activeSection]);
-
-  const handleClick = useCallback((target: string) => {
-    const el = document.getElementById(target);
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 12;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  }, []);
 
   return (
     <nav
@@ -94,7 +64,7 @@ const GuestGuideStickyNav = () => {
               ref={(el) => {
                 if (el) buttonRefs.current.set(item.target, el);
               }}
-              onClick={() => handleClick(item.target)}
+              onClick={() => onNavClick(item.target)}
               className={`
                 flex items-center gap-1.5 whitespace-nowrap shrink-0
                 px-3.5 py-2 rounded-full text-sm font-medium
