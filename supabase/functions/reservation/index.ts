@@ -209,10 +209,9 @@ Deno.serve(async (req) => {
     }
 
     const resp = buildGuestResponse(matched, doorCode, wifiPassword);
-    // Generate a token so the guest can bookmark the direct link
+    // Return with fixed token for bookmarking
     const matchedId = String(matched.id);
-    const directToken = await makeToken(matchedId, tokenSecret);
-    return json({ ...resp, reservationId: matchedId, token: directToken });
+    return json({ ...resp, reservationId: matchedId, token: FIXED_TOKEN });
   } catch (error) {
     console.error("Error:", error);
     return json({ error: String(error) }, 500);
