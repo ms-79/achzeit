@@ -43,7 +43,7 @@ interface Props {
   onNavClick?: (section: string) => void;
 }
 
-const GuestGuideHero = ({ guestData }: Props) => {
+const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
   const { guestName, checkin, checkout } = guestData;
 
   return (
