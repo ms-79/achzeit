@@ -298,6 +298,17 @@ const GuestGuideContent = ({ guestData }: Props) => {
                 </div>
                 <p className="text-sm mt-2">Großer Allgäuer Supermarkt mit breiter Auswahl. Ca. 10 Min. Fahrzeit.</p>
               </a>
+
+              <a href="https://maps.google.com/?q=V-Markt+Sonthofen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">V-Markt</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Sonthofen · Verbrauchermarkt</p>
+                  </div>
+                  <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
+                </div>
+                <p className="text-sm mt-2">Großer Verbrauchermarkt mit riesiger Auswahl – von Lebensmitteln bis Haushalt. Ca. 15 Min. Fahrzeit.</p>
+              </a>
             </div>
 
             <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
