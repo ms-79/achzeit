@@ -438,7 +438,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Familienberg</p>
                 </div>
                 <p className="text-sm mt-2">Der Familienberg: Sommerrodelbahn, kurze Wanderwege und ein tolles Panorama. Ideal mit Kindern.</p>
-                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 15 Min.</span></div>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 9 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Christlessee+Trettachtal" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
