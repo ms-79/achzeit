@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 const BASE_URL =
@@ -15,12 +15,10 @@ function getISOWeek(date: Date): number {
 
 /** Parse a date range string like "24.02. – 02.03.2025" and add days */
 function shiftDateRange(dateRange: string, days: number): string {
-  // Extract the two date parts
   const parts = dateRange.split(/\s*[–\-—]\s*/);
   if (parts.length !== 2) return dateRange;
 
   const endPart = parts[1].trim();
-  // Extract year from end date (always has full year)
   const endMatch = endPart.match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
   if (!endMatch) return dateRange;
   const year = parseInt(endMatch[3], 10);
@@ -32,7 +30,6 @@ function shiftDateRange(dateRange: string, days: number): string {
   const startDate = new Date(Date.UTC(year, parseInt(startMatch[2], 10) - 1, parseInt(startMatch[1], 10)));
   const endDate = new Date(Date.UTC(year, parseInt(endMatch[2], 10) - 1, parseInt(endMatch[1], 10)));
 
-  // Handle year boundary (start in Dec, end in Jan)
   if (startDate > endDate) {
     startDate.setUTCFullYear(year - 1);
   }
@@ -77,70 +74,44 @@ function useCheckPdf(url: string): PdfResult {
   return result;
 }
 
-interface WeekRowProps {
-  kwNumber: number;
-  label: string;
-  /** Date range from the previous (current) week, used as fallback (+7 days) */
-  fallbackFromDateRange?: string | null;
-}
+/** Fullscreen PDF viewer overlay */
+const PdfViewerModal = ({
+  url,
+  title,
+  onClose,
+}: {
+  url: string;
+  title: string;
+  onClose: () => void;
+}) => {
+  const proxyBase = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/check-pdf`;
+  const proxyUrl = `${proxyBase}?url=${encodeURIComponent(url)}`;
+  const viewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(proxyUrl)}`;
 
-const WeekRow = ({ kwNumber, label, fallbackFromDateRange }: WeekRowProps) => {
-  const kwStr = String(kwNumber).padStart(2, '0');
-  const url = `${BASE_URL}${kwStr}.pdf`;
-  const { status, dateRange } = useCheckPdf(url);
-
-  // Determine displayed date range
-  let displayDate: string | null = dateRange;
-  if (!displayDate && fallbackFromDateRange) {
-    displayDate = shiftDateRange(fallbackFromDateRange, 7);
-  }
-
-  if (status === 'loading') {
-    return (
-      <div className="bg-muted rounded-lg p-4 animate-pulse">
-        <div className="h-5 bg-border/50 rounded w-48 mb-1.5" />
-        <div className="h-3 bg-border/50 rounded w-32" />
-      </div>
-    );
-  }
-
-  if (status === 'unavailable') {
-    return (
-      <div className="bg-muted rounded-lg p-4 opacity-60">
-        <h4 className="font-display text-base text-foreground">
-          Wochenprogramm KW {kwStr}
-        </h4>
-        {displayDate && (
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {displayDate} · {label}
-          </p>
-        )}
-        <p className="text-sm text-muted-foreground mt-2 italic">
-          Information noch nicht verfügbar.
-        </p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
 
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors"
-    >
-      <div>
-        <h4 className="font-display text-base text-foreground">
-          Wochenprogramm KW {kwStr}
-        </h4>
-        {displayDate && (
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {displayDate} · {label}
-          </p>
-        )}
+    <div className="fixed inset-0 z-50 flex flex-col bg-background">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted">
+        <h3 className="font-display text-sm text-foreground truncate pr-4">{title}</h3>
+        <button
+          onClick={onClose}
+          className="shrink-0 p-2 rounded-full hover:bg-accent transition-colors"
+          aria-label="Schließen"
+        >
+          <X size={20} className="text-foreground" />
+        </button>
       </div>
-      <ExternalLink size={16} className="text-alpine-wood shrink-0" />
-    </a>
+      <iframe
+        src={viewerUrl}
+        className="flex-1 w-full border-0"
+        title={title}
+        allow="fullscreen"
+      />
+    </div>
   );
 };
 
@@ -149,23 +120,21 @@ const GuestGuideEvents = () => {
   const currentWeek = getISOWeek(now);
   const nextWeek = currentWeek + 1;
 
-  // We need the current week's dateRange to compute fallback for next week.
-  // Use a shared hook at this level.
   const currentKwStr = String(currentWeek).padStart(2, '0');
   const currentUrl = `${BASE_URL}${currentKwStr}.pdf`;
   const currentResult = useCheckPdf(currentUrl);
 
   const nextKwStr = String(nextWeek).padStart(2, '0');
   const nextUrl = `${BASE_URL}${nextKwStr}.pdf`;
-  
   const nextResult = useCheckPdf(nextUrl);
 
-  // Determine displayed dates
   const currentDisplayDate = currentResult.dateRange;
   let nextDisplayDate = nextResult.dateRange;
   if (!nextDisplayDate && currentDisplayDate) {
     nextDisplayDate = shiftDateRange(currentDisplayDate, 7);
   }
+
+  const [viewerState, setViewerState] = useState<{ url: string; title: string } | null>(null);
 
   return (
     <div className="space-y-4">
@@ -173,46 +142,50 @@ const GuestGuideEvents = () => {
         Das aktuelle Wochenprogramm mit Veranstaltungen, Führungen und Kursen in Fischen.
       </p>
       <div className="space-y-3">
-        {/* Current week */}
         <WeekRowDirect
           kwStr={currentKwStr}
           label="Aktuelle Woche"
           status={currentResult.status}
           dateRange={currentDisplayDate}
-          url={currentUrl}
+          onOpen={() => setViewerState({ url: currentUrl, title: `Wochenprogramm KW ${currentKwStr}` })}
         />
-        {/* Next week */}
         <WeekRowDirect
           kwStr={nextKwStr}
           label="Nächste Woche"
           status={nextResult.status}
           dateRange={nextDisplayDate}
-          url={nextUrl}
+          onOpen={() => setViewerState({ url: nextUrl, title: `Wochenprogramm KW ${nextKwStr}` })}
         />
       </div>
       <p className="text-xs text-muted-foreground italic pt-1">
         Quelle: Hörnerdörfer Tourismus · PDF wird wöchentlich aktualisiert.
       </p>
+
+      {viewerState && (
+        <PdfViewerModal
+          url={viewerState.url}
+          title={viewerState.title}
+          onClose={() => setViewerState(null)}
+        />
+      )}
     </div>
   );
 };
 
-/** Presentational row that receives all data – no internal fetch */
+/** Presentational row – click opens inline PDF viewer */
 const WeekRowDirect = ({
   kwStr,
   label,
   status,
   dateRange,
-  url,
+  onOpen,
 }: {
   kwStr: string;
   label: string;
   status: 'loading' | 'available' | 'unavailable';
   dateRange: string | null;
-  url: string;
+  onOpen: () => void;
 }) => {
-  
-
   if (status === 'loading') {
     return (
       <div className="bg-muted rounded-lg p-4 animate-pulse">
@@ -241,11 +214,9 @@ const WeekRowDirect = ({
   }
 
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors"
+    <button
+      onClick={onOpen}
+      className="flex items-center justify-between bg-muted rounded-lg p-4 hover:bg-accent transition-colors w-full text-left"
     >
       <div>
         <h4 className="font-display text-base text-foreground">
@@ -258,7 +229,7 @@ const WeekRowDirect = ({
         )}
       </div>
       <ExternalLink size={16} className="text-alpine-wood shrink-0" />
-    </a>
+    </button>
   );
 };
 
