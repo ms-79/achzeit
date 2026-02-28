@@ -39,14 +39,16 @@ const CarIcon = ({ size = 14 }: { size?: number }) => (
 
 interface Props {
   guestData: GuestData;
+  activeSection: string;
+  onSectionChange: (section: string) => void;
 }
 
-const GuestGuideContent = ({ guestData }: Props) => {
+const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props) => {
   const { boxCode, wifiPassword } = guestData;
 
   return (
     <main className="max-w-3xl mx-auto px-6 py-12 md:py-16">
-      <Accordion type="multiple" defaultValue={['zugang']} className="space-y-4">
+      <Accordion type="single" collapsible value={activeSection} onValueChange={(val) => onSectionChange(val || '')} className="space-y-4">
         {/* Zugang & Anreise */}
         <AccordionItem value="zugang" id="zugang" className="border border-border rounded-lg px-6 overflow-hidden">
           <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
