@@ -1,11 +1,11 @@
 const VALID_TOKEN = "ABC321";
 
-Deno.serve(async (req) => {
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  };
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
 
+Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -29,7 +29,6 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Step 1: Get access token from Hostaway
     const accountId = Deno.env.get("HOSTAWAY_ACCOUNT_ID");
     const apiKey = Deno.env.get("HOSTAWAY_API_KEY");
 
@@ -40,6 +39,7 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Step 1: Get access token
     const tokenBody = new URLSearchParams({
       grant_type: "client_credentials",
       client_id: accountId,
@@ -65,7 +65,6 @@ Deno.serve(async (req) => {
     const accessToken = tokenData.access_token;
 
     // Step 2: Get reservation
-    // Step 2: Get reservation
     const resRes = await fetch(
       `https://api.hostaway.com/v1/reservations/${reservationId}`,
       { headers: { Authorization: `Bearer ${accessToken}` } }
@@ -84,7 +83,7 @@ Deno.serve(async (req) => {
 
     let doorCode = r.doorCode || r.doorSecurityCode || "";
 
-    // Step 3: Fallback – get door code from listing if not on reservation
+    // Step 3: Fallback – get door code from listing
     if (!doorCode) {
       const listingId = r.listingMapId || r.listingId || "463607";
       try {
@@ -96,6 +95,8 @@ Deno.serve(async (req) => {
           const listingData = await listingRes.json();
           const l = listingData.result;
           doorCode = l.doorCode || l.doorSecurityCode || "";
+        } else {
+          await listingRes.text();
         }
       } catch (e) {
         console.error("Failed to fetch listing door code:", e);
@@ -121,7 +122,7 @@ Deno.serve(async (req) => {
     console.error("Error:", error);
     return new Response(
       JSON.stringify({ error: String(error) }),
-      { status: 500, headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" } }
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });
