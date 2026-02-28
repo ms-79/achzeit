@@ -264,7 +264,8 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten. <span className="inline-flex items-center gap-1 text-muted-foreground"><Footprints size={12} /> ca. 6 Min.</span></p>
+                <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><Footprints size={14} strokeWidth={2.5} /> 6 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Bäckerei+Härle+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -275,7 +276,8 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Hier wird noch alles von Hand gemacht – frische Semmeln, Brot und Gebäck. Auch sonntags geöffnet. <span className="inline-flex items-center gap-1 text-muted-foreground"><Footprints size={12} /> ca. 6 Min.</span></p>
+                <p className="text-sm mt-2">Hier wird noch alles von Hand gemacht – frische Semmeln, Brot und Gebäck. Auch sonntags geöffnet.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><Footprints size={14} strokeWidth={2.5} /> 6 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Metzgerei+Hubert+Schmid+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -286,7 +288,8 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Regionale Fleisch- und Wurstwaren vom Allgäuer Metzger. <span className="inline-flex items-center gap-1 text-muted-foreground"><Footprints size={12} /> ca. 12 Min.</span></p>
+                <p className="text-sm mt-2">Regionale Fleisch- und Wurstwaren vom Allgäuer Metzger.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><Footprints size={14} strokeWidth={2.5} /> 12 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Feneberg+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -297,7 +300,8 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Großer Allgäuer Supermarkt mit breiter Auswahl. <span className="inline-flex items-center gap-1 text-muted-foreground"><Car size={12} /> ca. 10 Min.</span></p>
+                <p className="text-sm mt-2">Großer Allgäuer Supermarkt mit breiter Auswahl.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><Car size={14} strokeWidth={2.5} /> 10 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=V-Markt+Fischen+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
@@ -308,7 +312,8 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Großer Verbrauchermarkt mit riesiger Auswahl – von Lebensmitteln bis Haushalt. <span className="inline-flex items-center gap-1 text-muted-foreground"><Car size={12} /> ca. 5 Min.</span></p>
+                <p className="text-sm mt-2">Großer Verbrauchermarkt mit riesiger Auswahl – von Lebensmitteln bis Haushalt.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><Car size={14} strokeWidth={2.5} /> 5 Min.</span></div>
               </a>
 
               <a href="https://maps.google.com/?q=Kur-Apotheke+Färberhaus+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
