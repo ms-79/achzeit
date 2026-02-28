@@ -94,7 +94,7 @@ Deno.serve(async (req) => {
     }
 
     const accessToken = await getHostawayToken(accountId, apiKey);
-    const tokenSecret = apiKey; // use API key as HMAC secret
+    
 
     // ── MODE 1: Direct access via reservationId + token ──
     if (reservationId && token) {
