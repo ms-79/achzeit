@@ -69,7 +69,7 @@ const GuestGuide = () => {
         // Mode 1: Direct access via reservationId + token
         if (reservationId && token) {
           const res = await fetch(
-            `${baseUrl}?slug=${slug}&reservationId=${reservationId}&token=${token}`,
+            `${baseUrl}?reservationId=${reservationId}&token=${token}`,
             { headers: { apikey: anonKey, 'Content-Type': 'application/json' } },
           );
           const body = await res.json();
