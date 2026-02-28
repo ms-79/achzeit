@@ -285,7 +285,7 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Regionale Fleisch- und Wurstwaren vom Allgäuer Metzger.</p>
+                <p className="text-sm mt-2">Regionale Fleisch- und Wurstwaren vom Allgäuer Metzger. Ca. 12 Min. zu Fuß.</p>
               </a>
 
               <a href="https://maps.google.com/?q=Feneberg+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
