@@ -12,6 +12,7 @@ import {
   Trash2,
   AlertTriangle,
   Car,
+  Zap,
   UtensilsCrossed,
   Phone,
   MapPin,
