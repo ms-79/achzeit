@@ -9,6 +9,7 @@ import {
   UtensilsCrossed,
   Mountain,
   Zap,
+  ShoppingCart,
   MessageCircle,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
