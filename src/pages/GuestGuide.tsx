@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import GuestGuideHero from '@/components/guest-guide/GuestGuideHero';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
@@ -25,7 +25,6 @@ type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
 
 const GuestGuide = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
   const [errorMsg, setErrorMsg] = useState('');
@@ -45,7 +44,7 @@ const GuestGuide = () => {
 
     // Persist token in URL so the guest can bookmark/share the direct link
     if (body.reservationId && body.token) {
-      setSearchParams({ reservationId: body.reservationId, token: body.token }, { replace: true });
+      window.history.replaceState(null, '', `${window.location.pathname}?${body.reservationId}.${body.token}`);
     }
 
     setState('loaded');
@@ -54,8 +53,15 @@ const GuestGuide = () => {
   useEffect(() => {
     if (!slug) return;
 
-    const reservationId = searchParams.get('reservationId');
-    const token = searchParams.get('token');
+    // Support format: ?RESID.TOKEN (single query key with dot separator)
+    const rawQuery = window.location.search.replace('?', '');
+    let reservationId: string | null = null;
+    let token: string | null = null;
+    if (rawQuery.includes('.')) {
+      const [id, tok] = rawQuery.split('.', 2);
+      reservationId = id || null;
+      token = tok || null;
+    }
 
     const load = async () => {
       try {
