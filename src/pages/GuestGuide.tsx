@@ -113,12 +113,9 @@ const GuestGuide = () => {
     // Don't switch to full-screen loading – keep PIN form visible
     // so the user sees inline feedback on invalid PIN
 
-    // Wait for warmup to finish (if still running) so the PIN request
-    // hits a warm edge function with a cached Hostaway token
-    if (warmupPromiseRef.current) {
-      await warmupPromiseRef.current;
-      warmupPromiseRef.current = null;
-    }
+    // Don't block on warmup – fire PIN request immediately.
+    // The edge function handles caching internally; waiting for
+    // a potentially slow warmup was causing multi-minute hangs.
 
     try {
       const res = await fetchWithRetry(`${baseUrl}?pin=${pin}`, { headers });
