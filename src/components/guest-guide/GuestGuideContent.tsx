@@ -19,6 +19,7 @@ import {
   Star,
   Mountain,
   ExternalLink,
+  ShoppingCart,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 import GuestGuideEvents from './GuestGuideEvents';
@@ -238,6 +239,69 @@ const GuestGuideContent = ({ guestData }: Props) => {
 
             <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
               <MapPin size={12} /> Alle Restaurants sind in 5–15 Minuten mit dem Auto erreichbar.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+
+        {/* Einkaufen & Versorgung */}
+        <AccordionItem value="einkaufen" id="einkaufen" className="border border-border rounded-lg px-6 overflow-hidden">
+          <AccordionTrigger className="text-lg md:text-xl font-display hover:no-underline">
+            <span className="flex items-center gap-3">
+              <ShoppingCart size={20} className="text-alpine-wood" />
+              Einkaufen & Versorgung
+            </span>
+          </AccordionTrigger>
+          <AccordionContent className="text-muted-foreground leading-relaxed space-y-5">
+            <p className="text-sm">Alles Wichtige für den täglichen Bedarf – direkt in Fischen oder wenige Minuten entfernt.</p>
+
+            <div className="space-y-4">
+              <a href="https://maps.google.com/?q=EDEKA+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">EDEKA</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Fischen · Supermarkt</p>
+                  </div>
+                  <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
+                </div>
+                <p className="text-sm mt-2">Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten. Ca. 3 Min. mit dem Auto.</p>
+              </a>
+
+              <a href="https://maps.google.com/?q=Bäckerei+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">Bäckerei</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Fischen · Frische Backwaren</p>
+                  </div>
+                  <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
+                </div>
+                <p className="text-sm mt-2">Frische Semmeln und Brot – auch sonntags. Direkt im Ortskern.</p>
+              </a>
+
+              <a href="https://maps.google.com/?q=Metzgerei+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">Metzgerei</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Fischen · Fleisch & Wurst</p>
+                  </div>
+                  <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
+                </div>
+                <p className="text-sm mt-2">Regionale Fleisch- und Wurstwaren vom Allgäuer Metzger.</p>
+              </a>
+
+              <a href="https://maps.google.com/?q=Feneberg+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-display text-base text-foreground">Feneberg</h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">Oberstdorf · Supermarkt</p>
+                  </div>
+                  <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
+                </div>
+                <p className="text-sm mt-2">Großer Allgäuer Supermarkt mit breiter Auswahl. Ca. 10 Min. Fahrzeit.</p>
+              </a>
+            </div>
+
+            <p className="text-xs text-muted-foreground italic pt-1 flex items-center gap-1.5">
+              <MapPin size={12} /> Alle Geschäfte sind fußläufig oder in wenigen Minuten mit dem Auto erreichbar.
             </p>
           </AccordionContent>
         </AccordionItem>
