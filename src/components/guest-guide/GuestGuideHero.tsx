@@ -20,6 +20,7 @@ const quickActions = [
   { icon: Wifi, label: 'WLAN', target: 'wlan' },
   { icon: Baby, label: 'Familie', target: 'familie' },
   { icon: Flame, label: 'Sauna & Kamin', target: 'sauna' },
+  { icon: ShoppingCart, label: 'Einkaufen', target: 'einkaufen' },
   { icon: UtensilsCrossed, label: 'Restaurants', target: 'restaurants' },
   { icon: Mountain, label: 'Ausflüge', target: 'ausfluege' },
   { icon: Zap, label: 'E-Auto', target: 'e-auto' },
