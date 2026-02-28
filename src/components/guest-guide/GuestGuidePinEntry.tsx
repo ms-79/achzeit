@@ -47,12 +47,13 @@ const GuestGuidePinEntry = ({ onSubmit }: Props) => {
             pattern="[0-9]*"
             maxLength={4}
             value={pin}
+            disabled={loading}
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, '').slice(0, 4);
               setPin(val);
               setError(false);
             }}
-            className="w-full text-center text-3xl font-mono tracking-[0.5em] bg-muted border border-border rounded-lg py-4 px-6 focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/30"
+            className="w-full text-center text-3xl font-mono tracking-[0.5em] bg-muted border border-border rounded-lg py-4 px-6 focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/30 disabled:opacity-50"
             placeholder="• • • •"
             autoFocus
           />
