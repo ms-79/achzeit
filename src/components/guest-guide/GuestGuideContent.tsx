@@ -269,7 +269,7 @@ const GuestGuideContent = ({ guestData }: Props) => {
               <a href="https://maps.google.com/?q=Bäckerei+Härle+Fischen+im+Allgäu" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h4 className="font-display text-base text-foreground">Bäckerei Härle</h4>
+                    <h4 className="font-display text-base text-foreground">Bäckerei Härle <span className="text-xs font-medium text-alpine-wood">★ Unser Tipp</span></h4>
                     <p className="text-xs text-muted-foreground mt-0.5">Fischen · Traditionelle Handwerksbäckerei</p>
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
