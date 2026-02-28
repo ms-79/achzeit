@@ -18,6 +18,7 @@ import {
   Star,
   Mountain,
   ExternalLink,
+  MessageCircle,
 } from 'lucide-react';
 import type { GuestData } from '@/pages/GuestGuide';
 
