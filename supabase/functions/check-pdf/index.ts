@@ -5,13 +5,10 @@ const corsHeaders = {
 };
 
 /**
- * Attempt to extract a date range like "24.02. – 02.03.2025" or
- * "24.02. - 02.03.2025" from raw PDF text content.
- * Returns the matched string or null.
+ * Extract date-like patterns from raw PDF text.
  */
 function extractDateRange(text: string): string | null {
   // Pattern: dd.mm. – dd.mm.yyyy  or  dd.mm.yyyy – dd.mm.yyyy
-  // Separators: – - —
   const pattern =
     /(\d{1,2}\.\d{1,2}\.(?:\d{4})?)\s*[–\-—]\s*(\d{1,2}\.\d{1,2}\.\d{4})/;
   const match = text.match(pattern);
@@ -27,7 +24,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { url } = await req.json();
+    const { url, debug } = await req.json();
 
     if (!url || typeof url !== 'string') {
       return new Response(
@@ -36,7 +33,6 @@ Deno.serve(async (req) => {
       );
     }
 
-    // First do a HEAD check
     const headRes = await fetch(url, { method: 'HEAD', redirect: 'follow' });
     if (!headRes.ok) {
       return new Response(
@@ -45,22 +41,39 @@ Deno.serve(async (req) => {
       );
     }
 
-    // PDF is available – fetch content and try to extract date range
+    // PDF is available – fetch and extract dates
     let dateRange: string | null = null;
+    let debugSnippets: string[] | undefined;
     try {
       const pdfRes = await fetch(url, { redirect: 'follow' });
       if (pdfRes.ok) {
         const buf = await pdfRes.arrayBuffer();
-        // Convert raw bytes to latin1 string to find readable text in PDF
         const raw = new TextDecoder('latin1').decode(buf);
+
+        // If debug mode, collect all date-like patterns
+        if (debug) {
+          const datePatterns = raw.match(/\d{1,2}\.\d{1,2}\.\s*[-–—]?\s*\d{0,2}\.?\d{0,2}\.?\d{0,4}/g);
+          // Also grab text around "KW" or "Woche" or month names
+          const kwPatterns = raw.match(/.{0,40}(KW|Woche|Februar|März|Januar|April|Mai).{0,40}/gi);
+          debugSnippets = [
+            ...(datePatterns || []).slice(0, 10),
+            ...(kwPatterns || []).slice(0, 10),
+          ];
+        }
+
         dateRange = extractDateRange(raw);
       }
     } catch {
-      // Extraction failure is non-critical; we still know the PDF exists
+      // non-critical
+    }
+
+    const result: Record<string, unknown> = { available: true, status: 200, dateRange };
+    if (debug && debugSnippets) {
+      result.debugSnippets = debugSnippets;
     }
 
     return new Response(
-      JSON.stringify({ available: true, status: 200, dateRange }),
+      JSON.stringify(result),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   } catch (error) {
