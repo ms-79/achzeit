@@ -223,6 +223,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   </span>
                 </div>
                 <p className="text-sm mt-2">Zwei Konzepte unter einem Dach – gehobene Küche und entspannte Genusswirtschaft. Perfekt für einen besonderen Abend.</p>
+                <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
               </a>
 
               {/* Alte Sennküche */}
