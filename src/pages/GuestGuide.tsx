@@ -40,6 +40,7 @@ const GuestGuide = () => {
   const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
   const [errorMsg, setErrorMsg] = useState('');
+  const [activeSection, setActiveSection] = useState('zugang');
 
   // Store the preloaded warmup promise so the PIN submit can await it
   const warmupPromiseRef = useRef<Promise<void> | null>(null);
@@ -179,11 +180,22 @@ const GuestGuide = () => {
     return <GuestGuidePinEntry onSubmit={handlePinSubmit} />;
   }
 
+  const handleNavClick = (section: string) => {
+    setActiveSection(section);
+    setTimeout(() => {
+      const el = document.getElementById(section);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 56 - 12;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <GuestGuideHero guestData={guestData} />
-      <GuestGuideStickyNav />
-      <GuestGuideContent guestData={guestData} />
+      <GuestGuideStickyNav activeSection={activeSection} onNavClick={handleNavClick} />
+      <GuestGuideContent guestData={guestData} activeSection={activeSection} onSectionChange={setActiveSection} />
 
       {/* Footer */}
       <div className="max-w-3xl mx-auto px-6 text-center mt-16 pb-12 pt-8 border-t border-border">
