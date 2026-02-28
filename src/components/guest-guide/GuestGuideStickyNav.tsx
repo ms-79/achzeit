@@ -10,6 +10,7 @@ import {
   Mountain,
   Zap,
   ShoppingCart,
+  HelpCircle,
 } from 'lucide-react';
 
 const navItems = [
