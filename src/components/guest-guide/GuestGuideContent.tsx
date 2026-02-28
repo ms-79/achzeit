@@ -297,7 +297,7 @@ const GuestGuideContent = ({ guestData }: Props) => {
                   </div>
                   <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-1" />
                 </div>
-                <p className="text-sm mt-2">Großer Allgäuer Supermarkt mit breiter Auswahl. Ca. 10 Min. Fahrzeit.</p>
+                <p className="text-sm mt-2">Großer Allgäuer Supermarkt mit breiter Auswahl. <span className="inline-flex items-center gap-1 text-muted-foreground"><Car size={12} /> ca. 10 Min.</span></p>
               </a>
 
               <a href="https://maps.google.com/?q=V-Markt+Fischen+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
