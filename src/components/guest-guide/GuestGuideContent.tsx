@@ -208,6 +208,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   </span>
                 </div>
                 <p className="text-sm mt-2">Traditionelle Allgäuer Gastlichkeit mit modernen Akzenten. Regionale Küche mit besten Zutaten aus der Heimat – gemütlich und herzlich.</p>
+                <div className="flex justify-end mt-2 gap-3"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><WalkingIcon size={14} /> 10 Min.</span><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 3 Min.</span></div>
               </a>
 
               {/* Ondersch */}
