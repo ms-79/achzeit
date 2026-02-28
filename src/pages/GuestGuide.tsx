@@ -9,6 +9,7 @@ export interface GuestData {
   checkin: string;
   checkout: string;
   boxCode: string;
+  wifiPassword: string;
 }
 
 const FALLBACK_DATA: GuestData = {
@@ -16,6 +17,7 @@ const FALLBACK_DATA: GuestData = {
   checkin: '',
   checkout: '',
   boxCode: '– – – –',
+  wifiPassword: '',
 };
 
 const parseToken = (t: string | null): { reservationId: string; token: string } | null => {
@@ -65,6 +67,7 @@ const GuestGuide = () => {
           checkin: result.checkin || '',
           checkout: result.checkout || '',
           boxCode: result.doorCode || '– – – –',
+          wifiPassword: result.wifiPassword || '',
         });
       } catch (err: any) {
         console.error('Failed to fetch reservation:', err);

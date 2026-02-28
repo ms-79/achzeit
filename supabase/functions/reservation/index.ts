@@ -82,25 +82,27 @@ Deno.serve(async (req) => {
     const r = resData.result;
 
     let doorCode = r.doorCode || r.doorSecurityCode || "";
+    let wifiPassword = "";
 
-    // Step 3: Fallback – get door code from listing
-    if (!doorCode) {
-      const listingId = r.listingMapId || r.listingId || "463607";
-      try {
-        const listingRes = await fetch(
-          `https://api.hostaway.com/v1/listings/${listingId}`,
-          { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
-        if (listingRes.ok) {
-          const listingData = await listingRes.json();
-          const l = listingData.result;
+    // Step 3: Fetch listing for door code fallback and wifi password
+    const listingId = r.listingMapId || r.listingId || "463607";
+    try {
+      const listingRes = await fetch(
+        `https://api.hostaway.com/v1/listings/${listingId}`,
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+      if (listingRes.ok) {
+        const listingData = await listingRes.json();
+        const l = listingData.result;
+        if (!doorCode) {
           doorCode = l.doorCode || l.doorSecurityCode || "";
-        } else {
-          await listingRes.text();
         }
-      } catch (e) {
-        console.error("Failed to fetch listing door code:", e);
+        wifiPassword = l.wifiPassword || "";
+      } else {
+        await listingRes.text();
       }
+    } catch (e) {
+      console.error("Failed to fetch listing:", e);
     }
 
     const guestName = r.guestName ||
@@ -113,6 +115,7 @@ Deno.serve(async (req) => {
       checkout: r.departureDate || "",
       numberOfGuests: r.numberOfGuests || 0,
       doorCode,
+      wifiPassword,
     };
 
     return new Response(JSON.stringify(guideData), {

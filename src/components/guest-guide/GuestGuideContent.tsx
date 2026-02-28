@@ -26,7 +26,7 @@ interface Props {
 }
 
 const GuestGuideContent = ({ guestData }: Props) => {
-  const { boxCode } = guestData;
+  const { boxCode, wifiPassword } = guestData;
 
   return (
     <main className="max-w-3xl mx-auto px-6 py-12 md:py-16">
@@ -73,11 +73,16 @@ const GuestGuideContent = ({ guestData }: Props) => {
             </span>
           </AccordionTrigger>
           <AccordionContent className="text-muted-foreground leading-relaxed space-y-4">
-            <div className="bg-muted rounded-lg p-4">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Netzwerkname</p>
-              <p className="text-lg font-mono font-bold text-foreground">ACHZEIT_WLAN</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="bg-muted rounded-lg p-4">
+                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Netzwerkname</p>
+                <p className="text-lg font-mono font-bold text-foreground">ACHZEIT</p>
+              </div>
+              <div className="bg-muted rounded-lg p-4">
+                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Passwort</p>
+                <p className="text-lg font-mono font-bold text-foreground">{wifiPassword || '– – – –'}</p>
+              </div>
             </div>
-            <p className="text-sm">Das Passwort findet ihr auf dem Aufsteller im Wohnbereich.</p>
             <div className="pt-2">
               <h4 className="font-display text-base text-foreground mb-2">Bei Verbindungsproblemen</h4>
               <ul className="space-y-1 text-sm">
