@@ -60,24 +60,24 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           transition={{ duration: 0.6 }}
         />
 
+        <motion.h1
+          className="font-display text-4xl md:text-5xl lg:text-6xl mb-3"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+        >
+          {t.welcome[locale]} {guestName}
+        </motion.h1>
+
         {/* Premium tagline */}
         <motion.p
           className="text-sm md:text-base tracking-[0.3em] uppercase text-alpine-snow/50 mb-6 font-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.05 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
         >
           {t.heroTagline[locale]}
         </motion.p>
-
-        <motion.h1
-          className="font-display text-4xl md:text-5xl lg:text-6xl mb-3"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          {t.welcome[locale]} {guestName}
-        </motion.h1>
 
 
         {checkin && checkout && (
