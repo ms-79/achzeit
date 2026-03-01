@@ -43,6 +43,8 @@ interface GuestGuideChatbotProps {
 }
 
 const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
+  const { locale } = useGuestGuideLocale();
+  const t = translations;
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
