@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+
 import { MessageCircle, ArrowUp, Mic } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
@@ -32,7 +33,19 @@ const SUGGESTIONS = [
   'WLAN Passwort?',
 ];
 
-const GuestGuideChatbot = () => {
+export interface ChatGuestData {
+  wifiPassword: string;
+  boxCode: string;
+  guestName: string;
+  checkin?: string;
+  checkout?: string;
+}
+
+interface GuestGuideChatbotProps {
+  guestData: ChatGuestData;
+}
+
+const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
@@ -106,7 +119,14 @@ const GuestGuideChatbot = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
-        body: JSON.stringify({ messages: allMessages }),
+        body: JSON.stringify({
+          messages: allMessages,
+          context: {
+            wifiPassword: guestData.wifiPassword,
+            boxCode: guestData.boxCode,
+            guestName: guestData.guestName,
+          },
+        }),
       });
 
       if (!resp.ok || !resp.body) throw new Error('Stream failed');

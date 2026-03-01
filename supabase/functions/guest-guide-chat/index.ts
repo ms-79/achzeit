@@ -24,7 +24,7 @@ ANREISE & ZUGANG:
 
 WLAN:
 - Netzwerkname: ACHZEIT
-- Passwort wird dem Gast mitgeteilt
+- Passwort: siehe individuelle Gästedaten unten (falls vorhanden)
 - Router im Technikschrank
 - Bei Problemen: Kurz vom Strom trennen (30 Sek.) und neu verbinden
 
@@ -122,8 +122,17 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { messages } = await req.json();
+    const { messages, context } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+
+    // Build dynamic context from guest data
+    let guestContext = '';
+    if (context?.wifiPassword) guestContext += `\nDas WLAN-Passwort für diesen Gast lautet: **${context.wifiPassword}**`;
+    if (context?.boxCode) guestContext += `\nDer Schlüsselbox-Code für diesen Gast lautet: **${context.boxCode}**`;
+    if (context?.guestName) guestContext += `\nDer Gast heißt: ${context.guestName}`;
+
+    const systemMessage = SYSTEM_PROMPT + (guestContext ? `\n\nINDIVIDUELLE GÄSTEDATEN:${guestContext}` : '');
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -135,7 +144,7 @@ serve(async (req) => {
       body: JSON.stringify({
         model: "google/gemini-3-flash-preview",
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
+          { role: "system", content: systemMessage },
           ...messages,
         ],
         stream: true,

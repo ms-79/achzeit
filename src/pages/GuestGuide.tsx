@@ -7,6 +7,7 @@ import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
 import GuestGuidePinEntry from '@/components/guest-guide/GuestGuidePinEntry';
 import GuestGuideChatbot from '@/components/guest-guide/GuestGuideChatbot';
 
+
 export interface GuestData {
   guestName: string;
   checkin: string;
@@ -199,7 +200,7 @@ const GuestGuide = () => {
       <GuestGuideContent guestData={guestData} activeSection={activeSection} onSectionChange={setActiveSection} />
 
       {/* Chatbot */}
-      <GuestGuideChatbot />
+      <GuestGuideChatbot guestData={guestData} />
 
       {/* Footer */}
       <div className="max-w-3xl mx-auto px-6 text-center mt-16 pb-12 pt-8 border-t border-border">
