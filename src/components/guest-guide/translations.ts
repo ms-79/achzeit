@@ -56,7 +56,6 @@ export const translations = {
     'Ravi de vous avoir ici. Vous trouverez toutes les informations importantes pour un séjour relaxant à l\'ACHZEIT Family Retreat.',
     'Fijn dat jullie er zijn. Hier vinden jullie alle belangrijke informatie voor een ontspannen verblijf in ACHZEIT Family Retreat.',
   ),
-  heroConciergeTagline: t('Eure ACHZEIT beginnt hier.', 'Your ACHZEIT starts here.', 'Vuestra ACHZEIT comienza aquí.', 'La vostra ACHZEIT inizia qui.', 'Votre ACHZEIT commence ici.', 'Jullie ACHZEIT begint hier.'),
   stay: t('Aufenthalt', 'Stay', 'Estancia', 'Soggiorno', 'Séjour', 'Verblijf'),
   whatsappCta: t(
     'Fragen? Schreibt uns per WhatsApp',
