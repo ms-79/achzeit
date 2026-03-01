@@ -71,13 +71,22 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
         </motion.p>
 
         <motion.h1
-          className="font-display text-4xl md:text-5xl lg:text-6xl mb-3"
+          className="font-display text-4xl md:text-5xl lg:text-6xl mb-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           {t.welcome[locale]} {guestName}
         </motion.h1>
+
+        <motion.p
+          className="font-display text-xl md:text-2xl lg:text-3xl text-alpine-snow/60 mb-6 italic"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {t.heroConciergeTagline[locale]}
+        </motion.p>
 
 
         {checkin && checkout && (
