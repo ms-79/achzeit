@@ -195,7 +195,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
       <button
         onClick={() => setOpen(true)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 bg-foreground text-background hover:scale-105"
-        aria-label="Fragen? Chat öffnen"
+        aria-label={t.chatOpenLabel[locale]}
       >
         <MessageCircle size={22} />
       </button>
