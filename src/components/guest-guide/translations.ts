@@ -621,7 +621,7 @@ export const translations = {
   micStop: t('Aufnahme stoppen', 'Stop recording', 'Detener grabación', 'Interrompi registrazione', 'Arrêter l\'enregistrement', 'Opname stoppen'),
 
   // Footer
-  footerText: t('Eure Gästemappe · ACHZEIT im Allgäu', 'Your Guest Guide · ACHZEIT in the Allgäu', 'Tu guía del huésped · ACHZEIT en Allgäu', 'La tua guida ospiti · ACHZEIT in Allgäu', 'Votre guide · ACHZEIT dans l\'Allgäu', 'Jullie gastenboek · ACHZEIT in de Allgäu'),
+  footerText: t('Eure Gästemappe · ACHZEIT Family Retreat. Fischen im Allgäu.', 'Your Guest Guide · ACHZEIT Family Retreat. Fischen im Allgäu.', 'Tu guía del huésped · ACHZEIT Family Retreat. Fischen im Allgäu.', 'La tua guida ospiti · ACHZEIT Family Retreat. Fischen im Allgäu.', 'Votre guide · ACHZEIT Family Retreat. Fischen im Allgäu.', 'Jullie gastenboek · ACHZEIT Family Retreat. Fischen im Allgäu.'),
 
   // Status screens
   noReservationTitle: t('Aktuell kein aktiver Aufenthalt', 'No Active Stay', 'Sin estancia activa', 'Nessun soggiorno attivo', 'Pas de séjour actif', 'Geen actief verblijf'),
