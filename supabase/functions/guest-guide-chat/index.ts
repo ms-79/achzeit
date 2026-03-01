@@ -101,9 +101,14 @@ E-AUTO LADESTATIONEN:
 
 CHECK-OUT:
 - Check-out bis 11:00 Uhr
-- Müll nach draußen bringen
-- Geschirrspüler starten
-- Gästekarten auf dem Tisch liegen lassen
+- Spülmaschine anmachen
+- Gelber Sack in die mit gelbem Symbol markierte Tonne im Keller
+- Restmüll, Altpapier und Biomüll in die Tonnen vor der Haustür
+- Alle Lichter ausschalten
+- Fenster schließen
+- Heizung auf normale Temperatur stellen
+- Benutzte Handtücher im Bad auf den Boden oder in die Badewanne
+- Falls physische Gästekarten erhalten, diese auf den Tisch legen
 - Schlüssel zurück in die Schlüsselbox
 
 NOTFALL:
