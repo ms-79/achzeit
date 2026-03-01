@@ -295,7 +295,7 @@ export const translations = {
     'Tout le nécessaire au quotidien – à Fischen ou à quelques minutes.',
     'Alles voor de dagelijkse boodschappen – in Fischen of op een paar minuten afstand.',
   ),
-  edeka Desc: t('Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten.', 'Full-range supermarket in the village. Well-stocked with regional products.', 'Supermercado completo en el pueblo. Bien surtido con productos regionales.', 'Supermercato completo nel paese. Ben fornito con prodotti regionali.', 'Supermarché complet au village. Bien approvisionné en produits régionaux.', 'Volledig assortiment in het dorp. Goed gesorteerd met regionale producten.'),
+  edekaDesc: t('Vollsortiment direkt im Ort. Gut sortiert mit regionalen Produkten.', 'Full-range supermarket in the village. Well-stocked with regional products.', 'Supermercado completo en el pueblo. Bien surtido con productos regionales.', 'Supermercato completo nel paese. Ben fornito con prodotti regionali.', 'Supermarché complet au village. Bien approvisionné en produits régionaux.', 'Volledig assortiment in het dorp. Goed gesorteerd met regionale producten.'),
   haerleDesc: t(
     'Hier wird noch alles von Hand gemacht – frische Semmeln, Brot und Gebäck. Auch sonntags geöffnet.',
     'Everything still handmade – fresh rolls, bread and pastries. Also open on Sundays.',
