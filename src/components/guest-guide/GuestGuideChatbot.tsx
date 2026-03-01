@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
 import { useGuestGuideLocale } from './GuestGuideLanguageContext';
 import { translations } from './translations';
+import whatsappButtonImg from '@/assets/whatsapp-button.png';
 
 interface ISpeechRecognition extends EventTarget {
   lang: string;
@@ -215,7 +216,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
 
       // Append WhatsApp escalation if keywords detected
       if (needsEscalation) {
-        const escalationText = `\n\n---\n\n${t.whatsappEscalation[locale]}\n\n[![WhatsApp](https://img.shields.io/badge/WhatsApp-%2325D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/4915679656368)  \n[📲 **${t.whatsappOpen[locale]}**](https://wa.me/4915679656368)`;
+        const escalationText = `\n\n---\n\n${t.whatsappEscalation[locale]}\n\n[![WhatsApp Chat](whatsapp-btn)](https://wa.me/4915679656368)`;
         setMessages((prev) => {
           const last = prev[prev.length - 1];
           if (last?.role === 'assistant') {
@@ -325,6 +326,12 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                                 {children}
                               </a>
                             ),
+                            img: ({ src, alt }) => {
+                              if (src === 'whatsapp-btn') {
+                                return <img src={whatsappButtonImg} alt={alt || 'WhatsApp'} className="mt-4 h-12 rounded-lg inline-block" />;
+                              }
+                              return <img src={src} alt={alt} />;
+                            },
                           }}
                         >
                           {msg.content}
