@@ -536,10 +536,15 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
           <AccordionContent className="text-muted-foreground leading-relaxed space-y-4">
             <p>Check-out bis <strong className="text-foreground">11:00 Uhr</strong>.</p>
             <ul className="space-y-2 text-sm">
-              <li>• Müll nach draußen bringen</li>
-              <li>• Geschirrspüler starten</li>
-              <li>• Gästekarten auf dem Tisch liegen lassen</li>
-              <li>• Schlüssel zurück in die Schlüsselbox hängen</li>
+              <li>• Spülmaschine anmachen</li>
+              <li>• Gelber Sack in die mit gelbem Symbol markierte Tonne im Keller</li>
+              <li>• Restmüll, Altpapier und Biomüll in die Tonnen vor der Haustür</li>
+              <li>• Alle Lichter ausschalten</li>
+              <li>• Fenster schließen</li>
+              <li>• Heizung auf normale Temperatur stellen</li>
+              <li>• Benutzte Handtücher im Bad auf den Boden oder in die Badewanne</li>
+              <li>• Falls physische Gästekarten erhalten, diese auf den Tisch legen</li>
+              <li>• Schlüssel zurück in die Schlüsselbox</li>
             </ul>
             <p className="text-sm italic text-muted-foreground pt-2">
               Vielen Dank für euren Aufenthalt im ACHZEIT.
