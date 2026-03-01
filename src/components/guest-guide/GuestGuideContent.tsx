@@ -104,7 +104,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
             <div className="pt-2">
               <h4 className="font-display text-base text-foreground mb-2">Bei Verbindungsproblemen</h4>
               <ul className="space-y-1 text-sm">
-                <li>• Router befindet sich im Technikschrank.</li>
+                <li>• Der Router befindet sich im Keller unter der Treppe.</li>
                 <li>• Kurz vom Strom trennen (30 Sekunden) und neu verbinden.</li>
               </ul>
             </div>
@@ -121,10 +121,9 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
           </AccordionTrigger>
           <AccordionContent className="text-muted-foreground leading-relaxed space-y-4">
             <ul className="space-y-2 text-sm">
-              <li>• Babybett (im Abstellraum)</li>
-              <li>• Wickelunterlage im Badezimmerschrank</li>
-              <li>• Rausfallschutz verfügbar</li>
-              <li>• Hochstuhl in der Küche</li>
+              <li>• Babybett und Hochstuhl stehen im Keller unter der Treppe</li>
+              <li>• Wickelunterlage im Schrank im Kinderzimmer – bitte Handtuch unterlegen</li>
+              <li>• Rausfallschutz im Kinderzimmer in der Schublade unter dem Etagenbett</li>
               <li>• Kindergeschirr in der unteren Küchenschublade</li>
               <li>• Spiele & Bücher im Wohnbereich</li>
             </ul>

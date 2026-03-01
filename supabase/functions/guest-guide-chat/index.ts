@@ -25,14 +25,13 @@ ANREISE & ZUGANG:
 WLAN:
 - Netzwerkname: ACHZEIT
 - Passwort: siehe individuelle Gästedaten unten (falls vorhanden)
-- Router im Technikschrank
+- Router im Keller unter der Treppe
 - Bei Problemen: Kurz vom Strom trennen (30 Sek.) und neu verbinden
 
 FAMILIE:
-- Babybett (im Abstellraum)
-- Wickelunterlage im Badezimmerschrank
-- Rausfallschutz verfügbar
-- Hochstuhl in der Küche
+- Babybett und Hochstuhl im Keller unter der Treppe
+- Wickelunterlage im Schrank im Kinderzimmer (bitte Handtuch unterlegen)
+- Rausfallschutz im Kinderzimmer in der Schublade unter dem Etagenbett
 - Kindergeschirr in der unteren Küchenschublade
 - Spiele & Bücher im Wohnbereich
 
