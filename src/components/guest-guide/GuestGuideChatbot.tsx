@@ -3,6 +3,8 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { MessageCircle, ArrowUp, Mic } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
+import { useGuestGuideLocale } from './GuestGuideLanguageContext';
+import { translations } from './translations';
 
 interface ISpeechRecognition extends EventTarget {
   lang: string;
