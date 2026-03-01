@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import {
   Key, Wifi, Baby, Flame, Trash2, AlertTriangle,
-  UtensilsCrossed, Mountain, Zap, ShoppingCart, MessageCircle,
+  UtensilsCrossed, Mountain, Zap, ShoppingCart,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import type { GuestData } from '@/pages/GuestGuide';
@@ -44,7 +44,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
   };
 
   return (
-    <section className="relative bg-alpine-charcoal text-alpine-snow py-16 md:py-24 px-6">
+    <section className="relative bg-gradient-to-b from-alpine-charcoal via-alpine-charcoal to-alpine-charcoal/95 text-alpine-snow py-16 md:py-24 px-6">
       {/* Language Toggle - top right */}
       <div className="absolute top-4 right-4 z-10">
         <GuestGuideLanguageToggle />
@@ -59,6 +59,16 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           animate={{ opacity: 0.8, y: 0 }}
           transition={{ duration: 0.6 }}
         />
+
+        {/* Premium tagline */}
+        <motion.p
+          className="text-sm md:text-base tracking-[0.3em] uppercase text-alpine-snow/50 mb-6 font-light"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.05 }}
+        >
+          {t.heroTagline[locale]}
+        </motion.p>
 
         <motion.h1
           className="font-display text-4xl md:text-5xl lg:text-6xl mb-3"
@@ -80,12 +90,12 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
 
         {checkin && checkout && (
           <motion.div
-            className="inline-block bg-alpine-snow/10 backdrop-blur-sm rounded-lg px-6 py-3 mb-8"
+            className="inline-block bg-alpine-snow/8 backdrop-blur-sm rounded-xl px-6 py-3 mb-8 border border-alpine-snow/10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <p className="text-sm text-alpine-snow/60 uppercase tracking-widest mb-1">{t.stay[locale]}</p>
+            <p className="text-sm text-alpine-snow/50 uppercase tracking-widest mb-1">{t.stay[locale]}</p>
             <p className="text-alpine-snow/90 font-medium">
               {formatDate(checkin)} – {formatDate(checkout)}
             </p>
@@ -93,12 +103,22 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
         )}
 
         <motion.p
-          className="text-alpine-snow/60 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-10"
+          className="text-alpine-snow/60 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           {t.heroIntro[locale]}
+        </motion.p>
+
+        {/* Concierge hint – subtle, no button */}
+        <motion.p
+          className="text-alpine-snow/40 max-w-md mx-auto text-xs md:text-sm leading-relaxed mb-12 italic"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+        >
+          {t.heroConciergeHint[locale]}
         </motion.p>
 
         {/* Quick Actions */}
@@ -112,30 +132,12 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
             <button
               key={action.target}
               onClick={() => onNavClick?.(action.target)}
-              className="flex items-center gap-2 bg-alpine-snow/10 hover:bg-alpine-snow/20 text-alpine-snow/80 hover:text-alpine-snow px-4 py-2.5 rounded-lg text-sm transition-all duration-200"
+              className="flex items-center gap-2 bg-alpine-snow/8 hover:bg-alpine-snow/15 text-alpine-snow/70 hover:text-alpine-snow px-4 py-2.5 rounded-xl text-sm transition-all duration-200 border border-alpine-snow/8 hover:border-alpine-snow/20"
             >
               <action.icon size={16} />
               <span>{action.label}</span>
             </button>
           ))}
-        </motion.div>
-
-        {/* WhatsApp Button */}
-        <motion.div
-          className="mt-8"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <a
-            href="https://wa.me/4915679656368"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe57] text-white font-medium px-6 py-3.5 rounded-lg transition-colors duration-200"
-          >
-            <MessageCircle size={20} />
-            <span>{t.whatsappCta[locale]}</span>
-          </a>
         </motion.div>
       </div>
     </section>

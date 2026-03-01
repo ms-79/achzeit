@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-import { MessageCircle, ArrowUp, Mic } from 'lucide-react';
+import { MessageCircle, ArrowUp, Mic, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
 import { useGuestGuideLocale } from './GuestGuideLanguageContext';
@@ -28,7 +28,14 @@ type Msg = { role: 'user' | 'assistant'; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/guest-guide-chat`;
 
-const SUGGESTIONS_KEYS = ['sauna', 'supermarket', 'fireplace', 'wifi'] as const;
+const QUICK_BUTTONS_KEYS = ['wifi', 'zugang', 'checkout'] as const;
+const QUICK_BUTTONS_MAP: Record<typeof QUICK_BUTTONS_KEYS[number], keyof typeof translations.chatSuggestions> = {
+  wifi: 'wifi',
+  zugang: 'fireplace', // we'll use actual translations below
+  checkout: 'supermarket',
+};
+
+const ESCALATION_KEYWORDS = ['problem', 'geht nicht', 'hilfe', 'notfall', 'help', 'emergency', 'broken', 'not working', 'ayuda', 'emergencia', 'aiuto', 'aide', 'urgence', 'noodgeval'];
 
 export interface ChatGuestData {
   wifiPassword: string;
@@ -50,9 +57,12 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
+  const [showPulse, setShowPulse] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
+  const autoOpenRef = useRef(false);
 
   const stopListening = useCallback(() => {
     recognitionRef.current?.stop();
@@ -83,8 +93,30 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
     setIsListening(true);
   }, []);
 
+  // Auto-open on first visit with greeting
+  useEffect(() => {
+    if (autoOpenRef.current) return;
+    autoOpenRef.current = true;
+    const visited = sessionStorage.getItem('achzeit-concierge-opened');
+    if (!visited) {
+      const timer = setTimeout(() => {
+        setOpen(true);
+        setHasOpened(true);
+        setShowPulse(false);
+        sessionStorage.setItem('achzeit-concierge-opened', '1');
+        // Add greeting message
+        setMessages([{ role: 'assistant', content: t.conciergeGreeting[locale] }]);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [locale, t]);
+
   useEffect(() => {
     if (open && textareaRef.current) textareaRef.current.focus();
+    if (open) {
+      setShowPulse(false);
+      setHasOpened(true);
+    }
   }, [open]);
 
   useEffect(() => {
@@ -101,6 +133,12 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
     el.style.height = Math.min(el.scrollHeight, 150) + 'px';
   }, [input]);
 
+  // Check for escalation keywords in user message
+  const shouldShowEscalation = (text: string) => {
+    const lower = text.toLowerCase();
+    return ESCALATION_KEYWORDS.some((kw) => lower.includes(kw));
+  };
+
   const send = async (text: string) => {
     if (!text.trim() || isLoading) return;
     const userMsg: Msg = { role: 'user', content: text.trim() };
@@ -108,6 +146,9 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
     setMessages(allMessages);
     setInput('');
     setIsLoading(true);
+
+    // Check for escalation
+    const needsEscalation = shouldShowEscalation(text);
 
     let assistantSoFar = '';
 
@@ -171,6 +212,18 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
           }
         }
       }
+
+      // Append WhatsApp escalation if keywords detected
+      if (needsEscalation) {
+        const escalationText = `\n\n---\n\n${t.whatsappEscalation[locale]}\n\n[${t.whatsappOpen[locale]}](https://wa.me/4915679656368)`;
+        setMessages((prev) => {
+          const last = prev[prev.length - 1];
+          if (last?.role === 'assistant') {
+            return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: m.content + escalationText } : m));
+          }
+          return prev;
+        });
+      }
     } catch (e) {
       console.error('Chat error:', e);
       setMessages((prev) => [
@@ -189,12 +242,21 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
     }
   };
 
+  // Quick button labels for the greeting
+  const quickButtons = [
+    { label: t.navWlan[locale], query: t.chatSuggestions.wifi[locale] },
+    { label: t.navZugang[locale], query: t.chatSuggestions.fireplace[locale].includes('Kamin') ? `Wie komme ich ins Haus?` : `How do I access the house?` },
+    { label: t.navCheckout[locale], query: locale === 'de' ? 'Was muss ich beim Check-out beachten?' : locale === 'en' ? 'What should I know about check-out?' : locale === 'es' ? '¿Qué debo saber sobre el check-out?' : locale === 'it' ? 'Cosa devo sapere sul check-out?' : locale === 'fr' ? 'Que dois-je savoir sur le check-out ?' : 'Wat moet ik weten over de check-out?' },
+  ];
+
   return (
     <>
       {/* Floating button */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 bg-foreground text-background hover:scale-105"
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-elevated flex items-center justify-center transition-all duration-300 bg-foreground text-background hover:scale-105 ${
+          showPulse ? 'animate-[pulse_2s_ease-in-out_3]' : ''
+        }`}
         aria-label={t.chatOpenLabel[locale]}
       >
         <MessageCircle size={22} />
@@ -206,7 +268,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
           <DialogTitle className="sr-only">ACHZEIT Concierge</DialogTitle>
 
           {/* Header – minimal */}
-          <div className="px-5 py-3.5 border-b border-border/40 shrink-0">
+          <div className="px-5 py-3.5 border-b border-border/40 shrink-0 flex items-center justify-between">
             <p className="text-sm font-medium text-foreground">{t.chatTitle[locale]}</p>
           </div>
 
@@ -217,7 +279,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                 <div className="pt-6 pb-2 space-y-5">
                   <p className="text-base text-muted-foreground text-center">{t.chatWelcome[locale]}</p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    {SUGGESTIONS_KEYS.map((key) => (
+                    {(['sauna', 'supermarket', 'fireplace', 'wifi'] as const).map((key) => (
                       <button
                         key={key}
                         onClick={() => send(t.chatSuggestions[key][locale])}
@@ -227,6 +289,21 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                       </button>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* Show quick buttons after greeting (first auto-open) */}
+              {messages.length === 1 && messages[0].role === 'assistant' && (
+                <div className="flex flex-wrap justify-center gap-2 pt-2">
+                  {quickButtons.map((btn) => (
+                    <button
+                      key={btn.label}
+                      onClick={() => send(btn.query)}
+                      className="text-xs font-medium text-foreground/80 hover:text-foreground px-4 py-2 rounded-full border border-border hover:border-foreground/30 hover:bg-muted/50 transition-all"
+                    >
+                      {btn.label}
+                    </button>
+                  ))}
                 </div>
               )}
 
