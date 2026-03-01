@@ -17,7 +17,7 @@ FORMATIERUNG:
 
 ANREISE & ZUGANG:
 - Check-in ab 16:00 Uhr
-- Schlüssel in der Schlüsselbox (Code wird dem Gast mitgeteilt)
+- Schlüssel in der Schlüsselbox (Code: siehe individuelle Gästedaten unten, falls vorhanden)
 - Schlüssel nach Entnahme wieder sicher verschließen
 - Beim Check-out Schlüssel zurück in die Box und Code verdrehen
 - Carport direkt am Haus
