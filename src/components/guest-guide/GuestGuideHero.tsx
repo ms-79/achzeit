@@ -71,7 +71,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
 
         {/* Premium tagline */}
         <motion.p
-          className="text-sm md:text-base tracking-[0.3em] uppercase text-alpine-snow/50 mb-6 font-light"
+          className="text-sm md:text-base tracking-[0.3em] uppercase text-alpine-snow/50 mt-4 mb-8 font-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
