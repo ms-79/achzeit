@@ -173,6 +173,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
             <div>
               <h4 className="font-display text-base text-foreground mb-2">Kamin</h4>
               <ul className="space-y-1 text-sm">
+                <li>• Starterset mit Anzünder, Anfeuerholz und Holz als Erstausstattung vorhanden.</li>
                 <li>• Nur trockenes Holz verwenden.</li>
                 <li>• Asche erst vollständig abgekühlt entsorgen.</li>
               </ul>
