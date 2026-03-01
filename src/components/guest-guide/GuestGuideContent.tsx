@@ -121,10 +121,9 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
           </AccordionTrigger>
           <AccordionContent className="text-muted-foreground leading-relaxed space-y-4">
             <ul className="space-y-2 text-sm">
-              <li>• Babybett (im Abstellraum)</li>
-              <li>• Wickelunterlage im Badezimmerschrank</li>
-              <li>• Rausfallschutz verfügbar</li>
-              <li>• Hochstuhl in der Küche</li>
+              <li>• Babybett und Hochstuhl stehen im Keller unter der Treppe</li>
+              <li>• Wickelunterlage im Schrank im Kinderzimmer – bitte Handtuch unterlegen</li>
+              <li>• Rausfallschutz im Kinderzimmer in der Schublade unter dem Etagenbett</li>
               <li>• Kindergeschirr in der unteren Küchenschublade</li>
               <li>• Spiele & Bücher im Wohnbereich</li>
             </ul>
