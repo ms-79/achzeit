@@ -97,7 +97,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           Schön, dass ihr da seid. Hier findet ihr alle wichtigen Informationen für einen
-          entspannten Aufenthalt im ACHZEIT.
+          entspannten Aufenthalt im ACHZEIT Family Retreat.
         </motion.p>
 
         {/* Quick Actions */}
