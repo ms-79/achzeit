@@ -104,7 +104,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
             <div className="pt-2">
               <h4 className="font-display text-base text-foreground mb-2">Bei Verbindungsproblemen</h4>
               <ul className="space-y-1 text-sm">
-                <li>• Router befindet sich im Technikschrank.</li>
+                <li>• Der Router befindet sich im Keller unter der Treppe.</li>
                 <li>• Kurz vom Strom trennen (30 Sekunden) und neu verbinden.</li>
               </ul>
             </div>
