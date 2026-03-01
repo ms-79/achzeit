@@ -175,7 +175,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
       console.error('Chat error:', e);
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: 'Entschuldigung, es gab ein technisches Problem. Bitte versuche es erneut oder kontaktiere den [Gastgeber per WhatsApp](https://wa.me/4915679656368).' },
+        { role: 'assistant', content: t.chatError[locale] },
       ]);
     } finally {
       setIsLoading(false);
