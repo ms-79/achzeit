@@ -33,7 +33,7 @@ const SUGGESTIONS = [
   'WLAN Passwort?',
 ];
 
-const GuestGuideChatbot = () => {
+const GuestGuideChatbot = ({ guestData }: { guestData: GuestData }) => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
