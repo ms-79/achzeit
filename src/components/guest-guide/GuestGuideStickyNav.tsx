@@ -1,31 +1,10 @@
 import { useEffect, useRef } from 'react';
 import {
-  Key,
-  Wifi,
-  Baby,
-  Flame,
-  Trash2,
-  AlertTriangle,
-  UtensilsCrossed,
-  Mountain,
-  Zap,
-  ShoppingCart,
-  HelpCircle,
+  Key, Wifi, Baby, Flame, Trash2, AlertTriangle,
+  UtensilsCrossed, Mountain, Zap, ShoppingCart, HelpCircle,
 } from 'lucide-react';
-
-const navItems = [
-  { icon: Key, label: 'Zugang', target: 'zugang' },
-  { icon: Wifi, label: 'WLAN', target: 'wlan' },
-  { icon: Baby, label: 'Familie', target: 'familie' },
-  { icon: Flame, label: 'Sauna', target: 'sauna' },
-  { icon: UtensilsCrossed, label: 'Restaurants', target: 'restaurants' },
-  { icon: ShoppingCart, label: 'Einkaufen', target: 'einkaufen' },
-  { icon: Mountain, label: 'Ausflüge', target: 'ausfluege' },
-  { icon: Zap, label: 'E-Auto', target: 'e-auto' },
-  { icon: Trash2, label: 'Check-out', target: 'checkout' },
-  { icon: HelpCircle, label: 'Anleitungen', target: 'anleitungen' },
-  { icon: AlertTriangle, label: 'Notfall', target: 'notfall' },
-];
+import { useGuestGuideLocale } from './GuestGuideLanguageContext';
+import { translations } from './translations';
 
 const NAV_HEIGHT = 56;
 
@@ -35,10 +14,25 @@ interface Props {
 }
 
 const GuestGuideStickyNav = ({ activeSection, onNavClick }: Props) => {
+  const { locale } = useGuestGuideLocale();
+  const t = translations;
   const scrollRef = useRef<HTMLDivElement>(null);
   const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
-  // Auto-scroll the nav strip so the active button is visible
+  const navItems = [
+    { icon: Key, label: t.navZugang[locale], target: 'zugang' },
+    { icon: Wifi, label: t.navWlan[locale], target: 'wlan' },
+    { icon: Baby, label: t.navFamilie[locale], target: 'familie' },
+    { icon: Flame, label: t.navSaunaShort[locale], target: 'sauna' },
+    { icon: UtensilsCrossed, label: t.navRestaurants[locale], target: 'restaurants' },
+    { icon: ShoppingCart, label: t.navEinkaufen[locale], target: 'einkaufen' },
+    { icon: Mountain, label: t.navAusfluege[locale], target: 'ausfluege' },
+    { icon: Zap, label: t.navEAuto[locale], target: 'e-auto' },
+    { icon: Trash2, label: t.navCheckout[locale], target: 'checkout' },
+    { icon: HelpCircle, label: t.navAnleitungen[locale], target: 'anleitungen' },
+    { icon: AlertTriangle, label: t.navNotfall[locale], target: 'notfall' },
+  ];
+
   useEffect(() => {
     const btn = buttonRefs.current.get(activeSection);
     if (btn && scrollRef.current) {

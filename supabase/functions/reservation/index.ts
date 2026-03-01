@@ -133,9 +133,13 @@ function buildGuestResponse(reservation: any, doorCode: string, wifiPassword: st
     [reservation.guestFirstName, reservation.guestLastName].filter(Boolean).join(" ") ||
     "Gast";
 
+  // Extract guest language from Hostaway reservation
+  const guestLanguage = reservation.guestLanguage || reservation.language || "de";
+
   return {
     status: "ok",
     guestName,
+    guestLanguage,
     checkin: reservation.arrivalDate || "",
     checkout: reservation.departureDate || "",
     numberOfGuests: reservation.numberOfGuests || 0,

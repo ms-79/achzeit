@@ -3,6 +3,8 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { MessageCircle, ArrowUp, Mic } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
+import { useGuestGuideLocale } from './GuestGuideLanguageContext';
+import { translations } from './translations';
 
 interface ISpeechRecognition extends EventTarget {
   lang: string;
@@ -26,12 +28,7 @@ type Msg = { role: 'user' | 'assistant'; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/guest-guide-chat`;
 
-const SUGGESTIONS = [
-  'Wie funktioniert die Sauna?',
-  'Wo ist der nächste Supermarkt?',
-  'Wie zünde ich den Kamin an?',
-  'WLAN Passwort?',
-];
+const SUGGESTIONS_KEYS = ['sauna', 'supermarket', 'fireplace', 'wifi'] as const;
 
 export interface ChatGuestData {
   wifiPassword: string;
@@ -46,6 +43,8 @@ interface GuestGuideChatbotProps {
 }
 
 const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
+  const { locale } = useGuestGuideLocale();
+  const t = translations;
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
@@ -176,7 +175,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
       console.error('Chat error:', e);
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: 'Entschuldigung, es gab ein technisches Problem. Bitte versuche es erneut oder kontaktiere den [Gastgeber per WhatsApp](https://wa.me/4915679656368).' },
+        { role: 'assistant', content: t.chatError[locale] },
       ]);
     } finally {
       setIsLoading(false);
@@ -196,7 +195,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
       <button
         onClick={() => setOpen(true)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 bg-foreground text-background hover:scale-105"
-        aria-label="Fragen? Chat öffnen"
+        aria-label={t.chatOpenLabel[locale]}
       >
         <MessageCircle size={22} />
       </button>
@@ -208,7 +207,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
 
           {/* Header – minimal */}
           <div className="px-5 py-3.5 border-b border-border/40 shrink-0">
-            <p className="text-sm font-medium text-foreground">ACHZEIT Concierge</p>
+            <p className="text-sm font-medium text-foreground">{t.chatTitle[locale]}</p>
           </div>
 
           {/* Messages area */}
@@ -216,15 +215,15 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
             <div className="max-w-[480px] mx-auto px-4 py-5 space-y-5">
               {messages.length === 0 && (
                 <div className="pt-6 pb-2 space-y-5">
-                  <p className="text-base text-muted-foreground text-center">Wie kann ich behilflich sein?</p>
+                  <p className="text-base text-muted-foreground text-center">{t.chatWelcome[locale]}</p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    {SUGGESTIONS.map((s) => (
+                    {SUGGESTIONS_KEYS.map((key) => (
                       <button
-                        key={s}
-                        onClick={() => send(s)}
+                        key={key}
+                        onClick={() => send(t.chatSuggestions[key][locale])}
                         className="text-xs text-muted-foreground hover:text-foreground px-3.5 py-2 rounded-full border border-border/60 hover:border-border hover:bg-muted/50 transition-all"
                       >
-                        {s}
+                        {t.chatSuggestions[key][locale]}
                       </button>
                     ))}
                   </div>
@@ -277,7 +276,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Nachricht an ACHZEIT Concierge"
+                placeholder={t.chatPlaceholder[locale]}
                 disabled={isLoading}
                 rows={1}
                 className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none disabled:opacity-50 resize-none leading-relaxed max-h-[150px]"
@@ -293,7 +292,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                       ? 'bg-destructive text-destructive-foreground animate-pulse'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
-                  aria-label={isListening ? 'Aufnahme stoppen' : 'Spracheingabe'}
+                  aria-label={isListening ? t.micStop[locale] : t.micStart[locale]}
                 >
                   <Mic size={16} />
                 </button>

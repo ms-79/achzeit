@@ -1,42 +1,13 @@
 import { motion } from 'framer-motion';
 import {
-  Key,
-  Wifi,
-  Baby,
-  Flame,
-  Trash2,
-  AlertTriangle,
-  UtensilsCrossed,
-  Mountain,
-  Zap,
-  ShoppingCart,
-  MessageCircle,
+  Key, Wifi, Baby, Flame, Trash2, AlertTriangle,
+  UtensilsCrossed, Mountain, Zap, ShoppingCart, MessageCircle,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import type { GuestData } from '@/pages/GuestGuide';
-
-const quickActions = [
-  { icon: Key, label: 'Zugang', target: 'zugang' },
-  { icon: Wifi, label: 'WLAN', target: 'wlan' },
-  { icon: Baby, label: 'Familie', target: 'familie' },
-  { icon: Flame, label: 'Sauna & Kamin', target: 'sauna' },
-  { icon: ShoppingCart, label: 'Einkaufen', target: 'einkaufen' },
-  { icon: UtensilsCrossed, label: 'Restaurants', target: 'restaurants' },
-  { icon: Mountain, label: 'Ausflüge', target: 'ausfluege' },
-  { icon: Zap, label: 'E-Auto', target: 'e-auto' },
-  { icon: Trash2, label: 'Check-out', target: 'checkout' },
-  { icon: AlertTriangle, label: 'Notfall', target: 'notfall' },
-];
-
-const formatDate = (dateStr: string) => {
-  if (!dateStr) return '–';
-  const d = new Date(dateStr);
-  const weekday = d.toLocaleDateString('de-DE', { weekday: 'short' }).replace('.', '');
-  const day = String(d.getDate()).padStart(2, '0');
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const year = d.getFullYear();
-  return `${weekday}, ${day}.${month}.${year}`;
-};
+import GuestGuideLanguageToggle from './GuestGuideLanguageToggle';
+import { useGuestGuideLocale } from './GuestGuideLanguageContext';
+import { translations } from './translations';
 
 interface Props {
   guestData: GuestData;
@@ -45,9 +16,40 @@ interface Props {
 
 const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
   const { guestName, checkin, checkout } = guestData;
+  const { locale } = useGuestGuideLocale();
+  const t = translations;
+
+  const quickActions = [
+    { icon: Key, label: t.navZugang[locale], target: 'zugang' },
+    { icon: Wifi, label: t.navWlan[locale], target: 'wlan' },
+    { icon: Baby, label: t.navFamilie[locale], target: 'familie' },
+    { icon: Flame, label: t.navSauna[locale], target: 'sauna' },
+    { icon: ShoppingCart, label: t.navEinkaufen[locale], target: 'einkaufen' },
+    { icon: UtensilsCrossed, label: t.navRestaurants[locale], target: 'restaurants' },
+    { icon: Mountain, label: t.navAusfluege[locale], target: 'ausfluege' },
+    { icon: Zap, label: t.navEAuto[locale], target: 'e-auto' },
+    { icon: Trash2, label: t.navCheckout[locale], target: 'checkout' },
+    { icon: AlertTriangle, label: t.navNotfall[locale], target: 'notfall' },
+  ];
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '–';
+    const d = new Date(dateStr);
+    const loc = locale === 'de' ? 'de-DE' : locale === 'en' ? 'en-GB' : locale === 'es' ? 'es-ES' : locale === 'it' ? 'it-IT' : locale === 'fr' ? 'fr-FR' : 'nl-NL';
+    const weekday = d.toLocaleDateString(loc, { weekday: 'short' }).replace('.', '');
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${weekday}, ${day}.${month}.${year}`;
+  };
 
   return (
     <section className="relative bg-alpine-charcoal text-alpine-snow py-16 md:py-24 px-6">
+      {/* Language Toggle - top right */}
+      <div className="absolute top-4 right-4 z-10">
+        <GuestGuideLanguageToggle />
+      </div>
+
       <div className="max-w-3xl mx-auto text-center">
         <motion.img
           src={logoAchzeit}
@@ -64,7 +66,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Willkommen {guestName}
+          {t.welcome[locale]} {guestName}
         </motion.h1>
 
         <motion.p
@@ -73,7 +75,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Deine ACHZEIT in Fischen beginnt jetzt.
+          {t.heroSubtitle[locale]}
         </motion.p>
 
         {checkin && checkout && (
@@ -83,7 +85,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <p className="text-sm text-alpine-snow/60 uppercase tracking-widest mb-1">Aufenthalt</p>
+            <p className="text-sm text-alpine-snow/60 uppercase tracking-widest mb-1">{t.stay[locale]}</p>
             <p className="text-alpine-snow/90 font-medium">
               {formatDate(checkin)} – {formatDate(checkout)}
             </p>
@@ -96,8 +98,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          Schön, dass ihr da seid. Hier findet ihr alle wichtigen Informationen für einen
-          entspannten Aufenthalt im ACHZEIT Family Retreat.
+          {t.heroIntro[locale]}
         </motion.p>
 
         {/* Quick Actions */}
@@ -133,7 +134,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
             className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe57] text-white font-medium px-6 py-3.5 rounded-lg transition-colors duration-200"
           >
             <MessageCircle size={20} />
-            <span>Fragen? Schreibt uns per WhatsApp</span>
+            <span>{t.whatsappCta[locale]}</span>
           </a>
         </motion.div>
       </div>
