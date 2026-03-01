@@ -26,7 +26,7 @@ const GuestGuideLanguageToggle = () => {
         aria-label="Change language"
       >
         <Globe size={16} />
-        <span>{LOCALE_FLAGS[locale]} {locale.toUpperCase()}</span>
+        <span>{LOCALE_FLAGS[locale]}</span>
       </button>
 
       {open && (
