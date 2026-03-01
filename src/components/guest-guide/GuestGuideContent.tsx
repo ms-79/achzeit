@@ -470,7 +470,32 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
 
             <div className="space-y-4">
               <div className="space-y-3">
-                <h4 className="font-display text-base text-foreground">Fischen</h4>
+                <h4 className="font-display text-base text-foreground">⚡ Schnellste Ladestationen</h4>
+                <a href="https://maps.google.com/?q=Trigema+Langenwang+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="text-sm"><strong className="text-foreground">150 kW Schnelllader</strong> – Trigema, Dorfstr. 25 (EnBW)</p>
+                    <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
+                  </div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
+                </a>
+                <a href="https://maps.google.com/?q=McDonald's+Langenwang+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="text-sm"><strong className="text-foreground">50 kW</strong> – McDonald's, An der Breitach 1 (AllgäuStrom)</p>
+                    <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
+                  </div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 6 Min.</span></div>
+                </a>
+                <a href="https://maps.google.com/?q=Parkplatz+P2+Sonthofener+Str+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="text-sm"><strong className="text-foreground">22 kW</strong> – Parkplatz P2 Oberstdorf, Sonthofener Str. 20 (AllgäuStrom)</p>
+                    <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
+                  </div>
+                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 8 Min.</span></div>
+                </a>
+              </div>
+
+              <div className="space-y-3">
+                <h4 className="font-display text-base text-foreground">📍 Nächste Ladestationen</h4>
                 <a href="https://maps.google.com/?q=Kurhaus+Fiskina+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-sm">Kurhaus Fiskina, Bahnhofstr. 3 – 22 kW (New Motion)</p>
@@ -485,55 +510,12 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                   </div>
                   <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
                 </a>
-                <a href="https://maps.google.com/?q=NaturGut+Allgäu+Maderhalm+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm">NaturGut Allgäu, Maderhalm 2 – 22 kW (Heel-Energie)</p>
-                    <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
-                  </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 10 Min.</span></div>
-                </a>
-              </div>
-
-              <div className="space-y-3">
-                <h4 className="font-display text-base text-foreground">Fischen-Langenwang</h4>
-                <a href="https://maps.google.com/?q=Trigema+Langenwang+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm"><strong className="text-foreground">150 kW Schnelllader</strong> – Trigema, Dorfstr. 25 (EnBW)</p>
-                    <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
-                  </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
-                </a>
-                <a href="https://maps.google.com/?q=McDonald's+Langenwang+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm">McDonald's, An der Breitach 1 – 50 kW (AllgäuStrom)</p>
-                    <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
-                  </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 6 Min.</span></div>
-                </a>
                 <a href="https://maps.google.com/?q=Haus+des+Gastes+Langenwang+Fischen" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-sm">Haus des Gastes, Dorfstr. 19 – 11–22 kW (New Motion)</p>
                     <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
                   </div>
                   <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 4 Min.</span></div>
-                </a>
-              </div>
-
-              <div className="space-y-3">
-                <h4 className="font-display text-base text-foreground">Oberstdorf</h4>
-                <a href="https://maps.google.com/?q=Parkplatz+P2+Sonthofener+Str+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm">Parkplatz P2, Sonthofener Str. 20 – 22 kW (AllgäuStrom)</p>
-                    <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
-                  </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 8 Min.</span></div>
-                </a>
-                <a href="https://maps.google.com/?q=Nebelhornbahn+Oberstdorf" target="_blank" rel="noopener noreferrer" className="block bg-muted rounded-lg p-4 hover:bg-accent transition-colors">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm">Nebelhornbahn, Nebelhornstr. 67 – 22 kW (AllgäuStrom)</p>
-                    <ExternalLink size={14} className="text-alpine-wood shrink-0 mt-0.5" />
-                  </div>
-                  <div className="flex justify-end mt-2"><span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-semibold"><CarIcon size={14} /> 13 Min.</span></div>
                 </a>
               </div>
             </div>
