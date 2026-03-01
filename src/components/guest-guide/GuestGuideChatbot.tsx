@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import ReactMarkdown from 'react-markdown';
 import { useGuestGuideLocale } from './GuestGuideLanguageContext';
 import { translations } from './translations';
+import whatsappButtonImg from '@/assets/whatsapp-button.png';
 
 interface ISpeechRecognition extends EventTarget {
   lang: string;
