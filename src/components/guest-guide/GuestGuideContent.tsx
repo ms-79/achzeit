@@ -594,7 +594,7 @@ const GuestGuideContent = ({ guestData, activeSection, onSectionChange }: Props)
                 <li>Erst nach ca. 15 Min. größere Scheite nachlegen.</li>
                 <li>Zufuhr nach dem Anbrennen halb schließen für gleichmäßige Wärme.</li>
               </ol>
-              <p className="text-xs text-muted-foreground italic">📌 Nur trockenes Holz verwenden. Asche erst kalt entsorgen.</p>
+              <p className="text-xs text-muted-foreground italic">📌 Starterset (Anzünder, Anfeuerholz, Holz) als Erstausstattung vorhanden. Nur trockenes Holz verwenden. Asche erst kalt entsorgen.</p>
             </div>
 
             {/* Kaffeemaschine */}

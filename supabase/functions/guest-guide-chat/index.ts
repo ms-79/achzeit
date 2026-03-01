@@ -53,7 +53,7 @@ SAUNA:
 
 KAMIN:
 - Kaminzufuhr (Hebel unten) vollständig öffnen
-- Anzünder und kleines Holz als Basis
+- Starterset mit Anzünder, Anfeuerholz und Holz als Erstausstattung vorhanden
 - Von oben nach unten anzünden
 - Nach ca. 15 Min. größere Scheite nachlegen
 - Zufuhr nach dem Anbrennen halb schließen
