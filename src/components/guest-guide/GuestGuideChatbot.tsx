@@ -33,13 +33,19 @@ const SUGGESTIONS = [
   'WLAN Passwort?',
 ];
 
-interface ChatGuestData {
+export interface ChatGuestData {
   wifiPassword: string;
   boxCode: string;
   guestName: string;
+  checkin?: string;
+  checkout?: string;
 }
 
-const GuestGuideChatbot = ({ guestData }: { guestData: ChatGuestData }) => {
+interface GuestGuideChatbotProps {
+  guestData: ChatGuestData;
+}
+
+const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState('');
