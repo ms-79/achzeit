@@ -240,8 +240,8 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-sm text-foreground leading-relaxed">
-                      <div className="prose prose-sm max-w-none prose-p:my-1.5 prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-strong:text-foreground prose-headings:text-foreground prose-h3:text-base prose-h3:font-bold prose-h3:mt-4 prose-h3:mb-1.5 prose-h4:text-[0.95rem] prose-h4:font-semibold prose-h4:mt-3 prose-h4:mb-1">
+                    <div className="text-[0.9rem] text-foreground leading-relaxed">
+                      <div className="prose prose-sm max-w-none prose-p:my-1.5 prose-p:text-[0.9rem] prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-li:text-[0.9rem] prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-strong:text-foreground prose-headings:text-foreground prose-headings:font-body prose-h3:text-[1.1rem] prose-h3:font-semibold prose-h3:mt-5 prose-h3:mb-2 prose-h4:text-[1rem] prose-h4:font-semibold prose-h4:mt-4 prose-h4:mb-1.5">
                         <ReactMarkdown
                           components={{
                             a: ({ href, children }) => (
