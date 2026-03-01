@@ -6,6 +6,10 @@ import GuestGuideStickyNav from '@/components/guest-guide/GuestGuideStickyNav';
 import GuestGuideContent from '@/components/guest-guide/GuestGuideContent';
 import GuestGuidePinEntry from '@/components/guest-guide/GuestGuidePinEntry';
 import GuestGuideChatbot from '@/components/guest-guide/GuestGuideChatbot';
+import { GuestGuideLanguageProvider } from '@/components/guest-guide/GuestGuideLanguageContext';
+import { useGuestGuideLocale } from '@/components/guest-guide/GuestGuideLanguageContext';
+import { mapHostawayLanguage, type GuestGuideLocale } from '@/components/guest-guide/translations';
+import { translations } from '@/components/guest-guide/translations';
 
 
 export interface GuestData {
@@ -14,6 +18,7 @@ export interface GuestData {
   checkout: string;
   boxCode: string;
   wifiPassword: string;
+  guestLanguage: GuestGuideLocale;
 }
 
 const FALLBACK_DATA: GuestData = {
@@ -22,6 +27,7 @@ const FALLBACK_DATA: GuestData = {
   checkout: '',
   boxCode: '– – – –',
   wifiPassword: '',
+  guestLanguage: 'de',
 };
 
 type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
@@ -38,13 +44,13 @@ const fetchWithRetry = async (url: string, opts: RequestInit, retries = 2): Prom
   throw new Error('Netzwerkfehler');
 };
 
-const GuestGuide = () => {
+const GuestGuideInner = () => {
   const [state, setState] = useState<GuideState>('loading');
   const [guestData, setGuestData] = useState<GuestData>(FALLBACK_DATA);
   const [errorMsg, setErrorMsg] = useState('');
   const [activeSection, setActiveSection] = useState('zugang');
+  const { locale, setLocale } = useGuestGuideLocale();
 
-  // Store the preloaded warmup promise so the PIN submit can await it
   const warmupPromiseRef = useRef<Promise<void> | null>(null);
 
   const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
@@ -53,13 +59,17 @@ const GuestGuide = () => {
   const headers = { apikey: anonKey, 'Content-Type': 'application/json' };
 
   const applyGuestData = (body: any) => {
+    const lang = mapHostawayLanguage(body.guestLanguage);
     setGuestData({
       guestName: body.guestName || 'Gast',
       checkin: body.checkin || '',
       checkout: body.checkout || '',
       boxCode: body.doorCode || '– – – –',
       wifiPassword: body.wifiPassword || '',
+      guestLanguage: lang,
     });
+
+    setLocale(lang);
 
     if (body.reservationId && body.token) {
       window.history.replaceState(null, '', `${window.location.pathname}?t=${body.reservationId}.${body.token}`);
@@ -80,7 +90,6 @@ const GuestGuide = () => {
     }
 
     const load = async () => {
-      // Mode 1: Direct access via reservationId + token
       if (reservationId && token) {
         try {
           const res = await fetchWithRetry(
@@ -98,13 +107,8 @@ const GuestGuide = () => {
         }
       }
 
-      // No token or token failed → show PIN immediately
       setState('pin');
 
-      // Fire a warmup request in the background (no PIN) to pre-heat
-      // the edge function cold start + Hostaway token fetch.
-      // The response will be `pin_required` but that's fine – the server
-      // will have cached the Hostaway access token for the next call.
       warmupPromiseRef.current = fetchWithRetry(baseUrl, { headers })
         .then(() => {})
         .catch(() => {});
@@ -114,19 +118,12 @@ const GuestGuide = () => {
   }, []);
 
   const handlePinSubmit = async (pin: string) => {
-    // Don't switch to full-screen loading – keep PIN form visible
-    // so the user sees inline feedback on invalid PIN
-
-    // Don't block on warmup – fire PIN request immediately.
-    // The edge function handles caching internally; waiting for
-    // a potentially slow warmup was causing multi-minute hangs.
-
     try {
       const res = await fetchWithRetry(`${baseUrl}?pin=${pin}`, { headers });
       const body = await res.json();
 
       if (res.ok && body.status === 'ok') {
-        setState('loading'); // brief transition before showing content
+        setState('loading');
         applyGuestData(body);
       } else if (body.error === 'invalid_pin') {
         return 'invalid';
@@ -157,10 +154,8 @@ const GuestGuide = () => {
       <div className="min-h-screen bg-background flex items-center justify-center px-6">
         <div className="text-center max-w-md">
           <img src={logoAchzeit} alt="ACHZEIT" className="w-24 mx-auto mb-6 opacity-40" />
-          <h1 className="font-display text-2xl text-foreground mb-3">Aktuell kein aktiver Aufenthalt</h1>
-          <p className="text-muted-foreground text-sm">
-            Die digitale Gästemappe ist nur während eures Aufenthalts verfügbar.
-          </p>
+          <h1 className="font-display text-2xl text-foreground mb-3">{translations.noReservationTitle[locale]}</h1>
+          <p className="text-muted-foreground text-sm">{translations.noReservationText[locale]}</p>
         </div>
       </div>
     );
@@ -171,7 +166,7 @@ const GuestGuide = () => {
       <div className="min-h-screen bg-background flex items-center justify-center px-6">
         <div className="text-center max-w-md">
           <img src={logoAchzeit} alt="ACHZEIT" className="w-24 mx-auto mb-6 opacity-40" />
-          <h1 className="font-display text-2xl text-foreground mb-3">Fehler</h1>
+          <h1 className="font-display text-2xl text-foreground mb-3">{translations.errorTitle[locale]}</h1>
           <p className="text-muted-foreground text-sm">{errorMsg}</p>
         </div>
       </div>
@@ -199,15 +194,21 @@ const GuestGuide = () => {
       <GuestGuideStickyNav activeSection={activeSection} onNavClick={handleNavClick} />
       <GuestGuideContent guestData={guestData} activeSection={activeSection} onSectionChange={setActiveSection} />
 
-      {/* Chatbot */}
       <GuestGuideChatbot guestData={guestData} />
 
-      {/* Footer */}
       <div className="max-w-3xl mx-auto px-6 text-center mt-16 pb-12 pt-8 border-t border-border">
         <img src={logoAchzeit} alt="ACHZEIT" className="w-20 mx-auto mb-3 opacity-30" />
-        <p className="text-xs text-muted-foreground">Eure Gästemappe · ACHZEIT im Allgäu</p>
+        <p className="text-xs text-muted-foreground">{translations.footerText[locale]}</p>
       </div>
     </div>
+  );
+};
+
+const GuestGuide = () => {
+  return (
+    <GuestGuideLanguageProvider>
+      <GuestGuideInner />
+    </GuestGuideLanguageProvider>
   );
 };
 
