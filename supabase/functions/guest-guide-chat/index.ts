@@ -24,7 +24,7 @@ ANREISE & ZUGANG:
 
 WLAN:
 - Netzwerkname: ACHZEIT
-- Passwort wird dem Gast mitgeteilt
+- Passwort: siehe individuelle Gästedaten unten (falls vorhanden)
 - Router im Technikschrank
 - Bei Problemen: Kurz vom Strom trennen (30 Sek.) und neu verbinden
 
