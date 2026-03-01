@@ -326,6 +326,12 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                                 {children}
                               </a>
                             ),
+                            img: ({ src, alt }) => {
+                              if (src === 'whatsapp-btn') {
+                                return <img src={whatsappButtonImg} alt={alt || 'WhatsApp'} className="mt-4 h-12 rounded-lg inline-block" />;
+                              }
+                              return <img src={src} alt={alt} />;
+                            },
                           }}
                         >
                           {msg.content}
