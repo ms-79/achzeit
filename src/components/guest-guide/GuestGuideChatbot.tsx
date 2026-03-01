@@ -207,7 +207,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
 
           {/* Header – minimal */}
           <div className="px-5 py-3.5 border-b border-border/40 shrink-0">
-            <p className="text-sm font-medium text-foreground">ACHZEIT Concierge</p>
+            <p className="text-sm font-medium text-foreground">{t.chatTitle[locale]}</p>
           </div>
 
           {/* Messages area */}
