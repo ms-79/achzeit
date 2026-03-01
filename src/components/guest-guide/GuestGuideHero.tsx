@@ -79,14 +79,6 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           {t.welcome[locale]} {guestName}
         </motion.h1>
 
-        <motion.p
-          className="text-lg md:text-xl text-alpine-snow/70 mb-6 tracking-wide"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {t.heroSubtitle[locale]}
-        </motion.p>
 
         {checkin && checkout && (
           <motion.div
