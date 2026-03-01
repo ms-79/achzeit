@@ -107,7 +107,14 @@ const GuestGuideChatbot = ({ guestData }: { guestData: GuestData }) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
-        body: JSON.stringify({ messages: allMessages }),
+        body: JSON.stringify({
+          messages: allMessages,
+          context: {
+            wifiPassword: guestData.wifiPassword,
+            boxCode: guestData.boxCode,
+            guestName: guestData.guestName,
+          },
+        }),
       });
 
       if (!resp.ok || !resp.body) throw new Error('Stream failed');
