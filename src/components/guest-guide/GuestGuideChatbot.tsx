@@ -28,12 +28,7 @@ type Msg = { role: 'user' | 'assistant'; content: string };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/guest-guide-chat`;
 
-const SUGGESTIONS = [
-  'Wie funktioniert die Sauna?',
-  'Wo ist der nächste Supermarkt?',
-  'Wie zünde ich den Kamin an?',
-  'WLAN Passwort?',
-];
+const SUGGESTIONS_KEYS = ['sauna', 'supermarket', 'fireplace', 'wifi'] as const;
 
 export interface ChatGuestData {
   wifiPassword: string;
