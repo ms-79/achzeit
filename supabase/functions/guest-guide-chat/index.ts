@@ -119,10 +119,10 @@ NOTFALL:
 - Erste-Hilfe-Set im Badezimmerschrank
 - Feuerlöscher im Hauswirtschaftsraum
 
-KONTAKT GASTGEBER:
-- WhatsApp: [Gastgeber kontaktieren](https://wa.me/4915679656368)
+KONTAKT TEAM ACHZEIT:
+- WhatsApp: [Team ACHZEIT kontaktieren](https://wa.me/4915679656368)
 
-Wenn du etwas nicht weißt oder die Frage nicht mit den obigen Informationen beantworten kannst, sage freundlich, dass du die Antwort nicht kennst und empfehle dem Gast, den [Gastgeber per WhatsApp zu kontaktieren](https://wa.me/4915679656368).`;
+Falls du etwas nicht weißt oder die Frage nicht mit den obigen Informationen beantworten kannst, sage z. B.: „Das kann ich dir leider nicht beantworten – aber du kannst das Team von ACHZEIT jederzeit per [WhatsApp kontaktieren](https://wa.me/4915679656368)."`;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
