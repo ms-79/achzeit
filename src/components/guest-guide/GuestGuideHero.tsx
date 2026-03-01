@@ -73,7 +73,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Deine ACHZEIT im Allgäu beginnt jetzt.
+          Deine ACHZEIT in Fischen beginnt jetzt.
         </motion.p>
 
         {checkin && checkout && (
