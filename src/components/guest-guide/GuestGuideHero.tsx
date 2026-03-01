@@ -90,7 +90,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
 
         {checkin && checkout && (
           <motion.div
-            className="inline-block bg-alpine-snow/8 backdrop-blur-sm rounded-xl px-6 py-3 mb-8 border border-alpine-snow/10"
+            className="inline-block bg-alpine-snow/15 backdrop-blur-sm rounded-xl px-6 py-4 mb-8 border border-alpine-snow/20 shadow-[0_0_20px_-4px_rgba(255,255,255,0.08)]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
