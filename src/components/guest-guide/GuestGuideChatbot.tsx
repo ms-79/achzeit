@@ -292,7 +292,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                       ? 'bg-destructive text-destructive-foreground animate-pulse'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
-                  aria-label={isListening ? 'Aufnahme stoppen' : 'Spracheingabe'}
+                  aria-label={isListening ? t.micStop[locale] : t.micStart[locale]}
                 >
                   <Mic size={16} />
                 </button>
