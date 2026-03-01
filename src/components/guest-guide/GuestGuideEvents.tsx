@@ -1,12 +1,17 @@
 import { ExternalLink } from 'lucide-react';
+import { useGuestGuideLocale } from './GuestGuideLanguageContext';
+import { translations } from './translations';
 
 const CALENDAR_URL = 'https://www.hoernerdoerfer.de/region/veranstaltungskalender';
 
 const GuestGuideEvents = () => {
+  const { locale } = useGuestGuideLocale();
+  const t = translations;
+
   return (
     <div className="space-y-4">
       <p className="text-sm">
-        Veranstaltungen, Führungen und Kurse in Fischen und den Hörnerdörfern.
+        {t.eventsIntro[locale]}
       </p>
       <a
         href={CALENDAR_URL}
@@ -16,7 +21,7 @@ const GuestGuideEvents = () => {
       >
         <div>
           <h4 className="font-display text-base text-foreground">
-            Veranstaltungskalender
+            {t.eventCalendar[locale]}
           </h4>
           <p className="text-xs text-muted-foreground mt-0.5">
             Hörnerdörfer · Fischen, Ofterschwang, Bolsterlang & mehr
@@ -25,7 +30,7 @@ const GuestGuideEvents = () => {
         <ExternalLink size={16} className="text-alpine-wood shrink-0" />
       </a>
       <p className="text-xs text-muted-foreground italic pt-1">
-        Quelle: Hörnerdörfer Tourismus
+        {t.eventSource[locale]}
       </p>
     </div>
   );
