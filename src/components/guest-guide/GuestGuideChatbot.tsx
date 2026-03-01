@@ -254,7 +254,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
       {/* Floating button */}
       <button
         onClick={() => setOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-elevated flex items-center justify-center transition-all duration-300 bg-foreground text-background hover:scale-105 ${
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 bg-background text-foreground border-2 border-border/60 hover:scale-105 shadow-[0_4px_24px_-2px_rgba(255,255,255,0.25),0_2px_12px_-2px_rgba(0,0,0,0.3)] ${
           showPulse ? 'animate-[pulse_2s_ease-in-out_3]' : ''
         }`}
         aria-label={t.chatOpenLabel[locale]}
