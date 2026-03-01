@@ -215,7 +215,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
 
       // Append WhatsApp escalation if keywords detected
       if (needsEscalation) {
-        const escalationText = `\n\n---\n\n${t.whatsappEscalation[locale]}\n\n[![WhatsApp](https://img.shields.io/badge/WhatsApp-%2325D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/4915679656368)  \n[📲 **${t.whatsappOpen[locale]}**](https://wa.me/4915679656368)`;
+        const escalationText = `\n\n---\n\n${t.whatsappEscalation[locale]}\n\n[![WhatsApp Chat](WHATSAPP_BTN_PLACEHOLDER)](https://wa.me/4915679656368)`;
         setMessages((prev) => {
           const last = prev[prev.length - 1];
           if (last?.role === 'assistant') {
