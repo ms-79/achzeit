@@ -19,6 +19,7 @@ export interface GuestData {
   boxCode: string;
   wifiPassword: string;
   guestLanguage: GuestGuideLocale;
+  awpassLink: string;
 }
 
 const FALLBACK_DATA: GuestData = {
