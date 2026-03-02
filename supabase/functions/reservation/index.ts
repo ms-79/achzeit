@@ -63,8 +63,9 @@ async function getActiveReservations(accessToken: string): Promise<any[]> {
 
   const today = todayUTC();
   const thirtyDaysAgo = new Date(Date.now() - 30 * 86_400_000).toISOString().slice(0, 10);
+  const threeDaysAhead = new Date(Date.now() + 3 * 86_400_000).toISOString().slice(0, 10);
   const reservationsRes = await fetch(
-    `https://api.hostaway.com/v1/reservations?listingId=${LISTING_ID}&arrivalStartDate=${thirtyDaysAgo}&arrivalEndDate=${today}&departureStartDate=${today}&limit=5&sortOrder=arrivalDate&sortDirection=desc`,
+    `https://api.hostaway.com/v1/reservations?listingId=${LISTING_ID}&arrivalStartDate=${thirtyDaysAgo}&arrivalEndDate=${threeDaysAhead}&departureStartDate=${today}&limit=5&sortOrder=arrivalDate&sortDirection=desc`,
     { headers: { Authorization: `Bearer ${accessToken}` } },
   );
 
@@ -81,7 +82,9 @@ async function getActiveReservations(accessToken: string): Promise<any[]> {
     if (status === "cancelled" || status === "declined") return false;
     const arrival = r.arrivalDate?.slice(0, 10);
     const departure = r.departureDate?.slice(0, 10);
-    return arrival && departure && today >= arrival && today <= departure;
+    if (!arrival || !departure) return false;
+    // Active now OR arriving within 3 days
+    return (today >= arrival && today <= departure) || (arrival > today && arrival <= threeDaysAhead);
   });
 
   cachedReservations = { data: active, fetchedAt: now };
