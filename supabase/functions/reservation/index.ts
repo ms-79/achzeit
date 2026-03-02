@@ -82,7 +82,9 @@ async function getActiveReservations(accessToken: string): Promise<any[]> {
     if (status === "cancelled" || status === "declined") return false;
     const arrival = r.arrivalDate?.slice(0, 10);
     const departure = r.departureDate?.slice(0, 10);
-    return arrival && departure && today >= arrival && today <= departure;
+    if (!arrival || !departure) return false;
+    // Active now OR arriving within 3 days
+    return (today >= arrival && today <= departure) || (arrival > today && arrival <= threeDaysAhead);
   });
 
   cachedReservations = { data: active, fetchedAt: now };
