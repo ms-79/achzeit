@@ -620,6 +620,11 @@ export const translations = {
   micStart: t('Spracheingabe', 'Voice input', 'Entrada de voz', 'Input vocale', 'Saisie vocale', 'Spraakinvoer'),
   micStop: t('Aufnahme stoppen', 'Stop recording', 'Detener grabación', 'Interrompi registrazione', 'Arrêter l\'enregistrement', 'Opname stoppen'),
 
+  // Allgäu Walser Pass
+  awpassTitle: t('Euer Allgäu Walser Pass', 'Your Allgäu Walser Pass', 'Tu Allgäu Walser Pass', 'Il tuo Allgäu Walser Pass', 'Votre Allgäu Walser Pass', 'Jullie Allgäu Walser Pass'),
+  awpassDescription: t('Kostenlose Bergbahnen, Bäder & mehr', 'Free cable cars, pools & more', 'Teleféricos, piscinas y más gratis', 'Funivie, piscine e altro gratis', 'Remontées, piscines et plus gratuits', 'Gratis bergbanen, zwembaden & meer'),
+  awpassButton: t('Pass öffnen', 'Open Pass', 'Abrir pase', 'Apri pass', 'Ouvrir le pass', 'Pass openen'),
+
   // Footer
   footerText: t('Eure Gästemappe · ACHZEIT Family Retreat. Fischen im Allgäu.', 'Your Guest Guide · ACHZEIT Family Retreat. Fischen im Allgäu.', 'Tu guía del huésped · ACHZEIT Family Retreat. Fischen im Allgäu.', 'La tua guida ospiti · ACHZEIT Family Retreat. Fischen im Allgäu.', 'Votre guide · ACHZEIT Family Retreat. Fischen im Allgäu.', 'Jullie gastenboek · ACHZEIT Family Retreat. Fischen im Allgäu.'),
 

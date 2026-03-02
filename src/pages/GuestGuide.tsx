@@ -69,6 +69,7 @@ const GuestGuideInner = () => {
       boxCode: body.doorCode || '– – – –',
       wifiPassword: body.wifiPassword || '',
       guestLanguage: lang,
+      awpassLink: body.awpassLink || '',
     });
 
     setLocale(lang);
