@@ -29,6 +29,7 @@ const FALLBACK_DATA: GuestData = {
   boxCode: '– – – –',
   wifiPassword: '',
   guestLanguage: 'de',
+  awpassLink: '',
 };
 
 type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
