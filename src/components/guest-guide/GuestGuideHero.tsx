@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import {
   Key, Wifi, Baby, Flame, Trash2, AlertTriangle,
-  UtensilsCrossed, Mountain, Zap, ShoppingCart,
+  UtensilsCrossed, Mountain, Zap, ShoppingCart, ExternalLink, Ticket,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import type { GuestData } from '@/pages/GuestGuide';
