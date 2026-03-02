@@ -65,7 +65,7 @@ async function getActiveReservations(accessToken: string): Promise<any[]> {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 86_400_000).toISOString().slice(0, 10);
   const threeDaysAhead = new Date(Date.now() + 3 * 86_400_000).toISOString().slice(0, 10);
   const reservationsRes = await fetch(
-    `https://api.hostaway.com/v1/reservations?listingId=${LISTING_ID}&arrivalStartDate=${thirtyDaysAgo}&arrivalEndDate=${threeDaysAhead}&departureStartDate=${today}&limit=5&sortOrder=arrivalDate&sortDirection=desc`,
+    `https://api.hostaway.com/v1/reservations?listingId=${LISTING_ID}&arrivalStartDate=${thirtyDaysAgo}&arrivalEndDate=${threeDaysAhead}&departureStartDate=${today}&limit=5&sortOrder=arrivalDate&sortDirection=desc&includeResources=1`,
     { headers: { Authorization: `Bearer ${accessToken}` } },
   );
 
@@ -130,6 +130,13 @@ function isValidToken(reservationId: string, token: string): boolean {
   return token === FIXED_TOKEN;
 }
 
+function extractCustomField(reservation: any, fieldId: number): string {
+  const cfv = reservation.customFieldValues;
+  if (!Array.isArray(cfv)) return "";
+  const field = cfv.find((f: any) => f.customFieldId === fieldId || f.id === fieldId);
+  return field?.value || "";
+}
+
 function buildGuestResponse(reservation: any, doorCode: string, wifiPassword: string) {
   const guestName =
     reservation.guestName ||
@@ -138,6 +145,9 @@ function buildGuestResponse(reservation: any, doorCode: string, wifiPassword: st
 
   // Extract guest language from Hostaway reservation
   const guestLanguage = reservation.guestLanguage || reservation.language || "de";
+
+  // Extract Allgäu Walser Pass link (custom field 89486)
+  const awpassLink = extractCustomField(reservation, 89486);
 
   return {
     status: "ok",
@@ -148,6 +158,7 @@ function buildGuestResponse(reservation: any, doorCode: string, wifiPassword: st
     numberOfGuests: reservation.numberOfGuests || 0,
     doorCode,
     wifiPassword,
+    awpassLink,
   };
 }
 
@@ -184,7 +195,7 @@ Deno.serve(async (req) => {
       }
 
       const resRes = await fetch(
-        `https://api.hostaway.com/v1/reservations/${reservationId}`,
+        `https://api.hostaway.com/v1/reservations/${reservationId}?includeResources=1`,
         { headers: { Authorization: `Bearer ${accessToken}` } },
       );
 

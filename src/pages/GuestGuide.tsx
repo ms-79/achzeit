@@ -19,6 +19,7 @@ export interface GuestData {
   boxCode: string;
   wifiPassword: string;
   guestLanguage: GuestGuideLocale;
+  awpassLink: string;
 }
 
 const FALLBACK_DATA: GuestData = {
@@ -28,6 +29,7 @@ const FALLBACK_DATA: GuestData = {
   boxCode: '– – – –',
   wifiPassword: '',
   guestLanguage: 'de',
+  awpassLink: '',
 };
 
 type GuideState = 'loading' | 'pin' | 'loaded' | 'no_reservation' | 'error';
@@ -67,6 +69,7 @@ const GuestGuideInner = () => {
       boxCode: body.doorCode || '– – – –',
       wifiPassword: body.wifiPassword || '',
       guestLanguage: lang,
+      awpassLink: body.awpassLink || '',
     });
 
     setLocale(lang);

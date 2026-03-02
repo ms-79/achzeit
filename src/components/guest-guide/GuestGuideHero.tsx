@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import {
   Key, Wifi, Baby, Flame, Trash2, AlertTriangle,
-  UtensilsCrossed, Mountain, Zap, ShoppingCart,
+  UtensilsCrossed, Mountain, Zap, ShoppingCart, ExternalLink, Ticket,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 import type { GuestData } from '@/pages/GuestGuide';
@@ -112,6 +112,26 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
         >
           {t.heroConciergeHint[locale]}
         </motion.p>
+
+        {/* Allgäu Walser Pass */}
+        {guestData.awpassLink && (
+          <motion.a
+            href={guestData.awpassLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-alpine-snow/10 hover:bg-alpine-snow/18 border border-alpine-snow/20 hover:border-alpine-snow/30 rounded-2xl px-6 py-4 mb-8 transition-all duration-200 group"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.48 }}
+          >
+            <Ticket size={22} className="text-alpine-snow/70 group-hover:text-alpine-snow transition-colors" />
+            <div className="text-left">
+              <p className="text-sm font-medium text-alpine-snow/90 group-hover:text-alpine-snow transition-colors">{t.awpassTitle[locale]}</p>
+              <p className="text-xs text-alpine-snow/50">{t.awpassDescription[locale]}</p>
+            </div>
+            <ExternalLink size={14} className="text-alpine-snow/40 group-hover:text-alpine-snow/70 transition-colors ml-1" />
+          </motion.a>
+        )}
 
         {/* Quick Actions */}
         <motion.div
