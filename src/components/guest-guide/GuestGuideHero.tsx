@@ -4,7 +4,7 @@ import {
   UtensilsCrossed, Mountain, Zap, ShoppingCart, ExternalLink,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
-import iconAwpass from '@/assets/icon-awpass.webp';
+import iconAwpass from '@/assets/icon-awpass.svg';
 import type { GuestData } from '@/pages/GuestGuide';
 import GuestGuideLanguageToggle from './GuestGuideLanguageToggle';
 import { useGuestGuideLocale } from './GuestGuideLanguageContext';
