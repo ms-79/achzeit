@@ -41,7 +41,7 @@ const Index = () => {
         </Suspense>
       </main>
       <Footer />
-      <CookieConsentBanner />
+      {/* <CookieConsentBanner /> */}
     </div>
   );
 };
