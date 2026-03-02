@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import {
   Key, Wifi, Baby, Flame, Trash2, AlertTriangle,
-  UtensilsCrossed, Mountain, Zap, ShoppingCart, ExternalLink, Ticket,
+  UtensilsCrossed, Mountain, Zap, ShoppingCart, ExternalLink,
 } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
+import iconAwpass from '@/assets/icon-awpass.svg';
 import type { GuestData } from '@/pages/GuestGuide';
 import GuestGuideLanguageToggle from './GuestGuideLanguageToggle';
 import { useGuestGuideLocale } from './GuestGuideLanguageContext';
@@ -124,7 +125,7 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.48 }}
           >
-            <Ticket size={22} className="text-alpine-snow/70 group-hover:text-alpine-snow transition-colors" />
+            <img src={iconAwpass} alt="Allgäu Walser Pass" className="w-7 h-7 rounded-md" />
             <div className="text-left">
               <p className="text-sm font-medium text-alpine-snow/90 group-hover:text-alpine-snow transition-colors">{t.awpassTitle[locale]}</p>
               <p className="text-xs text-alpine-snow/50">{t.awpassDescription[locale]}</p>
