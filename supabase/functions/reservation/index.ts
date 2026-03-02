@@ -195,7 +195,7 @@ Deno.serve(async (req) => {
       }
 
       const resRes = await fetch(
-        `https://api.hostaway.com/v1/reservations/${reservationId}`,
+        `https://api.hostaway.com/v1/reservations/${reservationId}?includeResources=1`,
         { headers: { Authorization: `Bearer ${accessToken}` } },
       );
 
