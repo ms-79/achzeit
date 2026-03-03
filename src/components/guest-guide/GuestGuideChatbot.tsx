@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { MessageCircle, ArrowUp, Mic, X } from 'lucide-react';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import ReactMarkdown from 'react-markdown';
 import { useGuestGuideLocale } from './GuestGuideLanguageContext';
 import { translations } from './translations';
 import whatsappButtonImg from '@/assets/whatsapp-button.png';
+import { cn } from '@/lib/utils';
 
 interface ISpeechRecognition extends EventTarget {
   lang: string;
@@ -60,10 +61,20 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
   const [isListening, setIsListening] = useState(false);
   const [hasOpened, setHasOpened] = useState(false);
   const [showPulse, setShowPulse] = useState(true);
+  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const autoOpenRef = useRef(false);
+
+  // Track visual viewport height for iOS keyboard handling
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.visualViewport) return;
+    const vv = window.visualViewport;
+    const update = () => setViewportHeight(vv.height);
+    vv.addEventListener('resize', update);
+    return () => vv.removeEventListener('resize', update);
+  }, []);
 
   const stopListening = useCallback(() => {
     recognitionRef.current?.stop();
@@ -122,7 +133,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, viewportHeight]);
 
   // Auto-resize textarea
   useEffect(() => {
@@ -261,12 +272,19 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
         <MessageCircle size={22} />
       </button>
 
-      {/* Dialog */}
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-[100dvw] h-[100dvh] max-w-[100dvw] max-h-[100dvh] sm:w-auto sm:max-w-[540px] sm:h-auto sm:max-h-[80dvh] p-0 gap-0 flex flex-col overflow-hidden border-none sm:border sm:border-border/50 rounded-none sm:rounded-2xl shadow-2xl translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%]">
-          <DialogTitle className="sr-only">ACHZEIT Concierge</DialogTitle>
-
-          {/* Header – minimal */}
+      {/* Chat overlay */}
+      <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
+        <DialogPrimitive.Portal>
+          <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+          <DialogPrimitive.Content
+            className={cn(
+              "fixed z-50 flex flex-col overflow-hidden bg-background shadow-2xl",
+              "inset-0 rounded-none border-none",
+              "sm:inset-auto sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:max-w-[540px] sm:w-full sm:max-h-[80dvh] sm:rounded-2xl sm:border sm:border-border/50"
+            )}
+            style={viewportHeight ? { height: `${viewportHeight}px` } : undefined}
+          >
+            <DialogPrimitive.Title className="sr-only">ACHZEIT Concierge</DialogPrimitive.Title>
           <div className="px-5 py-3.5 border-b border-border/40 shrink-0 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <p className="text-sm font-medium text-foreground">{t.chatTitle[locale]}</p>
@@ -395,8 +413,14 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
               )}
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+          {/* Close button */}
+          <DialogPrimitive.Close className="absolute right-4 top-3 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+            <X className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        </DialogPrimitive.Content>
+        </DialogPrimitive.Portal>
+      </DialogPrimitive.Root>
     </>
   );
 };
