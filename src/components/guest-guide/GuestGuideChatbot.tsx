@@ -103,6 +103,13 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
     }
   }, [open, hasOpened, locale, t]);
 
+  // Update greeting message when locale changes (only if greeting is the only message)
+  useEffect(() => {
+    if (hasOpened && messages.length === 1 && messages[0].role === 'assistant') {
+      setMessages([{ role: 'assistant', content: t.conciergeGreeting[locale] }]);
+    }
+  }, [locale]);
+
   useEffect(() => {
     if (open && textareaRef.current) textareaRef.current.focus();
     if (open) {
