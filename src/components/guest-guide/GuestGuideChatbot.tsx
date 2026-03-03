@@ -285,10 +285,21 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
             style={viewportHeight ? { height: `${viewportHeight}px` } : undefined}
           >
             <DialogPrimitive.Title className="sr-only">ACHZEIT Concierge</DialogPrimitive.Title>
-          <div className="px-5 py-3.5 border-b border-border/40 shrink-0 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <p className="text-sm font-medium text-foreground">{t.chatTitle[locale]}</p>
-              <span className="text-[10px] font-semibold uppercase tracking-wider bg-primary/15 text-primary px-1.5 py-0.5 rounded-md">Beta</span>
+          <div className="px-5 py-3 bg-[hsl(222,20%,14%)] shrink-0 flex items-center justify-between rounded-t-none sm:rounded-t-2xl">
+            <div className="flex items-center gap-3">
+              {/* Mountain icon only */}
+              <svg viewBox="0 0 120 50" fill="none" className="w-7 h-auto opacity-90">
+                <path
+                  d="M0 45 L60 5 L75 18 L90 10 L120 45"
+                  stroke="white"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </svg>
+              <p className="text-sm font-medium text-white/90">{t.chatTitle[locale]}</p>
+              <span className="text-[10px] font-semibold uppercase tracking-wider bg-white/10 text-white/60 px-1.5 py-0.5 rounded-md">Beta</span>
             </div>
           </div>
 
