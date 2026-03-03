@@ -263,7 +263,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
 
       {/* Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[540px] max-h-[80dvh] p-0 gap-0 flex flex-col overflow-hidden border-border/50 rounded-2xl shadow-2xl">
+        <DialogContent className="w-[100dvw] h-[100dvh] max-w-[100dvw] max-h-[100dvh] sm:w-auto sm:max-w-[540px] sm:h-auto sm:max-h-[80dvh] p-0 gap-0 flex flex-col overflow-hidden border-none sm:border sm:border-border/50 rounded-none sm:rounded-2xl shadow-2xl translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%]">
           <DialogTitle className="sr-only">ACHZEIT Concierge</DialogTitle>
 
           {/* Header – minimal */}
@@ -353,9 +353,9 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
             </div>
           </div>
 
-          {/* Input bar – ChatGPT style */}
-          <div className="p-3 shrink-0">
-            <div className="flex items-end gap-2 bg-muted rounded-2xl px-4 py-2.5 border border-border/40 focus-within:border-border/80 transition-colors">
+          {/* Input bar – fixed at bottom with safe area */}
+          <div className="p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shrink-0 border-t border-border/20">
+            <div className="flex items-end gap-2 bg-muted rounded-2xl px-3 py-2.5 border border-border/40 focus-within:border-border/80 transition-colors">
               <textarea
                 ref={textareaRef}
                 value={input}
@@ -364,7 +364,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                 placeholder={t.chatPlaceholder[locale]}
                 disabled={isLoading}
                 rows={1}
-                className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none disabled:opacity-50 resize-none leading-relaxed max-h-[150px]"
+                className="flex-1 min-w-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none disabled:opacity-50 resize-none leading-relaxed max-h-[150px]"
               />
               {/* Mic button – shown when input is empty */}
               {!input.trim() && (typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition)) && (
@@ -372,7 +372,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                   type="button"
                   onClick={isListening ? stopListening : startListening}
                   disabled={isLoading}
-                  className={`w-7 h-7 rounded-full flex items-center justify-center transition-all shrink-0 mb-0.5 ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all shrink-0 ${
                     isListening
                       ? 'bg-destructive text-destructive-foreground animate-pulse'
                       : 'text-muted-foreground hover:text-foreground'
@@ -388,7 +388,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                   type="button"
                   onClick={() => { stopListening(); send(input); }}
                   disabled={isLoading}
-                  className="w-7 h-7 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-20 transition-opacity shrink-0 mb-0.5"
+                  className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center disabled:opacity-20 transition-opacity shrink-0"
                 >
                   <ArrowUp size={14} strokeWidth={2.5} />
                 </button>
