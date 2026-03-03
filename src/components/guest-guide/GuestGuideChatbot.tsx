@@ -337,7 +337,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
                     </div>
                   ) : (
                     <div className="text-[0.9rem] text-foreground leading-relaxed">
-                      <div className="prose max-w-none prose-p:my-1.5 prose-p:text-[0.9rem] prose-p:leading-relaxed prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-li:text-[0.9rem] prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-strong:text-foreground prose-headings:text-foreground prose-headings:font-body [&_h3]:!text-lg [&_h3]:!font-semibold [&_h3]:!mt-5 [&_h3]:!mb-2 [&_h4]:!text-base [&_h4]:!font-semibold [&_h4]:!mt-4 [&_h4]:!mb-1.5">
+                      <div className="prose max-w-none prose-p:my-1.5 prose-p:text-[0.9rem] prose-p:leading-relaxed prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-li:text-[0.9rem] prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-strong:text-foreground prose-headings:text-foreground prose-headings:font-body [&_h3]:!text-lg [&_h3]:!font-semibold [&_h3]:!mt-5 [&_h3]:!mb-2 [&_h4]:!text-base [&_h4]:!font-semibold [&_h4]:!mt-4 [&_h4]:!mb-1.5 [&_.whatsapp-link]:!no-underline [&_.whatsapp-link]:!text-foreground">
                         <ReactMarkdown
                           components={{
                             a: ({ href, children }) => {
