@@ -272,12 +272,19 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
         <MessageCircle size={22} />
       </button>
 
-      {/* Dialog */}
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-[100dvw] h-[100dvh] max-w-[100dvw] max-h-[100dvh] sm:w-auto sm:max-w-[540px] sm:h-auto sm:max-h-[80dvh] p-0 gap-0 flex flex-col overflow-hidden border-none sm:border sm:border-border/50 rounded-none sm:rounded-2xl shadow-2xl translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%]">
-          <DialogTitle className="sr-only">ACHZEIT Concierge</DialogTitle>
-
-          {/* Header – minimal */}
+      {/* Chat overlay */}
+      <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
+        <DialogPrimitive.Portal>
+          <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+          <DialogPrimitive.Content
+            className={cn(
+              "fixed z-50 flex flex-col overflow-hidden bg-background shadow-2xl",
+              "inset-0 rounded-none border-none",
+              "sm:inset-auto sm:left-[50%] sm:top-[50%] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:max-w-[540px] sm:w-full sm:max-h-[80dvh] sm:rounded-2xl sm:border sm:border-border/50"
+            )}
+            style={viewportHeight ? { height: `${viewportHeight}px` } : undefined}
+          >
+            <DialogPrimitive.Title className="sr-only">ACHZEIT Concierge</DialogPrimitive.Title>
           <div className="px-5 py-3.5 border-b border-border/40 shrink-0 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <p className="text-sm font-medium text-foreground">{t.chatTitle[locale]}</p>
