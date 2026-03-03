@@ -263,7 +263,7 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
 
       {/* Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[540px] max-h-[80dvh] p-0 gap-0 flex flex-col overflow-hidden border-border/50 rounded-2xl shadow-2xl">
+        <DialogContent className="w-[100dvw] h-[100dvh] max-w-[100dvw] max-h-[100dvh] sm:w-auto sm:max-w-[540px] sm:h-auto sm:max-h-[80dvh] p-0 gap-0 flex flex-col overflow-hidden border-none sm:border sm:border-border/50 rounded-none sm:rounded-2xl shadow-2xl translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%]">
           <DialogTitle className="sr-only">ACHZEIT Concierge</DialogTitle>
 
           {/* Header – minimal */}
