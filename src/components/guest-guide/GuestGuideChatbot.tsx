@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { useGuestGuideLocale } from './GuestGuideLanguageContext';
 import { translations } from './translations';
 import whatsappButtonImg from '@/assets/whatsapp-button.png';
+import achzeitLogo from '@/assets/logo-achzeit-transparent.webp';
 import { cn } from '@/lib/utils';
 
 interface ISpeechRecognition extends EventTarget {
