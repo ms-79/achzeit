@@ -104,18 +104,15 @@ const GuestGuideHero = ({ guestData, onNavClick }: Props) => {
           {t.heroIntro[locale]}
         </motion.p>
 
-        {/* Concierge hint – subtle pill */}
-        <motion.div
-          className="inline-flex items-center gap-2 bg-alpine-snow/8 border border-alpine-snow/12 rounded-xl px-4 py-2.5 mb-12"
+        {/* Concierge hint – subtle, no button */}
+        <motion.p
+          className="text-alpine-snow/40 max-w-md mx-auto text-xs md:text-sm leading-relaxed mb-12 italic"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.45 }}
         >
-          <span className="text-alpine-snow/50 text-lg">💬</span>
-          <p className="text-alpine-snow/45 text-xs md:text-sm italic">
-            {t.heroConciergeHint[locale]}
-          </p>
-        </motion.div>
+          {t.heroConciergeHint[locale]}
+        </motion.p>
 
         {/* Allgäu Walser Pass */}
         {guestData.awpassLink && (
