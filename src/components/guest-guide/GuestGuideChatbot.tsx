@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { MessageCircle, ArrowUp, Mic, X } from 'lucide-react';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import ReactMarkdown from 'react-markdown';
 import { useGuestGuideLocale } from './GuestGuideLanguageContext';
 import { translations } from './translations';
 import whatsappButtonImg from '@/assets/whatsapp-button.png';
+import { cn } from '@/lib/utils';
 
 interface ISpeechRecognition extends EventTarget {
   lang: string;
