@@ -61,10 +61,20 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
   const [isListening, setIsListening] = useState(false);
   const [hasOpened, setHasOpened] = useState(false);
   const [showPulse, setShowPulse] = useState(true);
+  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const autoOpenRef = useRef(false);
+
+  // Track visual viewport height for iOS keyboard handling
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.visualViewport) return;
+    const vv = window.visualViewport;
+    const update = () => setViewportHeight(vv.height);
+    vv.addEventListener('resize', update);
+    return () => vv.removeEventListener('resize', update);
+  }, []);
 
   const stopListening = useCallback(() => {
     recognitionRef.current?.stop();
