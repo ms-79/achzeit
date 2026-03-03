@@ -94,23 +94,14 @@ const GuestGuideChatbot: React.FC<GuestGuideChatbotProps> = ({ guestData }) => {
     setIsListening(true);
   }, []);
 
-  // Auto-open on first visit with greeting
+  // Auto-open disabled – concierge opens only on bubble click
+  // Greeting is shown when dialog opens for the first time
   useEffect(() => {
-    if (autoOpenRef.current) return;
-    autoOpenRef.current = true;
-    const visited = sessionStorage.getItem('achzeit-concierge-opened');
-    if (!visited) {
-      const timer = setTimeout(() => {
-        setOpen(true);
-        setHasOpened(true);
-        setShowPulse(false);
-        sessionStorage.setItem('achzeit-concierge-opened', '1');
-        // Add greeting message
-        setMessages([{ role: 'assistant', content: t.conciergeGreeting[locale] }]);
-      }, 2000);
-      return () => clearTimeout(timer);
+    if (open && !hasOpened) {
+      setHasOpened(true);
+      setMessages([{ role: 'assistant', content: t.conciergeGreeting[locale] }]);
     }
-  }, [locale, t]);
+  }, [open, hasOpened, locale, t]);
 
   useEffect(() => {
     if (open && textareaRef.current) textareaRef.current.focus();
