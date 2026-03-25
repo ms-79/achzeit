@@ -10,14 +10,12 @@ const AvailabilitySection = () => {
   const initializingRef = useRef(false);
 
   useEffect(() => {
-    // Prevent multiple initializations
-    if (initializingRef.current) return;
-    initializingRef.current = true;
+    let cancelled = false;
 
     const initializeWidget = () => {
       const hostawayWidget = (window as any).hostawayCalendarWidget;
-      if (!hostawayWidget) {
-        console.error('Hostaway widget function not available');
+      if (!hostawayWidget || cancelled) {
+        if (!hostawayWidget) console.error('Hostaway widget function not available');
         return;
       }
       
@@ -63,11 +61,10 @@ const AvailabilitySection = () => {
       // Check if script is already in document
       const existingScript = document.querySelector(`script[src="${HOSTAWAY_SCRIPT_URL}"]`);
       if (existingScript) {
-        // Wait for it to load
         const checkReady = setInterval(() => {
           if ((window as any).hostawayCalendarWidget) {
             clearInterval(checkReady);
-            initializeWidget();
+            if (!cancelled) initializeWidget();
           }
         }, 100);
         setTimeout(() => clearInterval(checkReady), 10000);
@@ -79,8 +76,7 @@ const AvailabilitySection = () => {
       script.src = HOSTAWAY_SCRIPT_URL;
       script.async = true;
       script.onload = () => {
-        // Wait a bit for the function to be available
-        setTimeout(initializeWidget, 200);
+        setTimeout(() => { if (!cancelled) initializeWidget(); }, 200);
       };
       script.onerror = (e) => {
         console.error('Failed to load Hostaway script:', e);
@@ -88,8 +84,9 @@ const AvailabilitySection = () => {
       document.body.appendChild(script);
     };
 
-    // Run after component has mounted
     loadScript();
+
+    return () => { cancelled = true; };
   }, [t]);
 
   return (
