@@ -69,7 +69,7 @@ Deno.serve(async (req) => {
   try {
     const { url } = await req.json();
 
-    if (!url || typeof url !== 'string') {
+    if (!url || typeof url !== 'string' || !url.startsWith(ALLOWED_PREFIX)) {
       return new Response(
         JSON.stringify({ available: false, error: 'URL is required' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
