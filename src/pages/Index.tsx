@@ -35,6 +35,8 @@ const Index = () => {
           <AvailabilitySection />
         </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
+          <ReviewsSection />
+        <Suspense fallback={<SectionSkeleton />}>
           <LocationSection />
         </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
