@@ -7,7 +7,6 @@ const HOSTAWAY_SCRIPT_URL = 'https://d2q3n06xhbi0am.cloudfront.net/calendar.js';
 const AvailabilitySection = () => {
   const { t } = useLanguage();
   const widgetContainerRef = useRef<HTMLDivElement>(null);
-  const initializingRef = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
