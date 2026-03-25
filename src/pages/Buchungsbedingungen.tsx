@@ -45,12 +45,8 @@ const Buchungsbedingungen = () => {
               </h2>
               <ul className="list-none space-y-2 text-foreground/70">
                 <li>
-                  <strong>{language === 'de' ? 'Bis 30 Tage vor Anreise:' : 'Up to 30 days before arrival:'}</strong>{' '}
+                  <strong>{language === 'de' ? 'Bis 14 Tage vor Anreise:' : 'Up to 14 days before arrival:'}</strong>{' '}
                   {language === 'de' ? 'Kostenfreie Stornierung' : 'Free cancellation'}
-                </li>
-                <li>
-                  <strong>{language === 'de' ? '29–14 Tage vor Anreise:' : '29–14 days before arrival:'}</strong>{' '}
-                  {language === 'de' ? '50% des Gesamtbetrags' : '50% of the total amount'}
                 </li>
                 <li>
                   <strong>{language === 'de' ? 'Ab 13 Tage vor Anreise:' : 'From 13 days before arrival:'}</strong>{' '}
