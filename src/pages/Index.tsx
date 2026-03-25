@@ -8,6 +8,7 @@ import CookieConsentBanner from '@/components/CookieConsentBanner';
 const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
 const GallerySection = lazy(() => import('@/components/sections/GallerySection'));
 const AvailabilitySection = lazy(() => import('@/components/sections/AvailabilitySection'));
+const ReviewsSection = lazy(() => import('@/components/sections/ReviewsSection'));
 const LocationSection = lazy(() => import('@/components/sections/LocationSection'));
 const ContactSection = lazy(() => import('@/components/sections/ContactSection'));
 
