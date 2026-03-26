@@ -1,13 +1,30 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import heroWinter from '@/assets/hero-winter.webp';
 import heroSummer from '@/assets/hero-summer.jpg';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
 
 const HeroSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [reviewData, setReviewData] = useState<{ avg: number; count: number } | null>(null);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const { data } = await supabase.functions.invoke('reviews');
+        const reviews = data?.reviews || [];
+        if (reviews.length > 0) {
+          const avg = reviews.reduce((s: number, r: any) => s + r.rating, 0) / reviews.length;
+          setReviewData({ avg: avg / 2, count: reviews.length });
+        }
+      } catch {}
+    };
+    fetchReviews();
+  }, []);
 
   // Determine which hero image to show based on current month
   // Winter: October (10) - March (3)
@@ -111,6 +128,36 @@ const HeroSection = () => {
               {t('hero.cta.book')}
             </Button>
           </motion.div>
+
+          {/* Review Badge */}
+          {reviewData && (
+            <motion.div
+              className="flex justify-center mt-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+            >
+              <button
+                onClick={() => scrollToSection('#reviews')}
+                className="flex items-center gap-2 bg-alpine-snow/10 backdrop-blur-sm border border-alpine-snow/20 rounded-full px-5 py-2.5 hover:bg-alpine-snow/15 transition-colors cursor-pointer"
+              >
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-3.5 h-3.5 ${i < Math.round(reviewData.avg) ? 'fill-amber-400 text-amber-400' : 'text-alpine-snow/30'}`}
+                    />
+                  ))}
+                </div>
+                <span className="text-alpine-snow/90 text-sm font-medium">
+                  {reviewData.avg.toFixed(1)}
+                </span>
+                <span className="text-alpine-snow/50 text-xs">
+                  ({reviewData.count} {language === 'de' ? 'Bewertungen' : 'reviews'})
+                </span>
+              </button>
+            </motion.div>
+          )}
         </div>
       </div>
 
