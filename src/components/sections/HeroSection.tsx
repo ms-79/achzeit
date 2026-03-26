@@ -139,21 +139,21 @@ const HeroSection = () => {
             >
               <button
                 onClick={() => scrollToSection('#reviews')}
-                className="flex items-center gap-3 bg-alpine-charcoal/60 backdrop-blur-md border-2 border-amber-400/60 rounded-full px-7 py-3 hover:border-amber-400/80 hover:bg-alpine-charcoal/70 transition-all cursor-pointer shadow-[0_0_20px_rgba(251,191,36,0.15)]"
+                className="flex items-center gap-2 backdrop-blur-sm rounded-full px-4 py-1.5 hover:bg-alpine-snow/10 transition-colors cursor-pointer"
               >
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-5 h-5 ${i < Math.round(reviewData.avg) ? 'fill-amber-400 text-amber-400' : 'text-alpine-snow/30'}`}
+                      className={`w-3.5 h-3.5 ${i < Math.round(reviewData.avg) ? 'fill-amber-400/80 text-amber-400/80' : 'text-alpine-snow/20'}`}
                     />
                   ))}
                 </div>
-                <span className="text-amber-300 text-lg font-semibold">
-                  {reviewData.avg.toFixed(1)}
+                <span className="text-alpine-snow/70 text-sm">
+                  {reviewData.avg.toFixed(1)}/5
                 </span>
-                <span className="text-alpine-snow/60 text-sm">
-                  ({reviewData.count} {language === 'de' ? 'Bewertungen' : 'reviews'})
+                <span className="text-alpine-snow/40 text-xs">
+                  ({reviewData.count})
                 </span>
               </button>
             </motion.div>
