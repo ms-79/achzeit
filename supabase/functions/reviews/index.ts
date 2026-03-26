@@ -59,9 +59,26 @@ serve(async (req) => {
     if (!res.ok) throw new Error(`Reviews fetch failed: ${res.status}`);
     const data = await res.json();
 
+    const allResults = data.result || [];
+    
+    // Log first review's keys for debugging
+    if (allResults.length > 0) {
+      console.log("Sample review keys:", Object.keys(allResults[0]));
+      console.log("Sample listingMapId:", allResults[0].listingMapId, typeof allResults[0].listingMapId);
+      console.log("Sample listingId:", allResults[0].listingId, typeof allResults[0].listingId);
+      console.log("Total reviews from API:", allResults.length);
+    }
+
     // Filter to published reviews with actual content, strictly for this listing
-    const reviews = (data.result || [])
-      .filter((r: any) => r.status === "published" && r.publicReview && r.rating && String(r.listingMapId) === LISTING_ID)
+    const reviews = allResults
+      .filter((r: any) => {
+        const matchesListing = String(r.listingMapId) === LISTING_ID || String(r.listingId) === LISTING_ID;
+        const isValid = r.status === "published" && r.publicReview && r.rating;
+        if (!matchesListing && isValid) {
+          console.log(`Excluding review ${r.id} - listingMapId: ${r.listingMapId}, listingId: ${r.listingId}`);
+        }
+        return isValid && matchesListing;
+      })
       .map((r: any) => ({
         id: r.id,
         reviewerName: r.reviewerName,
