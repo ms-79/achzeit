@@ -158,6 +158,7 @@ const HeroSection = () => {
               </button>
             </motion.div>
           )}
+        </div>
       </div>
 
       {/* Scroll Indicator - positioned at bottom */}
