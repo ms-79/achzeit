@@ -59,12 +59,17 @@ serve(async (req) => {
     if (!res.ok) throw new Error(`Reviews fetch failed: ${res.status}`);
     const data = await res.json();
 
-    // Filter to published reviews with actual content, strictly for this listing
+    // Filter to published reviews with actual content, strictly for listing 463607 (Achzeit)
     const reviews = (data.result || [])
-      .filter((r: any) => r.status === "published" && r.publicReview && r.rating && String(r.listingMapId) === LISTING_ID)
+      .filter((r: any) => 
+        r.status === "published" && 
+        r.publicReview && 
+        r.rating && 
+        String(r.listingMapId) === LISTING_ID
+      )
       .map((r: any) => ({
         id: r.id,
-        reviewerName: r.reviewerName,
+        reviewerName: r.reviewerName || r.guestName,
         rating: r.rating,
         review: r.publicReview,
         submittedAt: r.submittedAt,
