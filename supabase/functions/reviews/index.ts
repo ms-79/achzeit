@@ -52,16 +52,16 @@ serve(async (req) => {
 
     const token = await getHostawayToken();
     const res = await fetch(
-      `https://api.hostaway.com/v1/reviews?listingMapId=${LISTING_ID}`,
+      `https://api.hostaway.com/v1/reviews?listingMapId=${LISTING_ID}&limit=100`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
     if (!res.ok) throw new Error(`Reviews fetch failed: ${res.status}`);
     const data = await res.json();
 
-    // Filter to published reviews with actual content
+    // Filter to published reviews with actual content, strictly for this listing
     const reviews = (data.result || [])
-      .filter((r: any) => r.status === "published" && r.publicReview && r.rating)
+      .filter((r: any) => r.status === "published" && r.publicReview && r.rating && String(r.listingMapId) === LISTING_ID)
       .map((r: any) => ({
         id: r.id,
         reviewerName: r.reviewerName,
