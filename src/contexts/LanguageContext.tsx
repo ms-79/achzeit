@@ -65,6 +65,9 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.boracooktop': 'BORA Kochfeld',
     'gallery.bathroomupstairs': 'Bad im OG',
     'gallery.bedroomsingle': 'Einzelbett (180x80) in Schlafzimmer 3 (Kinderzimmer)',
+    'gallery.terrace': 'Terrasse mit Lounge & Esstisch',
+    'gallery.balcony': 'Balkon im Dachgeschoss mit Bergblick',
+    'gallery.games': 'Spielesammlung für Familienabende',
     
     // Availability
     'availability.title': 'Verfügbarkeit',
@@ -150,6 +153,9 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.boracooktop': 'BORA Cooktop',
     'gallery.bathroomupstairs': 'Upstairs Bathroom',
     'gallery.bedroomsingle': 'Single Bed (180x80) in Bedroom 3 (Kids Room)',
+    'gallery.terrace': 'Terrace with Lounge & Dining Table',
+    'gallery.balcony': 'Top-Floor Balcony with Mountain View',
+    'gallery.games': 'Board Games for Family Evenings',
     
     // Availability
     'availability.title': 'Availability',

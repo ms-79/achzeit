@@ -35,6 +35,11 @@ import gallerySaunaShower from '@/assets/gallery-sauna-shower.jpg';
 // Garden & Nature
 import galleryGarden from '@/assets/gallery-garden.jpg';
 
+// Outdoor & Extras
+import galleryTerrace from '@/assets/gallery-terrasse.jpg';
+import galleryBalcony from '@/assets/gallery-balkon-dachgeschoss.jpg';
+import galleryGames from '@/assets/gallery-spielesammlung.jpg';
+
 interface GalleryItem {
   src: string;
   labelKey: string;
@@ -70,6 +75,9 @@ const GallerySection = () => {
     { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', visibleInGrid: false }, // 17. BORA Kochfeld
     { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', visibleInGrid: false }, // 18. SMEG Ausstattung
     { src: galleryGarden, labelKey: 'gallery.garden', visibleInGrid: false }, // 19. Natur & Umgebung
+    { src: galleryTerrace, labelKey: 'gallery.terrace', visibleInGrid: false }, // 20. Terrasse
+    { src: galleryBalcony, labelKey: 'gallery.balcony', visibleInGrid: false }, // 21. Balkon Dachgeschoss
+    { src: galleryGames, labelKey: 'gallery.games', visibleInGrid: false }, // 22. Spielesammlung
   ];
 
   const gridItems = galleryItems.filter(item => item.visibleInGrid);
