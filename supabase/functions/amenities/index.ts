@@ -8,8 +8,8 @@ let cachedToken = "";
 let tokenExpiresAt = 0;
 let cachedAmenities: string[] | null = null;
 let amenitiesCachedAt = 0;
-let cachedDescription = "";
-let cachedSummary = "";
+const cachedDescriptions: Record<string, string> = {};
+const cachedSummaries: Record<string, string> = {};
 const CACHE_TTL = 6 * 60 * 60 * 1000;
 
 async function getToken(): Promise<string> {
@@ -40,11 +40,19 @@ Deno.serve(async (req) => {
   try {
     const url = new URL(req.url);
     const bypass = url.searchParams.get("refresh") === "1";
-    if (!bypass && cachedAmenities && Date.now() - amenitiesCachedAt < CACHE_TTL) {
+    const localeRaw = (url.searchParams.get("locale") || "en").toLowerCase();
+    const locale = localeRaw === "de" ? "de" : "en";
+    if (
+      !bypass &&
+      cachedAmenities &&
+      Date.now() - amenitiesCachedAt < CACHE_TTL &&
+      cachedDescriptions[locale]
+    ) {
       return new Response(JSON.stringify({
         amenities: cachedAmenities,
-        description: cachedDescription,
-        summary: cachedSummary,
+        description: cachedDescriptions[locale] || cachedDescriptions.en || "",
+        summary: cachedSummaries[locale] || cachedSummaries.en || "",
+        locale,
       }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -59,6 +67,12 @@ Deno.serve(async (req) => {
     const data = await res.json();
     const listing = data.result || {};
     console.log("listing keys:", Object.keys(listing).join(","));
+    if (listing.listingTranslations) {
+      console.log(
+        "translations languages:",
+        (listing.listingTranslations || []).map((t: any) => t.language).join(","),
+      );
+    }
 
     // Hostaway returns "listingAmenities": [{ amenityId, amenityName }]
     // but on some accounts only "listingAmenities": [{ id, amenityId }] (numeric IDs).
@@ -94,15 +108,31 @@ Deno.serve(async (req) => {
     const amenities = Array.from(new Set(names));
     cachedAmenities = amenities;
     amenitiesCachedAt = Date.now();
-    cachedDescription = String(
+
+    // Default fields are typically EN on this account.
+    cachedDescriptions.en = String(
       listing.description || listing.descriptionLong || listing.summary || "",
     );
-    cachedSummary = String(listing.summary || "");
+    cachedSummaries.en = String(listing.summary || "");
+
+    // Hostaway returns localized variants in `listingTranslations`.
+    const translations: any[] = Array.isArray(listing.listingTranslations)
+      ? listing.listingTranslations
+      : [];
+    for (const tr of translations) {
+      const lang = String(tr.language || tr.languageCode || "").toLowerCase().slice(0, 2);
+      if (!lang) continue;
+      const desc = String(tr.description || tr.descriptionLong || tr.summary || "");
+      const sum = String(tr.summary || "");
+      if (desc) cachedDescriptions[lang] = desc;
+      if (sum) cachedSummaries[lang] = sum;
+    }
 
     return new Response(JSON.stringify({
       amenities,
-      description: cachedDescription,
-      summary: cachedSummary,
+      description: cachedDescriptions[locale] || cachedDescriptions.en || "",
+      summary: cachedSummaries[locale] || cachedSummaries.en || "",
+      locale,
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
