@@ -65,7 +65,7 @@ const GallerySection = () => {
     { src: galleryBedroomSingle, labelKey: 'gallery.bedroomsingle', visibleInGrid: true }, // 9. Einzelbett in Schlafzimmer 3
     
     // Only in lightbox (positions 10-19)
-    { src: galleryDiningFireplace, labelKey: 'gallery.diningfireplace', visibleInGrid: false }, // 10. Esstisch direkt am Kamin
+    { src: galleryDiningFireplace, labelKey: 'gallery.diningfireplace', visibleInGrid: true }, // 10. Esstisch direkt am Kamin
     { src: gallerySaunaInterior, labelKey: 'gallery.saunainterior', visibleInGrid: false }, // 11. Sauna Innenansicht
     { src: gallerySaunaShower, labelKey: 'gallery.saunashower', visibleInGrid: false }, // 12. Dusche im Saunabereich
     { src: galleryBathroomUpstairs, labelKey: 'gallery.bathroomupstairs', visibleInGrid: false }, // 13. Bad im OG
@@ -75,8 +75,8 @@ const GallerySection = () => {
     { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', visibleInGrid: false }, // 17. BORA Kochfeld
     { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', visibleInGrid: false }, // 18. SMEG Ausstattung
     { src: galleryGarden, labelKey: 'gallery.garden', visibleInGrid: false }, // 19. Natur & Umgebung
-    { src: galleryTerrace, labelKey: 'gallery.terrace', visibleInGrid: false }, // 20. Terrasse
-    { src: galleryBalcony, labelKey: 'gallery.balcony', visibleInGrid: false }, // 21. Balkon Dachgeschoss
+    { src: galleryTerrace, labelKey: 'gallery.terrace', visibleInGrid: true }, // 20. Terrasse
+    { src: galleryBalcony, labelKey: 'gallery.balcony', visibleInGrid: true }, // 21. Balkon Dachgeschoss
     { src: galleryGames, labelKey: 'gallery.games', visibleInGrid: false }, // 22. Spielesammlung
   ];
 
