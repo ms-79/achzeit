@@ -119,10 +119,12 @@ const HeroSection = () => {
                 <div className="text-[11px] md:text-xs text-muted-foreground mt-2 underline">
                   {reviewData ? `${reviewData.count} Bewertungen` : 'Bewertungen'}
                 </div>
-                <div className="text-[10px] md:text-[11px] text-muted-foreground mt-1.5 tracking-wide">
-                  auf Airbnb
-                </div>
               </div>
+
+              {/* Erklärtext */}
+              <p className="text-[11px] md:text-xs text-muted-foreground leading-snug max-w-[180px] mt-1">
+                Unterkunft auf Airbnb mit herausragenden Gäste-Bewertungen in allen Kategorien
+              </p>
             </div>
           </button>
         </motion.div>
