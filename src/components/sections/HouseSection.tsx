@@ -23,20 +23,23 @@ const HouseSection = () => {
     })();
   }, [language]);
 
-  const paragraphs = description
-    .split(/\n{2,}/)
-    .map((p) => p.trim())
-    .filter(Boolean);
-  const DESC_PREVIEW = 2;
-  const visibleParas = descExpanded ? paragraphs : paragraphs.slice(0, DESC_PREVIEW);
-  const hiddenParas = Math.max(0, paragraphs.length - DESC_PREVIEW);
-
-  const renderInline = (text: string) => {
-    const html = text
-      .replace(/<b>(.*?)<\/b>/gi, '<strong>$1</strong>')
-      .replace(/\n/g, '<br />');
-    return <span dangerouslySetInnerHTML={{ __html: html }} />;
-  };
+  // Normalize: convert <b> → <strong>; if HTML lacks block tags, wrap paragraphs.
+  const normalized = (() => {
+    let html = description.replace(/<b(\s[^>]*)?>/gi, '<strong>').replace(/<\/b>/gi, '</strong>');
+    if (!/<(h3|p|ul|li)\b/i.test(html)) {
+      html = html
+        .split(/\n{2,}/)
+        .map((p) => `<p>${p.trim().replace(/\n/g, '<br />')}</p>`)
+        .filter(Boolean)
+        .join('');
+    }
+    return html;
+  })();
+  // Split into blocks for collapse: keep <h3> with following <p>s as one chunk pair.
+  const blocks = normalized.match(/<(h3|p|ul)[\s\S]*?<\/\1>/gi) || (normalized ? [normalized] : []);
+  const DESC_PREVIEW = 3;
+  const visibleBlocks = descExpanded ? blocks : blocks.slice(0, DESC_PREVIEW);
+  const hiddenCount = Math.max(0, blocks.length - DESC_PREVIEW);
 
   const features = [
     { icon: Users, label: t('house.guests'), detail: t('house.guests.detail') },
@@ -64,24 +67,27 @@ const HouseSection = () => {
           <div className="alpine-divider mt-6" />
         </ScrollReveal>
 
-        {paragraphs.length > 0 && (
+        {blocks.length > 0 && (
           <ScrollReveal className="mb-16">
-            <div className="max-w-3xl mx-auto space-y-4 text-foreground/90 text-base md:text-lg leading-relaxed font-light">
-              {visibleParas.map((p, i) => (
-                <p key={i}>{renderInline(p)}</p>
-              ))}
-              {hiddenParas > 0 && (
-                <div className="pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setDescExpanded((v) => !v)}
-                    className="text-sm font-medium text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
-                  >
-                    {descExpanded ? 'Weniger anzeigen' : 'Weiterlesen'}
-                  </button>
-                </div>
-              )}
-            </div>
+            <div
+              className="max-w-3xl mx-auto text-foreground/90 text-base md:text-lg leading-relaxed font-light
+                         [&>p]:mb-4 [&>ul]:mb-4 [&>ul]:list-disc [&>ul]:pl-6
+                         [&>h3]:font-display [&>h3]:text-2xl [&>h3]:md:text-3xl [&>h3]:text-foreground
+                         [&>h3]:mt-8 [&>h3]:mb-3 [&>h3]:font-normal
+                         [&>h3:first-child]:mt-0"
+              dangerouslySetInnerHTML={{ __html: visibleBlocks.join('') }}
+            />
+            {hiddenCount > 0 && (
+              <div className="max-w-3xl mx-auto pt-4">
+                <button
+                  type="button"
+                  onClick={() => setDescExpanded((v) => !v)}
+                  className="text-sm font-medium text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
+                >
+                  {descExpanded ? 'Weniger anzeigen' : 'Weiterlesen'}
+                </button>
+              </div>
+            )}
           </ScrollReveal>
         )}
 
