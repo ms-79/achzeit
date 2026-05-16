@@ -51,10 +51,19 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight">
-            ACHZEIT — {t('hero.tagline')}
+          <div className="flex items-center gap-3 mb-2">
+            <span className="h-px w-10 bg-primary/60" aria-hidden="true" />
+            <span className="font-body uppercase tracking-[0.25em] text-xs md:text-sm text-primary/80">
+              Family Retreat · Allgäu
+            </span>
+          </div>
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.05] tracking-tight">
+            ACHZEIT <span className="italic font-light text-primary/90">Family Retreat</span>
           </h1>
-          <p className="mt-3 text-base md:text-lg text-muted-foreground">
+          <p className="mt-3 font-display italic text-lg md:text-xl text-muted-foreground">
+            {t('hero.tagline')}
+          </p>
+          <p className="mt-2 text-sm md:text-base text-muted-foreground">
             {t('house.guests')} · {t('house.bedrooms')} · 4 {t('house.bedrooms').includes('Bedroom') ? 'Beds' : 'Betten'} · 3 {t('house.bedrooms').includes('Bedroom') ? 'Bathrooms' : 'Badezimmer'}
           </p>
         </motion.div>
