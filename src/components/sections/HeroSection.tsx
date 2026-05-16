@@ -44,13 +44,14 @@ const HeroSection = () => {
   return (
     <section id="home" className="pt-24 md:pt-28 pb-12 md:pb-16 bg-background">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-        {/* Title above image (mobile) */}
+        {/* Title above image */}
         <motion.div
-          className="mb-6 md:mb-8"
+          className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-6"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
+          <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 mb-3">
             <span className="h-px w-10 bg-primary/60" aria-hidden="true" />
             <span className="font-body uppercase tracking-[0.25em] text-xs md:text-sm text-primary/80">
@@ -86,6 +87,45 @@ const HeroSection = () => {
               Bis zu 7 Gäste (4 Erwachsene, 3 Kinder)
             </span>
           </div>
+          </div>
+
+          {/* Gäste-Favorit Badge – kompakt, rechts im Hero-Header */}
+          <button
+            onClick={() => scrollToSection('#reviews')}
+            className="shrink-0 self-start border border-border rounded-2xl bg-card px-4 py-3 md:px-5 md:py-4 shadow-soft hover:shadow-medium transition-shadow text-left"
+            aria-label="Gäste-Favorit auf Airbnb"
+          >
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="flex items-center gap-1 shrink-0 h-10 md:h-12">
+                <img src={laurelLeft} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
+                <span className="font-body font-semibold text-foreground text-center whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[11px] md:text-[13px]">
+                  <span>Gäste-</span>
+                  <span>Favorit</span>
+                </span>
+                <img src={laurelRight} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
+              </div>
+              <div className="flex items-stretch gap-3 md:gap-4 shrink-0">
+                <div className="flex flex-col items-center justify-center text-center border-l border-border pl-3 md:pl-4 min-w-[2.75rem]">
+                  <div className="font-body font-semibold text-lg md:text-xl text-foreground leading-none h-5 md:h-6 flex items-center">
+                    {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
+                  </div>
+                  <div className="flex justify-center gap-0.5 mt-1 h-3">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="w-2 h-2 fill-foreground text-foreground" />
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col items-center justify-center text-center border-l border-border pl-3 md:pl-4 min-w-[2.75rem]">
+                  <div className="font-body font-semibold text-lg md:text-xl text-foreground leading-none h-5 md:h-6 flex items-center">
+                    {reviewData ? reviewData.count : '–'}
+                  </div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1 h-3 leading-none">
+                    Bewertungen
+                  </div>
+                </div>
+              </div>
+            </div>
+          </button>
         </motion.div>
 
         {/* Airbnb-style photo grid */}
@@ -128,76 +168,13 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Info row: Gäste-Favorit + CTA */}
+        {/* CTA Row */}
         <motion.div
-          className="mt-8 md:mt-10 grid md:grid-cols-3 gap-6 md:gap-8 items-start"
+          className="mt-8 md:mt-10"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
         >
-          {/* Gäste-Favorit Badge – Airbnb-Layout */}
-          <button
-            onClick={() => scrollToSection('#reviews')}
-            className="md:col-span-2 border border-border rounded-2xl bg-card px-5 py-4 md:px-8 md:py-5 shadow-soft hover:shadow-medium transition-shadow text-left"
-          >
-            <div className="flex items-center gap-4 md:gap-8">
-              {/* Lorbeer + Gäste-Favorit – Text-Höhe an Lorbeer gebunden */}
-              <div className="flex items-center gap-1 md:gap-1.5 shrink-0 h-10 md:h-12">
-                <img
-                  src={laurelLeft}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-full w-auto shrink-0"
-                  loading="lazy"
-                />
-                <span
-                  className="font-body font-semibold text-foreground text-center whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[11px] md:text-[13px]"
-                >
-                  <span>Gäste-</span>
-                  <span>Favorit</span>
-                </span>
-                <img
-                  src={laurelRight}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-full w-auto shrink-0"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Beschreibung */}
-              <p className="flex-1 text-xs md:text-sm text-foreground leading-snug">
-                Unterkunft auf Airbnb mit herausragenden Gäste-Bewertungen in allen Kategorien
-              </p>
-
-              {/* Bewertung */}
-              <div className="flex items-stretch gap-4 md:gap-6 shrink-0">
-                <div className="flex flex-col items-center justify-center text-center border-l border-border pl-4 md:pl-6 min-w-[3.5rem]">
-                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none h-6 md:h-7 flex items-center">
-                    {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
-                  </div>
-                  <div className="flex justify-center gap-0.5 mt-1.5 h-3">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-2.5 h-2.5 fill-foreground text-foreground"
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="flex flex-col items-center justify-center text-center border-l border-border pl-4 md:pl-6 min-w-[3.5rem]">
-                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none h-6 md:h-7 flex items-center">
-                    {reviewData ? reviewData.count : '–'}
-                  </div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1.5 h-3 leading-none">
-                    Bewertungen
-                  </div>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          {/* CTA */}
           <div className="flex flex-col gap-3">
             <p className="text-sm text-muted-foreground leading-relaxed">
               {t('hero.description')}
