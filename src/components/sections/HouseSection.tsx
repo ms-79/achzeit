@@ -84,7 +84,7 @@ const HouseSection = () => {
                   onClick={() => setDescExpanded((v) => !v)}
                   className="text-sm font-medium text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
                 >
-                  {descExpanded ? 'Weniger anzeigen' : 'Weiterlesen'}
+                  {descExpanded ? t('common.readLess') : t('common.readMore')}
                 </button>
               </div>
             )}

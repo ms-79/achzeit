@@ -32,9 +32,9 @@ const StickyMobileCTA = () => {
     >
       <div className="px-4 py-3 flex items-center gap-3">
         <div className="flex-1 min-w-0">
-          <p className="text-xs text-muted-foreground leading-tight">ACHZEIT · Allgäu</p>
+          <p className="text-xs text-muted-foreground leading-tight">{t('sticky.eyebrow')}</p>
           <p className="text-sm font-medium text-foreground leading-tight truncate">
-            Verfügbarkeit prüfen
+            {t('sticky.cta')}
           </p>
         </div>
         <Button
@@ -43,7 +43,7 @@ const StickyMobileCTA = () => {
           onClick={() => scrollTo('#availability')}
           className="shrink-0"
         >
-          {t('nav.book') || 'Jetzt buchen'}
+          {t('nav.book')}
         </Button>
       </div>
     </div>

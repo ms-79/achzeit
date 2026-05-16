@@ -34,6 +34,7 @@ const Header = () => {
     { key: 'nav.house', href: '#house' },
     { key: 'nav.gallery', href: '#gallery' },
     { key: 'nav.availability', href: '#availability' },
+    { key: 'nav.faq', href: '#faq' },
     { key: 'nav.location', href: '#location' },
     { key: 'nav.contact', href: '#contact' },
   ];
@@ -141,6 +142,39 @@ const Header = () => {
 
         {/* Mobile: Book Button + Menu Button */}
         <div className="lg:hidden flex items-center gap-2">
+          {/* Compact language toggle - always visible on mobile */}
+          <div
+            className={`flex items-center rounded-md border text-xs font-medium overflow-hidden ${
+              showScrolledStyle
+                ? 'border-border bg-background/80'
+                : 'border-alpine-snow/40 bg-alpine-snow/10 backdrop-blur-sm'
+            }`}
+            role="group"
+            aria-label={t('common.language')}
+          >
+            {(['de', 'en'] as const).map((lng) => {
+              const active = language === lng;
+              return (
+                <button
+                  key={lng}
+                  type="button"
+                  onClick={() => setLanguage(lng)}
+                  className={`px-2 py-1 transition-colors ${
+                    active
+                      ? showScrolledStyle
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-alpine-snow text-alpine-charcoal'
+                      : showScrolledStyle
+                      ? 'text-foreground hover:bg-muted'
+                      : 'text-alpine-snow hover:bg-alpine-snow/20'
+                  }`}
+                  aria-pressed={active}
+                >
+                  {lng.toUpperCase()}
+                </button>
+              );
+            })}
+          </div>
           <Button
             onClick={() => scrollToSection('#availability')}
             size="sm"

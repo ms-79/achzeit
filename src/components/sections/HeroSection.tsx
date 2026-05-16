@@ -55,35 +55,35 @@ const HeroSection = () => {
           <div className="flex items-center gap-3 mb-3">
             <span className="h-px w-10 bg-primary/60" aria-hidden="true" />
             <span className="font-body uppercase tracking-[0.25em] text-xs md:text-sm text-primary/80">
-              ACHZEIT Family Retreat · Fischen im Allgäu · Nahe Oberstdorf
+              {t('hero.chip')}
             </span>
           </div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.05] tracking-tight">
-            Endlich ankommen.{' '}
+            {t('hero.headline.1')}{' '}
             <span className="italic font-light text-primary/90 whitespace-nowrap">
-              Tief durchatmen.
+              {t('hero.headline.2')}
             </span>
           </h1>
-          <p className="mt-4 text-base md:text-lg text-foreground/80 leading-relaxed">
-            Dein modernes <strong className="font-semibold text-foreground">Family Retreat</strong> mitten in den Allgäuer Alpen, nahe Oberstdorf –
-            mit privater Sauna, Kamin, Terrasse und Balkon.
-          </p>
+          <p
+            className="mt-4 text-base md:text-lg text-foreground/80 leading-relaxed [&_strong]:font-semibold [&_strong]:text-foreground"
+            dangerouslySetInnerHTML={{ __html: t('hero.sub') }}
+          />
 
           {/* Benefits / Trust Row */}
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm md:text-[15px] text-foreground/80">
             <span className="inline-flex items-center gap-1.5">
               <Flame className="w-4 h-4 text-primary" aria-hidden="true" />
-              Private Sauna &amp; Kamin
+              {t('hero.benefit.sauna')}
             </span>
             <span className="hidden md:inline text-border">·</span>
             <span className="inline-flex items-center gap-1.5">
               <Sun className="w-4 h-4 text-primary" aria-hidden="true" />
-              Terrasse &amp; Balkon
+              {t('hero.benefit.terrace')}
             </span>
             <span className="hidden md:inline text-border">·</span>
             <span className="inline-flex items-center gap-1.5">
               <Users className="w-4 h-4 text-primary" aria-hidden="true" />
-              Bis zu 7 Gäste (4 Erwachsene, 3 Kinder)
+              {t('hero.benefit.guests')}
             </span>
           </div>
           </div>
@@ -93,15 +93,16 @@ const HeroSection = () => {
             <button
               onClick={() => scrollToSection('#reviews')}
               className="border border-border rounded-2xl bg-card px-4 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
-              aria-label="Gäste-Favorit auf Airbnb"
+              aria-label={t('hero.badge.title')}
             >
               <div className="flex flex-col items-center text-center gap-3 w-full">
               {/* Lorbeer + Gäste-Favorit */}
               <div className="flex items-center gap-1.5 h-11 md:h-14">
                 <img src={laurelLeft} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
-                <span className="font-body font-semibold text-foreground whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[13px] md:text-sm">
-                  <span>Gäste-</span>
-                  <span>Favorit</span>
+                <span className="font-body font-semibold text-foreground whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[13px] md:text-sm text-center">
+                  {t('hero.badge.title').split(/[-\s]/).map((w, i) => (
+                    <span key={i}>{w}</span>
+                  ))}
                 </span>
                 <img src={laurelRight} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
               </div>
@@ -117,13 +118,15 @@ const HeroSection = () => {
                   ))}
                 </div>
                 <div className="text-[11px] md:text-xs text-muted-foreground mt-2 underline">
-                  {reviewData ? `${reviewData.count} Bewertungen` : 'Bewertungen'}
+                  {reviewData
+                    ? `${reviewData.count} ${t('hero.badge.reviews')}`
+                    : t('hero.badge.reviews')}
                 </div>
               </div>
 
               {/* Erklärtext */}
               <p className="text-[11px] leading-[1.35] text-muted-foreground w-full break-words text-pretty mt-1">
-                Unterkunft auf Airbnb mit herausragenden Gäste-Bewertungen in allen Kategorien
+                {t('hero.badge.text')}
               </p>
               </div>
             </button>
@@ -142,10 +145,10 @@ const HeroSection = () => {
               onClick={() => scrollToSection('#gallery')}
               className="text-xs md:text-sm text-foreground/70 hover:text-foreground underline underline-offset-4 transition-colors text-center"
             >
-              Galerie ansehen
+              {t('hero.secondary.gallery')}
             </button>
             <p className="text-[11px] leading-snug text-muted-foreground text-center -mt-1">
-              Antwort meist innerhalb 1&nbsp;Std. · Direktkontakt zum Gastgeber · Sichere Buchung über Airbnb
+              {t('hero.trust')}
             </p>
           </div>
         </motion.div>
