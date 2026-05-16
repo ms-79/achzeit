@@ -51,10 +51,36 @@ Deno.serve(async (req) => {
     const data = await res.json();
     const listing = data.result || {};
 
+    // Hostaway returns "listingAmenities": [{ amenityId, amenityName }]
+    // but on some accounts only "listingAmenities": [{ id, amenityId }] (numeric IDs).
+    // Fetch amenity catalog to resolve IDs → names if needed.
     const raw = listing.listingAmenities || [];
-    const names: string[] = raw
+    console.log("listingAmenities sample:", JSON.stringify(raw.slice(0, 3)));
+
+    let names: string[] = raw
       .map((a: any) => a.amenityName || a.name || "")
       .filter((s: string) => !!s);
+
+    if (names.length === 0 && raw.length > 0) {
+      // Resolve via amenities catalog
+      try {
+        const catRes = await fetch("https://api.hostaway.com/v1/amenities", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (catRes.ok) {
+          const catData = await catRes.json();
+          const catalog: Record<string, string> = {};
+          for (const c of (catData.result || [])) {
+            catalog[String(c.id)] = c.name;
+          }
+          names = raw
+            .map((a: any) => catalog[String(a.amenityId ?? a.id)] || "")
+            .filter((s: string) => !!s);
+        }
+      } catch (e) {
+        console.error("Catalog fetch failed:", e);
+      }
+    }
 
     const amenities = Array.from(new Set(names));
     cachedAmenities = amenities;
