@@ -8,6 +8,8 @@ let cachedToken = "";
 let tokenExpiresAt = 0;
 let cachedAmenities: string[] | null = null;
 let amenitiesCachedAt = 0;
+let cachedDescription = "";
+let cachedSummary = "";
 const CACHE_TTL = 6 * 60 * 60 * 1000;
 
 async function getToken(): Promise<string> {
@@ -37,7 +39,11 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
     if (cachedAmenities && Date.now() - amenitiesCachedAt < CACHE_TTL) {
-      return new Response(JSON.stringify({ amenities: cachedAmenities }), {
+      return new Response(JSON.stringify({
+        amenities: cachedAmenities,
+        description: cachedDescription,
+        summary: cachedSummary,
+      }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -86,13 +92,21 @@ Deno.serve(async (req) => {
     const amenities = Array.from(new Set(names));
     cachedAmenities = amenities;
     amenitiesCachedAt = Date.now();
+    cachedDescription = String(
+      listing.description || listing.descriptionLong || listing.summary || "",
+    );
+    cachedSummary = String(listing.summary || "");
 
-    return new Response(JSON.stringify({ amenities }), {
+    return new Response(JSON.stringify({
+      amenities,
+      description: cachedDescription,
+      summary: cachedSummary,
+    }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
     console.error("amenities error:", error);
-    return new Response(JSON.stringify({ error: String(error), amenities: [] }), {
+    return new Response(JSON.stringify({ error: String(error), amenities: [], description: "", summary: "" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
