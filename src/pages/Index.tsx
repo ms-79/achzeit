@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/sections/HeroSection';
 import Footer from '@/components/Footer';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
+import StickyMobileCTA from '@/components/StickyMobileCTA';
 
 // Lazy load below-the-fold sections for faster initial page load
 const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
@@ -53,6 +54,7 @@ const Index = () => {
         </Suspense>
       </main>
       <Footer />
+      <StickyMobileCTA />
       {/* <CookieConsentBanner /> */}
     </div>
   );
