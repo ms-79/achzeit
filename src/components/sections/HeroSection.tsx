@@ -121,7 +121,7 @@ const HeroSection = () => {
                   className="h-10 md:h-12 w-auto"
                   loading="lazy"
                 />
-                <span className="font-body font-semibold text-foreground text-sm md:text-base leading-tight text-center">
+                <span className="font-body font-semibold text-foreground text-sm md:text-base leading-tight text-center whitespace-nowrap">
                   Gäste-<br />Favorit
                 </span>
                 <img
@@ -139,12 +139,12 @@ const HeroSection = () => {
               </p>
 
               {/* Bewertung */}
-              <div className="flex items-center gap-4 md:gap-6 shrink-0">
-                <div className="text-center border-l border-border pl-4 md:pl-6">
-                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none">
+              <div className="flex items-stretch gap-4 md:gap-6 shrink-0">
+                <div className="flex flex-col items-center justify-center text-center border-l border-border pl-4 md:pl-6 min-w-[3.5rem]">
+                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none h-6 md:h-7 flex items-center">
                     {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
                   </div>
-                  <div className="flex justify-center gap-0.5 mt-1.5">
+                  <div className="flex justify-center gap-0.5 mt-1.5 h-3">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}
@@ -153,11 +153,11 @@ const HeroSection = () => {
                     ))}
                   </div>
                 </div>
-                <div className="text-center border-l border-border pl-4 md:pl-6">
-                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none">
+                <div className="flex flex-col items-center justify-center text-center border-l border-border pl-4 md:pl-6 min-w-[3.5rem]">
+                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none h-6 md:h-7 flex items-center">
                     {reviewData ? reviewData.count : '–'}
                   </div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1.5 underline underline-offset-2">
+                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1.5 h-3 leading-none">
                     Bewertungen
                   </div>
                 </div>
