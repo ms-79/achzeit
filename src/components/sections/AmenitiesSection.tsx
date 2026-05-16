@@ -83,8 +83,6 @@ function mapAmenities(raw: string[]) {
 const AmenitiesSection = () => {
   const [items, setItems] = useState<ReturnType<typeof mapAmenities>>([]);
   const [expanded, setExpanded] = useState(false);
-  const [description, setDescription] = useState<string>('');
-  const [descExpanded, setDescExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -93,7 +91,6 @@ const AmenitiesSection = () => {
         const { data } = await supabase.functions.invoke('amenities');
         const list: string[] = data?.amenities || [];
         setItems(mapAmenities(list));
-        setDescription(String(data?.description || ''));
       } catch (e) {
         console.error(e);
       } finally {
@@ -120,21 +117,6 @@ const AmenitiesSection = () => {
   const visibleItems = expanded ? items : items.slice(0, VISIBLE_COUNT);
   const hiddenCount = Math.max(0, items.length - VISIBLE_COUNT);
 
-  const paragraphs = description
-    .split(/\n{2,}/)
-    .map((p) => p.trim())
-    .filter(Boolean);
-  const DESC_PREVIEW = 2;
-  const visibleParas = descExpanded ? paragraphs : paragraphs.slice(0, DESC_PREVIEW);
-  const hiddenParas = Math.max(0, paragraphs.length - DESC_PREVIEW);
-
-  const renderInline = (text: string) => {
-    const html = text
-      .replace(/<b>(.*?)<\/b>/gi, '<strong>$1</strong>')
-      .replace(/\n/g, '<br />');
-    return <span dangerouslySetInnerHTML={{ __html: html }} />;
-  };
-
   return (
     <section id="amenities" className="section-padding bg-background">
       <div className="container mx-auto px-6">
@@ -147,27 +129,6 @@ const AmenitiesSection = () => {
           </p>
           <div className="alpine-divider mt-6" />
         </ScrollReveal>
-
-        {paragraphs.length > 0 && (
-          <ScrollReveal className="mb-12 md:mb-16">
-            <div className="max-w-3xl mx-auto space-y-4 text-foreground/90 text-base md:text-lg leading-relaxed font-light">
-              {visibleParas.map((p, i) => (
-                <p key={i}>{renderInline(p)}</p>
-              ))}
-              {hiddenParas > 0 && (
-                <div className="pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setDescExpanded((v) => !v)}
-                    className="text-sm font-medium text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
-                  >
-                    {descExpanded ? 'Weniger anzeigen' : 'Weiterlesen'}
-                  </button>
-                </div>
-              )}
-            </div>
-          </ScrollReveal>
-        )}
 
         <ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
