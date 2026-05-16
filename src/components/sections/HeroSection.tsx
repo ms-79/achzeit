@@ -43,7 +43,7 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="pt-24 md:pt-28 pb-12 md:pb-16 bg-background">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div className="container mx-auto px-6">
         {/* Title above image */}
         <motion.div
           className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-8"
