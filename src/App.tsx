@@ -14,6 +14,7 @@ const Datenschutz = lazy(() => import("./pages/Datenschutz"));
 const CookieSettings = lazy(() => import("./pages/CookieSettings"));
 const Buchungsbedingungen = lazy(() => import("./pages/Buchungsbedingungen"));
 const GuestGuide = lazy(() => import("./pages/GuestGuide"));
+const KurtaxeDanke = lazy(() => import("./pages/KurtaxeDanke"));
 
 const queryClient = new QueryClient();
 
