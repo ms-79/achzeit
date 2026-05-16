@@ -18,6 +18,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.book': 'Jetzt buchen',
     'nav.location': 'Lage',
     'nav.contact': 'Kontakt',
+    'nav.faq': 'FAQ',
+    'nav.amenities': 'Ausstattung',
     
     // Hero
     'hero.title': 'ACHZEIT',
@@ -26,6 +28,18 @@ const translations: Record<Language, Record<string, string>> = {
    'hero.description': 'Wir haben ACHZEIT so gestaltet, wie wir selbst Urlaub machen möchten – ruhig, hochwertig und familienfreundlich.',
     'hero.cta.availability': 'Verfügbarkeit prüfen',
     'hero.cta.book': 'Jetzt buchen',
+    'hero.chip': 'ACHZEIT Family Retreat · Fischen im Allgäu · Nahe Oberstdorf',
+    'hero.headline.1': 'Endlich ankommen.',
+    'hero.headline.2': 'Tief durchatmen.',
+    'hero.sub': 'Dein modernes <strong>Family Retreat</strong> mitten in den Allgäuer Alpen, nahe Oberstdorf – mit privater Sauna, Kamin, Terrasse und Balkon.',
+    'hero.benefit.sauna': 'Private Sauna & Kamin',
+    'hero.benefit.terrace': 'Terrasse & Balkon',
+    'hero.benefit.guests': 'Bis zu 7 Gäste (4 Erwachsene, 3 Kinder)',
+    'hero.badge.title': 'Gäste-Favorit',
+    'hero.badge.reviews': 'Bewertungen',
+    'hero.badge.text': 'Unterkunft auf Airbnb mit herausragenden Gäste-Bewertungen in allen Kategorien',
+    'hero.secondary.gallery': 'Galerie ansehen',
+    'hero.trust': 'Antwort meist innerhalb 1\u00a0Std. · Direktkontakt zum Gastgeber · Sichere Buchung über Airbnb',
     
     // House
     'house.title': 'Das Haus',
@@ -68,6 +82,27 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.terrace': 'Terrasse mit Lounge & Esstisch',
     'gallery.balcony': 'Balkon im Dachgeschoss mit Bergblick',
     'gallery.games': 'Spielesammlung für Familienabende',
+
+    // Amenities
+    'amenities.title': 'Ausstattung',
+    'amenities.subtitle': 'Alles, was du für deinen Aufenthalt brauchst',
+    'amenities.showAll': 'Alle {count} Ausstattungsmerkmale anzeigen',
+    'amenities.showLess': 'Weniger anzeigen',
+
+    // Common
+    'common.readMore': 'Weiterlesen',
+    'common.readLess': 'Weniger anzeigen',
+    'common.language': 'Sprache',
+    'common.mapLoading': 'Karte wird geladen…',
+
+    // Location highlights
+    'location.hiking': 'Wandern',
+    'location.skiing': 'Skifahren',
+    'location.nature': 'Natur',
+
+    // Sticky CTA
+    'sticky.eyebrow': 'ACHZEIT · Allgäu',
+    'sticky.cta': 'Verfügbarkeit prüfen',
     
     // Availability
     'availability.title': 'Verfügbarkeit',
@@ -111,6 +146,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.book': 'Book Now',
     'nav.location': 'Location',
     'nav.contact': 'Contact',
+    'nav.faq': 'FAQ',
+    'nav.amenities': 'Amenities',
     
     // Hero
     'hero.title': 'ACHZEIT',
@@ -119,6 +156,18 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.description': 'We designed ACHZEIT the way we ourselves want to vacation – peaceful, high-quality and family-friendly.',
     'hero.cta.availability': 'Check Availability',
     'hero.cta.book': 'Book Now',
+    'hero.chip': 'ACHZEIT Family Retreat · Fischen im Allgäu · Near Oberstdorf',
+    'hero.headline.1': 'Finally arrive.',
+    'hero.headline.2': 'Breathe deeply.',
+    'hero.sub': 'Your modern <strong>family retreat</strong> in the heart of the Allgäu Alps, near Oberstdorf – with private sauna, fireplace, terrace and balcony.',
+    'hero.benefit.sauna': 'Private sauna & fireplace',
+    'hero.benefit.terrace': 'Terrace & balcony',
+    'hero.benefit.guests': 'Up to 7 guests (4 adults, 3 children)',
+    'hero.badge.title': 'Guest Favorite',
+    'hero.badge.reviews': 'reviews',
+    'hero.badge.text': 'A home on Airbnb with outstanding guest ratings across all categories',
+    'hero.secondary.gallery': 'View gallery',
+    'hero.trust': 'Usually replies within 1\u00a0hr · Direct contact with host · Secure booking via Airbnb',
     
     // House
     'house.title': 'The House',
@@ -161,6 +210,27 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.terrace': 'Terrace with Lounge & Dining Table',
     'gallery.balcony': 'Top-Floor Balcony with Mountain View',
     'gallery.games': 'Board Games for Family Evenings',
+
+    // Amenities
+    'amenities.title': 'Amenities',
+    'amenities.subtitle': 'Everything you need for your stay',
+    'amenities.showAll': 'Show all {count} amenities',
+    'amenities.showLess': 'Show less',
+
+    // Common
+    'common.readMore': 'Read more',
+    'common.readLess': 'Show less',
+    'common.language': 'Language',
+    'common.mapLoading': 'Loading map…',
+
+    // Location highlights
+    'location.hiking': 'Hiking',
+    'location.skiing': 'Skiing',
+    'location.nature': 'Nature',
+
+    // Sticky CTA
+    'sticky.eyebrow': 'ACHZEIT · Allgäu',
+    'sticky.cta': 'Check availability',
     
     // Availability
     'availability.title': 'Availability',
