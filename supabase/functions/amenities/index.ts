@@ -79,7 +79,14 @@ Deno.serve(async (req) => {
   try {
     const url = new URL(req.url);
     const bypass = url.searchParams.get("refresh") === "1";
-    const localeRaw = (url.searchParams.get("locale") || "en").toLowerCase();
+    let localeRaw = (url.searchParams.get("locale") || "").toLowerCase();
+    if (!localeRaw && (req.method === "POST")) {
+      try {
+        const body = await req.json();
+        localeRaw = String(body?.locale || "").toLowerCase();
+      } catch { /* ignore */ }
+    }
+    if (!localeRaw) localeRaw = "en";
     const locale = localeRaw === "de" ? "de" : "en";
     if (
       !bypass &&

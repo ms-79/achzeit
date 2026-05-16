@@ -14,9 +14,8 @@ const HouseSection = () => {
     (async () => {
       try {
         const { data } = await supabase.functions.invoke('amenities', {
-          body: undefined,
-          // pass locale as query string via the function URL
-        } as any);
+          body: { locale: language },
+        });
         setDescription(String(data?.description || ''));
       } catch (e) {
         console.error(e);
