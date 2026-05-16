@@ -96,6 +96,12 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.rights': 'Alle Rechte vorbehalten',
     'footer.tagline': 'Zeit für Familie. Zeit für die Berge. Zeit für ACHZEIT.',
+
+    // Kurtaxe Danke
+    'kurtaxe.thanksTitle': 'Vielen Dank!',
+    'kurtaxe.thanksMessage': 'Ihre Kurtaxe wurde erfolgreich gezahlt. Wir wünschen Ihnen einen wunderbaren Aufenthalt in Fischen und erholsame Tage im Allgäu.',
+    'kurtaxe.confirmationEmail': 'Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet.',
+    'kurtaxe.backHome': 'Zurück zur Startseite',
   },
   en: {
     // Navigation
