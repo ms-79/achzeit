@@ -137,6 +137,16 @@ const HeroSection = () => {
             >
               {t('hero.cta.book')}
             </Button>
+            <button
+              type="button"
+              onClick={() => scrollToSection('#gallery')}
+              className="text-xs md:text-sm text-foreground/70 hover:text-foreground underline underline-offset-4 transition-colors text-center"
+            >
+              Galerie ansehen
+            </button>
+            <p className="text-[11px] leading-snug text-muted-foreground text-center -mt-1">
+              Antwort meist innerhalb 1&nbsp;Std. · Direktkontakt zum Gastgeber · Sichere Buchung über Airbnb
+            </p>
           </div>
         </motion.div>
 
