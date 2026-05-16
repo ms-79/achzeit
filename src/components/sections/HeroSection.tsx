@@ -46,7 +46,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Title above image */}
         <motion.div
-          className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-6"
+          className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-8"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -92,12 +92,12 @@ const HeroSection = () => {
           {/* Gäste-Favorit Badge – kompakt, rechts im Hero-Header */}
           <button
             onClick={() => scrollToSection('#reviews')}
-            className="shrink-0 self-start border border-border rounded-2xl bg-card px-6 py-5 md:px-7 md:py-6 shadow-soft hover:shadow-medium transition-shadow"
+            className="shrink-0 self-start mx-auto md:mx-0 w-full max-w-[220px] md:w-[200px] md:max-w-none border border-border rounded-2xl bg-card px-4 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
             aria-label="Gäste-Favorit auf Airbnb"
           >
-            <div className="flex flex-col items-center text-center gap-3 min-w-[140px]">
+            <div className="flex flex-col items-center text-center gap-3 w-full">
               {/* Lorbeer + Gäste-Favorit */}
-              <div className="flex items-center gap-1.5 h-12 md:h-14">
+              <div className="flex items-center gap-1.5 h-11 md:h-14">
                 <img src={laurelLeft} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
                 <span className="font-body font-semibold text-foreground whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[13px] md:text-sm">
                   <span>Gäste-</span>
@@ -122,7 +122,7 @@ const HeroSection = () => {
               </div>
 
               {/* Erklärtext */}
-              <p className="text-[11px] md:text-xs text-muted-foreground leading-snug max-w-[180px] mt-1">
+              <p className="text-[11px] leading-[1.35] text-muted-foreground w-full break-words text-pretty mt-1">
                 Unterkunft auf Airbnb mit herausragenden Gäste-Bewertungen in allen Kategorien
               </p>
             </div>

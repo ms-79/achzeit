@@ -1,28 +1,33 @@
 ## Ziel
-Den „Gäste-Favorit"-Badge in `HeroSection.tsx` so anpassen, dass Typografie und Proportionen 1:1 dem Airbnb-Original entsprechen.
+Die Gäste-Favorit-Badge rechts im Hero so anpassen, dass sie auf jeder Bildschirmgröße kompakt bleibt und der Erklärtext sauber umbricht – ohne horizontales Überlaufen und ohne dass der Text die Karte sprengt.
 
-## Änderungen (nur Badge-Block)
+## Aktueller Stand (HeroSection.tsx, Zeile 92–129)
+- Badge nutzt `min-w-[140px]` aber Erklärtext hat `max-w-[180px]` → Text kann breiter werden als der Inhaltsrahmen suggeriert.
+- Padding `px-6 py-5 md:px-7 md:py-6` ist auf Mobile relativ groß.
+- Auf sehr schmalen Displays (<360px) konkurriert die Badge mit der H1 um den Platz.
 
-**Zahl „5,0"**
-- Schrift von `font-display` (Cormorant Serif) → `font-body` (Inter)
-- Gewicht: `font-bold` (statt aktuell standard)
-- Größe deutlich erhöht: `text-7xl md:text-8xl` (statt `text-5xl md:text-6xl`)
-- Farbe bleibt `text-foreground` (Anthrazit)
-- `tracking-tight` für engeren Look wie bei Airbnb
+## Änderungen
 
-**Lorbeerblätter**
-- Höhe reduzieren auf `h-12 md:h-14` (statt `h-16 md:h-20`), damit sie wie bei Airbnb deutlich kleiner als die Zahl sind
-- Abstand zwischen Lorbeer und Zahl enger: `gap-2 md:gap-3` (statt `gap-4 md:gap-6`)
+1. **Feste, responsive Breite statt min/max-Mix**
+   - Badge-Wrapper: `w-full max-w-[220px] sm:max-w-[200px] md:w-[200px]` (auf Mobile volle Spaltenbreite bis Cap, ab md fixe Spalte).
+   - Inneren `min-w-[140px]` entfernen, stattdessen `w-full`.
 
-**„Gäste-Favorit auf Airbnb"**
-- Bleibt `font-medium`, Größe `text-base md:text-lg`
-- Abstand nach oben reduzieren: `mt-2` (statt `mt-4`), damit der Block kompakter wirkt
+2. **Padding reduzieren auf kleinen Displays**
+   - `px-4 py-4 md:px-6 md:py-5` statt `px-6 py-5 md:px-7 md:py-6`.
 
-**Beschreibungstext**
-- Bleibt wie ist, ggf. `max-w-xs md:max-w-sm` für engeren Textblock wie im Airbnb-Original
+3. **Erklärtext-Umbruch absichern**
+   - `max-w-[180px]` entfernen → Text nutzt volle Badge-Breite minus Padding.
+   - `text-pretty` + `break-words` ergänzen, `leading-snug` bleibt.
+   - Schriftgröße `text-[11px] leading-[1.35]` konsistent (kein md-Sprung, damit Umbruch vorhersehbar bleibt).
 
-**Container**
-- Padding ggf. leicht reduzieren auf `p-5 md:p-6` für kompakteres Verhältnis
+4. **Lorbeerblätter/Headline-Höhe auf Mobile kleiner**
+   - `h-11 md:h-14` statt `h-12 md:h-14`, damit Badge auf Mobile insgesamt schlanker wird.
 
-## Nicht geändert
-- Logik, Bewertungs-Fetch, Klickziel `#reviews`, Bilder bleiben unverändert.
+5. **Hero-Header-Layout**
+   - Flex-Container der Title-Row: `gap-4 md:gap-8` (statt `gap-6`) und auf Mobile `items-stretch`, damit die Badge oberhalb der H1 nicht zu viel Platz frisst.
+   - Badge `self-start md:self-start` bleibt, aber auf Mobile `mx-auto md:mx-0` für saubere Zentrierung wenn sie alleinsteht.
+
+## Technische Details
+- Nur `src/components/sections/HeroSection.tsx` betroffen.
+- Keine neuen Tokens nötig, alle Tailwind-Utilities sind im Standard-Setup verfügbar.
+- Visuelle QA in 320px / 375px / 768px / 1280px Viewports.
