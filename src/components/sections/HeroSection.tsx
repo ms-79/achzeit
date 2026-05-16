@@ -121,23 +121,26 @@ const HeroSection = () => {
             className="md:col-span-2 border border-border rounded-2xl bg-card px-5 py-4 md:px-8 md:py-5 shadow-soft hover:shadow-medium transition-shadow text-left"
           >
             <div className="flex items-center gap-4 md:gap-8">
-              {/* Lorbeer + Gäste-Favorit */}
-              <div className="flex items-center gap-1.5 shrink-0">
+              {/* Lorbeer + Gäste-Favorit – Text-Höhe an Lorbeer gebunden */}
+              <div className="flex items-center gap-1 md:gap-1.5 shrink-0 h-10 md:h-12">
                 <img
                   src={laurelLeft}
                   alt=""
                   aria-hidden="true"
-                  className="h-10 md:h-12 w-auto"
+                  className="h-full w-auto shrink-0"
                   loading="lazy"
                 />
-                <span className="font-body font-semibold text-foreground text-sm md:text-base leading-tight text-center whitespace-nowrap">
-                  Gäste-<br />Favorit
+                <span
+                  className="font-body font-semibold text-foreground text-center whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[11px] md:text-[13px]"
+                >
+                  <span>Gäste-</span>
+                  <span>Favorit</span>
                 </span>
                 <img
                   src={laurelRight}
                   alt=""
                   aria-hidden="true"
-                  className="h-10 md:h-12 w-auto"
+                  className="h-full w-auto shrink-0"
                   loading="lazy"
                 />
               </div>
