@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CheckCircle } from 'lucide-react';
-import AchzeitLogo from '@/components/AchzeitLogo';
+import achzeitLogo from '@/assets/achzeit-logo.png';
 
-const KurtaxeDanke = () => {
+const KurbeitragDanke = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
@@ -12,7 +12,11 @@ const KurtaxeDanke = () => {
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="max-w-lg w-full text-center">
         <div className="flex justify-center mb-10">
-          <AchzeitLogo className="w-32" color="hsl(var(--alpine-charcoal))" />
+          <img
+            src={achzeitLogo}
+            alt="ACHZEIT"
+            className="w-40 h-auto mix-blend-multiply"
+          />
         </div>
 
         <div className="flex justify-center mb-8">
@@ -22,21 +26,21 @@ const KurtaxeDanke = () => {
         </div>
 
         <h1 className="text-3xl md:text-4xl font-display text-foreground mb-4">
-          {t('kurtaxe.thanksTitle')}
+          {t('kurbeitrag.thanksTitle')}
         </h1>
 
         <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-          {t('kurtaxe.thanksMessage')}
+          {t('kurbeitrag.thanksMessage')}
         </p>
 
         <div className="w-16 h-0.5 bg-alpine-stone mx-auto mb-10" />
 
         <Button variant="alpine" size="lg" onClick={() => navigate('/')}>
-          {t('kurtaxe.backHome')}
+          {t('kurbeitrag.backHome')}
         </Button>
       </div>
     </div>
   );
 };
 
-export default KurtaxeDanke;
+export default KurbeitragDanke;
