@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import galleryBalcony from '@/assets/gallery-balkon-dachgeschoss.jpg';
@@ -105,36 +106,63 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
         >
-          {/* Gäste-Favorit Badge */}
+          {/* Gäste-Favorit Badge – Airbnb-Layout */}
           <button
             onClick={() => scrollToSection('#reviews')}
-            className="md:col-span-2 border border-border rounded-2xl bg-card p-5 md:p-6 shadow-soft hover:shadow-medium transition-shadow text-center"
+            className="md:col-span-2 border border-border rounded-2xl bg-card px-5 py-4 md:px-8 md:py-5 shadow-soft hover:shadow-medium transition-shadow text-left"
           >
-            <div className="flex items-center justify-center gap-2 md:gap-3">
-              <img
-                src={laurelLeft}
-                alt=""
-                aria-hidden="true"
-                className="h-10 md:h-12 w-auto"
-                loading="lazy"
-              />
-              <span className="font-body font-semibold text-foreground text-lg md:text-xl leading-tight text-center">
-                Gäste-<br />Favorit
-              </span>
-              <img
-                src={laurelRight}
-                alt=""
-                aria-hidden="true"
-                className="h-10 md:h-12 w-auto"
-                loading="lazy"
-              />
+            <div className="flex items-center gap-4 md:gap-8">
+              {/* Lorbeer + Gäste-Favorit */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <img
+                  src={laurelLeft}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-10 md:h-12 w-auto"
+                  loading="lazy"
+                />
+                <span className="font-body font-semibold text-foreground text-sm md:text-base leading-tight text-center">
+                  Gäste-<br />Favorit
+                </span>
+                <img
+                  src={laurelRight}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-10 md:h-12 w-auto"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Beschreibung */}
+              <p className="flex-1 text-xs md:text-sm text-foreground leading-snug">
+                Unterkunft auf Airbnb mit herausragenden Gäste-Bewertungen in allen Kategorien
+              </p>
+
+              {/* Bewertung */}
+              <div className="flex items-center gap-4 md:gap-6 shrink-0">
+                <div className="text-center border-l border-border pl-4 md:pl-6">
+                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none">
+                    {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
+                  </div>
+                  <div className="flex justify-center gap-0.5 mt-1.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-2.5 h-2.5 fill-foreground text-foreground"
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="text-center border-l border-border pl-4 md:pl-6">
+                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none">
+                    {reviewData ? reviewData.count : '–'}
+                  </div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1.5 underline underline-offset-2">
+                    Bewertungen
+                  </div>
+                </div>
+              </div>
             </div>
-            <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-xs md:max-w-sm mx-auto leading-relaxed">
-              Diese Unterkunft gehört zu den{' '}
-              <span className="font-medium text-foreground">obersten 10 %</span>{' '}
-              der gefragtesten Inserate auf Airbnb – basierend auf Bewertungen und Zuverlässigkeit
-              {reviewData ? ` (${reviewData.count} Bewertungen).` : '.'}
-            </p>
           </button>
 
           {/* CTA */}
