@@ -1,10 +1,40 @@
+import { useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Users, Bed, Bath, Flame, Home, UtensilsCrossed, TreePine, Heart, MapPin } from 'lucide-react';
 import houseExterior from '@/assets/house-exterior.webp';
 import ScrollReveal from '@/components/ScrollReveal';
+import { supabase } from '@/integrations/supabase/client';
 
 const HouseSection = () => {
   const { t } = useLanguage();
+  const [description, setDescription] = useState<string>('');
+  const [descExpanded, setDescExpanded] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await supabase.functions.invoke('amenities');
+        setDescription(String(data?.description || ''));
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, []);
+
+  const paragraphs = description
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  const DESC_PREVIEW = 2;
+  const visibleParas = descExpanded ? paragraphs : paragraphs.slice(0, DESC_PREVIEW);
+  const hiddenParas = Math.max(0, paragraphs.length - DESC_PREVIEW);
+
+  const renderInline = (text: string) => {
+    const html = text
+      .replace(/<b>(.*?)<\/b>/gi, '<strong>$1</strong>')
+      .replace(/\n/g, '<br />');
+    return <span dangerouslySetInnerHTML={{ __html: html }} />;
+  };
 
   const features = [
     { icon: Users, label: t('house.guests'), detail: t('house.guests.detail') },
@@ -31,6 +61,27 @@ const HouseSection = () => {
           </p>
           <div className="alpine-divider mt-6" />
         </ScrollReveal>
+
+        {paragraphs.length > 0 && (
+          <ScrollReveal className="mb-16">
+            <div className="max-w-3xl mx-auto space-y-4 text-foreground/90 text-base md:text-lg leading-relaxed font-light">
+              {visibleParas.map((p, i) => (
+                <p key={i}>{renderInline(p)}</p>
+              ))}
+              {hiddenParas > 0 && (
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setDescExpanded((v) => !v)}
+                    className="text-sm font-medium text-primary underline underline-offset-4 hover:opacity-80 transition-opacity"
+                  >
+                    {descExpanded ? 'Weniger anzeigen' : 'Weiterlesen'}
+                  </button>
+                </div>
+              )}
+            </div>
+          </ScrollReveal>
+        )}
 
         {/* Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
