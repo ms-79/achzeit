@@ -39,6 +39,7 @@ const App = () => (
               <Route path="/cookies" element={<CookieSettings />} />
               <Route path="/buchungsbedingungen" element={<Buchungsbedingungen />} />
               <Route path="/guide/achzeit" element={<GuestGuide />} />
+              <Route path="/kurtaxe-danke" element={<KurtaxeDanke />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
