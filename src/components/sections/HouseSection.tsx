@@ -6,20 +6,22 @@ import ScrollReveal from '@/components/ScrollReveal';
 import { supabase } from '@/integrations/supabase/client';
 
 const HouseSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [description, setDescription] = useState<string>('');
   const [descExpanded, setDescExpanded] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await supabase.functions.invoke('amenities');
+        const { data } = await supabase.functions.invoke('amenities', {
+          body: { locale: language },
+        });
         setDescription(String(data?.description || ''));
       } catch (e) {
         console.error(e);
       }
     })();
-  }, []);
+  }, [language]);
 
   const paragraphs = description
     .split(/\n{2,}/)
