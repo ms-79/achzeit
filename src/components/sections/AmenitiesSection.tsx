@@ -8,7 +8,6 @@ import {
 } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { supabase } from '@/integrations/supabase/client';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 
 type AmenityDef = {
@@ -82,7 +81,6 @@ function mapAmenities(raw: string[]) {
 }
 
 const AmenitiesSection = () => {
-  const { t } = useLanguage();
   const [items, setItems] = useState<ReturnType<typeof mapAmenities>>([]);
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
