@@ -35,6 +35,45 @@ async function getToken(): Promise<string> {
   return cachedToken;
 }
 
+async function translateToGerman(text: string): Promise<string> {
+  const apiKey = Deno.env.get("LOVABLE_API_KEY");
+  if (!apiKey || !text.trim()) return text;
+  try {
+    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          {
+            role: "system",
+            content:
+              "Du bist ein professioneller Übersetzer für hochwertige Ferienhaus-Beschreibungen. " +
+              "Übersetze den Text vom Englischen ins Deutsche. " +
+              "Behalte Absätze, Zeilenumbrüche und HTML-Tags wie <b>...</b> exakt bei. " +
+              "Verwende einen einladenden, hochwertigen Ton (Du-Form). " +
+              "Gib nur die Übersetzung zurück, keinen zusätzlichen Text.",
+          },
+          { role: "user", content: text },
+        ],
+      }),
+    });
+    if (!res.ok) {
+      console.error("Translation failed:", res.status, await res.text());
+      return text;
+    }
+    const data = await res.json();
+    const out = data?.choices?.[0]?.message?.content;
+    return typeof out === "string" && out.trim() ? out.trim() : text;
+  } catch (e) {
+    console.error("Translation error:", e);
+    return text;
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
@@ -126,6 +165,16 @@ Deno.serve(async (req) => {
       const sum = String(tr.summary || "");
       if (desc) cachedDescriptions[lang] = desc;
       if (sum) cachedSummaries[lang] = sum;
+    }
+
+    // Fallback: if no German translation in Hostaway and the user wants DE,
+    // translate the English description once via Lovable AI Gateway and cache it.
+    if (locale === "de" && !cachedDescriptions.de && cachedDescriptions.en) {
+      console.log("Translating description EN → DE via Lovable AI");
+      cachedDescriptions.de = await translateToGerman(cachedDescriptions.en);
+      if (cachedSummaries.en) {
+        cachedSummaries.de = await translateToGerman(cachedSummaries.en);
+      }
     }
 
     return new Response(JSON.stringify({
