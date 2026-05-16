@@ -193,13 +193,6 @@ const HeroSection = () => {
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
-                variant="alpine"
-                size="lg"
-                onClick={() => scrollToSection('#availability')}
-              >
-                {t('hero.cta.book')}
-              </Button>
-              <Button
                 variant="outline"
                 size="lg"
                 onClick={() => scrollToSection('#house')}
