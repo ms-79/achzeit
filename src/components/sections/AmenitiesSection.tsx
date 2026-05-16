@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Flame, Wifi, Car, Sun, Trees, Tv, Music, WashingMachine, Wind,
+  Flame, Wifi, Car, Sun, Trees, Tv, WashingMachine, Wind,
   UtensilsCrossed, Coffee, Microwave, Refrigerator, Heart, Baby, Thermometer,
   Droplets, Scissors, Shirt, Bed, Lock, Briefcase, Moon, Archive, KeyRound,
-  Check, ChevronDown, ChevronUp, Sparkles, Volume2, Home, ShieldCheck, Plug,
-  DoorOpen,
+  ChevronDown, ChevronUp, Sparkles, Volume2, Home, DoorOpen,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 import { supabase } from '@/integrations/supabase/client';
