@@ -58,10 +58,9 @@ const HeroSection = () => {
               ACHZEIT Family Retreat · Fischen im Allgäu · Nahe Oberstdorf
             </span>
           </div>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.02] tracking-tight">
-            Endlich ankommen.
-            <br />
-            <span className="italic font-light text-primary/90">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.05] tracking-tight">
+            Endlich ankommen.{' '}
+            <span className="italic font-light text-primary/90 whitespace-nowrap">
               Tief durchatmen.
             </span>
           </h1>
