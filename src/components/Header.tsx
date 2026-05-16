@@ -72,21 +72,19 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Logo - visible when scrolled or on subpages */}
-        {showScrolledStyle ? (
-          <button
-            onClick={goHome}
-            className="flex items-center"
-          >
-            <img 
-              src={logoAchzeit} 
-              alt="ACHZEIT" 
-              className="h-10 md:h-12 w-auto transition-all duration-300"
-            />
-          </button>
-        ) : (
-          <div className="h-10 md:h-12" />
-        )}
+        {/* Logo - always visible */}
+        <button
+          onClick={goHome}
+          className="flex items-center"
+        >
+          <img
+            src={logoAchzeit}
+            alt="ACHZEIT"
+            className={`w-auto transition-all duration-300 ${
+              showScrolledStyle ? 'h-10 md:h-12' : 'h-12 md:h-14 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]'
+            }`}
+          />
+        </button>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">

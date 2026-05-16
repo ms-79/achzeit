@@ -22,8 +22,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     'hero.title': 'ACHZEIT',
     'hero.subtitle': 'Family Retreat',
-    'hero.tagline': 'Ihr modernes Ferienhaus im Allgäu',
-    'hero.description': 'Wir haben ACHZEIT so gestaltet, wie wir selbst Urlaub machen möchten – ruhig, hochwertig und familienfreundlich.',
+   'hero.tagline': 'Dein modernes Ferienhaus im Allgäu',
+   'hero.description': 'Wir haben ACHZEIT so gestaltet, wie wir selbst Urlaub machen möchten – ruhig, hochwertig und familienfreundlich.',
     'hero.cta.availability': 'Verfügbarkeit prüfen',
     'hero.cta.book': 'Jetzt buchen',
     
