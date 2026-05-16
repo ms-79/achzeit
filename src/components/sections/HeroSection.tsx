@@ -88,13 +88,14 @@ const HeroSection = () => {
           </div>
           </div>
 
-          {/* Gäste-Favorit Badge – kompakt, rechts im Hero-Header */}
-          <button
-            onClick={() => scrollToSection('#reviews')}
-            className="shrink-0 self-start mx-auto md:mx-0 w-full max-w-[220px] md:w-[200px] md:max-w-none border border-border rounded-2xl bg-card px-4 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
-            aria-label="Gäste-Favorit auf Airbnb"
-          >
-            <div className="flex flex-col items-center text-center gap-3 w-full">
+          {/* Gäste-Favorit Badge + CTA – rechts im Hero-Header */}
+          <div className="shrink-0 self-start mx-auto md:mx-0 w-full max-w-[240px] md:w-[220px] md:max-w-none flex flex-col gap-3">
+            <button
+              onClick={() => scrollToSection('#reviews')}
+              className="border border-border rounded-2xl bg-card px-4 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
+              aria-label="Gäste-Favorit auf Airbnb"
+            >
+              <div className="flex flex-col items-center text-center gap-3 w-full">
               {/* Lorbeer + Gäste-Favorit */}
               <div className="flex items-center gap-1.5 h-11 md:h-14">
                 <img src={laurelLeft} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
@@ -124,8 +125,19 @@ const HeroSection = () => {
               <p className="text-[11px] leading-[1.35] text-muted-foreground w-full break-words text-pretty mt-1">
                 Unterkunft auf Airbnb mit herausragenden Gäste-Bewertungen in allen Kategorien
               </p>
-            </div>
-          </button>
+              </div>
+            </button>
+
+            {/* CTA direkt unter der Badge */}
+            <Button
+              variant="alpine"
+              size="lg"
+              onClick={() => scrollToSection('#availability')}
+              className="w-full"
+            >
+              {t('hero.cta.book')}
+            </Button>
+          </div>
         </motion.div>
 
         {/* Airbnb-style photo grid */}
