@@ -180,28 +180,6 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* CTA Row */}
-        <motion.div
-          className="mt-8 md:mt-10"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25 }}
-        >
-          <div className="flex flex-col gap-3">
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {t('hero.description')}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => scrollToSection('#house')}
-              >
-                {t('nav.house')}
-              </Button>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
