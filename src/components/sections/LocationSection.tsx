@@ -32,9 +32,9 @@ const LocationSection = () => {
   }, []);
 
   const highlights = [
-    { icon: Mountain, label: 'Hiking' },
-    { icon: Snowflake, label: 'Skiing' },
-    { icon: TreePine, label: 'Nature' },
+    { icon: Mountain, label: t('location.hiking') },
+    { icon: Snowflake, label: t('location.skiing') },
+    { icon: TreePine, label: t('location.nature') },
   ];
 
   const locationImages = [
@@ -108,7 +108,7 @@ const LocationSection = () => {
                 <div className="w-full h-full flex items-center justify-center bg-muted">
                   <div className="text-center text-muted-foreground">
                     <MapPin className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                    <span className="text-sm">Karte wird geladen...</span>
+                    <span className="text-sm">{t('common.mapLoading')}</span>
                   </div>
                 </div>
               )}
