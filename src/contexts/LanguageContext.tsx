@@ -98,9 +98,9 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.tagline': 'Zeit für Familie. Zeit für die Berge. Zeit für ACHZEIT.',
 
     // Kurtaxe Danke
-    'kurtaxe.thanksTitle': 'Vielen Dank!',
-    'kurtaxe.thanksMessage': 'Ihre Kurtaxe wurde erfolgreich gezahlt. Wir wünschen Ihnen einen wunderbaren Aufenthalt in Fischen und erholsame Tage im Allgäu.',
-    'kurtaxe.backHome': 'Zurück zur Startseite',
+    'kurbeitrag.thanksTitle': 'Vielen Dank!',
+    'kurbeitrag.thanksMessage': 'Ihr Kurbeitrag wurde erfolgreich gezahlt. Wir wünschen Ihnen einen wunderbaren Aufenthalt in Fischen und erholsame Tage im Allgäu.',
+    'kurbeitrag.backHome': 'Zurück zur Startseite',
   },
   en: {
     // Navigation
@@ -191,9 +191,9 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.tagline': 'Time for family. Time for the mountains. Time for ACHZEIT.',
 
     // Kurtaxe Danke
-    'kurtaxe.thanksTitle': 'Thank You!',
-    'kurtaxe.thanksMessage': 'Your tourist tax has been successfully paid. We wish you a wonderful stay in Fischen and relaxing days in the Allgäu.',
-    'kurtaxe.backHome': 'Back to Home',
+    'kurbeitrag.thanksTitle': 'Thank You!',
+    'kurbeitrag.thanksMessage': 'Your tourist contribution has been successfully paid. We wish you a wonderful stay in Fischen and relaxing days in the Allgäu.',
+    'kurbeitrag.backHome': 'Back to Home',
   }
 };
 
