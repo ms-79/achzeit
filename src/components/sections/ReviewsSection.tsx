@@ -86,7 +86,7 @@ const ReviewsSection = () => {
           <div className="flex items-center justify-center gap-3 mt-4">
             {renderStars(avgRating)}
             <span className="text-foreground font-medium">
-              {(avgRating / 2).toFixed(1)}/5
+              {(avgRating / 2).toFixed(1)}
             </span>
             <span className="text-muted-foreground text-sm">
               ({reviews.length} {language === 'de' ? 'Bewertungen' : 'reviews'})
