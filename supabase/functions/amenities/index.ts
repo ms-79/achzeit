@@ -35,9 +35,37 @@ async function getToken(): Promise<string> {
   return cachedToken;
 }
 
-async function translateToGerman(text: string): Promise<string> {
+// Heuristic language detection between de and en.
+function detectLang(text: string): "de" | "en" | "other" {
+  const sample = text.toLowerCase().slice(0, 2000);
+  if (!sample.trim()) return "other";
+  const deHits = (sample.match(/\b(und|der|die|das|mit|für|ist|nicht|auch|sich|ein|eine|sind|wir|sie|ihr|im|zum|zur|bei|sehr|haus|wohnung|küche|schlafzimmer|gäste|aussicht|berge|gemütlich|ferienhaus)\b/g) || []).length;
+  const enHits = (sample.match(/\b(the|and|with|for|you|your|our|are|this|that|from|have|will|kitchen|bedroom|guests|mountain|view|cozy|house|apartment|vacation)\b/g) || []).length;
+  const umlauts = (sample.match(/[äöüß]/g) || []).length;
+  const deScore = deHits + umlauts * 2;
+  if (deScore > enHits && deScore >= 3) return "de";
+  if (enHits > deScore && enHits >= 3) return "en";
+  return "other";
+}
+
+// Translate + structure: returns HTML with <h3> headings and <p> paragraphs.
+async function aiFormat(
+  text: string,
+  targetLang: "de" | "en",
+  needsTranslation: boolean,
+): Promise<string> {
   const apiKey = Deno.env.get("LOVABLE_API_KEY");
   if (!apiKey || !text.trim()) return text;
+  const langName = targetLang === "de" ? "Deutsch (Du-Form)" : "English";
+  const sys =
+    `Du formatierst Ferienhaus-Beschreibungen für eine hochwertige Website.\n\n` +
+    `AUFGABE:\n` +
+    `1. ${needsTranslation ? `Übersetze den Text vollständig nach ${langName}.` : `Der Text ist bereits ${langName} — behalte die Sprache exakt bei.`}\n` +
+    `2. Erkenne logische Abschnitte (z.B. "Das Haus", "Schlafzimmer", "Ausstattung", "Lage", "Aktivitäten") und gib ihnen kurze, klare Überschriften.\n` +
+    `3. Strukturiere den Output als sauberes HTML mit <h3> für Überschriften und <p> für Absätze.\n` +
+    `4. Erlaubte Tags NUR: <h3>, <p>, <strong>, <em>, <br>, <ul>, <li>. Keine anderen Tags, keine Attribute, keine Markdown-Zeichen wie ** oder ##.\n` +
+    `5. Keine Inhalte hinzuerfinden oder weglassen. Doppelte Infos entfernen.\n` +
+    `6. Antworte ausschließlich mit dem HTML, ohne Code-Fences, ohne Vor-/Nachtext.`;
   try {
     const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -48,28 +76,22 @@ async function translateToGerman(text: string): Promise<string> {
       body: JSON.stringify({
         model: "google/gemini-2.5-flash",
         messages: [
-          {
-            role: "system",
-            content:
-              "Du bist ein professioneller Übersetzer für hochwertige Ferienhaus-Beschreibungen. " +
-              "Übersetze den Text vom Englischen ins Deutsche. " +
-              "Behalte Absätze, Zeilenumbrüche und HTML-Tags wie <b>...</b> exakt bei. " +
-              "Verwende einen einladenden, hochwertigen Ton (Du-Form). " +
-              "Gib nur die Übersetzung zurück, keinen zusätzlichen Text.",
-          },
+          { role: "system", content: sys },
           { role: "user", content: text },
         ],
       }),
     });
     if (!res.ok) {
-      console.error("Translation failed:", res.status, await res.text());
+      console.error("aiFormat failed:", res.status, await res.text());
       return text;
     }
     const data = await res.json();
-    const out = data?.choices?.[0]?.message?.content;
-    return typeof out === "string" && out.trim() ? out.trim() : text;
+    let out = data?.choices?.[0]?.message?.content;
+    if (typeof out !== "string" || !out.trim()) return text;
+    out = out.trim().replace(/^```(?:html)?\s*/i, "").replace(/```$/i, "").trim();
+    return out;
   } catch (e) {
-    console.error("Translation error:", e);
+    console.error("aiFormat error:", e);
     return text;
   }
 }
@@ -161,10 +183,16 @@ Deno.serve(async (req) => {
     amenitiesCachedAt = Date.now();
 
     // Default fields are typically EN on this account.
-    cachedDescriptions.en = String(
+    const defaultDesc = String(
       listing.description || listing.descriptionLong || listing.summary || "",
     );
-    cachedSummaries.en = String(listing.summary || "");
+    const defaultSum = String(listing.summary || "");
+    const defaultLang = detectLang(defaultDesc);
+    console.log("default description detected lang:", defaultLang);
+    // Store raw under detected language (default to en if undetermined).
+    const storeAs = defaultLang === "de" ? "de" : "en";
+    cachedDescriptions[storeAs] = defaultDesc;
+    cachedSummaries[storeAs] = defaultSum;
 
     // Hostaway returns localized variants in `listingTranslations`.
     const translations: any[] = Array.isArray(listing.listingTranslations)
@@ -175,18 +203,33 @@ Deno.serve(async (req) => {
       if (!lang) continue;
       const desc = String(tr.description || tr.descriptionLong || tr.summary || "");
       const sum = String(tr.summary || "");
-      if (desc) cachedDescriptions[lang] = desc;
+      if (desc) {
+        // Verify it actually matches the claimed language; otherwise discard.
+        const actual = detectLang(desc);
+        if (actual === "other" || actual === lang) {
+          cachedDescriptions[lang] = desc;
+        } else {
+          console.log(`discarding translation '${lang}' — actual lang is '${actual}'`);
+        }
+      }
       if (sum) cachedSummaries[lang] = sum;
     }
 
-    // Fallback: if no German translation in Hostaway and the user wants DE,
-    // translate the English description once via Lovable AI Gateway and cache it.
-    if (locale === "de" && !cachedDescriptions.de && cachedDescriptions.en) {
-      console.log("Translating description EN → DE via Lovable AI");
-      cachedDescriptions.de = await translateToGerman(cachedDescriptions.en);
-      if (cachedSummaries.en) {
-        cachedSummaries.de = await translateToGerman(cachedSummaries.en);
-      }
+    // Ensure we have the requested locale: detect actual language and format.
+    const have = cachedDescriptions[locale];
+    const haveLang = have ? detectLang(have) : "other";
+    if (!have || (haveLang !== "other" && haveLang !== locale)) {
+      const source =
+        cachedDescriptions[locale === "de" ? "en" : "de"] ||
+        cachedDescriptions.en ||
+        cachedDescriptions.de ||
+        defaultDesc;
+      console.log(`Formatting/translating description → ${locale} (source lang: ${detectLang(source)})`);
+      cachedDescriptions[locale] = await aiFormat(source, locale, detectLang(source) !== locale);
+    } else if (have && !/<h3|<p/i.test(have)) {
+      // Already correct language but unformatted → just structure it.
+      console.log(`Formatting existing ${locale} description`);
+      cachedDescriptions[locale] = await aiFormat(have, locale, false);
     }
 
     return new Response(JSON.stringify({
