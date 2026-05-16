@@ -38,7 +38,9 @@ async function getToken(): Promise<string> {
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
-    if (cachedAmenities && Date.now() - amenitiesCachedAt < CACHE_TTL) {
+    const url = new URL(req.url);
+    const bypass = url.searchParams.get("refresh") === "1";
+    if (!bypass && cachedAmenities && Date.now() - amenitiesCachedAt < CACHE_TTL) {
       return new Response(JSON.stringify({
         amenities: cachedAmenities,
         description: cachedDescription,
