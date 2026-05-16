@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Star, Mountain, Flame, Sparkles } from 'lucide-react';
+import { Star, Flame, Sun, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import galleryBalcony from '@/assets/gallery-balkon-dachgeschoss.jpg';
@@ -54,7 +54,7 @@ const HeroSection = () => {
           <div className="flex items-center gap-3 mb-3">
             <span className="h-px w-10 bg-primary/60" aria-hidden="true" />
             <span className="font-body uppercase tracking-[0.25em] text-xs md:text-sm text-primary/80">
-              Family Retreat · Fischen im Allgäu
+              ACHZEIT Family Retreat · Fischen im Allgäu · Nahe Oberstdorf
             </span>
           </div>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.02] tracking-tight">
@@ -65,8 +65,8 @@ const HeroSection = () => {
             </span>
           </h1>
           <p className="mt-4 text-base md:text-xl text-foreground/80 max-w-2xl leading-relaxed">
-            Dein modernes <strong className="font-semibold text-foreground">Family Retreat</strong> mitten in den Allgäuer Alpen –
-            mit privater Sauna, Kamin und Bergblick vom Balkon.
+            Dein modernes <strong className="font-semibold text-foreground">Family Retreat</strong> mitten in den Allgäuer Alpen, nahe Oberstdorf –
+            mit privater Sauna, Kamin, Terrasse und Balkon.
           </p>
 
           {/* Benefits / Trust Row */}
@@ -77,13 +77,13 @@ const HeroSection = () => {
             </span>
             <span className="hidden md:inline text-border">·</span>
             <span className="inline-flex items-center gap-1.5">
-              <Mountain className="w-4 h-4 text-primary" aria-hidden="true" />
-              360° Bergpanorama
+              <Sun className="w-4 h-4 text-primary" aria-hidden="true" />
+              Terrasse &amp; Balkon
             </span>
             <span className="hidden md:inline text-border">·</span>
             <span className="inline-flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
-              Bis zu 8 Gäste · 3 Schlafzimmer
+              <Users className="w-4 h-4 text-primary" aria-hidden="true" />
+              Bis zu 7 Gäste (4 Erwachsene, 3 Kinder)
             </span>
           </div>
         </motion.div>
