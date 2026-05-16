@@ -6,6 +6,7 @@ import CookieConsentBanner from '@/components/CookieConsentBanner';
 
 // Lazy load below-the-fold sections for faster initial page load
 const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
+const AmenitiesSection = lazy(() => import('@/components/sections/AmenitiesSection'));
 const GallerySection = lazy(() => import('@/components/sections/GallerySection'));
 const AvailabilitySection = lazy(() => import('@/components/sections/AvailabilitySection'));
 const ReviewsSection = lazy(() => import('@/components/sections/ReviewsSection'));
@@ -27,6 +28,9 @@ const Index = () => {
         <HeroSection />
         <Suspense fallback={<SectionSkeleton />}>
           <HouseSection />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <AmenitiesSection />
         </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
           <GallerySection />
