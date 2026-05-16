@@ -80,14 +80,19 @@ Deno.serve(async (req) => {
     const url = new URL(req.url);
     const bypass = url.searchParams.get("refresh") === "1";
     let localeRaw = (url.searchParams.get("locale") || "").toLowerCase();
-    if (!localeRaw && (req.method === "POST")) {
+    if (!localeRaw && req.method === "POST") {
       try {
-        const body = await req.json();
+        const txt = await req.text();
+        const body = txt ? JSON.parse(txt) : {};
         localeRaw = String(body?.locale || "").toLowerCase();
-      } catch { /* ignore */ }
+        console.log("parsed body locale:", localeRaw, "raw:", txt);
+      } catch (e) {
+        console.error("body parse failed:", e);
+      }
     }
     if (!localeRaw) localeRaw = "en";
     const locale = localeRaw === "de" ? "de" : "en";
+    console.log("resolved locale:", locale, "method:", req.method);
     if (
       !bypass &&
       cachedAmenities &&
