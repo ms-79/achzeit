@@ -100,7 +100,6 @@ const translations: Record<Language, Record<string, string>> = {
     // Kurtaxe Danke
     'kurtaxe.thanksTitle': 'Vielen Dank!',
     'kurtaxe.thanksMessage': 'Ihre Kurtaxe wurde erfolgreich gezahlt. Wir wünschen Ihnen einen wunderbaren Aufenthalt in Fischen und erholsame Tage im Allgäu.',
-    'kurtaxe.confirmationEmail': 'Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet.',
     'kurtaxe.backHome': 'Zurück zur Startseite',
   },
   en: {
@@ -194,7 +193,6 @@ const translations: Record<Language, Record<string, string>> = {
     // Kurtaxe Danke
     'kurtaxe.thanksTitle': 'Thank You!',
     'kurtaxe.thanksMessage': 'Your tourist tax has been successfully paid. We wish you a wonderful stay in Fischen and relaxing days in the Allgäu.',
-    'kurtaxe.confirmationEmail': 'A confirmation has been sent to your email address.',
     'kurtaxe.backHome': 'Back to Home',
   }
 };

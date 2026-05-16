@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CheckCircle } from 'lucide-react';
+import AchzeitLogo from '@/components/AchzeitLogo';
 
 const KurtaxeDanke = () => {
   const { t } = useLanguage();
@@ -10,6 +11,10 @@ const KurtaxeDanke = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="max-w-lg w-full text-center">
+        <div className="flex justify-center mb-10">
+          <AchzeitLogo className="w-32" color="hsl(var(--alpine-charcoal))" />
+        </div>
+
         <div className="flex justify-center mb-8">
           <div className="w-20 h-20 rounded-full bg-alpine-forest/10 flex items-center justify-center">
             <CheckCircle className="w-10 h-10 text-alpine-forest" strokeWidth={1.5} />
@@ -24,11 +29,7 @@ const KurtaxeDanke = () => {
           {t('kurtaxe.thanksMessage')}
         </p>
 
-        <div className="w-16 h-0.5 bg-alpine-stone mx-auto mb-8" />
-
-        <p className="text-muted-foreground text-sm mb-10">
-          {t('kurtaxe.confirmationEmail')}
-        </p>
+        <div className="w-16 h-0.5 bg-alpine-stone mx-auto mb-10" />
 
         <Button variant="alpine" size="lg" onClick={() => navigate('/')}>
           {t('kurtaxe.backHome')}
