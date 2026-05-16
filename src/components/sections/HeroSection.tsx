@@ -92,36 +92,32 @@ const HeroSection = () => {
           {/* Gäste-Favorit Badge – kompakt, rechts im Hero-Header */}
           <button
             onClick={() => scrollToSection('#reviews')}
-            className="shrink-0 self-start border border-border rounded-2xl bg-card px-4 py-3 md:px-5 md:py-4 shadow-soft hover:shadow-medium transition-shadow text-left"
+            className="shrink-0 self-start border border-border rounded-2xl bg-card px-6 py-5 md:px-7 md:py-6 shadow-soft hover:shadow-medium transition-shadow"
             aria-label="Gäste-Favorit auf Airbnb"
           >
-            <div className="flex items-center gap-3 md:gap-4">
-              <div className="flex items-center gap-1 shrink-0 h-10 md:h-12">
+            <div className="flex flex-col items-center text-center gap-3 min-w-[140px]">
+              {/* Lorbeer + Gäste-Favorit */}
+              <div className="flex items-center gap-1.5 h-12 md:h-14">
                 <img src={laurelLeft} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
-                <span className="font-body font-semibold text-foreground text-center whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[11px] md:text-[13px]">
+                <span className="font-body font-semibold text-foreground whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[13px] md:text-sm">
                   <span>Gäste-</span>
                   <span>Favorit</span>
                 </span>
                 <img src={laurelRight} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
               </div>
-              <div className="flex items-stretch gap-3 md:gap-4 shrink-0">
-                <div className="flex flex-col items-center justify-center text-center border-l border-border pl-3 md:pl-4 min-w-[2.75rem]">
-                  <div className="font-body font-semibold text-lg md:text-xl text-foreground leading-none h-5 md:h-6 flex items-center">
-                    {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
-                  </div>
-                  <div className="flex justify-center gap-0.5 mt-1 h-3">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="w-2 h-2 fill-foreground text-foreground" />
-                    ))}
-                  </div>
+
+              {/* Bewertung */}
+              <div className="flex flex-col items-center pt-2 border-t border-border w-full">
+                <div className="font-body font-semibold text-2xl md:text-3xl text-foreground leading-none">
+                  {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
                 </div>
-                <div className="flex flex-col items-center justify-center text-center border-l border-border pl-3 md:pl-4 min-w-[2.75rem]">
-                  <div className="font-body font-semibold text-lg md:text-xl text-foreground leading-none h-5 md:h-6 flex items-center">
-                    {reviewData ? reviewData.count : '–'}
-                  </div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1 h-3 leading-none">
-                    Bewertungen
-                  </div>
+                <div className="flex justify-center gap-0.5 mt-1.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="w-2.5 h-2.5 fill-foreground text-foreground" />
+                  ))}
+                </div>
+                <div className="text-[11px] md:text-xs text-muted-foreground mt-2 underline">
+                  {reviewData ? `${reviewData.count} Bewertungen` : 'Bewertungen'}
                 </div>
               </div>
             </div>
