@@ -123,8 +123,8 @@ const GallerySection = () => {
           <div className="alpine-divider mt-6" />
         </ScrollReveal>
 
-        {/* Gallery Grid - 3x3 */}
-        <div className="grid grid-cols-3 gap-3 md:gap-4">
+        {/* Gallery Grid - 4x3 */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
           {gridItems.map((item, gridIndex) => {
             // Find the actual index in galleryItems for lightbox navigation
             const actualIndex = galleryItems.findIndex(g => g.src === item.src);
