@@ -44,12 +44,13 @@ Deno.serve(async (req) => {
 
     const token = await getToken();
     const res = await fetch(
-      `https://api.hostaway.com/v1/listings/${LISTING_ID}`,
+      `https://api.hostaway.com/v1/listings/${LISTING_ID}?includeResources=1`,
       { headers: { Authorization: `Bearer ${token}` } },
     );
     if (!res.ok) throw new Error(`Listing fetch failed: ${res.status}`);
     const data = await res.json();
     const listing = data.result || {};
+    console.log("listing keys:", Object.keys(listing).join(","));
 
     // Hostaway returns "listingAmenities": [{ amenityId, amenityName }]
     // but on some accounts only "listingAmenities": [{ id, amenityId }] (numeric IDs).
