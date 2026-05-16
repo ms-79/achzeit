@@ -108,31 +108,31 @@ const HeroSection = () => {
           {/* Gäste-Favorit Badge */}
           <button
             onClick={() => scrollToSection('#reviews')}
-            className="md:col-span-2 border border-border rounded-2xl bg-card p-6 md:p-8 shadow-soft hover:shadow-medium transition-shadow text-center"
+            className="md:col-span-2 border border-border rounded-2xl bg-card p-5 md:p-6 shadow-soft hover:shadow-medium transition-shadow text-center"
           >
-            <div className="flex items-center justify-center gap-4 md:gap-6">
+            <div className="flex items-center justify-center gap-2 md:gap-3">
               <img
                 src={laurelLeft}
                 alt=""
                 aria-hidden="true"
-                className="h-16 md:h-20 w-auto"
+                className="h-12 md:h-14 w-auto"
                 loading="lazy"
               />
-              <span className="font-display text-5xl md:text-6xl text-foreground leading-none">
+              <span className="font-body font-bold tracking-tight text-7xl md:text-8xl text-foreground leading-none">
                 {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
               </span>
               <img
                 src={laurelRight}
                 alt=""
                 aria-hidden="true"
-                className="h-16 md:h-20 w-auto"
+                className="h-12 md:h-14 w-auto"
                 loading="lazy"
               />
             </div>
-            <div className="mt-4 font-medium text-foreground text-base md:text-lg">
+            <div className="mt-2 font-medium text-foreground text-base md:text-lg">
               Gäste-Favorit auf Airbnb
             </div>
-            <p className="mt-2 text-sm md:text-base text-muted-foreground max-w-md mx-auto leading-relaxed">
+            <p className="mt-2 text-sm md:text-base text-muted-foreground max-w-xs md:max-w-sm mx-auto leading-relaxed">
               Diese Unterkunft gehört zu den{' '}
               <span className="font-medium text-foreground">obersten 10 %</span>{' '}
               der gefragtesten Inserate auf Airbnb – basierend auf Bewertungen und Zuverlässigkeit
