@@ -190,6 +190,12 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.rights': 'All rights reserved',
     'footer.tagline': 'Time for family. Time for the mountains. Time for ACHZEIT.',
+
+    // Kurtaxe Danke
+    'kurtaxe.thanksTitle': 'Thank You!',
+    'kurtaxe.thanksMessage': 'Your tourist tax has been successfully paid. We wish you a wonderful stay in Fischen and relaxing days in the Allgäu.',
+    'kurtaxe.confirmationEmail': 'A confirmation has been sent to your email address.',
+    'kurtaxe.backHome': 'Back to Home',
   }
 };
 
