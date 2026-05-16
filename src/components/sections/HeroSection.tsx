@@ -64,7 +64,7 @@ const HeroSection = () => {
               Tief durchatmen.
             </span>
           </h1>
-          <p className="mt-4 text-base md:text-xl text-foreground/80 max-w-2xl leading-relaxed">
+          <p className="mt-4 text-base md:text-lg text-foreground/80 leading-relaxed">
             Dein modernes <strong className="font-semibold text-foreground">Family Retreat</strong> mitten in den Allgäuer Alpen, nahe Oberstdorf –
             mit privater Sauna, Kamin, Terrasse und Balkon.
           </p>
