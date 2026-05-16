@@ -115,24 +115,21 @@ const HeroSection = () => {
                 src={laurelLeft}
                 alt=""
                 aria-hidden="true"
-                className="h-12 md:h-14 w-auto"
+                className="h-10 md:h-12 w-auto"
                 loading="lazy"
               />
-              <span className="font-body font-bold tracking-tight text-7xl md:text-8xl text-foreground leading-none">
-                {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
+              <span className="font-body font-semibold text-foreground text-lg md:text-xl leading-tight text-center">
+                Gäste-<br />Favorit
               </span>
               <img
                 src={laurelRight}
                 alt=""
                 aria-hidden="true"
-                className="h-12 md:h-14 w-auto"
+                className="h-10 md:h-12 w-auto"
                 loading="lazy"
               />
             </div>
-            <div className="mt-2 font-medium text-foreground text-base md:text-lg">
-              Gäste-Favorit auf Airbnb
-            </div>
-            <p className="mt-2 text-sm md:text-base text-muted-foreground max-w-xs md:max-w-sm mx-auto leading-relaxed">
+            <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-xs md:max-w-sm mx-auto leading-relaxed">
               Diese Unterkunft gehört zu den{' '}
               <span className="font-medium text-foreground">obersten 10 %</span>{' '}
               der gefragtesten Inserate auf Airbnb – basierend auf Bewertungen und Zuverlässigkeit
