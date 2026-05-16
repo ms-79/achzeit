@@ -1,9 +1,8 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
+import { Star, Mountain, Flame, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Mountain, Flame, Sparkles } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import galleryBalcony from '@/assets/gallery-balkon-dachgeschoss.jpg';
 import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
