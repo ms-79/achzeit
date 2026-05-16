@@ -99,7 +99,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Kurtaxe Danke
     'kurbeitrag.thanksTitle': 'Vielen Dank!',
-    'kurbeitrag.thanksMessage': 'Ihr Kurbeitrag wurde erfolgreich gezahlt. Wir wünschen Ihnen einen wunderbaren Aufenthalt in Fischen und erholsame Tage im Allgäu.',
+    'kurbeitrag.thanksMessage': 'Dein Kurbeitrag wurde erfolgreich gezahlt. Wir wünschen dir einen wunderbaren Aufenthalt in Fischen und erholsame Tage im Allgäu.',
     'kurbeitrag.backHome': 'Zurück zur Startseite',
   },
   en: {
