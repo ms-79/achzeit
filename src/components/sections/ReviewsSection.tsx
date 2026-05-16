@@ -21,8 +21,11 @@ const ReviewsSection = () => {
 
   useEffect(() => {
     const fetchReviews = async () => {
+      setLoading(true);
       try {
-        const { data, error } = await supabase.functions.invoke('reviews');
+        const { data, error } = await supabase.functions.invoke('reviews', {
+          body: { locale: language },
+        });
         if (error) throw error;
         setReviews(data.reviews || []);
       } catch (err) {
@@ -32,7 +35,7 @@ const ReviewsSection = () => {
       }
     };
     fetchReviews();
-  }, []);
+  }, [language]);
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
