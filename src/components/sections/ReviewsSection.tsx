@@ -143,9 +143,14 @@ const ReviewsSection = () => {
             {active && (
               <>
                 <DialogHeader>
-                  <DialogTitle className="flex items-center justify-between gap-4 font-display text-2xl">
+                  <DialogTitle className="flex items-center justify-between gap-4 font-display text-2xl pr-8">
                     <span>{active.reviewerName}</span>
-                    {renderStars(active.rating)}
+                    <span className="flex items-center gap-2 mr-2">
+                      {renderStars(active.rating)}
+                      <span className="text-sm font-medium text-foreground tabular-nums">
+                        {(active.rating / 2).toFixed(1).replace('.', ',')}
+                      </span>
+                    </span>
                   </DialogTitle>
                   <span className="text-xs text-muted-foreground">
                     {formatDate(active.submittedAt)}
