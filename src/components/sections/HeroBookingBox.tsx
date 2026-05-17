@@ -108,8 +108,11 @@ const HeroBookingBox = () => {
       className="w-full rounded-2xl border border-border bg-card shadow-medium p-5 md:p-6 lg:sticky lg:top-24"
       aria-label={t('hero.book.title')}
     >
-      <p className="font-display text-xl md:text-[1.4rem] leading-snug text-foreground mb-4">
+      <p className="font-display text-xl md:text-[1.4rem] leading-snug text-foreground">
         {t('hero.book.title')}
+      </p>
+      <p className="text-xs text-muted-foreground mt-1 mb-4 leading-snug">
+        {t('hero.book.intro')}
       </p>
 
       {/* Date pills */}
