@@ -41,7 +41,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="home" className="pt-20 md:pt-24 pb-6 md:pb-8 bg-background relative">
+    <section id="home" className="pt-20 md:pt-24 pb-6 md:pb-8 bg-background relative lg:pr-[380px]">
       <div className="container mx-auto px-6 relative">
         {/* Title above image */}
         <motion.div
