@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
+import HeroBookingBox from '@/components/sections/HeroBookingBox';
 
 // Lazy load below-the-fold sections for faster initial page load
 const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
@@ -27,7 +28,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
+      <main className="lg:pr-[380px] relative">
         <HeroSection />
         <Suspense fallback={<SectionSkeleton />}>
           <HouseSection />
@@ -53,6 +54,14 @@ const Index = () => {
         <Suspense fallback={<SectionSkeleton />}>
           <ContactSection />
         </Suspense>
+
+        {/* Desktop: floating sticky booking box — always in viewport */}
+        <aside
+          className="hidden lg:block fixed top-24 right-6 w-[340px] z-30"
+          aria-label="Buchungsbox"
+        >
+          <HeroBookingBox />
+        </aside>
       </main>
       <Footer />
       <StickyMobileCTA />
