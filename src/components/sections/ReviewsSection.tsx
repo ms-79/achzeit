@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import ScrollReveal from '@/components/ScrollReveal';
 import { Star, Quote } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface Review {
   id: number;
@@ -18,6 +19,7 @@ const ReviewsSection = () => {
   const { language } = useLanguage();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
+  const [active, setActive] = useState<Review | null>(null);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -103,9 +105,23 @@ const ReviewsSection = () => {
             <ScrollReveal key={review.id} delay={index * 0.1}>
               <div className="bg-card rounded-lg border border-border/50 p-6 shadow-sm h-full flex flex-col">
                 <Quote className="w-6 h-6 text-primary/30 mb-3 shrink-0" />
-                <p className="text-foreground/80 text-sm leading-relaxed flex-1 mb-4">
+                <p
+                  className="text-foreground/80 text-sm leading-relaxed flex-1 mb-2 overflow-hidden"
+                  style={{
+                    display: '-webkit-box',
+                    WebkitLineClamp: 7,
+                    WebkitBoxOrient: 'vertical',
+                  }}
+                >
                   "{review.review}"
                 </p>
+                <button
+                  type="button"
+                  onClick={() => setActive(review)}
+                  className="text-xs font-medium text-primary hover:underline self-start mb-4"
+                >
+                  {language === 'de' ? 'Mehr lesen' : 'Read more'}
+                </button>
                 <div className="border-t border-border/30 pt-4 mt-auto">
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-foreground text-sm">
@@ -121,6 +137,28 @@ const ReviewsSection = () => {
             </ScrollReveal>
           ))}
         </div>
+
+        <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
+          <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto bg-card">
+            {active && (
+              <>
+                <DialogHeader>
+                  <DialogTitle className="flex items-center justify-between gap-4 font-display text-2xl">
+                    <span>{active.reviewerName}</span>
+                    {renderStars(active.rating)}
+                  </DialogTitle>
+                  <span className="text-xs text-muted-foreground">
+                    {formatDate(active.submittedAt)}
+                  </span>
+                </DialogHeader>
+                <Quote className="w-6 h-6 text-primary/30" />
+                <p className="text-foreground/85 text-sm leading-relaxed whitespace-pre-line">
+                  "{active.review}"
+                </p>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
