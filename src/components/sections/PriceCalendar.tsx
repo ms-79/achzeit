@@ -129,26 +129,25 @@ const PriceCalendar = ({ onSelect }: Props) => {
             const isTo = to === dateStr;
             const inRange = from && to && dateStr > from && dateStr < to;
             const isSelected = isFrom || isTo;
-            // Hide days after `from` that are below minimum stay (still during checkout selection)
+            // Days after `from` that are below the minimum stay → visible but disabled/greyed out
             const belowMinStay =
               !!from && !to && minStay != null && dateStr > from && daysBetween(from, dateStr) < minStay;
-
-            if (belowMinStay) {
-              return <div key={i} className="h-12" aria-hidden="true" />;
-            }
+            const effectivelyAvailable = available && !belowMinStay;
 
             return (
               <button
                 key={i}
                 type="button"
-                onClick={() => handleDayClick(dateStr, available)}
-                disabled={!available}
+                onClick={() => handleDayClick(dateStr, effectivelyAvailable)}
+                disabled={!effectivelyAvailable}
                 aria-label={dateStr}
                 className={cn(
                   'flex flex-col items-center justify-start pt-1.5 h-12 rounded-md text-sm leading-none transition-colors px-0.5',
-                  available
+                  effectivelyAvailable
                     ? 'text-foreground hover:bg-muted cursor-pointer'
-                    : 'text-muted-foreground/40 line-through cursor-not-allowed',
+                    : 'text-muted-foreground/40 cursor-not-allowed',
+                  !effectivelyAvailable && available && 'opacity-50',
+                  !available && 'line-through',
                   inRange && 'bg-muted',
                   isSelected && 'bg-foreground text-background hover:bg-foreground',
                 )}
