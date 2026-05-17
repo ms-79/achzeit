@@ -209,6 +209,13 @@ const PriceCalendar = ({ onSelect }: Props) => {
         <div className="min-w-0">{renderMonth(cursor)}</div>
         <div className="min-w-0 hidden md:block">{renderMonth(addMonths(cursor, 1))}</div>
       </div>
+      {from && minStay ? (
+        <p className="mt-4 text-xs text-destructive text-center">
+          {language === 'de'
+            ? `Mindestaufenthalt: ${minStay} Nächte`
+            : `Minimum stay: ${minStay} nights`}
+        </p>
+      ) : null}
     </div>
   );
 };
