@@ -32,7 +32,7 @@ const WhySection = () => {
           <div className="alpine-divider mt-6" />
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 max-w-6xl mx-auto">
           {tiles.map((tile, i) => (
             <ScrollReveal key={i} delay={i * 0.05}>
               <div className="group h-full p-6 rounded-xl bg-card border border-border/60 shadow-soft hover:shadow-medium hover:border-alpine-stone/50 transition-all duration-300">
