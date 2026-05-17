@@ -127,7 +127,12 @@ const ReviewsSection = () => {
                     <span className="font-medium text-foreground text-sm">
                       {review.reviewerName}
                     </span>
-                    {renderStars(review.rating)}
+                    <span className="flex items-center gap-1.5">
+                      {renderStars(review.rating)}
+                      <span className="text-xs font-medium text-foreground tabular-nums">
+                        {(review.rating / 2).toFixed(1).replace('.', ',')}
+                      </span>
+                    </span>
                   </div>
                   <span className="text-xs text-muted-foreground mt-1 block">
                     {formatDate(review.submittedAt)}
@@ -143,9 +148,14 @@ const ReviewsSection = () => {
             {active && (
               <>
                 <DialogHeader>
-                  <DialogTitle className="flex items-center justify-between gap-4 font-display text-2xl">
+                  <DialogTitle className="flex items-center justify-between gap-4 font-display text-2xl pr-8">
                     <span>{active.reviewerName}</span>
-                    {renderStars(active.rating)}
+                    <span className="flex items-center gap-2 mr-2">
+                      {renderStars(active.rating)}
+                      <span className="text-sm font-medium text-foreground tabular-nums">
+                        {(active.rating / 2).toFixed(1).replace('.', ',')}
+                      </span>
+                    </span>
                   </DialogTitle>
                   <span className="text-xs text-muted-foreground">
                     {formatDate(active.submittedAt)}
