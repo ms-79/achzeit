@@ -38,8 +38,14 @@ const HeroBookingBox = () => {
     : 0;
   const minStayWarning = minStay && nights > 0 && nights < minStay;
 
-  const scrollToAvailability = () => {
-    document.querySelector('#availability')?.scrollIntoView({ behavior: 'smooth' });
+  const openCheckout = () => {
+    const base = 'https://achzeit.holidayfuture.com/checkout/463607';
+    const params = new URLSearchParams();
+    if (range.from) params.set('start', range.from);
+    if (range.to) params.set('end', range.to);
+    params.set('numberOfGuests', String(total));
+    const url = range.from && range.to ? `${base}?${params.toString()}` : base;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
@@ -204,7 +210,7 @@ const HeroBookingBox = () => {
         variant="alpine"
         size="lg"
         className="w-full"
-        onClick={scrollToAvailability}
+        onClick={openCheckout}
       >
         {t('hero.book.cta')}
       </Button>
