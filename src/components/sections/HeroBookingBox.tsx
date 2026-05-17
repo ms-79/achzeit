@@ -105,6 +105,9 @@ const HeroBookingBox = () => {
       <p className="font-display text-xl md:text-[1.4rem] leading-snug text-foreground mb-4">
         {t('hero.book.title')}
       </p>
+      <p className="text-xs md:text-sm text-muted-foreground -mt-2 mb-4 leading-snug">
+        {t('hero.book.subtitle')}
+      </p>
 
       {/* Date pills */}
       <Popover open={dateOpen} onOpenChange={setDateOpen}>
