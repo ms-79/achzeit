@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/sections/HeroSection';
-import TrustBar from '@/components/sections/TrustBar';
 import Footer from '@/components/Footer';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
@@ -31,7 +30,6 @@ const Index = () => {
       <Header />
       <main className="relative">
         <HeroSection />
-        <TrustBar />
         {/* Reserve space on desktop for the pinned booking box (prevents content jump) */}
         <div className="lg:pr-[380px]">
           <Suspense fallback={<SectionSkeleton />}>
