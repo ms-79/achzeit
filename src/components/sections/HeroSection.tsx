@@ -107,8 +107,8 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Mobile/Tablet: Gäste-Favorit badge (Desktop sieht ihn in der rechten Sidebar) */}
-        <div className="lg:hidden mt-6">
+        {/* Gäste-Favorit badge – scrollt mit dem Content */}
+        <div className="mt-6">
           <GuestFavoriteBadge />
         </div>
 
