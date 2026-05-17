@@ -10,6 +10,7 @@ import galleryTerrace from '@/assets/gallery-terrasse.jpg';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 import laurelLeft from '@/assets/laurel-left.png';
 import laurelRight from '@/assets/laurel-right.png';
+import airbnbLogo from '@/assets/airbnb-logo.png';
 import HeroBookingBox from './HeroBookingBox';
 
 const HeroSection = () => {
@@ -153,8 +154,14 @@ const HeroSection = () => {
               </div>
 
               {/* Erklärtext */}
-              <p className="hidden sm:block flex-1 text-xs md:text-sm leading-snug text-muted-foreground text-pretty">
-                {t('hero.badge.text')}
+              <p className="hidden sm:flex flex-1 items-center flex-wrap gap-x-1.5 gap-y-1 text-xs md:text-sm leading-snug text-muted-foreground text-pretty">
+                <span>{t('hero.badge.text')}</span>
+                <img
+                  src={airbnbLogo}
+                  alt="Airbnb"
+                  loading="lazy"
+                  className="h-3.5 md:h-4 w-auto inline-block translate-y-[1px]"
+                />
               </p>
 
               {/* Rating */}
