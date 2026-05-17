@@ -9,6 +9,7 @@ import ScrollPinnedBookingBox from '@/components/ScrollPinnedBookingBox';
 
 // Lazy load below-the-fold sections for faster initial page load
 const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
+const WhySection = lazy(() => import('@/components/sections/WhySection'));
 const AmenitiesSection = lazy(() => import('@/components/sections/AmenitiesSection'));
 const GallerySection = lazy(() => import('@/components/sections/GallerySection'));
 const ReviewsSection = lazy(() => import('@/components/sections/ReviewsSection'));
@@ -32,6 +33,9 @@ const Index = () => {
         <HeroSection />
         {/* Reserve space on desktop for the pinned booking box (prevents content jump) */}
         <div className="lg:pr-[380px]">
+          <Suspense fallback={<SectionSkeleton />}>
+            <WhySection />
+          </Suspense>
           <Suspense fallback={<SectionSkeleton />}>
             <HouseSection />
           </Suspense>
