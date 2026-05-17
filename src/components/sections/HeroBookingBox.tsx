@@ -213,14 +213,6 @@ const HeroBookingBox = () => {
         {t('hero.book.trust')}
       </p>
 
-      {/* Min-stay info — appears at the bottom in red after first date click */}
-      {range.from && minStay ? (
-        <p className="text-[11px] leading-snug text-destructive text-center mt-2">
-          {t('hero.book.checkin') === 'CHECK-IN'
-            ? `Minimum stay: ${minStay} nights`
-            : `Mindestaufenthalt: ${minStay} Nächte`}
-        </p>
-      ) : null}
 
       <span className="sr-only">
         {total} {total === 1 ? t('hero.book.guest.one') : t('hero.book.guest.many')}
