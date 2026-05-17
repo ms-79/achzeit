@@ -28,7 +28,7 @@ const HeroBookingBox = () => {
     const [y, m, d] = s.split('-').map(Number);
     return new Date(y, m - 1, d).toLocaleDateString(
       t('hero.book.checkin') === 'CHECK-IN' ? 'en-US' : 'de-DE',
-      { day: '2-digit', month: 'short' },
+      { day: '2-digit', month: 'short', year: 'numeric' },
     );
   };
 
