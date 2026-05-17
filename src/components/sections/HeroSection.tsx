@@ -10,6 +10,7 @@ import galleryTerrace from '@/assets/gallery-terrasse.jpg';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 import laurelLeft from '@/assets/laurel-left.png';
 import laurelRight from '@/assets/laurel-right.png';
+import HeroBookingBox from './HeroBookingBox';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -45,12 +46,11 @@ const HeroSection = () => {
       <div className="container mx-auto px-6">
         {/* Title above image */}
         <motion.div
-          className="mb-5 md:mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-8"
+          className="mb-5 md:mb-6"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 mb-3">
             <span className="h-px w-10 bg-primary/60" aria-hidden="true" />
             <span className="font-body uppercase tracking-[0.25em] text-xs md:text-sm text-primary/80">
@@ -84,55 +84,6 @@ const HeroSection = () => {
               <Users className="w-4 h-4 text-primary" aria-hidden="true" />
               {t('hero.benefit.guests')}
             </span>
-          </div>
-          </div>
-
-          {/* Gäste-Favorit Badge + CTA – rechts im Hero-Header */}
-          <div className="shrink-0 self-start mx-auto md:mx-0 w-full max-w-[240px] md:w-[220px] md:max-w-none flex flex-col gap-3">
-            <button
-              onClick={() => scrollToSection('#reviews')}
-              className="border border-border rounded-2xl bg-card px-4 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
-              aria-label={t('hero.badge.title')}
-            >
-              <div className="flex flex-col items-center text-center gap-3 w-full">
-              {/* Lorbeer + Gäste-Favorit */}
-              <div className="flex items-center gap-1.5 h-11 md:h-14">
-                <img src={laurelLeft} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
-                <span className="font-body font-semibold text-foreground whitespace-nowrap flex flex-col justify-center h-full leading-[1.05] text-[13px] md:text-sm text-center">
-                  {t('hero.badge.title').split(/[-\s]/).map((w, i) => (
-                    <span key={i}>{w}</span>
-                  ))}
-                </span>
-                <img src={laurelRight} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
-              </div>
-
-              {/* Bewertung */}
-              <div className="flex flex-col items-center pt-2 border-t border-border w-full">
-                <div className="font-body font-semibold text-2xl md:text-3xl text-foreground leading-none">
-                  {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
-                </div>
-                <div className="flex justify-center gap-0.5 mt-1.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-2.5 h-2.5 fill-foreground text-foreground" />
-                  ))}
-                </div>
-                <div className="text-[11px] md:text-xs text-muted-foreground mt-2 underline">
-                  {reviewData
-                    ? `${reviewData.count} ${t('hero.badge.reviews')}`
-                    : t('hero.badge.reviews')}
-                </div>
-              </div>
-
-              {/* Erklärtext */}
-              <p className="text-[11px] leading-[1.35] text-muted-foreground w-full break-words text-pretty mt-1">
-                {t('hero.badge.text')}
-              </p>
-              </div>
-            </button>
-
-            <p className="text-[11px] leading-snug text-muted-foreground text-center">
-              {t('hero.trust')}
-            </p>
           </div>
         </motion.div>
 
@@ -174,6 +125,66 @@ const HeroSection = () => {
               )}
             </button>
           ))}
+        </motion.div>
+
+        {/* Badge horizontal + Buchungsbox (Airbnb-Stil) */}
+        <motion.div
+          className="mt-6 md:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {/* Left: horizontal Gäste-Favorit badge */}
+          <button
+            onClick={() => scrollToSection('#reviews')}
+            className="lg:col-span-2 w-full text-left border border-border rounded-2xl bg-card px-5 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
+            aria-label={t('hero.badge.title')}
+          >
+            <div className="flex items-center gap-4 md:gap-6">
+              {/* Lorbeer + Gäste-Favorit */}
+              <div className="flex items-center gap-1.5 shrink-0 h-12 md:h-14">
+                <img src={laurelLeft} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
+                <span className="font-body font-semibold text-foreground flex flex-col justify-center h-full leading-[1.05] text-[13px] md:text-sm text-center">
+                  {t('hero.badge.title').split(/[-\s]/).map((w, i) => (
+                    <span key={i}>{w}</span>
+                  ))}
+                </span>
+                <img src={laurelRight} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
+              </div>
+
+              {/* Erklärtext */}
+              <p className="hidden sm:block flex-1 text-xs md:text-sm leading-snug text-muted-foreground text-pretty">
+                {t('hero.badge.text')}
+              </p>
+
+              {/* Rating */}
+              <div className="flex items-center gap-4 md:gap-6 shrink-0 border-l border-border pl-4 md:pl-6">
+                <div className="flex flex-col items-center">
+                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none">
+                    {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
+                  </div>
+                  <div className="flex gap-0.5 mt-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="w-2.5 h-2.5 fill-foreground text-foreground" />
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col items-center border-l border-border pl-4 md:pl-6">
+                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none">
+                    {reviewData?.count ?? 5}
+                  </div>
+                  <div className="text-[11px] md:text-xs text-muted-foreground mt-1.5 underline">
+                    {t('hero.badge.reviews')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          {/* Right: Booking box */}
+          <div className="lg:col-span-1">
+            <HeroBookingBox />
+          </div>
         </motion.div>
 
       </div>

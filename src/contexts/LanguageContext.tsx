@@ -40,6 +40,15 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.badge.text': 'Unterkunft mit herausragenden Gäste-Bewertungen in allen Kategorien',
     'hero.secondary.gallery': 'Galerie ansehen',
     'hero.trust': 'Antwort meist innerhalb 1\u00a0Std. · Direktkontakt zum Gastgeber · Sichere Buchung direkt auf dieser Website',
+    'hero.book.title': 'Zeitraum wählen, um Preise anzuzeigen',
+    'hero.book.checkin': 'Check-in',
+    'hero.book.checkout': 'Check-out',
+    'hero.book.addDate': 'Datum hinzufügen',
+    'hero.book.guests': 'Gäste',
+    'hero.book.guest.one': 'Gast',
+    'hero.book.guest.many': 'Gäste',
+    'hero.book.cta': 'Verfügbarkeit prüfen',
+    'hero.book.trust': 'Du wirst noch nicht belastet · Sichere Buchung direkt hier',
     
     // House
     'house.title': 'Das Haus',
@@ -180,6 +189,15 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.badge.text': 'A home with outstanding guest ratings across all categories',
     'hero.secondary.gallery': 'View gallery',
     'hero.trust': 'Usually replies within 1\u00a0hr · Direct contact with host · Secure booking directly on this website',
+    'hero.book.title': 'Select dates to view prices',
+    'hero.book.checkin': 'Check-in',
+    'hero.book.checkout': 'Check-out',
+    'hero.book.addDate': 'Add date',
+    'hero.book.guests': 'Guests',
+    'hero.book.guest.one': 'guest',
+    'hero.book.guest.many': 'guests',
+    'hero.book.cta': 'Check availability',
+    'hero.book.trust': 'You won\'t be charged yet · Secure booking right here',
     
     // House
     'house.title': 'The House',
