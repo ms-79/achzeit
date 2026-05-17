@@ -211,9 +211,9 @@ const PriceCalendar = ({ onSelect }: Props) => {
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>
-      <div className="flex gap-4 md:gap-8">
-        {renderMonth(cursor)}
-        <div className="hidden md:block">{renderMonth(addMonths(cursor, 1))}</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+        <div className="min-w-0">{renderMonth(cursor)}</div>
+        <div className="min-w-0 hidden md:block">{renderMonth(addMonths(cursor, 1))}</div>
       </div>
     </div>
   );
