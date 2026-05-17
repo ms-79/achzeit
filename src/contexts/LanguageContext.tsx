@@ -127,6 +127,18 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.message': 'Nachricht',
     'contact.send': 'Nachricht senden',
     'contact.success': 'Vielen Dank für Ihre Nachricht!',
+
+    // WhatsApp
+    'whatsapp.cta.short': 'WhatsApp',
+    'whatsapp.aria': 'Per WhatsApp Kontakt aufnehmen',
+    'whatsapp.close': 'Schließen',
+    'whatsapp.card.title': 'Schreib uns auf WhatsApp',
+    'whatsapp.card.sub': 'Direkter Draht zu den Gastgebern – ideal für schnelle Fragen zu Verfügbarkeit, Anreise oder Ausstattung.',
+    'whatsapp.card.cta': 'Chat auf WhatsApp starten',
+    'whatsapp.card.hours': 'Mo–So 9–20 Uhr · Antwort meist innerhalb 1 Std.',
+    'whatsapp.card.privacy': 'Mit dem Klick wirst du zu WhatsApp (Meta) weitergeleitet. Es gelten unsere Datenschutzhinweise.',
+    'whatsapp.card.or': 'oder klassisch per Formular',
+    'whatsapp.prefill': 'Hallo, ich interessiere mich für das Achzeit Ferienhaus in Fischen im Allgäu und hätte eine Frage.',
     
     // Footer
     'footer.rights': 'Alle Rechte vorbehalten',
@@ -255,6 +267,18 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.message': 'Message',
     'contact.send': 'Send Message',
     'contact.success': 'Thank you for your message!',
+
+    // WhatsApp
+    'whatsapp.cta.short': 'WhatsApp',
+    'whatsapp.aria': 'Contact us on WhatsApp',
+    'whatsapp.close': 'Close',
+    'whatsapp.card.title': 'Message us on WhatsApp',
+    'whatsapp.card.sub': 'Direct line to your hosts – perfect for quick questions about availability, arrival or amenities.',
+    'whatsapp.card.cta': 'Start WhatsApp chat',
+    'whatsapp.card.hours': 'Mon–Sun 9 am–8 pm · usually replies within 1 hour',
+    'whatsapp.card.privacy': 'You will be redirected to WhatsApp (Meta). Our privacy policy applies.',
+    'whatsapp.card.or': 'or use the contact form below',
+    'whatsapp.prefill': 'Hi, I am interested in the Achzeit holiday home in Fischen im Allgäu and have a question.',
     
     // Footer
     'footer.rights': 'All rights reserved',
