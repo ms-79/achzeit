@@ -2,6 +2,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import HostawayInlineCalendar from './HostawayInlineCalendar';
 
 const MAX_GUESTS = 7;
 
@@ -10,6 +12,7 @@ const HeroBookingBox = () => {
   const [adults, setAdults] = useState(2);
   const [kids, setKids] = useState(0);
   const [open, setOpen] = useState(false);
+  const [dateOpen, setDateOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const total = adults + kids;
@@ -83,30 +86,39 @@ const HeroBookingBox = () => {
       </p>
 
       {/* Date pills */}
-      <div className="grid grid-cols-2 rounded-xl border border-border overflow-hidden mb-3">
-        <button
-          onClick={scrollToAvailability}
-          className="text-left px-3.5 py-2.5 border-r border-border hover:bg-muted/40 transition-colors"
+      <Popover open={dateOpen} onOpenChange={setDateOpen}>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            className="w-full grid grid-cols-2 rounded-xl border border-border overflow-hidden mb-3 hover:bg-muted/40 transition-colors text-left"
+            aria-label={`${t('hero.book.checkin')} / ${t('hero.book.checkout')}`}
+          >
+            <span className="px-3.5 py-2.5 border-r border-border">
+              <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
+                {t('hero.book.checkin')}
+              </span>
+              <span className="block text-sm text-muted-foreground mt-0.5">
+                {t('hero.book.addDate')}
+              </span>
+            </span>
+            <span className="px-3.5 py-2.5">
+              <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
+                {t('hero.book.checkout')}
+              </span>
+              <span className="block text-sm text-muted-foreground mt-0.5">
+                {t('hero.book.addDate')}
+              </span>
+            </span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent
+          align="start"
+          sideOffset={8}
+          className="p-3 w-[min(92vw,720px)] max-h-[80vh] overflow-auto z-50 bg-card"
         >
-          <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
-            {t('hero.book.checkin')}
-          </span>
-          <span className="block text-sm text-muted-foreground mt-0.5">
-            {t('hero.book.addDate')}
-          </span>
-        </button>
-        <button
-          onClick={scrollToAvailability}
-          className="text-left px-3.5 py-2.5 hover:bg-muted/40 transition-colors"
-        >
-          <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
-            {t('hero.book.checkout')}
-          </span>
-          <span className="block text-sm text-muted-foreground mt-0.5">
-            {t('hero.book.addDate')}
-          </span>
-        </button>
-      </div>
+          <HostawayInlineCalendar instanceId="hero-booking-calendar" />
+        </PopoverContent>
+      </Popover>
 
       {/* Guests pill with expandable steppers */}
       <div ref={panelRef} className="relative mb-4">
