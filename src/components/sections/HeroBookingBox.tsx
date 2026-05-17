@@ -1,14 +1,77 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react';
+
+const MAX_GUESTS = 7;
 
 const HeroBookingBox = () => {
   const { t } = useLanguage();
-  const [guests, setGuests] = useState(2);
+  const [adults, setAdults] = useState(2);
+  const [kids, setKids] = useState(0);
+  const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+
+  const total = adults + kids;
 
   const scrollToAvailability = () => {
     document.querySelector('#availability')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    if (!open) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (!panelRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, [open]);
+
+  const Stepper = ({
+    value,
+    onDec,
+    onInc,
+    canDec,
+    canInc,
+    label,
+    sub,
+  }: {
+    value: number;
+    onDec: () => void;
+    onInc: () => void;
+    canDec: boolean;
+    canInc: boolean;
+    label: string;
+    sub: string;
+  }) => (
+    <div className="flex items-center justify-between py-3">
+      <div>
+        <div className="text-sm font-medium text-foreground">{label}</div>
+        <div className="text-xs text-muted-foreground">{sub}</div>
+      </div>
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={onDec}
+          disabled={!canDec}
+          aria-label={`− ${label}`}
+          className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-foreground disabled:opacity-30 disabled:cursor-not-allowed hover:border-foreground transition-colors"
+        >
+          <Minus className="w-3.5 h-3.5" />
+        </button>
+        <span className="w-5 text-center text-sm font-medium text-foreground tabular-nums">{value}</span>
+        <button
+          type="button"
+          onClick={onInc}
+          disabled={!canInc}
+          aria-label={`+ ${label}`}
+          className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-foreground disabled:opacity-30 disabled:cursor-not-allowed hover:border-foreground transition-colors"
+        >
+          <Plus className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <aside
@@ -45,23 +108,52 @@ const HeroBookingBox = () => {
         </button>
       </div>
 
-      {/* Guests */}
-      <label className="block rounded-xl border border-border px-3.5 py-2.5 mb-4 cursor-pointer hover:bg-muted/40 transition-colors">
-        <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
-          {t('hero.book.guests')}
-        </span>
-        <select
-          value={guests}
-          onChange={(e) => setGuests(Number(e.target.value))}
-          className="w-full bg-transparent text-sm text-foreground outline-none appearance-none cursor-pointer mt-0.5"
+      {/* Guests pill with expandable steppers */}
+      <div ref={panelRef} className="relative mb-4">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="w-full text-left rounded-xl border border-border px-3.5 py-2.5 hover:bg-muted/40 transition-colors flex items-center justify-between gap-2"
         >
-          {[1, 2, 3, 4, 5, 6, 7].map((n) => (
-            <option key={n} value={n}>
-              {n} {n === 1 ? t('hero.book.guest.one') : t('hero.book.guest.many')}
-            </option>
-          ))}
-        </select>
-      </label>
+          <span className="min-w-0">
+            <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
+              {t('hero.book.guests')}
+            </span>
+            <span className="block text-sm text-foreground mt-0.5 truncate">
+              {adults} {t('hero.book.adults.short')} · {kids} {t('hero.book.kids.short')}
+            </span>
+          </span>
+          {open ? (
+            <ChevronUp className="w-4 h-4 text-foreground/70 shrink-0" />
+          ) : (
+            <ChevronDown className="w-4 h-4 text-foreground/70 shrink-0" />
+          )}
+        </button>
+
+        {open && (
+          <div className="mt-2 rounded-xl border border-border bg-card shadow-soft px-4 py-1 divide-y divide-border">
+            <Stepper
+              value={adults}
+              onDec={() => setAdults((a) => Math.max(1, a - 1))}
+              onInc={() => setAdults((a) => Math.min(MAX_GUESTS - kids, a + 1))}
+              canDec={adults > 1}
+              canInc={adults + kids < MAX_GUESTS}
+              label={t('hero.book.adults')}
+              sub={t('hero.book.adults.age')}
+            />
+            <Stepper
+              value={kids}
+              onDec={() => setKids((k) => Math.max(0, k - 1))}
+              onInc={() => setKids((k) => Math.min(MAX_GUESTS - adults, k + 1))}
+              canDec={kids > 0}
+              canInc={adults + kids < MAX_GUESTS}
+              label={t('hero.book.kids')}
+              sub={t('hero.book.kids.age')}
+            />
+          </div>
+        )}
+      </div>
 
       <Button
         variant="alpine"
@@ -75,6 +167,10 @@ const HeroBookingBox = () => {
       <p className="text-[11px] leading-snug text-muted-foreground text-center mt-3">
         {t('hero.book.trust')}
       </p>
+
+      <span className="sr-only">
+        {total} {total === 1 ? t('hero.book.guest.one') : t('hero.book.guest.many')}
+      </span>
     </aside>
   );
 };
