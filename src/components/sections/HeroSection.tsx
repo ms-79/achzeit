@@ -131,23 +131,7 @@ const HeroSection = () => {
               </div>
             </button>
 
-            {/* CTA direkt unter der Badge */}
-            <Button
-              variant="alpine"
-              size="lg"
-              onClick={() => scrollToSection('#availability')}
-              className="w-full"
-            >
-              {t('hero.cta.book')}
-            </Button>
-            <button
-              type="button"
-              onClick={() => scrollToSection('#gallery')}
-              className="text-xs md:text-sm text-foreground/70 hover:text-foreground underline underline-offset-4 transition-colors text-center"
-            >
-              {t('hero.secondary.gallery')}
-            </button>
-            <p className="text-[11px] leading-snug text-muted-foreground text-center -mt-1">
+            <p className="text-[11px] leading-snug text-muted-foreground text-center">
               {t('hero.trust')}
             </p>
           </div>
