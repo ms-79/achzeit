@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import HostawayInlineCalendar from './HostawayInlineCalendar';
+import PriceCalendar from './PriceCalendar';
 
 const MAX_GUESTS = 7;
 
@@ -114,9 +114,9 @@ const HeroBookingBox = () => {
         <PopoverContent
           align="start"
           sideOffset={8}
-          className="p-3 w-[min(92vw,720px)] max-h-[80vh] overflow-auto z-50 bg-card"
+          className="p-4 w-[min(94vw,760px)] max-h-[80vh] overflow-auto z-50 bg-card"
         >
-          <HostawayInlineCalendar instanceId="hero-booking-calendar" />
+          <PriceCalendar />
         </PopoverContent>
       </Popover>
 
