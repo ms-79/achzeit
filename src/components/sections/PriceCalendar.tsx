@@ -1,17 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
-
-interface CalendarDay {
-  date: string; // YYYY-MM-DD
-  isAvailable: boolean;
-  status?: string;
-  price: number | null;
-  currency: string;
-  minimumStay: number | null;
-}
+import { prefetchCalendar, type CalendarDay } from '@/lib/calendarData';
 
 const DAY_LABELS_DE = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
 const DAY_LABELS_EN = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
@@ -61,20 +52,16 @@ const PriceCalendar = ({ onSelect }: Props) => {
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke('calendar');
-        if (cancelled) return;
-        if (error) throw error;
-        const map: Record<string, CalendarDay> = {};
-        (data?.days || []).forEach((d: CalendarDay) => { map[d.date] = d; });
-        setDays(map);
-      } catch (e) {
+    prefetchCalendar()
+      .then((map) => {
+        if (!cancelled) setDays(map);
+      })
+      .catch((e) => {
         if (!cancelled) setError(String((e as Error).message || e));
-      } finally {
+      })
+      .finally(() => {
         if (!cancelled) setLoading(false);
-      }
-    })();
+      });
     return () => { cancelled = true; };
   }, []);
 
@@ -146,7 +133,7 @@ const PriceCalendar = ({ onSelect }: Props) => {
                 disabled={!available}
                 aria-label={dateStr}
                 className={cn(
-                  'flex flex-col items-center justify-center h-12 rounded-md text-sm leading-none transition-colors px-0.5',
+                  'flex flex-col items-center justify-start pt-1.5 h-12 rounded-md text-sm leading-none transition-colors px-0.5',
                   available
                     ? 'text-foreground hover:bg-muted cursor-pointer'
                     : 'text-muted-foreground/40 line-through cursor-not-allowed',
@@ -155,18 +142,14 @@ const PriceCalendar = ({ onSelect }: Props) => {
                 )}
               >
                 <span className="font-medium tabular-nums">{dayNum}</span>
-                {available && info?.price ? (
-                  <span
-                    className={cn(
-                      'mt-0.5 text-[9px] tabular-nums leading-none',
-                      isSelected ? 'text-background/90' : 'text-muted-foreground',
-                    )}
-                  >
-                    {formatPrice(info.price, info.currency, locale)}
-                  </span>
-                ) : (
-                  available && <span className="mt-0.5 w-1 h-1 rounded-full bg-muted-foreground/40" />
-                )}
+                <span
+                  className={cn(
+                    'mt-1 text-[9px] tabular-nums leading-none h-[10px]',
+                    isSelected ? 'text-background/90' : 'text-muted-foreground',
+                  )}
+                >
+                  {available && info?.price ? formatPrice(info.price, info.currency, locale) : ''}
+                </span>
               </button>
             );
           })}

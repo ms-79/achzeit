@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import PriceCalendar from './PriceCalendar';
+import { prefetchCalendar } from '@/lib/calendarData';
 
 const MAX_GUESTS = 7;
 
@@ -16,6 +17,10 @@ const HeroBookingBox = () => {
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const total = adults + kids;
+
+  useEffect(() => {
+    prefetchCalendar().catch(() => {});
+  }, []);
 
   const scrollToAvailability = () => {
     document.querySelector('#availability')?.scrollIntoView({ behavior: 'smooth' });
