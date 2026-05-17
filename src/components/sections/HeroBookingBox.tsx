@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ChevronUp, Minus, Plus } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import PriceCalendar from './PriceCalendar';
-import { prefetchCalendar } from '@/lib/calendarData';
+import { prefetchCalendar, type CalendarDay } from '@/lib/calendarData';
 
 const MAX_GUESTS = 7;
 
@@ -14,13 +14,29 @@ const HeroBookingBox = () => {
   const [kids, setKids] = useState(0);
   const [open, setOpen] = useState(false);
   const [dateOpen, setDateOpen] = useState(false);
+  const [range, setRange] = useState<{ from: string | null; to: string | null }>({ from: null, to: null });
+  const [days, setDays] = useState<Record<string, CalendarDay>>({});
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const total = adults + kids;
 
   useEffect(() => {
-    prefetchCalendar().catch(() => {});
+    prefetchCalendar().then(setDays).catch(() => {});
   }, []);
+
+  const fmtDate = (s: string) => {
+    const [y, m, d] = s.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString(
+      t('hero.book.checkin') === 'CHECK-IN' ? 'en-US' : 'de-DE',
+      { day: '2-digit', month: 'short' },
+    );
+  };
+
+  const minStay = range.from ? days[range.from]?.minimumStay ?? null : null;
+  const nights = range.from && range.to
+    ? Math.round((new Date(range.to).getTime() - new Date(range.from).getTime()) / 86400000)
+    : 0;
+  const minStayWarning = minStay && nights > 0 && nights < minStay;
 
   const scrollToAvailability = () => {
     document.querySelector('#availability')?.scrollIntoView({ behavior: 'smooth' });
@@ -102,16 +118,16 @@ const HeroBookingBox = () => {
               <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
                 {t('hero.book.checkin')}
               </span>
-              <span className="block text-sm text-muted-foreground mt-0.5">
-                {t('hero.book.addDate')}
+              <span className={`block text-sm mt-0.5 ${range.from ? 'text-foreground' : 'text-muted-foreground'}`}>
+                {range.from ? fmtDate(range.from) : t('hero.book.addDate')}
               </span>
             </span>
             <span className="px-3.5 py-2.5">
               <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
                 {t('hero.book.checkout')}
               </span>
-              <span className="block text-sm text-muted-foreground mt-0.5">
-                {t('hero.book.addDate')}
+              <span className={`block text-sm mt-0.5 ${range.to ? 'text-foreground' : 'text-muted-foreground'}`}>
+                {range.to ? fmtDate(range.to) : t('hero.book.addDate')}
               </span>
             </span>
           </button>
@@ -121,9 +137,26 @@ const HeroBookingBox = () => {
           sideOffset={8}
           className="p-4 w-[min(94vw,760px)] max-h-[80vh] overflow-auto z-50 bg-card"
         >
-          <PriceCalendar />
+          <PriceCalendar
+            onSelect={(r) => {
+              setRange(r);
+              if (r.from && r.to) setDateOpen(false);
+            }}
+          />
         </PopoverContent>
       </Popover>
+
+      {/* Min-stay / nights info */}
+      {range.from && (
+        <p className={`text-[11px] -mt-1 mb-3 ${minStayWarning ? 'text-destructive' : 'text-muted-foreground'}`}>
+          {nights > 0
+            ? `${nights} ${nights === 1 ? (t('hero.book.checkin') === 'CHECK-IN' ? 'night' : 'Nacht') : (t('hero.book.checkin') === 'CHECK-IN' ? 'nights' : 'Nächte')}`
+            : ''}
+          {minStay
+            ? `${nights > 0 ? ' · ' : ''}${t('hero.book.checkin') === 'CHECK-IN' ? 'min. stay' : 'Mindestaufenthalt'} ${minStay} ${t('hero.book.checkin') === 'CHECK-IN' ? 'nights' : 'Nächte'}`
+            : ''}
+        </p>
+      )}
 
       {/* Guests pill with expandable steppers */}
       <div ref={panelRef} className="relative mb-4">
