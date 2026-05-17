@@ -53,7 +53,7 @@ const translations: Record<Language, Record<string, string>> = {
    'hero.book.kids.age': '0–12 Jahre',
    'hero.book.adults.short': 'Erw.',
    'hero.book.kids.short': 'Kinder',
-    'hero.book.cta': 'Verfügbarkeit prüfen',
+    'hero.book.cta': 'Preis und Verfügbarkeit prüfen',
     'hero.book.trust': 'Sichere Buchung direkt hier zu den besten Konditionen.',
     
     // House
@@ -208,7 +208,7 @@ const translations: Record<Language, Record<string, string>> = {
    'hero.book.kids.age': 'Ages 0–12',
    'hero.book.adults.short': 'adults',
    'hero.book.kids.short': 'children',
-    'hero.book.cta': 'Check availability',
+    'hero.book.cta': 'Check price and availability',
     'hero.book.trust': 'Secure booking right here at the best rates.',
     
     // House
