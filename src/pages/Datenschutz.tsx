@@ -119,6 +119,17 @@ const Datenschutz = () => {
                   : 'You have the right to complain to a data protection supervisory authority. The state data protection officer of your federal state is responsible.'}
               </p>
             </section>
+
+            <section>
+              <h2 className="font-display text-xl font-medium text-foreground mb-4">
+                {language === 'de' ? '7. Kontaktaufnahme via WhatsApp' : '7. Contact via WhatsApp'}
+              </h2>
+              <p className="text-foreground/70">
+                {language === 'de'
+                  ? 'Wir bieten auf unserer Website die Möglichkeit, uns über WhatsApp (Betreiber: WhatsApp Ireland Limited, ein Unternehmen der Meta-Gruppe) zu kontaktieren. Wenn Sie auf einen WhatsApp-Button klicken, werden Sie zu WhatsApp weitergeleitet und es können personenbezogene Daten (z. B. Ihre Telefonnummer, Profilinformationen, Nachrichteninhalte sowie ggf. Daten in Drittländer wie die USA) an WhatsApp übertragen werden. Die Nutzung ist freiwillig; Rechtsgrundlage ist Art. 6 Abs. 1 lit. a/f DSGVO (Einwilligung durch aktive Kontaktaufnahme / berechtigtes Interesse an effizienter Kommunikation). Es gelten zusätzlich die Datenschutzbestimmungen von WhatsApp.'
+                  : 'Our website offers the option to contact us via WhatsApp (operator: WhatsApp Ireland Limited, part of the Meta group). When you click a WhatsApp button you are redirected to WhatsApp and personal data (e.g. your phone number, profile information, message content, and potentially data transferred to third countries such as the United States) may be sent to WhatsApp. Use is voluntary; legal basis is Art. 6(1)(a/f) GDPR (consent through active contact / legitimate interest in efficient communication). WhatsApp\'s own privacy terms apply in addition.'}
+              </p>
+            </section>
           </div>
         </div>
       </main>
