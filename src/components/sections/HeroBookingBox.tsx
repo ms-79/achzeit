@@ -118,16 +118,16 @@ const HeroBookingBox = () => {
               <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
                 {t('hero.book.checkin')}
               </span>
-              <span className="block text-sm text-muted-foreground mt-0.5">
-                {t('hero.book.addDate')}
+              <span className={`block text-sm mt-0.5 ${range.from ? 'text-foreground' : 'text-muted-foreground'}`}>
+                {range.from ? fmtDate(range.from) : t('hero.book.addDate')}
               </span>
             </span>
             <span className="px-3.5 py-2.5">
               <span className="block text-[10px] font-semibold uppercase tracking-wider text-foreground/80">
                 {t('hero.book.checkout')}
               </span>
-              <span className="block text-sm text-muted-foreground mt-0.5">
-                {t('hero.book.addDate')}
+              <span className={`block text-sm mt-0.5 ${range.to ? 'text-foreground' : 'text-muted-foreground'}`}>
+                {range.to ? fmtDate(range.to) : t('hero.book.addDate')}
               </span>
             </span>
           </button>
