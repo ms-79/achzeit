@@ -73,6 +73,11 @@ const PriceCalendar = ({ onSelect }: Props) => {
 
   const canPrev = cursor > startOfMonth(today);
 
+  const minStay = from ? days[from]?.minimumStay ?? null : null;
+
+  const daysBetween = (a: string, b: string) =>
+    Math.round((new Date(b).getTime() - new Date(a).getTime()) / 86400000);
+
   const handleDayClick = (date: string, available: boolean) => {
     if (!available) return;
     if (!from || (from && to)) {
@@ -124,6 +129,13 @@ const PriceCalendar = ({ onSelect }: Props) => {
             const isTo = to === dateStr;
             const inRange = from && to && dateStr > from && dateStr < to;
             const isSelected = isFrom || isTo;
+            // Hide days after `from` that are below minimum stay (still during checkout selection)
+            const belowMinStay =
+              !!from && !to && minStay != null && dateStr > from && daysBetween(from, dateStr) < minStay;
+
+            if (belowMinStay) {
+              return <div key={i} className="h-12" aria-hidden="true" />;
+            }
 
             return (
               <button
