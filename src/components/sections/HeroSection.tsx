@@ -1,5 +1,4 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Star, Flame, Sun, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
