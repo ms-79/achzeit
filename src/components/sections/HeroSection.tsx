@@ -86,6 +86,11 @@ const HeroSection = () => {
               {t('hero.benefit.guests')}
             </span>
           </div>
+
+          {/* Faktenzeile */}
+          <p className="mt-3 text-xs md:text-sm text-muted-foreground leading-relaxed">
+            {t('hero.facts')}
+          </p>
         </motion.div>
 
         {/* Airbnb-style photo grid */}
