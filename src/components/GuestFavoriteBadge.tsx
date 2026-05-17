@@ -77,6 +77,10 @@ const GuestFavoriteBadge = () => {
           className="inline-block h-3 w-auto align-middle ml-1"
         />
       </p>
+
+      <p className="mt-1.5 text-[10.5px] leading-snug text-muted-foreground/90">
+        {t('hero.trust.compact')}
+      </p>
     </button>
   );
 };
