@@ -11,8 +11,6 @@ import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 import laurelLeft from '@/assets/laurel-left.png';
 import laurelRight from '@/assets/laurel-right.png';
 import airbnbLogo from '@/assets/airbnb-logo.png';
-import HeroBookingBox from './HeroBookingBox';
-
 const HeroSection = () => {
   const { t } = useLanguage();
   const [reviewData, setReviewData] = useState<{ avg: number; count: number } | null>(null);
@@ -43,7 +41,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="home" className="pt-20 md:pt-24 pb-6 md:pb-8 bg-background relative">
+    <section id="home" className="pt-20 md:pt-24 pb-6 md:pb-8 bg-background relative lg:pr-[380px]">
       <div className="container mx-auto px-6 relative">
         {/* Title above image */}
         <motion.div
@@ -128,17 +126,16 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Badge horizontal + Buchungsbox (Airbnb-Stil) */}
+        {/* Badge horizontal (Airbnb-Stil) */}
         <motion.div
-          className="mt-6 md:mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-6 lg:items-stretch"
+          className="mt-6 md:mt-8"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          {/* Left: horizontal Gäste-Favorit badge */}
           <button
             onClick={() => scrollToSection('#reviews')}
-            className="w-full h-full text-left border border-border rounded-2xl bg-card px-5 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
+            className="w-full text-left border border-border rounded-2xl bg-card px-5 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
             aria-label={t('hero.badge.title')}
           >
             <div className="flex items-center gap-4 md:gap-6">
@@ -187,14 +184,6 @@ const HeroSection = () => {
               </div>
             </div>
           </button>
-
-          {/* Booking box — absolute on desktop so hero stays compact; extends into reserved space of following sections */}
-          <div
-            id="hero-booking-anchor"
-            className="mt-6 lg:mt-0"
-          >
-            <HeroBookingBox />
-          </div>
         </motion.div>
 
       </div>
