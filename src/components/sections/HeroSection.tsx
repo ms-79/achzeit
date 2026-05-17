@@ -6,6 +6,7 @@ import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
 import gallerySaunaInterior from '@/assets/gallery-sauna-interior.jpg';
 import galleryTerrace from '@/assets/gallery-terrasse.jpg';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
+import GuestFavoriteBadge from '@/components/GuestFavoriteBadge';
 const HeroSection = () => {
   const { t } = useLanguage();
 
@@ -105,6 +106,11 @@ const HeroSection = () => {
             </button>
           ))}
         </motion.div>
+
+        {/* Mobile/Tablet: Gäste-Favorit badge (Desktop sieht ihn in der rechten Sidebar) */}
+        <div className="lg:hidden mt-6">
+          <GuestFavoriteBadge />
+        </div>
 
       </div>
     </section>
