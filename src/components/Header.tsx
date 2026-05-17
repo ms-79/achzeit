@@ -131,13 +131,6 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Book Button - Always visible */}
-          <Button
-            onClick={() => scrollToSection('#availability')}
-            className="ml-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-          >
-            {t('nav.book')}
-          </Button>
         </nav>
 
         {/* Mobile: Book Button + Menu Button */}
