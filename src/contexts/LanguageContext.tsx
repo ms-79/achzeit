@@ -37,9 +37,9 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.benefit.guests': 'Bis zu 7 Gäste (4 Erwachsene, 3 Kinder)',
     'hero.badge.title': 'Gäste-Favorit',
     'hero.badge.reviews': 'Bewertungen',
-    'hero.badge.text': 'Unterkunft auf Airbnb mit herausragenden Gäste-Bewertungen in allen Kategorien',
+    'hero.badge.text': 'Unterkunft mit herausragenden Gäste-Bewertungen in allen Kategorien',
     'hero.secondary.gallery': 'Galerie ansehen',
-    'hero.trust': 'Antwort meist innerhalb 1\u00a0Std. · Direktkontakt zum Gastgeber · Sichere Buchung über Airbnb',
+    'hero.trust': 'Antwort meist innerhalb 1\u00a0Std. · Direktkontakt zum Gastgeber · Sichere Buchung direkt auf dieser Website',
     
     // House
     'house.title': 'Das Haus',
@@ -165,9 +165,9 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.benefit.guests': 'Up to 7 guests (4 adults, 3 children)',
     'hero.badge.title': 'Guest Favorite',
     'hero.badge.reviews': 'reviews',
-    'hero.badge.text': 'A home on Airbnb with outstanding guest ratings across all categories',
+    'hero.badge.text': 'A home with outstanding guest ratings across all categories',
     'hero.secondary.gallery': 'View gallery',
-    'hero.trust': 'Usually replies within 1\u00a0hr · Direct contact with host · Secure booking via Airbnb',
+    'hero.trust': 'Usually replies within 1\u00a0hr · Direct contact with host · Secure booking directly on this website',
     
     // House
     'house.title': 'The House',

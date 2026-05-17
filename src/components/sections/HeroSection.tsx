@@ -1,5 +1,4 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Star, Flame, Sun, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -42,11 +41,11 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="home" className="pt-24 md:pt-28 pb-12 md:pb-16 bg-background">
+    <section id="home" className="pt-20 md:pt-24 pb-10 md:pb-14 bg-background">
       <div className="container mx-auto px-6">
         {/* Title above image */}
         <motion.div
-          className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-8"
+          className="mb-5 md:mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-8"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -131,23 +130,7 @@ const HeroSection = () => {
               </div>
             </button>
 
-            {/* CTA direkt unter der Badge */}
-            <Button
-              variant="alpine"
-              size="lg"
-              onClick={() => scrollToSection('#availability')}
-              className="w-full"
-            >
-              {t('hero.cta.book')}
-            </Button>
-            <button
-              type="button"
-              onClick={() => scrollToSection('#gallery')}
-              className="text-xs md:text-sm text-foreground/70 hover:text-foreground underline underline-offset-4 transition-colors text-center"
-            >
-              {t('hero.secondary.gallery')}
-            </button>
-            <p className="text-[11px] leading-snug text-muted-foreground text-center -mt-1">
+            <p className="text-[11px] leading-snug text-muted-foreground text-center">
               {t('hero.trust')}
             </p>
           </div>

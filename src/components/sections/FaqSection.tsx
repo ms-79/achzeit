@@ -9,11 +9,11 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
   de: [
     {
       q: 'Wie funktioniert die Buchung?',
-      a: 'Die Buchung erfolgt sicher über Airbnb mit der bekannten Käufergarantie. Du kannst direkt im Verfügbarkeitskalender oben deine Wunschtermine wählen oder uns vorab per Kontaktformular eine Frage stellen – wir antworten meist innerhalb einer Stunde.',
+      a: 'Die Buchung erfolgt sicher und direkt hier auf unserer Website über eine verschlüsselte Verbindung – ohne Plattform-Gebühren und ohne Umweg über Airbnb. Du wählst deine Wunschtermine im Verfügbarkeitskalender oben aus oder stellst uns vorab per Kontaktformular eine Frage – wir antworten meist innerhalb einer Stunde.',
     },
     {
       q: 'Welche Stornierungsbedingungen gelten?',
-      a: 'Es gelten die Stornobedingungen der jeweiligen Plattform (Airbnb). Die genauen Konditionen werden dir vor Abschluss der Buchung transparent angezeigt.',
+      a: 'Es gelten unsere hauseigenen Stornobedingungen. Die genauen Konditionen werden dir vor Abschluss der Buchung transparent angezeigt.',
     },
     {
       q: 'Sind Haustiere erlaubt?',
@@ -43,11 +43,11 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
   en: [
     {
       q: 'How does the booking work?',
-      a: 'Booking is processed securely via Airbnb with their built-in guest protection. Pick your dates in the availability calendar above or contact us first – we usually reply within an hour.',
+      a: 'Booking is handled securely and directly here on our website via an encrypted connection – no platform fees and no detour through Airbnb. Pick your dates in the availability calendar above or contact us first – we usually reply within an hour.',
     },
     {
       q: 'What is the cancellation policy?',
-      a: "The platform's (Airbnb) cancellation terms apply. Exact conditions are shown transparently before you confirm your booking.",
+      a: 'Our own house cancellation terms apply. Exact conditions are shown transparently before you confirm your booking.',
     },
     {
       q: 'Are pets allowed?',
