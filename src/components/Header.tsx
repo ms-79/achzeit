@@ -82,7 +82,7 @@ const Header = () => {
             src={logoAchzeit}
             alt="ACHZEIT"
             className={`w-auto transition-all duration-300 ${
-              showScrolledStyle ? 'h-11 md:h-14' : 'h-14 md:h-16 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]'
+              showScrolledStyle ? 'h-10 md:h-12' : 'h-12 md:h-14 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]'
             }`}
           />
         </button>
@@ -131,13 +131,6 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Desktop Book Button */}
-          <Button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="ml-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-          >
-            {t('nav.book')}
-          </Button>
         </nav>
 
         {/* Mobile: Book Button + Menu Button */}

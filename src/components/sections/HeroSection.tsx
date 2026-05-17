@@ -1,12 +1,12 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
+import { Flame, Sun, Users } from 'lucide-react';
 import galleryBalcony from '@/assets/gallery-balkon-dachgeschoss.jpg';
 import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
 import gallerySaunaInterior from '@/assets/gallery-sauna-interior.jpg';
 import galleryTerrace from '@/assets/gallery-terrasse.jpg';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
 import GuestFavoriteBadge from '@/components/GuestFavoriteBadge';
-import HeroBookingBox from './HeroBookingBox';
 const HeroSection = () => {
   const { t } = useLanguage();
 
@@ -48,10 +48,23 @@ const HeroSection = () => {
             dangerouslySetInnerHTML={{ __html: t('hero.sub') }}
           />
 
-          {/* Facts row */}
-          <p className="mt-5 text-sm md:text-[15px] text-foreground/75 leading-relaxed">
-            {t('hero.facts')}
-          </p>
+          {/* Benefits / Trust Row */}
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm md:text-[15px] text-foreground/80">
+            <span className="inline-flex items-center gap-1.5">
+              <Flame className="w-4 h-4 text-primary" aria-hidden="true" />
+              {t('hero.benefit.sauna')}
+            </span>
+            <span className="hidden md:inline text-border">·</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Sun className="w-4 h-4 text-primary" aria-hidden="true" />
+              {t('hero.benefit.terrace')}
+            </span>
+            <span className="hidden md:inline text-border">·</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Users className="w-4 h-4 text-primary" aria-hidden="true" />
+              {t('hero.benefit.guests')}
+            </span>
+          </div>
         </motion.div>
 
         {/* Airbnb-style photo grid */}
@@ -94,9 +107,8 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Mobile/Tablet: Buchungsbox direkt nach der Bildcollage + Gäste-Favorit Badge */}
-        <div className="lg:hidden mt-6 space-y-4">
-          <HeroBookingBox />
+        {/* Mobile/Tablet: Gäste-Favorit badge (Desktop sieht ihn in der rechten Sidebar) */}
+        <div className="lg:hidden mt-6">
           <GuestFavoriteBadge />
         </div>
 
