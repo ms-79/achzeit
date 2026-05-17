@@ -27,29 +27,11 @@ const ScrollPinnedBookingBox = () => {
     );
     obs.observe(anchor);
 
-    const mainEl = document.querySelector('main');
-    const apply = (on: boolean) => {
-      if (!mainEl) return;
-      mainEl.classList.toggle('lg:pr-[380px]', on);
-      mainEl.classList.toggle('transition-[padding]', true);
-      mainEl.classList.toggle('duration-200', true);
-    };
-    apply(false);
-    const sync = () => apply(pinned);
-    sync();
-
     return () => {
       obs.disconnect();
-      apply(false);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    const mainEl = document.querySelector('main');
-    if (!mainEl) return;
-    mainEl.classList.toggle('lg:pr-[380px]', pinned);
-  }, [pinned]);
 
   if (!pinned) return null;
   return (
