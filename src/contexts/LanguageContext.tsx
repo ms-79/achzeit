@@ -54,7 +54,7 @@ const translations: Record<Language, Record<string, string>> = {
    'hero.book.adults.short': 'Erw.',
    'hero.book.kids.short': 'Kinder',
     'hero.book.cta': 'Verfügbarkeit prüfen',
-    'hero.book.trust': 'Sichere Buchung direkt hier',
+    'hero.book.trust': 'Sichere Buchung direkt hier zu den besten Konditionen.',
     
     // House
     'house.title': 'Das Haus',
@@ -209,7 +209,7 @@ const translations: Record<Language, Record<string, string>> = {
    'hero.book.adults.short': 'adults',
    'hero.book.kids.short': 'children',
     'hero.book.cta': 'Check availability',
-    'hero.book.trust': 'Secure booking right here',
+    'hero.book.trust': 'Secure booking right here at the best rates.',
     
     // House
     'house.title': 'The House',
