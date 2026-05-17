@@ -146,15 +146,10 @@ const HeroBookingBox = () => {
         </PopoverContent>
       </Popover>
 
-      {/* Min-stay / nights info */}
-      {range.from && (
-        <p className={`text-[11px] -mt-1 mb-3 ${minStayWarning ? 'text-destructive' : 'text-muted-foreground'}`}>
-          {nights > 0
-            ? `${nights} ${nights === 1 ? (t('hero.book.checkin') === 'CHECK-IN' ? 'night' : 'Nacht') : (t('hero.book.checkin') === 'CHECK-IN' ? 'nights' : 'Nächte')}`
-            : ''}
-          {minStay
-            ? `${nights > 0 ? ' · ' : ''}${t('hero.book.checkin') === 'CHECK-IN' ? 'min. stay' : 'Mindestaufenthalt'} ${minStay} ${t('hero.book.checkin') === 'CHECK-IN' ? 'nights' : 'Nächte'}`
-            : ''}
+      {/* Nights summary (only when both dates picked) */}
+      {range.from && range.to && nights > 0 && (
+        <p className="text-[11px] -mt-1 mb-3 text-muted-foreground">
+          {`${nights} ${nights === 1 ? (t('hero.book.checkin') === 'CHECK-IN' ? 'night' : 'Nacht') : (t('hero.book.checkin') === 'CHECK-IN' ? 'nights' : 'Nächte')}`}
         </p>
       )}
 
@@ -217,6 +212,15 @@ const HeroBookingBox = () => {
       <p className="text-[11px] leading-snug text-muted-foreground text-center mt-3">
         {t('hero.book.trust')}
       </p>
+
+      {/* Min-stay info — appears at the bottom in red after first date click */}
+      {range.from && minStay ? (
+        <p className="text-[11px] leading-snug text-destructive text-center mt-2">
+          {t('hero.book.checkin') === 'CHECK-IN'
+            ? `Minimum stay: ${minStay} nights`
+            : `Mindestaufenthalt: ${minStay} Nächte`}
+        </p>
+      ) : null}
 
       <span className="sr-only">
         {total} {total === 1 ? t('hero.book.guest.one') : t('hero.book.guest.many')}
