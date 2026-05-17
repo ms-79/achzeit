@@ -21,7 +21,7 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
     },
     {
       q: 'Wann sind Check-in und Check-out?',
-      a: 'Check-in ist ab 16:00 Uhr möglich, Check-out bis 10:00 Uhr. Du erhältst rechtzeitig vor Anreise alle Infos zum Self-Check-in inkl. PIN-Code und digitalem Gästeleitfaden.',
+      a: 'Check-in ist ab 16:00 Uhr möglich, Check-out bis 11:00 Uhr. Du erhältst rechtzeitig vor Anreise alle Infos zum Self-Check-in inkl. PIN-Code und digitalem Gästeleitfaden.',
     },
     {
       q: 'Ist die Kurtaxe / der Gästebeitrag bereits enthalten?',
@@ -55,7 +55,7 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
     },
     {
       q: 'What are the check-in and check-out times?',
-      a: 'Check-in from 4:00 PM, check-out by 10:00 AM. Ahead of arrival you receive all self-check-in details including PIN code and a digital guest guide.',
+      a: 'Check-in from 4:00 PM, check-out by 11:00 AM. Ahead of arrival you receive all self-check-in details including PIN code and a digital guest guide.',
     },
     {
       q: 'Is the local tourist tax already included?',
