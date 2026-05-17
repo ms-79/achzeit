@@ -1,33 +1,14 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
-import { Star, Flame, Sun, Users } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { Flame, Sun, Users } from 'lucide-react';
 import galleryBalcony from '@/assets/gallery-balkon-dachgeschoss.jpg';
 import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
 import gallerySaunaInterior from '@/assets/gallery-sauna-interior.jpg';
 import galleryTerrace from '@/assets/gallery-terrasse.jpg';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.jpg';
-import laurelLeft from '@/assets/laurel-left.png';
-import laurelRight from '@/assets/laurel-right.png';
-import airbnbLogo from '@/assets/airbnb-logo.png';
+import GuestFavoriteBadge from '@/components/GuestFavoriteBadge';
 const HeroSection = () => {
   const { t } = useLanguage();
-  const [reviewData, setReviewData] = useState<{ avg: number; count: number } | null>(null);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const { data } = await supabase.functions.invoke('reviews');
-        const reviews = data?.reviews || [];
-        if (reviews.length > 0) {
-          const avg = reviews.reduce((s: number, r: any) => s + r.rating, 0) / reviews.length;
-          setReviewData({ avg: avg / 2, count: reviews.length });
-        }
-      } catch {}
-    };
-    fetchReviews();
-  }, []);
 
   const scrollToSection = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
@@ -126,65 +107,10 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Badge horizontal (Airbnb-Stil) */}
-        <motion.div
-          className="mt-6 md:mt-8"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <button
-            onClick={() => scrollToSection('#reviews')}
-            className="w-full text-left border border-border rounded-2xl bg-card px-5 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
-            aria-label={t('hero.badge.title')}
-          >
-            <div className="flex items-center gap-4 md:gap-6">
-              {/* Lorbeer + Gäste-Favorit */}
-              <div className="flex items-center gap-1.5 shrink-0 h-12 md:h-14">
-                <img src={laurelLeft} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
-                <span className="font-body font-semibold text-foreground flex flex-col justify-center h-full leading-[1.05] text-[13px] md:text-sm text-center">
-                  {t('hero.badge.title').split(/[-\s]/).map((w, i) => (
-                    <span key={i}>{w}</span>
-                  ))}
-                </span>
-                <img src={laurelRight} alt="" aria-hidden="true" className="h-full w-auto shrink-0" loading="lazy" />
-              </div>
-
-              {/* Erklärtext */}
-              <p className="hidden sm:block flex-1 text-xs md:text-sm leading-snug text-muted-foreground text-pretty">
-                {t('hero.badge.text')}
-                <img
-                  src={airbnbLogo}
-                  alt="Airbnb"
-                  loading="lazy"
-                  className="inline-block h-3.5 md:h-4 w-auto align-middle ml-1.5"
-                />
-              </p>
-
-              {/* Rating */}
-              <div className="flex items-center gap-4 md:gap-6 shrink-0 border-l border-border pl-4 md:pl-6">
-                <div className="flex flex-col items-center">
-                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none">
-                    {reviewData ? reviewData.avg.toFixed(1).replace('.', ',') : '5,0'}
-                  </div>
-                  <div className="flex gap-0.5 mt-1">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="w-2.5 h-2.5 fill-foreground text-foreground" />
-                    ))}
-                  </div>
-                </div>
-                <div className="flex flex-col items-center border-l border-border pl-4 md:pl-6">
-                  <div className="font-body font-semibold text-xl md:text-2xl text-foreground leading-none">
-                    {reviewData?.count ?? 5}
-                  </div>
-                  <div className="text-[11px] md:text-xs text-muted-foreground mt-1.5 underline">
-                    {t('hero.badge.reviews')}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </button>
-        </motion.div>
+        {/* Mobile/Tablet: Gäste-Favorit badge (Desktop sieht ihn in der rechten Sidebar) */}
+        <div className="lg:hidden mt-6">
+          <GuestFavoriteBadge />
+        </div>
 
       </div>
     </section>

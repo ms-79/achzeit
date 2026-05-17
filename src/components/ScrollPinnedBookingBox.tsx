@@ -1,4 +1,5 @@
 import HeroBookingBox from '@/components/sections/HeroBookingBox';
+import GuestFavoriteBadge from '@/components/GuestFavoriteBadge';
 
 /**
  * Renders the booking box as a fixed sidebar on desktop (lg+),
@@ -7,9 +8,10 @@ import HeroBookingBox from '@/components/sections/HeroBookingBox';
 const ScrollPinnedBookingBox = () => {
   return (
     <aside
-      className="hidden lg:block fixed top-24 right-6 w-[340px] z-30"
+      className="hidden lg:flex flex-col gap-3 fixed top-24 right-6 w-[340px] z-30 max-h-[calc(100vh-7rem)] overflow-y-auto"
       aria-label="Buchungsbox"
     >
+      <GuestFavoriteBadge />
       <HeroBookingBox />
     </aside>
   );
