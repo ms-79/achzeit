@@ -30,30 +30,33 @@ const Index = () => {
       <Header />
       <main className="relative">
         <HeroSection />
-        <Suspense fallback={<SectionSkeleton />}>
-          <HouseSection />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <AmenitiesSection />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <GallerySection />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <ReviewsSection />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <AvailabilitySection />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <FaqSection />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <LocationSection />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <ContactSection />
-        </Suspense>
+        {/* Reserve space on desktop for the pinned booking box (prevents content jump) */}
+        <div className="lg:pr-[380px]">
+          <Suspense fallback={<SectionSkeleton />}>
+            <HouseSection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <AmenitiesSection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <GallerySection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <ReviewsSection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <AvailabilitySection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <FaqSection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <LocationSection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <ContactSection />
+          </Suspense>
+        </div>
       </main>
       <ScrollPinnedBookingBox />
       <Footer />
