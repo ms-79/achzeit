@@ -127,7 +127,12 @@ const ReviewsSection = () => {
                     <span className="font-medium text-foreground text-sm">
                       {review.reviewerName}
                     </span>
-                    {renderStars(review.rating)}
+                    <span className="flex items-center gap-1.5">
+                      {renderStars(review.rating)}
+                      <span className="text-xs font-medium text-foreground tabular-nums">
+                        {(review.rating / 2).toFixed(1).replace('.', ',')}
+                      </span>
+                    </span>
                   </div>
                   <span className="text-xs text-muted-foreground mt-1 block">
                     {formatDate(review.submittedAt)}
