@@ -130,7 +130,7 @@ const HeroSection = () => {
 
         {/* Badge horizontal + Buchungsbox (Airbnb-Stil) */}
         <motion.div
-          className="mt-6 md:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start"
+          className="mt-6 md:mt-8 lg:relative lg:pr-[380px]"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -138,7 +138,7 @@ const HeroSection = () => {
           {/* Left: horizontal Gäste-Favorit badge */}
           <button
             onClick={() => scrollToSection('#reviews')}
-            className="lg:col-span-2 w-full text-left border border-border rounded-2xl bg-card px-5 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
+            className="w-full text-left border border-border rounded-2xl bg-card px-5 py-4 md:px-6 md:py-5 shadow-soft hover:shadow-medium transition-shadow"
             aria-label={t('hero.badge.title')}
           >
             <div className="flex items-center gap-4 md:gap-6">
@@ -188,8 +188,11 @@ const HeroSection = () => {
             </div>
           </button>
 
-          {/* Booking box — inline, always below the gallery */}
-          <div id="hero-booking-anchor" className="lg:col-span-1">
+          {/* Booking box — absolute on desktop so hero stays compact; extends into reserved space of following sections */}
+          <div
+            id="hero-booking-anchor"
+            className="mt-6 lg:mt-0 lg:absolute lg:top-0 lg:right-0 lg:w-[360px]"
+          >
             <HeroBookingBox />
           </div>
         </motion.div>
