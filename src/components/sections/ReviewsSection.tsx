@@ -62,6 +62,8 @@ const ReviewsSection = () => {
     );
   };
 
+  const firstName = (name: string) => name.trim().split(/\s+/)[0];
+
   if (loading) {
     return (
       <section className="section-padding bg-background">
@@ -125,11 +127,11 @@ const ReviewsSection = () => {
                 <div className="border-t border-border/30 pt-4 mt-auto">
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-foreground text-sm">
-                      {review.reviewerName}
+                      {firstName(review.reviewerName)}
                     </span>
                     <span className="flex items-center gap-1.5">
                       {renderStars(review.rating)}
-                      <span className="text-xs font-medium text-foreground tabular-nums">
+                      <span className="text-sm font-semibold text-foreground tabular-nums">
                         {(review.rating / 2).toFixed(1).replace('.', ',')}
                       </span>
                     </span>
@@ -149,10 +151,10 @@ const ReviewsSection = () => {
               <>
                 <DialogHeader>
                   <DialogTitle className="flex items-center justify-between gap-4 font-display text-2xl pr-8">
-                    <span>{active.reviewerName}</span>
+                    <span>{firstName(active.reviewerName)}</span>
                     <span className="flex items-center gap-2 mr-2">
                       {renderStars(active.rating)}
-                      <span className="text-sm font-medium text-foreground tabular-nums">
+                      <span className="text-base font-semibold text-foreground tabular-nums">
                         {(active.rating / 2).toFixed(1).replace('.', ',')}
                       </span>
                     </span>
