@@ -154,7 +154,7 @@ const ReviewsSection = () => {
                     <span>{firstName(active.reviewerName)}</span>
                     <span className="flex items-center gap-2 mr-2">
                       {renderStars(active.rating)}
-                      <span className="font-body text-xl font-semibold text-foreground tabular-nums">
+                      <span className="font-display text-2xl text-foreground tabular-nums">
                         {(active.rating / 2).toFixed(1).replace('.', ',')}
                       </span>
                     </span>
