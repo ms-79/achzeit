@@ -56,6 +56,23 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.book.cta': 'Preis und Verfügbarkeit prüfen',
     'hero.book.trust': 'Sichere Buchung direkt beim Gastgeber zu den besten Konditionen. Keine Provision.',
     
+    // Why ACHZEIT
+    'why.title': 'Warum ACHZEIT?',
+    'why.subtitle': 'Ein Ferienhaus für gemeinsame Zeit, ruhige Abende und echte Allgäu-Momente.',
+    'why.cta': 'Verfügbarkeit prüfen',
+    'why.1.title': 'Private Sauna',
+    'why.1.text': 'Nach Wandertag, Skitag oder Familienausflug einfach abschalten.',
+    'why.2.title': 'Kamin & Wohnbereich',
+    'why.2.text': 'Gemütliche Abende mit viel Raum für gemeinsame Zeit.',
+    'why.3.title': 'Ideal für Familien',
+    'why.3.text': 'Bis zu 7 Gäste, 3 Schlafzimmer, Garten und praktische Ausstattung.',
+    'why.4.title': 'Fischen im Allgäu',
+    'why.4.text': 'Ruhig gelegen nahe Oberstdorf, Bergen, Natur und Ausflugszielen.',
+    'why.5.title': 'Terrasse, Balkon & Garten',
+    'why.5.text': 'Draußen frühstücken, spielen und die Allgäuer Luft genießen.',
+    'why.6.title': 'Komfortabel anreisen',
+    'why.6.text': 'Carport, moderne Küche, Waschmaschine und Trockner.',
+
     // House
     'house.title': 'Das Haus',
     'house.subtitle': 'Ihr Zuhause in den Bergen',
@@ -211,6 +228,23 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.book.cta': 'Check price and availability',
     'hero.book.trust': 'Secure booking directly with the host at the best rates. No commission.',
     
+    // Why ACHZEIT
+    'why.title': 'Why ACHZEIT?',
+    'why.subtitle': 'A holiday home for shared time, quiet evenings and genuine Allgäu moments.',
+    'why.cta': 'Check availability',
+    'why.1.title': 'Private Sauna',
+    'why.1.text': 'Unwind after a day of hiking, skiing or family adventures.',
+    'why.2.title': 'Fireplace & Living Area',
+    'why.2.text': 'Cozy evenings with plenty of space to spend time together.',
+    'why.3.title': 'Ideal for Families',
+    'why.3.text': 'Up to 7 guests, 3 bedrooms, garden and practical amenities.',
+    'why.4.title': 'Fischen im Allgäu',
+    'why.4.text': 'Quietly located near Oberstdorf, mountains, nature and excursions.',
+    'why.5.title': 'Terrace, Balcony & Garden',
+    'why.5.text': 'Breakfast outside, let the kids play and enjoy the Allgäu air.',
+    'why.6.title': 'Comfortable Stay',
+    'why.6.text': 'Carport, modern kitchen, washing machine and dryer.',
+
     // House
     'house.title': 'The House',
     'house.subtitle': 'Your Home in the Mountains',
