@@ -39,19 +39,19 @@ function detectLang(text: string): 'de' | 'en' | 'other' {
 }
 
 async function aiFormat(text: string, targetLang: 'de' | 'en', needsTranslation: boolean): Promise<string> {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey || !text.trim()) return text;
   const langName = targetLang === 'de' ? 'Deutsch (Du-Form)' : 'English';
   const sys = `Du formatierst Ferienhaus-Beschreibungen für eine hochwertige Website.\n\nAUFGABE:\n1. ${needsTranslation ? `Übersetze den Text vollständig nach ${langName}.` : `Der Text ist bereits ${langName} — behalte die Sprache exakt bei.`}\n2. Erkenne logische Abschnitte und gib ihnen kurze, klare Überschriften.\n3. Strukturiere den Output als sauberes HTML mit <h3> für Überschriften und <p> für Absätze.\n4. Erlaubte Tags NUR: <h3>, <p>, <strong>, <em>, <br>, <ul>, <li>. Keine anderen Tags.\n5. Keine Inhalte hinzuerfinden oder weglassen.\n6. Antworte ausschließlich mit dem HTML.`;
   try {
-    const res = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'google/gemini-2.5-flash', messages: [{ role: 'system', content: sys }, { role: 'user', content: text }] }),
+      headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 4096, system: sys, messages: [{ role: 'user', content: text }] }),
     });
     if (!res.ok) return text;
     const data = await res.json();
-    let out = data?.choices?.[0]?.message?.content;
+    let out = data?.content?.[0]?.text;
     if (typeof out !== 'string' || !out.trim()) return text;
     return out.trim().replace(/^```(?:html)?\s*/i, '').replace(/```$/i, '').trim();
   } catch { return text; }

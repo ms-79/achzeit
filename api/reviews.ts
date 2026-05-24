@@ -38,23 +38,24 @@ function detectLang(text: string): 'de' | 'en' | 'other' {
 }
 
 async function translateReviews(reviews: { id: number; review: string }[], target: 'de' | 'en'): Promise<Record<string, string>> {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey || reviews.length === 0) return {};
   const targetName = target === 'de' ? "German (use 'Du'/'du' form)" : 'English';
   const sys = `You translate vacation rental guest reviews to ${targetName}. Keep the tone natural, warm and authentic. Preserve emojis and punctuation. Return ONLY a JSON object mapping each review id (as string) to the translated text. No code fences, no commentary.`;
   try {
-    const res = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      headers: { 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
-        messages: [{ role: 'system', content: sys }, { role: 'user', content: JSON.stringify(reviews.map((r) => ({ id: String(r.id), text: r.review }))) }],
-        response_format: { type: 'json_object' },
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 4096,
+        system: sys,
+        messages: [{ role: 'user', content: JSON.stringify(reviews.map((r) => ({ id: String(r.id), text: r.review }))) }],
       }),
     });
     if (!res.ok) return {};
     const data = await res.json();
-    const out = data?.choices?.[0]?.message?.content;
+    const out = data?.content?.[0]?.text;
     if (typeof out !== 'string') return {};
     const clean = out.trim().replace(/^```(?:json)?\s*/i, '').replace(/```$/i, '').trim();
     const parsed = JSON.parse(clean);
