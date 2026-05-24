@@ -11,10 +11,11 @@ const CACHE_TTL = 6 * 60 * 60 * 1000;
 
 async function getToken(): Promise<string> {
   if (cachedToken && Date.now() < tokenExpiresAt) return cachedToken;
-  const accountId = process.env.HOSTAWAY_ACCOUNT_ID;
-  const apiKey = process.env.HOSTAWAY_API_KEY;
+  const accountId = process.env.HOSTAWAY_CLIENT_ID;
+  const apiKey = process.env.HOSTAWAY_API_TOKEN;
+  const baseUrl = process.env.HOSTAWAY_BASE_URL || 'https://api.hostaway.com/v1';
   if (!accountId || !apiKey) throw new Error('Missing Hostaway credentials');
-  const res = await fetch('https://api.hostaway.com/v1/accessTokens', {
+  const res = await fetch(`${baseUrl}/accessTokens`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ grant_type: 'client_credentials', client_id: accountId, client_secret: apiKey, scope: 'general' }),
