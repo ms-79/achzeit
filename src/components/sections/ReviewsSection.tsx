@@ -1,6 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
 import ScrollReveal from '@/components/ScrollReveal';
 import { Star, Quote } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -25,10 +24,9 @@ const ReviewsSection = () => {
     const fetchReviews = async () => {
       setLoading(true);
       try {
-        const { data, error } = await supabase.functions.invoke('reviews', {
-          body: { locale: language },
-        });
-        if (error) throw error;
+        const res = await fetch(`/api/reviews?locale=${language}`);
+        if (!res.ok) throw new Error('Reviews fetch failed');
+        const data = await res.json();
         setReviews(data.reviews || []);
       } catch (err) {
         console.error('Failed to fetch reviews:', err);

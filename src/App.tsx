@@ -13,7 +13,6 @@ const Impressum = lazy(() => import("./pages/Impressum"));
 const Datenschutz = lazy(() => import("./pages/Datenschutz"));
 const CookieSettings = lazy(() => import("./pages/CookieSettings"));
 const Buchungsbedingungen = lazy(() => import("./pages/Buchungsbedingungen"));
-const GuestGuide = lazy(() => import("./pages/GuestGuide"));
 const KurbeitragDanke = lazy(() => import("./pages/KurbeitragDanke"));
 
 const queryClient = new QueryClient();
@@ -38,7 +37,6 @@ const App = () => (
               <Route path="/datenschutz" element={<Datenschutz />} />
               <Route path="/cookies" element={<CookieSettings />} />
               <Route path="/buchungsbedingungen" element={<Buchungsbedingungen />} />
-              <Route path="/guide/achzeit" element={<GuestGuide />} />
               <Route path="/kurbeitrag-danke" element={<KurbeitragDanke />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

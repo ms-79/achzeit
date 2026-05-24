@@ -7,7 +7,6 @@ import {
   ChevronDown, ChevronUp, Sparkles, Volume2, Home, DoorOpen,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
-import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -92,9 +91,8 @@ const AmenitiesSection = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await supabase.functions.invoke('amenities', {
-          body: { locale: language },
-        });
+        const res = await fetch(`/api/amenities?locale=${language}`, { method: 'GET' });
+        const data = await res.json();
         const list: string[] = data?.amenities || [];
         setItems(mapAmenities(list, language));
       } catch (e) {

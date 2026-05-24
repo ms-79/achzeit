@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { supabase } from '@/integrations/supabase/client';
 import laurelLeft from '@/assets/laurel-left.png';
 import laurelRight from '@/assets/laurel-right.png';
 import airbnbLogo from '@/assets/airbnb-logo.png';
@@ -13,7 +12,8 @@ const GuestFavoriteBadge = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await supabase.functions.invoke('reviews');
+        const res = await fetch('/api/reviews');
+        const data = await res.json();
         const reviews = data?.reviews || [];
         if (reviews.length > 0) {
           const avg = reviews.reduce((s: number, r: any) => s + r.rating, 0) / reviews.length;

@@ -3,7 +3,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Users, Bed, Bath, Flame, Home, UtensilsCrossed, TreePine, Heart, MapPin } from 'lucide-react';
 import houseExterior from '@/assets/house-exterior.webp';
 import ScrollReveal from '@/components/ScrollReveal';
-import { supabase } from '@/integrations/supabase/client';
 
 const HouseSection = () => {
   const { t, language } = useLanguage();
@@ -13,9 +12,8 @@ const HouseSection = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await supabase.functions.invoke('amenities', {
-          body: { locale: language },
-        });
+        const res = await fetch(`/api/amenities?locale=${language}`);
+        const data = await res.json();
         setDescription(String(data?.description || ''));
       } catch (e) {
         console.error(e);

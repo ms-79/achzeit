@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, CheckCircle, Loader2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import ScrollReveal from '@/components/ScrollReveal';
 import { buildWhatsAppUrl } from '@/lib/whatsapp';
@@ -25,16 +24,12 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || undefined,
-          message: formData.message,
-        },
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: formData.name, email: formData.email, phone: formData.phone || undefined, message: formData.message }),
       });
-
-      if (error) throw error;
+      if (!res.ok) throw new Error('Contact form failed');
 
       setIsSubmitted(true);
       toast.success(
