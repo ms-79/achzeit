@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp, Minus, Plus, CircleCheck } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import PriceCalendar from './PriceCalendar';
 import { prefetchCalendar, type CalendarDay } from '@/lib/calendarData';
-import { PRICE_FROM_EUR } from '@/constants/site';
+import { PRICE_FROM_EUR, CHECKOUT_BASE_URL } from '@/constants/site';
 
 const MAX_GUESTS = 7;
 
@@ -40,7 +40,7 @@ const HeroBookingBox = () => {
   const minStayWarning = minStay && nights > 0 && nights < minStay;
 
   const openCheckout = () => {
-    const base = 'https://achzeit.holidayfuture.com/checkout/463607';
+    const base = CHECKOUT_BASE_URL;
     const params = new URLSearchParams();
     if (range.from) params.set('start', range.from);
     if (range.to) params.set('end', range.to);

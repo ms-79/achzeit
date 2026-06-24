@@ -89,7 +89,15 @@ const translations: Record<Language, Record<string, string>> = {
    'hero.book.kids.short': 'Kinder',
     'hero.book.cta': 'Verfügbarkeit prüfen',
     'hero.book.trust': 'Sichere Buchung direkt beim Gastgeber zu den besten Konditionen. Keine Provision.',
-    
+
+    // Welcome / emotional intro
+    'welcome.kicker': 'Willkommen bei ACHZEIT',
+    'welcome.title': 'Hier kehrt Ruhe ein.',
+    'welcome.p1': 'Nach einem Tag voller Abenteuer verblassen die Berge im Abendlicht. Die Skihosen hängen zum Trocknen, im Kamin lodert das Feuer, und der Duft aus der Küche zieht durchs Haus. Am Esstisch wird gelacht, erzählt, genossen – kein Zeitdruck, keine Ablenkung. Nur echte Momente, zusammen.',
+    'welcome.p2': 'Im Sommer beginnt der Tag mit frischer Bergluft auf der Terrasse. Die Wanderwege starten direkt vor der Haustür, und abends wird gegrillt, während die Kinder barfuß durch den Garten toben.',
+    'welcome.p3': 'ACHZEIT ist mehr als ein Ferienhaus – es ist euer Rückzugsort. Modern, alpin, durchdacht, mit privater Sauna und Kamin. Mit Raum für das, was im Alltag oft fehlt:',
+    'welcome.closer': 'Zeit füreinander.',
+
     // Why ACHZEIT
     'why.title': 'Warum ACHZEIT?',
     'why.subtitle': 'Ein Ferienhaus für gemeinsame Zeit, ruhige Abende und echte Allgäu-Momente.',
@@ -297,7 +305,15 @@ const translations: Record<Language, Record<string, string>> = {
    'hero.book.kids.short': 'children',
     'hero.book.cta': 'Check availability',
     'hero.book.trust': 'Secure booking directly with the host at the best rates. No commission.',
-    
+
+    // Welcome / emotional intro
+    'welcome.kicker': 'Welcome to ACHZEIT',
+    'welcome.title': 'Where calm settles in.',
+    'welcome.p1': 'After a day full of adventure, the mountains fade into the evening light. Ski trousers hang out to dry, the fire crackles in the hearth, and the smell of cooking drifts through the house. Around the table there is laughter, stories and time to savour – no rush, no distractions. Just real moments, together.',
+    'welcome.p2': 'In summer the day begins with fresh mountain air on the terrace. The hiking trails start right at your doorstep, and in the evening you fire up the grill while the children run barefoot through the garden.',
+    'welcome.p3': 'ACHZEIT is more than a holiday home – it is your retreat. Modern, alpine and thoughtfully designed, with a private sauna and fireplace. With room for what everyday life so often lacks:',
+    'welcome.closer': 'Time for each other.',
+
     // Why ACHZEIT
     'why.title': 'Why ACHZEIT?',
     'why.subtitle': 'A holiday home for shared time, quiet evenings and genuine Allgäu moments.',

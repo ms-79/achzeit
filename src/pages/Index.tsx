@@ -7,6 +7,7 @@ import StickyMobileCTA from '@/components/StickyMobileCTA';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
 
 // Lazy load below-the-fold sections for faster initial page load
+const WelcomeSection = lazy(() => import('@/components/sections/WelcomeSection'));
 const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
 const WhySection = lazy(() => import('@/components/sections/WhySection'));
 const AmenitiesSection = lazy(() => import('@/components/sections/AmenitiesSection'));
@@ -30,6 +31,9 @@ const Index = () => {
       <main className="relative">
         <HeroSection />
         <div>
+          <Suspense fallback={<SectionSkeleton />}>
+            <WelcomeSection />
+          </Suspense>
           <Suspense fallback={<SectionSkeleton />}>
             <WhySection />
           </Suspense>
