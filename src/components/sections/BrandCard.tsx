@@ -1,4 +1,4 @@
-import { Heart, MessageCircle } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 /**
@@ -20,10 +20,6 @@ const BrandCard = () => {
           </p>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
             {t('hero.brand.text')}
-          </p>
-          <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-alpine-forest">
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            {t('hero.brand.whatsapp')}
           </p>
         </div>
       </div>

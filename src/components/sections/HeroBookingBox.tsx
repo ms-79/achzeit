@@ -1,11 +1,11 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, ChevronUp, Minus, Plus, CircleCheck } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { ChevronDown, ChevronUp, Minus, Plus, CircleCheck, CalendarCheck } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import PriceCalendar from './PriceCalendar';
-import { prefetchCalendar, type CalendarDay } from '@/lib/calendarData';
-import { PRICE_FROM_EUR, CHECKOUT_BASE_URL } from '@/constants/site';
+import { prefetchCalendar, nextAvailableRanges, type CalendarDay } from '@/lib/calendarData';
+import { CHECKOUT_BASE_URL } from '@/constants/site';
 
 const MAX_GUESTS = 7;
 
@@ -31,6 +31,23 @@ const HeroBookingBox = () => {
       t('hero.book.checkin') === 'CHECK-IN' ? 'en-US' : 'de-DE',
       { day: '2-digit', month: 'short', year: 'numeric' },
     );
+  };
+
+  // Next bookable windows (≥ 5 nights) derived from the Hostaway calendar data.
+  const availRanges = useMemo(() => nextAvailableRanges(days, { minNights: 5, max: 3 }), [days]);
+
+  const fmtRange = (from: string, to: string) => {
+    const [fy, fm, fd] = from.split('-').map(Number);
+    const [ty, tm, td] = to.split('-').map(Number);
+    if (t('hero.book.checkin') === 'CHECK-IN') {
+      const opt: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short' };
+      const left = new Date(fy, fm - 1, fd).toLocaleDateString('en-US', opt);
+      const right = new Date(ty, tm - 1, td).toLocaleDateString('en-US', { ...opt, year: 'numeric' });
+      return `${left} – ${right}`;
+    }
+    const p = (n: number) => String(n).padStart(2, '0');
+    const left = fy === ty ? `${p(fd)}.${p(fm)}.` : `${p(fd)}.${p(fm)}.${fy}`;
+    return `${left}–${p(td)}.${p(tm)}.${ty}`;
   };
 
   const minStay = range.from ? days[range.from]?.minimumStay ?? null : null;
@@ -227,15 +244,24 @@ const HeroBookingBox = () => {
           {t('hero.book.cta')}
         </Button>
 
-        {/* Price box */}
-        <div className="mt-4 rounded-xl bg-alpine-snow/10 border border-alpine-snow/15 px-4 py-3 text-center">
-          <p className="text-alpine-snow">
-            <span className="text-sm text-alpine-snow/70">{t('hero.book.price.from')} </span>
-            <span className="font-display text-2xl font-medium">{PRICE_FROM_EUR} €</span>
-            <span className="text-sm text-alpine-snow/70"> {t('hero.book.price.unit')}</span>
-          </p>
-          <p className="text-[11px] text-alpine-snow/60 mt-0.5">{t('hero.book.price.note')}</p>
-        </div>
+        {/* Next available dates – derived from the Hostaway calendar; hidden when none */}
+        {availRanges.length > 0 && (
+          <div className="mt-4 rounded-xl bg-alpine-snow/10 border border-alpine-snow/15 px-4 py-3">
+            <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-alpine-snow/60 mb-2">
+              <CalendarCheck className="w-3.5 h-3.5 text-alpine-gold" aria-hidden="true" />
+              {t('hero.book.avail.title')}
+            </p>
+            <ul className="space-y-1.5">
+              {availRanges.map((r) => (
+                <li key={r.from} className="flex items-center gap-2 text-sm text-alpine-snow">
+                  <span className="w-1.5 h-1.5 rounded-full bg-alpine-gold shrink-0" aria-hidden="true" />
+                  <span className="tabular-nums">{fmtRange(r.from, r.to)}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-[11px] text-alpine-snow/55 mt-2">{t('hero.book.avail.more')}</p>
+          </div>
+        )}
 
         <span className="sr-only">
           {total} {total === 1 ? t('hero.book.guest.one') : t('hero.book.guest.many')}
