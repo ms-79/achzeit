@@ -58,6 +58,9 @@ export default {
           charcoal: "hsl(var(--alpine-charcoal))",
           forest: "hsl(var(--alpine-forest))",
           snow: "hsl(var(--alpine-snow))",
+          pine: "hsl(var(--alpine-pine))",
+          gold: "hsl(var(--alpine-gold))",
+          "gold-foreground": "hsl(var(--alpine-gold-foreground))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

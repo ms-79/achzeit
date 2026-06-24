@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import { buildWhatsAppUrl } from '@/lib/whatsapp';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,14 +31,18 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { key: 'nav.home', href: '#home' },
     { key: 'nav.house', href: '#house' },
+    { key: 'nav.amenities', href: '#amenities' },
     { key: 'nav.gallery', href: '#gallery' },
+    { key: 'nav.location', href: '#location' },
     { key: 'nav.availability', href: '#availability' },
     { key: 'nav.faq', href: '#faq' },
-    { key: 'nav.location', href: '#location' },
     { key: 'nav.contact', href: '#contact' },
   ];
+
+  const openWhatsApp = () => {
+    window.open(buildWhatsAppUrl(t('whatsapp.prefill')), '_blank', 'noopener,noreferrer');
+  };
 
   const scrollToSection = (href: string) => {
     setIsMobileMenuOpen(false);
@@ -61,15 +66,15 @@ const Header = () => {
     }
   };
 
-  // On subpages, always show the "scrolled" style
-  const showScrolledStyle = isScrolled || isSubpage;
+  // The hero sits on a light (cream) background, so the header always uses the
+  // solid light style with dark text for readability. `isScrolled` still toggles
+  // the compact height / stronger shadow on scroll.
+  const showScrolledStyle = true;
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        showScrolledStyle
-          ? 'bg-[#f5f0e8]/95 backdrop-blur-md shadow-soft py-3'
-          : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#f5f0e8]/95 backdrop-blur-md transition-all duration-500 ${
+        isScrolled ? 'shadow-medium py-3' : 'shadow-soft py-4'
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
@@ -131,6 +136,16 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          {/* Primary CTA – WhatsApp inquiry */}
+          <Button
+            onClick={openWhatsApp}
+            size="sm"
+            variant="alpine"
+            className="rounded-full px-5"
+          >
+            {t('nav.inquire')}
+            <MessageCircle className="w-4 h-4" />
+          </Button>
         </nav>
 
         {/* Mobile: Book Button + Menu Button */}

@@ -50,6 +50,10 @@
     --alpine-charcoal: 30 8% 20%;
     --alpine-forest: 150 20% 25%;
     --alpine-snow: 0 0% 99%;
+    /* Deep pine green for the booking box & footer, warm gold for CTAs */
+    --alpine-pine: 156 30% 15%;
+    --alpine-gold: 36 42% 56%;
+    --alpine-gold-foreground: 30 25% 14%;
 
     /* Gradients */
     --gradient-hero: linear-gradient(180deg, hsla(30, 8%, 20%, 0.7) 0%, hsla(30, 8%, 20%, 0.4) 100%);
@@ -111,6 +115,9 @@
     --alpine-charcoal: 40 20% 85%;
     --alpine-forest: 150 15% 35%;
     --alpine-snow: 30 10% 95%;
+    --alpine-pine: 156 25% 14%;
+    --alpine-gold: 36 45% 60%;
+    --alpine-gold-foreground: 30 25% 12%;
 
     --sidebar-background: 30 10% 10%;
     --sidebar-foreground: 40 20% 92%;

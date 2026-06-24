@@ -19,6 +19,7 @@ const buttonVariants = cva(
         hero: "bg-alpine-snow text-alpine-charcoal font-medium hover:bg-alpine-snow/90 shadow-medium hover:shadow-elevated transition-all duration-300",
         heroOutline: "border-2 border-alpine-snow text-alpine-snow bg-transparent hover:bg-alpine-snow/10 font-medium transition-all duration-300",
         alpine: "bg-alpine-charcoal text-alpine-snow hover:bg-alpine-charcoal/90 font-medium shadow-soft hover:shadow-medium transition-all duration-300",
+        gold: "bg-alpine-gold text-alpine-gold-foreground hover:bg-alpine-gold/90 font-medium shadow-soft hover:shadow-medium transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",
