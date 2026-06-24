@@ -114,13 +114,13 @@ const HeroBookingBox = () => {
   return (
     <div className="w-full flex flex-col gap-3">
       <aside
-        className="w-full rounded-2xl bg-alpine-pine text-alpine-snow shadow-elevated p-5 md:p-6"
+        className="w-full rounded-3xl bg-alpine-pine text-alpine-snow ring-1 ring-white/10 shadow-[0_24px_70px_-20px_hsla(156,40%,8%,0.5)] p-6 md:p-7"
         aria-label={t('hero.book.title')}
       >
-        <p className="font-display text-2xl md:text-[1.6rem] leading-snug text-alpine-snow">
+        <p className="font-display text-2xl md:text-[1.75rem] leading-snug text-alpine-snow">
           {t('hero.book.title')}
         </p>
-        <p className="text-sm text-alpine-snow/70 mb-4">{t('hero.book.subtitle')}</p>
+        <p className="text-sm text-alpine-snow/70 mb-5">{t('hero.book.subtitle')}</p>
 
         {/* Date pills */}
         <Popover open={dateOpen} onOpenChange={setDateOpen}>
@@ -219,8 +219,8 @@ const HeroBookingBox = () => {
 
         <Button
           variant="gold"
-          size="lg"
-          className="w-full"
+          size="xl"
+          className="w-full text-base font-semibold tracking-wide"
           onClick={openCheckout}
         >
           {t('hero.book.cta')}

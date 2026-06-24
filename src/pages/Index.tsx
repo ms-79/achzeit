@@ -5,7 +5,6 @@ import Footer from '@/components/Footer';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
-import ScrollPinnedBookingBox from '@/components/ScrollPinnedBookingBox';
 
 // Lazy load below-the-fold sections for faster initial page load
 const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
@@ -31,8 +30,7 @@ const Index = () => {
       <Header />
       <main className="relative">
         <HeroSection />
-        {/* Reserve space on desktop for the pinned booking box (prevents content jump) */}
-        <div className="lg:pr-[380px]">
+        <div>
           <Suspense fallback={<SectionSkeleton />}>
             <WhySection />
           </Suspense>
@@ -62,7 +60,6 @@ const Index = () => {
           </Suspense>
         </div>
       </main>
-      <ScrollPinnedBookingBox />
       <Footer />
       <StickyMobileCTA />
       <WhatsAppFloatingButton />

@@ -25,7 +25,7 @@ const StickyMobileCTA = () => {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 lg:hidden border-t border-border/60 bg-background/95 backdrop-blur-md transition-transform duration-300 ${
+      className={`fixed inset-x-0 bottom-0 z-40 xl:hidden border-t border-border/60 bg-background/95 backdrop-blur-md transition-transform duration-300 ${
         visible ? 'translate-y-0' : 'translate-y-full'
       }`}
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
