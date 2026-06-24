@@ -1,3 +1,5 @@
+import { env, envBaseUrl } from './_env';
+
 export const config = { runtime: 'edge' };
 
 const LISTING_ID = '463607';
@@ -11,9 +13,9 @@ const CACHE_TTL = 6 * 60 * 60 * 1000;
 
 async function getToken(): Promise<string> {
   if (cachedToken && Date.now() < tokenExpiresAt) return cachedToken;
-  const accountId = process.env.HOSTAWAY_CLIENT_ID;
-  const apiKey = process.env.HOSTAWAY_API_TOKEN;
-  const baseUrl = process.env.HOSTAWAY_BASE_URL || 'https://api.hostaway.com/v1';
+  const accountId = env('HOSTAWAY_CLIENT_ID');
+  const apiKey = env('HOSTAWAY_API_TOKEN');
+  const baseUrl = envBaseUrl('HOSTAWAY_BASE_URL', 'https://api.hostaway.com/v1');
   if (!accountId || !apiKey) throw new Error('Missing Hostaway credentials');
   const res = await fetch(`${baseUrl}/accessTokens`, {
     method: 'POST',
@@ -40,7 +42,7 @@ function detectLang(text: string): 'de' | 'en' | 'other' {
 }
 
 async function aiFormat(text: string, targetLang: 'de' | 'en', needsTranslation: boolean): Promise<string> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = env('ANTHROPIC_API_KEY');
   if (!apiKey || !text.trim()) return text;
   const langName = targetLang === 'de' ? 'Deutsch (Du-Form)' : 'English';
   const sys = `Du formatierst Ferienhaus-Beschreibungen für eine hochwertige Website.\n\nAUFGABE:\n1. ${needsTranslation ? `Übersetze den Text vollständig nach ${langName}.` : `Der Text ist bereits ${langName} — behalte die Sprache exakt bei.`}\n2. Erkenne logische Abschnitte und gib ihnen kurze, klare Überschriften.\n3. Strukturiere den Output als sauberes HTML mit <h3> für Überschriften und <p> für Absätze.\n4. Erlaubte Tags NUR: <h3>, <p>, <strong>, <em>, <br>, <ul>, <li>. Keine anderen Tags.\n5. Keine Inhalte hinzuerfinden oder weglassen.\n6. Antworte ausschließlich mit dem HTML.`;

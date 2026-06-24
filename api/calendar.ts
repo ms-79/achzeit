@@ -1,3 +1,5 @@
+import { env, envBaseUrl } from './_env';
+
 export const config = { runtime: 'edge' };
 
 const LISTING_ID = '463607';
@@ -8,9 +10,9 @@ const CACHE_TTL = 5 * 60_000;
 
 async function getHostawayToken(): Promise<string> {
   if (cachedToken && Date.now() < tokenExpiresAt) return cachedToken;
-  const accountId = process.env.HOSTAWAY_CLIENT_ID;
-  const apiKey = process.env.HOSTAWAY_API_TOKEN;
-  const baseUrl = process.env.HOSTAWAY_BASE_URL || 'https://api.hostaway.com/v1';
+  const accountId = env('HOSTAWAY_CLIENT_ID');
+  const apiKey = env('HOSTAWAY_API_TOKEN');
+  const baseUrl = envBaseUrl('HOSTAWAY_BASE_URL', 'https://api.hostaway.com/v1');
   if (!accountId || !apiKey) throw new Error('Hostaway credentials missing');
   const res = await fetch(`${baseUrl}/accessTokens`, {
     method: 'POST',

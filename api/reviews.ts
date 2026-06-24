@@ -1,3 +1,5 @@
+import { env, envBaseUrl } from './_env';
+
 export const config = { runtime: 'edge' };
 
 const LISTING_ID = '463607';
@@ -10,9 +12,9 @@ const REVIEWS_CACHE_TTL = 3600000;
 
 async function getHostawayToken(): Promise<string> {
   if (cachedToken && Date.now() < tokenExpiresAt) return cachedToken;
-  const accountId = process.env.HOSTAWAY_CLIENT_ID;
-  const apiKey = process.env.HOSTAWAY_API_TOKEN;
-  const baseUrl = process.env.HOSTAWAY_BASE_URL || 'https://api.hostaway.com/v1';
+  const accountId = env('HOSTAWAY_CLIENT_ID');
+  const apiKey = env('HOSTAWAY_API_TOKEN');
+  const baseUrl = envBaseUrl('HOSTAWAY_BASE_URL', 'https://api.hostaway.com/v1');
   if (!accountId || !apiKey) throw new Error('Missing Hostaway credentials');
   const res = await fetch(`${baseUrl}/accessTokens`, {
     method: 'POST',
@@ -39,7 +41,7 @@ function detectLang(text: string): 'de' | 'en' | 'other' {
 }
 
 async function translateReviews(reviews: { id: number; review: string }[], target: 'de' | 'en'): Promise<Record<string, string>> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = env('ANTHROPIC_API_KEY');
   if (!apiKey || reviews.length === 0) return {};
   const targetName = target === 'de' ? "German (use 'Du'/'du' form)" : 'English';
   const sys = `You translate vacation rental guest reviews to ${targetName}. Keep the tone natural, warm and authentic. Preserve emojis and punctuation. Return ONLY a JSON object mapping each review id (as string) to the translated text. No code fences, no commentary.`;

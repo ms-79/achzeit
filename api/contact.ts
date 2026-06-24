@@ -1,3 +1,5 @@
+import { env } from './_env';
+
 export const config = { runtime: 'edge' };
 
 export default async function handler(req: Request): Promise<Response> {
@@ -10,7 +12,7 @@ export default async function handler(req: Request): Promise<Response> {
     const { name, email, phone, message } = await req.json();
     if (!name || !email || !message) return json({ error: 'Name, email, and message are required' }, 400);
 
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey = env('RESEND_API_KEY');
     if (!apiKey) return json({ error: 'Email service not configured' }, 500);
 
     const response = await fetch('https://api.resend.com/emails', {
