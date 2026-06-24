@@ -41,7 +41,7 @@ const WelcomeSection = () => {
           height={1200}
           loading="lazy"
           decoding="async"
-          className="w-full h-[clamp(16rem,38vw,30rem)] object-cover"
+          className="w-full h-[clamp(16rem,38vw,32rem)] object-cover object-[center_22%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-alpine-pine/70 via-alpine-pine/25 to-transparent" />
         <ScrollReveal className="absolute inset-0 flex items-end justify-center pb-10 md:pb-14">
