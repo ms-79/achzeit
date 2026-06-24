@@ -27,7 +27,11 @@ const ReviewsSection = () => {
         const res = await fetch(`/api/reviews?locale=${language}`);
         if (!res.ok) throw new Error('Reviews fetch failed');
         const data = await res.json();
-        setReviews(data.reviews || []);
+        // Only show perfect reviews (displayed value 5,0 = Hostaway rating 10/10).
+        const fiveStar = (data.reviews || []).filter(
+          (r: Review) => (r.rating / 2).toFixed(1) === '5.0',
+        );
+        setReviews(fiveStar);
       } catch (err) {
         console.error('Failed to fetch reviews:', err);
       } finally {

@@ -80,29 +80,28 @@ const HeroSection = () => {
 
             {/* Social proof + USP strip */}
             <motion.div
-              className="mb-8 md:mb-10 flex flex-col gap-4 sm:flex-row sm:items-stretch"
+              className="mb-8 md:mb-10"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05 }}
             >
-              {/* Social proof */}
+              {/* Social proof – compact inline badge */}
               <button
                 onClick={() => scrollToSection('#reviews')}
-                className="flex flex-col justify-center text-left rounded-2xl border border-border bg-card px-5 py-3.5 shadow-soft hover:shadow-medium transition-shadow sm:w-56 shrink-0"
+                className="group mb-4 flex w-fit items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 shadow-soft hover:shadow-medium transition-shadow"
                 aria-label={`${AIRBNB_RATING} ${t('hero.social.rating')}`}
               >
-                <div className="flex items-center gap-0.5 mb-1">
+                <span className="flex items-center gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 fill-alpine-gold text-alpine-gold" />
                   ))}
-                </div>
-                <p className="text-sm font-semibold text-foreground">
-                  {AIRBNB_RATING} {t('hero.social.rating')}
-                </p>
+                </span>
+                <span className="text-sm font-semibold text-foreground tabular-nums">{AIRBNB_RATING}</span>
+                <span className="text-sm text-muted-foreground">{t('hero.social.rating')}</span>
               </button>
 
               {/* USPs – gap-px draws clean dividers in any layout. */}
-              <div className="flex-1 overflow-hidden rounded-2xl border border-border bg-border shadow-soft grid grid-cols-2 lg:grid-cols-4 gap-px">
+              <div className="overflow-hidden rounded-2xl border border-border bg-border shadow-soft grid grid-cols-2 lg:grid-cols-4 gap-px">
                 {usps.map(({ icon: Icon, title, sub }) => (
                   <div key={title} className="flex items-start gap-2.5 bg-card px-4 py-3.5">
                     <Icon className="w-5 h-5 text-alpine-forest shrink-0 mt-0.5" aria-hidden="true" />
