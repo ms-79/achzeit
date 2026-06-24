@@ -215,7 +215,6 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.location': 'Fischen im Allgäu · nahe Oberstdorf',
     'footer.nav': 'Navigation',
     'footer.contact': 'Kontakt',
-    'footer.book': 'Direkt buchen',
     'footer.whatsapp': 'WhatsApp',
     'footer.legal.agb': 'AGB & Stornierungsbedingungen',
 
@@ -430,7 +429,6 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.location': 'Fischen im Allgäu · near Oberstdorf',
     'footer.nav': 'Navigation',
     'footer.contact': 'Contact',
-    'footer.book': 'Book directly',
     'footer.whatsapp': 'WhatsApp',
     'footer.legal.agb': 'Terms & cancellation policy',
 

@@ -65,12 +65,6 @@ const Footer = () => {
             <h3 className="font-display text-lg text-alpine-snow mb-4">{t('footer.contact')}</h3>
             <div className="flex flex-col gap-3 text-sm">
               <a
-                href="/#home"
-                className="inline-flex items-center justify-center rounded-full bg-alpine-gold px-5 py-2.5 font-medium text-alpine-gold-foreground hover:bg-alpine-gold/90 transition-colors w-fit"
-              >
-                {t('footer.book')}
-              </a>
-              <a
                 href="mailto:info@achzeit.de"
                 className="text-alpine-snow/80 hover:text-alpine-snow transition-colors"
               >
