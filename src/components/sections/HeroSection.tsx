@@ -80,7 +80,7 @@ const HeroSection = () => {
 
         {/* Social proof + USP strip */}
         <motion.div
-          className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-stretch"
+          className="mb-6 flex flex-col gap-3 xl:flex-row xl:items-stretch"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.05 }}
@@ -88,7 +88,7 @@ const HeroSection = () => {
           {/* Social proof */}
           <button
             onClick={() => scrollToSection('#reviews')}
-            className="text-left rounded-2xl border border-border bg-card px-4 py-3 shadow-soft hover:shadow-medium transition-shadow lg:w-60 shrink-0"
+            className="flex flex-col justify-center text-left rounded-2xl border border-border bg-card px-5 py-3.5 shadow-soft hover:shadow-medium transition-shadow xl:w-60 shrink-0"
             aria-label={`${AIRBNB_RATING} ${t('hero.social.rating')}`}
           >
             <div className="flex items-center gap-0.5 mb-1">
@@ -104,14 +104,14 @@ const HeroSection = () => {
             </p>
           </button>
 
-          {/* USPs */}
-          <div className="flex-1 rounded-2xl border border-border bg-card shadow-soft grid grid-cols-2 md:grid-cols-4 divide-y divide-border md:divide-y-0 md:divide-x">
+          {/* USPs – 2×2 until xl, single row from xl. gap-px draws clean dividers in any layout. */}
+          <div className="flex-1 overflow-hidden rounded-2xl border border-border bg-border shadow-soft grid grid-cols-2 xl:grid-cols-4 gap-px">
             {usps.map(({ icon: Icon, title, sub }) => (
-              <div key={title} className="flex items-start gap-2.5 px-4 py-3">
+              <div key={title} className="flex items-start gap-2.5 bg-card px-4 py-3.5">
                 <Icon className="w-5 h-5 text-alpine-forest shrink-0 mt-0.5" aria-hidden="true" />
                 <div className="min-w-0">
                   <p className="text-sm font-semibold text-foreground leading-tight">{title}</p>
-                  <p className="text-xs text-muted-foreground leading-snug">{sub}</p>
+                  <p className="text-xs text-muted-foreground leading-snug mt-0.5">{sub}</p>
                 </div>
               </div>
             ))}
@@ -140,6 +140,11 @@ const HeroSection = () => {
             <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 bg-alpine-pine/85 text-alpine-snow text-xs md:text-sm font-medium px-3 py-1.5 rounded-lg backdrop-blur-sm">
               <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
               {t('hero.image.overlay')}
+            </span>
+            {/* Gallery CTA – only on mobile, where the thumbnails (and their CTA) are hidden */}
+            <span className="md:hidden absolute bottom-3 right-3 inline-flex items-center gap-1.5 bg-alpine-snow text-alpine-charcoal text-xs font-medium px-3 py-1.5 rounded-lg shadow-soft">
+              {t('hero.gallery.cta')}
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </span>
           </button>
           {thumbs.map((thumb, i) => (
@@ -171,10 +176,12 @@ const HeroSection = () => {
         </div>
 
         {/* Feature / trust strip */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 border-t border-border pt-6">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-5 border-t border-border pt-6">
           {features.map(({ icon: Icon, title, sub }) => (
-            <div key={title} className="flex items-center gap-3 lg:justify-center">
-              <Icon className="w-5 h-5 text-alpine-forest shrink-0" aria-hidden="true" />
+            <div key={title} className="flex items-center gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-alpine-forest">
+                <Icon className="w-5 h-5" aria-hidden="true" />
+              </span>
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-foreground leading-tight">{title}</p>
                 <p className="text-xs text-muted-foreground leading-snug">{sub}</p>
