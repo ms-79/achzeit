@@ -35,7 +35,6 @@ const Header = () => {
     { key: 'nav.amenities', href: '#amenities' },
     { key: 'nav.gallery', href: '#gallery' },
     { key: 'nav.location', href: '#location' },
-    { key: 'nav.availability', href: '#availability' },
     { key: 'nav.faq', href: '#faq' },
     { key: 'nav.contact', href: '#contact' },
   ];

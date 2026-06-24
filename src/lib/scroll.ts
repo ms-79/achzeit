@@ -15,4 +15,17 @@ export const scrollToBooking = (): void => {
   } else {
     document.getElementById('home')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  pulseBookingBox();
+};
+
+/** Briefly highlight the visible booking box(es) to draw the eye after a CTA. */
+const pulseBookingBox = (): void => {
+  const boxes = document.querySelectorAll<HTMLElement>('[data-booking-box]');
+  boxes.forEach((el) => {
+    if (el.offsetParent === null) return; // skip the hidden (other-layout) instance
+    el.classList.remove('booking-pulse');
+    void el.offsetWidth; // force reflow so the animation can restart
+    el.classList.add('booking-pulse');
+    window.setTimeout(() => el.classList.remove('booking-pulse'), 1400);
+  });
 };

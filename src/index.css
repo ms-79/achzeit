@@ -204,3 +204,21 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* One-shot gold ring pulse to draw attention to the booking box after a CTA.
+   Uses outline (not box-shadow) so the box's own elevated shadow is preserved. */
+@keyframes bookingPulse {
+  0% { outline-color: hsla(36, 45%, 55%, 0); outline-width: 3px; }
+  25% { outline-color: hsla(36, 45%, 55%, 0.9); }
+  100% { outline-color: hsla(36, 45%, 55%, 0); outline-width: 3px; }
+}
+.booking-pulse {
+  outline: 3px solid transparent;
+  outline-offset: 4px;
+  animation: bookingPulse 1.4s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .booking-pulse {
+    animation: none;
+  }
+}

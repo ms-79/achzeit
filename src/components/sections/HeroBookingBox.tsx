@@ -114,6 +114,7 @@ const HeroBookingBox = () => {
   return (
     <div className="w-full flex flex-col gap-3">
       <aside
+        data-booking-box
         className="w-full rounded-3xl bg-alpine-pine text-alpine-snow ring-1 ring-white/10 shadow-[0_24px_70px_-20px_hsla(156,40%,8%,0.5)] p-6 md:p-7"
         aria-label={t('hero.book.title')}
       >
