@@ -117,8 +117,11 @@ const LocationSection = () => {
 
           {/* Description */}
           <ScrollReveal direction="right" delay={0.2}>
-            <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-8 font-light">
+            <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-5 font-light">
               {t('location.description')}
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 font-light">
+              {t('location.description2')}
             </p>
 
             {/* Activity Highlights */}

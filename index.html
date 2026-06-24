@@ -17,14 +17,21 @@
     <meta name="author" content="ACHZEIT" />
     <meta name="keywords" content="Ferienhaus, Allgäu, Fischen, Familienurlaub, Sauna, Kamin, Berge, Holiday Home, Bavaria" />
 
+    <link rel="canonical" href="https://achzeit.de/" />
+
     <meta property="og:title" content="ACHZEIT – Family Retreat | Ferienhaus im Allgäu" />
     <meta property="og:description" content="Ein modernes Ferienhaus mit Sauna, Kamin und Platz für gemeinsame Zeit im Herzen des Allgäus." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://achzeit.de/" />
+    <meta property="og:image" content="https://achzeit.de/og-image.jpg" />
+    <meta property="og:image:width" content="1448" />
+    <meta property="og:image:height" content="1051" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="ACHZEIT Family Retreat" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@ACHZEIT" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:image" content="https://achzeit.de/og-image.jpg" />
     
     <link rel="icon" type="image/png" href="/favicon.png" />
     
@@ -48,6 +55,60 @@
       #root{min-height:100vh}
       img{max-width:100%;height:auto;display:block}
     </style>
+
+    <!-- Structured data: vacation rental / lodging business (Local SEO).
+         Keep address, geo, price and rating in sync with the site. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "@id": "https://achzeit.de/#lodging",
+      "name": "ACHZEIT Family Retreat",
+      "description": "Modernes Ferienhaus in Fischen im Allgäu mit privater Sauna, Kamin und Platz für bis zu 7 Gäste. Ideal für Familien – nahe Oberstdorf und dem Kleinwalsertal.",
+      "url": "https://achzeit.de/",
+      "image": [
+        "https://achzeit.de/og-image.jpg"
+      ],
+      "email": "info@achzeit.de",
+      "telephone": "+49 156 79656368",
+      "priceRange": "€€€",
+      "currenciesAccepted": "EUR",
+      "petsAllowed": false,
+      "numberOfRooms": 3,
+      "maximumAttendeeCapacity": 7,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Achweg 5a",
+        "postalCode": "87538",
+        "addressLocality": "Fischen im Allgäu",
+        "addressRegion": "Bayern",
+        "addressCountry": "DE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 47.4605,
+        "longitude": 10.2655
+      },
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Private Sauna", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Kamin", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Kostenfreies WLAN", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Kostenfreier Parkplatz", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Terrasse & Balkon", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Garten", "value": true }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "bestRating": "5",
+        "reviewCount": "120"
+      },
+      "containedInPlace": {
+        "@type": "Place",
+        "name": "Fischen im Allgäu, Oberallgäu"
+      }
+    }
+    </script>
   </head>
 
   <body>

@@ -16,3 +16,11 @@ export const GUEST_COUNT = 120;
  * `?start=&end=&numberOfGuests=` to this. Change here if the checkout moves.
  */
 export const CHECKOUT_BASE_URL = 'https://book.achzeit.de/checkout/463607';
+
+/**
+ * Full-width emotional landscape image below the welcome story.
+ * PLACEHOLDER — swap with a real/AI Allgäu photo later by replacing the file in
+ * /public or pointing this at the new asset path (recommended: optimized .webp,
+ * ~1600×600, landscape, no people).
+ */
+export const WELCOME_BAND_IMAGE = '/allgaeu-band-placeholder.svg';

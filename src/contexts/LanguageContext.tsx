@@ -97,6 +97,7 @@ const translations: Record<Language, Record<string, string>> = {
     'welcome.p2': 'Im Sommer beginnt der Tag mit frischer Bergluft auf der Terrasse. Die Wanderwege starten direkt vor der Haustür, und abends wird gegrillt, während die Kinder barfuß durch den Garten toben.',
     'welcome.p3': 'ACHZEIT ist mehr als ein Ferienhaus – es ist euer Rückzugsort. Modern, alpin, durchdacht, mit privater Sauna und Kamin. Mit Raum für das, was im Alltag oft fehlt:',
     'welcome.closer': 'Zeit füreinander.',
+    'welcome.band.alt': 'Allgäuer Berglandschaft bei Fischen im Allgäu',
 
     // Why ACHZEIT
     'why.title': 'Warum ACHZEIT?',
@@ -187,7 +188,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Location
     'location.title': 'Lage',
     'location.subtitle': 'Fischen im Allgäu',
-    'location.description': 'Eingebettet in die atemberaubende Landschaft des Allgäus bietet Fischen den perfekten Ausgangspunkt für Wanderungen, Skifahren und Familienaktivitäten. Genießen Sie die frische Bergluft und die Ruhe der Natur.',
+    'location.description': 'Eingebettet in die Hörnerdörfer im Oberallgäu liegt ACHZEIT in Fischen – nur wenige Minuten von Oberstdorf und dem Kleinwalsertal entfernt. Direkt vom Haus starten Wander- und Radwege ins Illertal, im Winter sind Loipen und die Skigebiete am Nebelhorn, Söllereck und in Balderschwang schnell erreicht.',
+    'location.description2': 'Die Bergbahnen rund um Oberstdorf, das Familienbad und zahlreiche Ausflugsziele liegen in unmittelbarer Nähe. Ob Sommerwanderung, Skitag oder ein ruhiger Nachmittag mit Bergblick – Fischen im Allgäu ist der ideale Ausgangspunkt für Familien.',
     
     // Contact
     'contact.title': 'Kontakt',
@@ -313,6 +315,7 @@ const translations: Record<Language, Record<string, string>> = {
     'welcome.p2': 'In summer the day begins with fresh mountain air on the terrace. The hiking trails start right at your doorstep, and in the evening you fire up the grill while the children run barefoot through the garden.',
     'welcome.p3': 'ACHZEIT is more than a holiday home – it is your retreat. Modern, alpine and thoughtfully designed, with a private sauna and fireplace. With room for what everyday life so often lacks:',
     'welcome.closer': 'Time for each other.',
+    'welcome.band.alt': 'Allgäu mountain landscape near Fischen im Allgäu',
 
     // Why ACHZEIT
     'why.title': 'Why ACHZEIT?',
@@ -403,7 +406,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Location
     'location.title': 'Location',
     'location.subtitle': 'Fischen im Allgäu',
-    'location.description': 'Nestled in the breathtaking landscape of the Allgäu, Fischen offers the perfect starting point for hiking, skiing, and family activities. Enjoy the fresh mountain air and the peace of nature.',
+    'location.description': 'Set among the Hörnerdörfer in the Oberallgäu, ACHZEIT sits in Fischen – just minutes from Oberstdorf and the Kleinwalsertal valley. Hiking and cycling trails start right at the house into the Iller valley, while in winter the cross-country tracks and the ski areas at Nebelhorn, Söllereck and Balderschwang are quickly reached.',
+    'location.description2': 'The mountain lifts around Oberstdorf, the family swimming pool and countless excursions are all close by. Whether a summer hike, a day on the slopes or a quiet afternoon with mountain views – Fischen im Allgäu is the perfect base for families.',
     
     // Contact
     'contact.title': 'Contact',
