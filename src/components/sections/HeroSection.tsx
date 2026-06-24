@@ -85,21 +85,6 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05 }}
             >
-              {/* Social proof – compact inline badge */}
-              <button
-                onClick={() => scrollToSection('#reviews')}
-                className="group mb-4 flex w-fit items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 shadow-soft hover:shadow-medium transition-shadow"
-                aria-label={`${AIRBNB_RATING} ${t('hero.social.rating')}`}
-              >
-                <span className="flex items-center gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-alpine-gold text-alpine-gold" />
-                  ))}
-                </span>
-                <span className="text-sm font-semibold text-foreground tabular-nums">{AIRBNB_RATING}</span>
-                <span className="text-sm text-muted-foreground">{t('hero.social.rating')}</span>
-              </button>
-
               {/* USPs – gap-px draws clean dividers in any layout. */}
               <div className="overflow-hidden rounded-2xl border border-border bg-border shadow-soft grid grid-cols-2 lg:grid-cols-4 gap-px">
                 {usps.map(({ icon: Icon, title, sub }) => (
@@ -132,6 +117,19 @@ const HeroSection = () => {
                   fetchPriority="high"
                   loading="eager"
                 />
+                {/* Overlay: Airbnb rating badge */}
+                <span
+                  className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-alpine-snow/95 text-alpine-charcoal text-xs md:text-sm font-medium px-3 py-1.5 rounded-lg shadow-soft backdrop-blur-sm"
+                  aria-label={`${AIRBNB_RATING} ${t('hero.social.rating')}`}
+                >
+                  <span className="flex items-center gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-alpine-gold text-alpine-gold" />
+                    ))}
+                  </span>
+                  <span className="font-semibold tabular-nums">{AIRBNB_RATING}</span>
+                  <span className="text-alpine-charcoal/70">{t('hero.social.rating')}</span>
+                </span>
                 {/* Overlay: quiet location */}
                 <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 bg-alpine-pine/85 text-alpine-snow text-xs md:text-sm font-medium px-3.5 py-2 rounded-lg backdrop-blur-sm">
                   <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
