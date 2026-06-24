@@ -2,6 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Flame, Home, Users, Mountain, Trees, Car } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ScrollReveal from '@/components/ScrollReveal';
+import { scrollToBooking } from '@/lib/scroll';
 
 const WhySection = () => {
   const { t } = useLanguage();
@@ -15,9 +16,6 @@ const WhySection = () => {
     { icon: Car, title: t('why.6.title'), text: t('why.6.text') },
   ];
 
-  const scrollToAvailability = () => {
-    document.querySelector('#availability')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <section id="why" className="py-16 md:py-20 bg-background">
@@ -51,7 +49,7 @@ const WhySection = () => {
         </div>
 
         <ScrollReveal className="mt-10 md:mt-12 text-center">
-          <Button variant="alpine" size="lg" onClick={scrollToAvailability}>
+          <Button variant="alpine" size="lg" onClick={scrollToBooking}>
             {t('why.cta')}
           </Button>
         </ScrollReveal>

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { buildWhatsAppUrl } from '@/lib/whatsapp';
+import { scrollToBooking } from '@/lib/scroll';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,8 +40,14 @@ const Header = () => {
     { key: 'nav.contact', href: '#contact' },
   ];
 
-  const openWhatsApp = () => {
-    window.open(buildWhatsAppUrl(t('whatsapp.prefill')), '_blank', 'noopener,noreferrer');
+  // Single primary action everywhere: go to the booking box.
+  const goToBooking = () => {
+    setIsMobileMenuOpen(false);
+    if (isSubpage) {
+      navigate('/');
+    } else {
+      scrollToBooking();
+    }
   };
 
   const scrollToSection = (href: string) => {
@@ -136,15 +142,14 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Primary CTA – WhatsApp inquiry */}
+          {/* Primary CTA – check availability (booking) */}
           <Button
-            onClick={openWhatsApp}
+            onClick={goToBooking}
             size="sm"
             variant="alpine"
             className="rounded-full px-5"
           >
-            {t('nav.inquire')}
-            <MessageCircle className="w-4 h-4" />
+            {t('hero.cta.availability')}
           </Button>
         </nav>
 
@@ -184,7 +189,7 @@ const Header = () => {
             })}
           </div>
           <Button
-            onClick={() => scrollToSection('#availability')}
+            onClick={goToBooking}
             size="sm"
             className="bg-primary hover:bg-primary/90 text-primary-foreground"
           >

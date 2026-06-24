@@ -1,8 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import { MessageCircle, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import logoAchzeit from '@/assets/logo-achzeit-transparent.webp';
-import { buildWhatsAppUrl, WHATSAPP_DISPLAY } from '@/lib/whatsapp';
 
 const Footer = () => {
   const { t, language } = useLanguage();
@@ -67,19 +66,10 @@ const Footer = () => {
             <h3 className="font-display text-lg text-alpine-snow mb-4">{t('footer.contact')}</h3>
             <div className="flex flex-col gap-3 text-sm">
               <a
-                href="/#availability"
+                href="/#home"
                 className="inline-flex items-center justify-center rounded-full bg-alpine-gold px-5 py-2.5 font-medium text-alpine-gold-foreground hover:bg-alpine-gold/90 transition-colors w-fit"
               >
                 {t('footer.book')}
-              </a>
-              <a
-                href={buildWhatsAppUrl(t('whatsapp.prefill'))}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-alpine-snow/80 hover:text-alpine-snow transition-colors"
-              >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                {t('footer.whatsapp')} · {WHATSAPP_DISPLAY}
               </a>
               <a
                 href="mailto:info@achzeit.de"

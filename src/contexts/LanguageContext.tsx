@@ -20,7 +20,6 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Kontakt',
     'nav.faq': 'FAQ',
     'nav.amenities': 'Ausstattung',
-    'nav.inquire': 'Jetzt anfragen',
 
     // Hero
     'hero.title': 'ACHZEIT',
@@ -28,7 +27,6 @@ const translations: Record<Language, Record<string, string>> = {
    'hero.tagline': 'Dein modernes Ferienhaus im Allgäu',
    'hero.description': 'Wir haben ACHZEIT so gestaltet, wie wir selbst Urlaub machen möchten – ruhig, hochwertig und familienfreundlich.',
     'hero.cta.availability': 'Verfügbarkeit prüfen',
-    'hero.cta.book': 'Jetzt buchen',
     'hero.chip': 'ACHZEIT Family Retreat · Fischen im Allgäu · Nahe Oberstdorf',
     'hero.headline.1': 'Euer privates Family Retreat im Allgäu',
     'hero.headline.2': 'Mit Sauna, Kamin und Bergblick.',
@@ -173,14 +171,10 @@ const translations: Record<Language, Record<string, string>> = {
     'sticky.cta': 'Verfügbarkeit prüfen',
     
     // Availability
-    'availability.title': 'Verfügbarkeit',
-    'availability.subtitle': 'Prüfen Sie freie Termine',
+    'availability.title': 'Belegungskalender',
+    'availability.subtitle': 'Aktuelle freie Termine auf einen Blick',
     'availability.clearDates': 'Daten löschen',
     'availability.apply': 'Anwenden',
-    
-    // Booking
-    'booking.title': 'Jetzt buchen',
-    'booking.subtitle': 'Reservieren Sie Ihren Aufenthalt',
     
     // Location
     'location.title': 'Lage',
@@ -234,7 +228,6 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Contact',
     'nav.faq': 'FAQ',
     'nav.amenities': 'Amenities',
-    'nav.inquire': 'Enquire now',
 
     // Hero
     'hero.title': 'ACHZEIT',
@@ -242,7 +235,6 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.tagline': 'Your Modern Holiday Home in the Allgäu',
     'hero.description': 'We designed ACHZEIT the way we ourselves want to vacation – peaceful, high-quality and family-friendly.',
     'hero.cta.availability': 'Check Availability',
-    'hero.cta.book': 'Book Now',
     'hero.chip': 'ACHZEIT Family Retreat · Fischen im Allgäu · Near Oberstdorf',
     'hero.headline.1': 'Your private family retreat in the Allgäu',
     'hero.headline.2': 'With sauna, fireplace and mountain views.',
@@ -387,14 +379,10 @@ const translations: Record<Language, Record<string, string>> = {
     'sticky.cta': 'Check availability',
     
     // Availability
-    'availability.title': 'Availability',
-    'availability.subtitle': 'Check Available Dates',
+    'availability.title': 'Availability Calendar',
+    'availability.subtitle': 'Free dates at a glance',
     'availability.clearDates': 'Clear dates',
     'availability.apply': 'Apply',
-    
-    // Booking
-    'booking.title': 'Book Now',
-    'booking.subtitle': 'Reserve Your Stay',
     
     // Location
     'location.title': 'Location',

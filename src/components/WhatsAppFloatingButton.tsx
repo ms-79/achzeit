@@ -44,8 +44,9 @@ const WhatsAppFloatingButton = () => {
       rel="noopener noreferrer"
       aria-label={t('whatsapp.aria')}
       className={[
-        'fixed z-40 right-4 md:right-6 bottom-24 md:bottom-6',
-        'flex items-center gap-2.5 pl-3.5 pr-4 py-3 rounded-full',
+        // Desktop only – on mobile/tablet WhatsApp lives in the sticky bottom bar
+        'hidden xl:flex fixed z-40 right-6 bottom-6',
+        'items-center gap-2.5 pl-3.5 pr-4 py-3 rounded-full',
         'bg-[#25D366] hover:bg-[#1ebe5d] text-white shadow-medium',
         'transition-all duration-500 ease-out',
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none',

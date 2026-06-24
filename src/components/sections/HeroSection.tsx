@@ -173,7 +173,7 @@ const HeroSection = () => {
             </motion.div>
 
             {/* Booking box + brand card – in flow below the collage on < xl */}
-            <div className="xl:hidden mt-6 flex flex-col gap-4">
+            <div id="booking" className="xl:hidden mt-6 flex flex-col gap-4 scroll-mt-24">
               <HeroBookingBox />
               <BrandCard />
             </div>

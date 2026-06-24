@@ -1,6 +1,5 @@
 import { Heart, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { buildWhatsAppUrl } from '@/lib/whatsapp';
 
 /**
  * Neutral brand card shown beneath the booking box.
@@ -22,15 +21,10 @@ const BrandCard = () => {
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
             {t('hero.brand.text')}
           </p>
-          <a
-            href={buildWhatsAppUrl(t('whatsapp.prefill'))}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-alpine-forest hover:opacity-80 transition-opacity"
-          >
+          <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-alpine-forest">
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
             {t('hero.brand.whatsapp')}
-          </a>
+          </p>
         </div>
       </div>
     </div>
