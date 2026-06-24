@@ -207,7 +207,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden absolute top-full left-0 right-0 bg-background/98 backdrop-blur-md shadow-medium transition-all duration-300 ${
+        className={`lg:hidden absolute top-full left-0 right-0 bg-[#f5f0e8] backdrop-blur-md shadow-medium border-t border-border/60 transition-all duration-300 ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
