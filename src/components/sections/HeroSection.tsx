@@ -20,7 +20,7 @@ import galleryTerrace from '@/assets/gallery-terrasse.webp';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.webp';
 import HeroBookingBox from '@/components/sections/HeroBookingBox';
 import BrandCard from '@/components/sections/BrandCard';
-import { AIRBNB_RATING, GUEST_COUNT } from '@/constants/site';
+import { AIRBNB_RATING } from '@/constants/site';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -51,19 +51,19 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="home" className="pt-24 md:pt-28 pb-10 md:pb-14 bg-background">
+    <section id="home" className="pt-28 md:pt-36 pb-10 md:pb-14 bg-background">
       <div className="mx-auto w-full max-w-[1600px] px-6">
         <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-8 2xl:gap-12 items-start">
           {/* ───────── Left column: content + collage + features ───────── */}
           <div className="min-w-0">
             {/* Title */}
             <motion.div
-              className="mb-5 md:mb-6"
+              className="mb-8 md:mb-10"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-3 mb-5 md:mb-6">
                 <span className="h-px w-10 bg-primary/60" aria-hidden="true" />
                 <span className="font-body uppercase tracking-[0.22em] text-xs md:text-sm text-primary/80">
                   {t('hero.chip')}
@@ -71,19 +71,16 @@ const HeroSection = () => {
               </div>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] 2xl:text-[3.8rem] text-foreground leading-[1.05] tracking-tight">
                 {t('hero.headline.1')}
-                <span className="block italic font-light text-alpine-gold mt-1">
-                  {t('hero.headline.2')}
-                </span>
               </h1>
               <p
-                className="mt-4 max-w-2xl text-base md:text-lg text-foreground/80 leading-relaxed [&_strong]:font-semibold [&_strong]:text-foreground"
+                className="mt-5 md:mt-6 max-w-2xl text-base md:text-lg text-foreground/80 leading-relaxed [&_strong]:font-semibold [&_strong]:text-foreground"
                 dangerouslySetInnerHTML={{ __html: t('hero.sub') }}
               />
             </motion.div>
 
             {/* Social proof + USP strip */}
             <motion.div
-              className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-stretch"
+              className="mb-8 md:mb-10 flex flex-col gap-4 sm:flex-row sm:items-stretch"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05 }}
@@ -101,9 +98,6 @@ const HeroSection = () => {
                 </div>
                 <p className="text-sm font-semibold text-foreground">
                   {AIRBNB_RATING} {t('hero.social.rating')}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {t('hero.social.over')} {GUEST_COUNT} {t('hero.social.guests')}
                 </p>
               </button>
 

@@ -29,7 +29,6 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.cta.availability': 'Verfügbarkeit prüfen',
     'hero.chip': 'ACHZEIT Family Retreat · Fischen im Allgäu · Nahe Oberstdorf',
     'hero.headline.1': 'Euer privates Family Retreat im Allgäu',
-    'hero.headline.2': 'Mit Sauna, Kamin und Bergblick.',
     'hero.sub': 'Ankommen, abschalten und gemeinsame Zeit genießen – in eurem modernen Ferienhaus für bis zu <strong>7 Gäste</strong>.',
     'hero.benefit.sauna': 'Private Sauna & Kamin',
     'hero.benefit.terrace': 'Terrasse & Balkon',
@@ -37,8 +36,6 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero – social proof, USPs, image overlay, brand card, feature strip
     'hero.social.rating': 'bei Airbnb',
-    'hero.social.over': 'Über',
-    'hero.social.guests': 'begeisterte Gäste',
     'hero.usp.sauna.title': 'Private Sauna',
     'hero.usp.sauna.sub': 'Für entspannte Abende',
     'hero.usp.fireplace.title': 'Kamin',
@@ -97,7 +94,7 @@ const translations: Record<Language, Record<string, string>> = {
     'welcome.p2': 'Im Sommer beginnt der Tag mit frischer Bergluft auf der Terrasse. Die Wanderwege starten direkt vor der Haustür, und abends wird gegrillt, während die Kinder barfuß durch den Garten toben.',
     'welcome.p3': 'ACHZEIT ist mehr als ein Ferienhaus – es ist euer Rückzugsort. Modern, alpin, durchdacht, mit privater Sauna und Kamin. Mit Raum für das, was im Alltag oft fehlt:',
     'welcome.closer': 'Zeit füreinander.',
-    'welcome.band.alt': 'Allgäuer Berglandschaft bei Fischen im Allgäu',
+    'welcome.band.alt': 'Bergpanorama mit Weiher bei Fischen im Allgäu',
 
     // Why ACHZEIT
     'why.title': 'Warum ACHZEIT?',
@@ -247,7 +244,6 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.cta.availability': 'Check Availability',
     'hero.chip': 'ACHZEIT Family Retreat · Fischen im Allgäu · Near Oberstdorf',
     'hero.headline.1': 'Your private family retreat in the Allgäu',
-    'hero.headline.2': 'With sauna, fireplace and mountain views.',
     'hero.sub': 'Arrive, unwind and enjoy time together – in your modern holiday home for up to <strong>7 guests</strong>.',
     'hero.benefit.sauna': 'Private sauna & fireplace',
     'hero.benefit.terrace': 'Terrace & balcony',
@@ -255,8 +251,6 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero – social proof, USPs, image overlay, brand card, feature strip
     'hero.social.rating': 'on Airbnb',
-    'hero.social.over': 'Over',
-    'hero.social.guests': 'happy guests',
     'hero.usp.sauna.title': 'Private Sauna',
     'hero.usp.sauna.sub': 'For relaxing evenings',
     'hero.usp.fireplace.title': 'Fireplace',
@@ -315,7 +309,7 @@ const translations: Record<Language, Record<string, string>> = {
     'welcome.p2': 'In summer the day begins with fresh mountain air on the terrace. The hiking trails start right at your doorstep, and in the evening you fire up the grill while the children run barefoot through the garden.',
     'welcome.p3': 'ACHZEIT is more than a holiday home – it is your retreat. Modern, alpine and thoughtfully designed, with a private sauna and fireplace. With room for what everyday life so often lacks:',
     'welcome.closer': 'Time for each other.',
-    'welcome.band.alt': 'Allgäu mountain landscape near Fischen im Allgäu',
+    'welcome.band.alt': 'Mountain panorama with pond near Fischen im Allgäu',
 
     // Why ACHZEIT
     'why.title': 'Why ACHZEIT?',

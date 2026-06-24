@@ -38,7 +38,7 @@ const WelcomeSection = () => {
           src={WELCOME_BAND_IMAGE}
           alt={t('welcome.band.alt')}
           width={1600}
-          height={600}
+          height={1200}
           loading="lazy"
           decoding="async"
           className="w-full h-[clamp(16rem,38vw,30rem)] object-cover"
