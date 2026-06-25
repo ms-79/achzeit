@@ -33,7 +33,7 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
     },
     {
       q: 'Wie sind die Schlafzimmer aufgeteilt?',
-      a: 'Es gibt 3 Schlafzimmer: Schlafzimmer 1 mit Doppelbett (200 × 200 cm), Schlafzimmer 2 mit Doppelbett (200 × 200 cm) und Schlafzimmer 3 mit Etagenbett (90 × 200 cm) sowie einem kleinen zusätzlichen Einzelbett (80 × 180 cm). Das dritte Schlafzimmer ist besonders gut für Kinder und Jugendliche geeignet – für Erwachsenengruppen empfehlen wir ACHZEIT komfortabel für bis zu 6 Erwachsene.',
+      a: 'Es gibt 3 Schlafzimmer: Schlafzimmer 1 mit Doppelbett (200 × 200 cm), Schlafzimmer 2 mit Doppelbett (200 × 200 cm) und Schlafzimmer 3 mit Etagenbett (200 × 90 cm) sowie einem kleinen zusätzlichen Einzelbett (180 × 80 cm). Das dritte Schlafzimmer ist besonders gut für Kinder und Jugendliche geeignet – für Erwachsenengruppen empfehlen wir ACHZEIT komfortabel für bis zu 6 Erwachsene.',
     },
     {
       q: 'Gibt es Parkplätze und WLAN?',
@@ -71,7 +71,7 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
     },
     {
       q: 'How are the bedrooms arranged?',
-      a: 'There are 3 bedrooms: bedroom 1 with a double bed (200 × 200 cm), bedroom 2 with a double bed (200 × 200 cm), and bedroom 3 with a bunk bed (90 × 200 cm) plus a small additional single bed (80 × 180 cm). The third bedroom is especially well suited to children and teenagers – for groups of adults we recommend ACHZEIT comfortably for up to 6 adults.',
+      a: 'There are 3 bedrooms: bedroom 1 with a double bed (200 × 200 cm), bedroom 2 with a double bed (200 × 200 cm), and bedroom 3 with a bunk bed (200 × 90 cm) plus a small additional single bed (180 × 80 cm). The third bedroom is especially well suited to children and teenagers – for groups of adults we recommend ACHZEIT comfortably for up to 6 adults.',
     },
     {
       q: 'Is there parking and Wi-Fi?',
