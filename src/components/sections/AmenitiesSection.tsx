@@ -149,16 +149,8 @@ const AmenitiesSection = () => {
                     transition={{ duration: 0.25, delay: i < VISIBLE_COUNT ? i * 0.03 : 0 }}
                     className="flex items-start gap-2.5"
                   >
-                    <Icon
-                      className={`w-5 h-5 mt-0.5 shrink-0 ${
-                        item.highlight ? 'text-alpine-forest' : 'text-muted-foreground'
-                      }`}
-                    />
-                    <span
-                      className={`text-sm leading-snug ${
-                        item.highlight ? 'text-foreground font-medium' : 'text-foreground/80'
-                      }`}
-                    >
+                    <Icon className="w-5 h-5 mt-0.5 shrink-0 text-alpine-forest" />
+                    <span className="text-sm leading-snug text-foreground">
                       {item.label}
                     </span>
                   </motion.div>
