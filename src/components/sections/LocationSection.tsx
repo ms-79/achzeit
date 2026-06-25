@@ -42,9 +42,9 @@ const LocationSection = () => {
 
   const locationImages = [
     { src: locationVillage, alt: 'St.-Verena-Kirche in Fischen im Allgäu' },
-    { src: locationRiver, alt: 'Die Iller bei Fischen im Allgäu' },
-    { src: locationCountryside, alt: 'Allgäuer Bergwiesen bei Fischen' },
-    { src: locationSwans, alt: 'Schwanenfamilie am Grundbach in Fischen mit Bergpanorama' },
+    { src: locationRiver, alt: 'Die Iller in Fischen im Allgäu' },
+    { src: locationCountryside, alt: 'Allgäuer Bergwiesen in Fischen im Allgäu' },
+    { src: locationSwans, alt: 'Schwanenfamilie am Grundbach in Fischen im Allgäu' },
   ];
 
   return (

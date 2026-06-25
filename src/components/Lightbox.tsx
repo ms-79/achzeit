@@ -35,7 +35,13 @@ const Lightbox = ({ images, index, onClose, onNavigate }: LightboxProps) => {
       else if (e.key === 'ArrowRight') go(1);
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    // Lock background scroll while the lightbox is open.
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, images.length]);
 
@@ -57,7 +63,7 @@ const Lightbox = ({ images, index, onClose, onNavigate }: LightboxProps) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-alpine-charcoal/95 flex items-center justify-center p-6 animate-fade-in"
+      className="fixed inset-0 z-50 bg-alpine-charcoal/95 flex items-center justify-center p-6 animate-fade-in touch-none overscroll-contain"
       onClick={onClose}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
@@ -81,7 +87,7 @@ const Lightbox = ({ images, index, onClose, onNavigate }: LightboxProps) => {
       <img
         src={current.src}
         alt={current.caption}
-        className="max-w-full max-h-[75vh] object-contain rounded select-none"
+        className="max-w-full max-h-[75vh] object-contain rounded select-none touch-none"
         onClick={(e) => e.stopPropagation()}
         draggable={false}
       />

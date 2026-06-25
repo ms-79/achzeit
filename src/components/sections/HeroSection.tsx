@@ -75,10 +75,10 @@ const HeroSection = () => {
     { src: galleryBalconyView, alt: t('gallery.balconyview') },
     { src: galleryLaundry, alt: t('gallery.laundry') },
     { src: galleryGamesNight, alt: t('gallery.games') },
-    { src: locationSwans, alt: 'Schwanenfamilie am Grundbach in Fischen im Allgäu mit Bergpanorama' },
-    { src: locationVillage, alt: 'St. Verena Kirche, Fischen im Allgäu' },
-    { src: locationRiver, alt: 'Iller bei Fischen im Allgäu' },
-    { src: locationCountryside, alt: 'Allgäuer Bergwiesen bei Fischen' },
+    { src: locationSwans, alt: 'Schwanenfamilie am Grundbach in Fischen im Allgäu' },
+    { src: locationVillage, alt: 'St.-Verena-Kirche in Fischen im Allgäu' },
+    { src: locationRiver, alt: 'Die Iller in Fischen im Allgäu' },
+    { src: locationCountryside, alt: 'Allgäuer Bergwiesen in Fischen im Allgäu' },
   ];
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
