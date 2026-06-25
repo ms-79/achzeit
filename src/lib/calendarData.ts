@@ -21,6 +21,13 @@ const dayAfter = (s: string): string => {
   return new Date(Date.UTC(y, m - 1, d + 1)).toISOString().slice(0, 10);
 };
 
+/** Today's date in the visitor's local timezone as YYYY-MM-DD (never UTC, so it
+ *  never drifts to the previous day in the evening/CET). */
+export const localTodayISO = (): string => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+};
+
 /**
  * Derive the next bookable windows from already-fetched Hostaway calendar data.
  * A window is a run of consecutive available nights long enough for a stay of at
@@ -29,7 +36,7 @@ const dayAfter = (s: string): string => {
  */
 export const nextAvailableRanges = (
   days: Record<string, CalendarDay>,
-  { minNights = 5, max = 3, today = new Date().toISOString().slice(0, 10) }: {
+  { minNights = 5, max = 3, today = localTodayISO() }: {
     minNights?: number;
     max?: number;
     today?: string;

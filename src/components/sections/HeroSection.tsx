@@ -106,10 +106,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
             >
-              <button
-                onClick={() => scrollToSection('#gallery')}
-                className="col-span-4 md:col-span-2 row-span-2 relative group overflow-hidden"
-              >
+              <div className="col-span-4 md:col-span-2 row-span-2 relative group overflow-hidden">
                 <img
                   src={galleryBalcony}
                   alt={t('gallery.balcony')}
@@ -117,10 +114,19 @@ const HeroSection = () => {
                   fetchPriority="high"
                   loading="eager"
                 />
-                {/* Overlay: Airbnb rating badge */}
-                <span
-                  className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-alpine-snow/95 text-alpine-charcoal text-xs md:text-sm font-medium px-3 py-1.5 rounded-lg shadow-soft backdrop-blur-sm"
+                {/* Whole-image click target → gallery */}
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('#gallery')}
+                  aria-label={t('hero.gallery.cta')}
+                  className="absolute inset-0 z-0"
+                />
+                {/* Airbnb rating badge → reviews (clickable, sits above the gallery target) */}
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('#reviews')}
                   aria-label={`${AIRBNB_RATING} ${t('hero.social.rating')}`}
+                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 bg-alpine-snow/95 text-alpine-charcoal text-xs md:text-sm font-medium px-3 py-1.5 rounded-lg shadow-soft backdrop-blur-sm hover:bg-alpine-snow transition-colors"
                 >
                   <span className="flex items-center gap-0.5">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -129,18 +135,17 @@ const HeroSection = () => {
                   </span>
                   <span className="font-semibold tabular-nums">{AIRBNB_RATING}</span>
                   <span className="text-alpine-charcoal/70">{t('hero.social.rating')}</span>
-                </span>
-                {/* Overlay: quiet location */}
-                <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 bg-alpine-pine/85 text-alpine-snow text-xs md:text-sm font-medium px-3.5 py-2 rounded-lg backdrop-blur-sm">
+                </button>
+                {/* Decorative overlays – non-interactive so clicks fall through to the gallery target */}
+                <span className="pointer-events-none absolute bottom-4 left-4 inline-flex items-center gap-1.5 bg-alpine-pine/85 text-alpine-snow text-xs md:text-sm font-medium px-3.5 py-2 rounded-lg backdrop-blur-sm">
                   <MapPin className="w-3.5 h-3.5" aria-hidden="true" />
                   {t('hero.image.overlay')}
                 </span>
-                {/* Gallery CTA – only on mobile, where the thumbnails (and their CTA) are hidden */}
-                <span className="md:hidden absolute bottom-4 right-4 inline-flex items-center gap-1.5 bg-alpine-snow text-alpine-charcoal text-xs font-medium px-3.5 py-2 rounded-lg shadow-soft">
+                <span className="pointer-events-none md:hidden absolute bottom-4 right-4 inline-flex items-center gap-1.5 bg-alpine-snow text-alpine-charcoal text-xs font-medium px-3.5 py-2 rounded-lg shadow-soft">
                   {t('hero.gallery.cta')}
                   <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </span>
-              </button>
+              </div>
               {thumbs.map((thumb, i) => (
                 <button
                   key={i}
