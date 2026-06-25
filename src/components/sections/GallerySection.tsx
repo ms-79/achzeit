@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
+import Lightbox from '@/components/Lightbox';
 import { motion } from 'framer-motion';
 
 // Living & Fireplace
@@ -105,20 +105,6 @@ const GallerySection = () => {
     setImagesPreloaded(true);
   }, [selectedIndex, imagesPreloaded]);
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedIndex !== null) {
-      setSelectedIndex(selectedIndex === 0 ? galleryItems.length - 1 : selectedIndex - 1);
-    }
-  };
-
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedIndex !== null) {
-      setSelectedIndex(selectedIndex === galleryItems.length - 1 ? 0 : selectedIndex + 1);
-    }
-  };
-
   return (
     <section id="gallery" className="section-padding bg-background">
       <div className="container mx-auto px-6">
@@ -171,55 +157,12 @@ const GallerySection = () => {
         </div>
       </div>
 
-      {/* Lightbox with Navigation */}
-      {selectedIndex !== null && (
-        <div
-          className="fixed inset-0 z-50 bg-alpine-charcoal/95 flex items-center justify-center p-6 animate-fade-in"
-          onClick={() => setSelectedIndex(null)}
-        >
-          {/* Close button */}
-          <button
-            className="absolute top-6 right-6 text-alpine-snow hover:text-alpine-stone transition-colors z-10"
-            onClick={() => setSelectedIndex(null)}
-          >
-            <X size={32} />
-          </button>
-
-          {/* Previous button */}
-          <button
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-alpine-snow hover:text-alpine-stone transition-colors p-2 bg-alpine-charcoal/50 rounded-full"
-            onClick={handlePrev}
-          >
-            <ChevronLeft size={32} />
-          </button>
-
-          {/* Image */}
-          <img
-            src={galleryItems[selectedIndex].src}
-            alt={t(galleryItems[selectedIndex].labelKey)}
-            className="max-w-full max-h-[75vh] object-contain rounded"
-            onClick={(e) => e.stopPropagation()}
-          />
-
-          {/* Next button */}
-          <button
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-alpine-snow hover:text-alpine-stone transition-colors p-2 bg-alpine-charcoal/50 rounded-full"
-            onClick={handleNext}
-          >
-            <ChevronRight size={32} />
-          </button>
-
-          {/* Image description and counter */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
-            <p className="text-alpine-snow font-medium text-lg mb-1">
-              {t(galleryItems[selectedIndex].labelKey)}
-            </p>
-            <span className="text-alpine-snow/60 text-sm">
-              {selectedIndex + 1} / {galleryItems.length}
-            </span>
-          </div>
-        </div>
-      )}
+      <Lightbox
+        images={galleryItems.map((g) => ({ src: g.src, caption: t(g.labelKey) }))}
+        index={selectedIndex}
+        onClose={() => setSelectedIndex(null)}
+        onNavigate={setSelectedIndex}
+      />
     </section>
   );
 };

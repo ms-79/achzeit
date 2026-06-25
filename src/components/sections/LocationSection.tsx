@@ -6,11 +6,13 @@ import locationRiver from '@/assets/location-river.webp';
 import locationCountryside from '@/assets/location-countryside.jpg';
 import locationSwans from '@/assets/location-swans.jpg';
 import ScrollReveal from '@/components/ScrollReveal';
+import Lightbox from '@/components/Lightbox';
 import { motion } from 'framer-motion';
 
 const LocationSection = () => {
   const { t } = useLanguage();
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [selectedLoc, setSelectedLoc] = useState<number | null>(null);
   const mapContainerRef = useRef<HTMLAnchorElement>(null);
 
   // Lazy load Google Maps when section comes into view
@@ -39,10 +41,10 @@ const LocationSection = () => {
   ];
 
   const locationImages = [
-    { src: locationVillage, alt: 'St. Verena Kirche, Fischen im Allgäu' },
-    { src: locationRiver, alt: 'Iller River, Fischen im Allgäu' },
-    { src: locationCountryside, alt: 'Alpine Meadows, Fischen im Allgäu' },
-    { src: locationSwans, alt: 'Schwanenfamilie am Grundbach in Fischen im Allgäu mit Bergpanorama' },
+    { src: locationVillage, alt: 'St.-Verena-Kirche in Fischen im Allgäu' },
+    { src: locationRiver, alt: 'Die Iller bei Fischen im Allgäu' },
+    { src: locationCountryside, alt: 'Allgäuer Bergwiesen bei Fischen' },
+    { src: locationSwans, alt: 'Schwanenfamilie am Grundbach in Fischen mit Bergpanorama' },
   ];
 
   return (
@@ -60,7 +62,7 @@ const LocationSection = () => {
           <div className="alpine-divider mt-6" />
         </ScrollReveal>
 
-        {/* Location Images Gallery */}
+        {/* Location Images Gallery – click to open swipeable lightbox (like the gallery) */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-12">
           {locationImages.map((image, index) => (
             <motion.div
@@ -68,23 +70,36 @@ const LocationSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
-              transition={{ 
-                duration: 0.5, 
+              transition={{
+                duration: 0.5,
                 delay: index * 0.1,
                 ease: [0.25, 0.1, 0.25, 1]
               }}
-              className="aspect-[4/3] rounded-lg overflow-hidden shadow-medium"
+              className="relative group cursor-pointer aspect-[4/3] rounded-lg overflow-hidden shadow-medium"
+              onClick={() => setSelectedLoc(index)}
             >
-              <img 
-                src={image.src} 
+              <img
+                src={image.src}
                 alt={image.alt}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-alpine-charcoal/0 group-hover:bg-alpine-charcoal/40 transition-all duration-300 flex items-end">
+                <span className="text-alpine-snow text-sm font-medium p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
+                  {image.alt}
+                </span>
+              </div>
             </motion.div>
           ))}
         </div>
+
+        <Lightbox
+          images={locationImages.map((img) => ({ src: img.src, caption: img.alt }))}
+          index={selectedLoc}
+          onClose={() => setSelectedLoc(null)}
+          onNavigate={setSelectedLoc}
+        />
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Map - Lazy loaded */}
