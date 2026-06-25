@@ -17,7 +17,7 @@ import galleryNespresso from '@/assets/gallery-nespresso.jpg';
 import galleryBoraCooktop from '@/assets/gallery-bora-cooktop.jpg';
 
 // Bedrooms
-import galleryBedroom1 from '@/assets/gallery-bedroom1.webp';
+import galleryWorkspace from '@/assets/gallery-workspace.jpg';
 import galleryBedroom2 from '@/assets/gallery-bedroom2.webp';
 import galleryBedroom3 from '@/assets/gallery-bedroom3.webp';
 import galleryBedroomMain from '@/assets/gallery-bedroom-main.webp';
@@ -25,6 +25,7 @@ import galleryBedroomSingle from '@/assets/gallery-bedroom-single.webp';
 
 // Bathroom
 import galleryBathroom from '@/assets/gallery-bathroom.webp';
+import galleryBathroomShower from '@/assets/gallery-bathroom-shower.jpg';
 import galleryBathroomUpstairs from '@/assets/gallery-bathroom-upstairs.webp';
 
 // Sauna
@@ -41,7 +42,9 @@ import galleryGarden from '@/assets/gallery-garden.jpg';
 // Outdoor & Extras
 import galleryTerrace from '@/assets/gallery-terrasse.jpg';
 import galleryBalcony from '@/assets/gallery-balkon-dachgeschoss.jpg';
-import galleryGames from '@/assets/gallery-spielesammlung.jpg';
+import galleryBalconyView from '@/assets/gallery-balcony-view.jpg';
+import galleryLaundry from '@/assets/gallery-laundry.jpg';
+import galleryGamesNight from '@/assets/gallery-games-night.jpg';
 
 interface GalleryItem {
   src: string;
@@ -63,8 +66,9 @@ const GallerySection = () => {
     { src: galleryTerrace, labelKey: 'gallery.terrace', visibleInGrid: true }, // 4. Terrasse & Garten
     { src: galleryHouseExterior, labelKey: 'gallery.exterior', visibleInGrid: true }, // 5. Außenansicht des Hauses
     { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', visibleInGrid: true }, // 6. Schlafzimmer 1
-    { src: galleryBedroom1, labelKey: 'gallery.workspace', visibleInGrid: true }, // 5. Arbeitsplatz direkt an Schlafzimmer 1
+    { src: galleryWorkspace, labelKey: 'gallery.workspace', visibleInGrid: true }, // Arbeitsbereich direkt an Schlafzimmer 1
     { src: galleryBathroom, labelKey: 'gallery.bathrooms', visibleInGrid: true }, // 6. Badezimmer en Suite (Schlafzimmer 1)
+    { src: galleryBathroomShower, labelKey: 'gallery.showerbed1', visibleInGrid: true }, // 6b. Dusche im Bad an Schlafzimmer 1
     { src: galleryBedroom2, labelKey: 'gallery.bedroom2', visibleInGrid: true }, // 7. Schlafzimmer 2 – Doppelbett
     { src: galleryBedroom3, labelKey: 'gallery.bedroom3', visibleInGrid: true }, // 8. Schlafzimmer 3 – Etagenbett & Einzelbett
     { src: galleryBedroomSingle, labelKey: 'gallery.bedroomsingle', visibleInGrid: true }, // 9. Einzelbett in Schlafzimmer 3
@@ -81,7 +85,9 @@ const GallerySection = () => {
     { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', visibleInGrid: false }, // 18. SMEG Ausstattung
     { src: galleryGarden, labelKey: 'gallery.garden', visibleInGrid: false }, // 19. Natur & Umgebung
     { src: galleryBalcony, labelKey: 'gallery.balcony', visibleInGrid: true }, // 20. Balkon Dachgeschoss
-    { src: galleryGames, labelKey: 'gallery.games', visibleInGrid: false }, // 22. Spielesammlung
+    { src: galleryBalconyView, labelKey: 'gallery.balconyview', visibleInGrid: true }, // 21. Blick vom Balkon
+    { src: galleryLaundry, labelKey: 'gallery.laundry', visibleInGrid: true }, // 22. Waschbereich
+    { src: galleryGamesNight, labelKey: 'gallery.games', visibleInGrid: true }, // 23. Spielesammlung
   ];
 
   const gridItems = galleryItems.filter(item => item.visibleInGrid);
