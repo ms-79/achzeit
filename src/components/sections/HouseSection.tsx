@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Users, Bed, Bath, Flame, Home, UtensilsCrossed, TreePine, Heart, MapPin } from 'lucide-react';
+import { Users, Bed, Bath, Flame, ThermometerSun, UtensilsCrossed, TreePine, Heart, MapPin } from 'lucide-react';
 import houseExterior from '@/assets/house-exterior.webp';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -35,15 +35,18 @@ const HouseSection = () => {
   })();
   // Split into blocks for collapse: keep <h3> with following <p>s as one chunk pair.
   const blocks = normalized.match(/<(h3|p|ul)[\s\S]*?<\/\1>/gi) || (normalized ? [normalized] : []);
-  const DESC_PREVIEW = 3;
-  const visibleBlocks = descExpanded ? blocks : blocks.slice(0, DESC_PREVIEW);
-  const hiddenCount = Math.max(0, blocks.length - DESC_PREVIEW);
+  // Collapse right before the 2nd heading (i.e. show only the intro, then
+  // "Weiterlesen" appears before "Wohnbereich & Küche"). Fallback: 3 blocks.
+  const headingIdx = blocks.reduce<number[]>((acc, b, i) => (/^<h3/i.test(b) ? [...acc, i] : acc), []);
+  const cut = headingIdx.length >= 2 ? headingIdx[1] : Math.min(3, blocks.length);
+  const visibleBlocks = descExpanded ? blocks : blocks.slice(0, cut);
+  const hiddenCount = Math.max(0, blocks.length - cut);
 
   const features = [
     { icon: Users, label: t('house.guests'), detail: t('house.guests.detail') },
     { icon: Bed, label: t('house.bedrooms') },
     { icon: Bath, label: t('house.bathrooms') },
-    { icon: Home, label: t('house.sauna') },
+    { icon: ThermometerSun, label: t('house.sauna') },
     { icon: Flame, label: t('house.fireplace') },
     { icon: UtensilsCrossed, label: t('house.kitchen') },
     { icon: TreePine, label: t('house.garden') },

@@ -19,8 +19,9 @@ export default async function handler(req: Request): Promise<Response> {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: 'Achzeit Website <noreply@allgau-stays.com>',
+        from: 'ACHZEIT <info@allgaeu-stays.com>',
         to: 'info@achzeit.de',
+        reply_to: email,
         subject: `Neue Anfrage von ${name}`,
         html: `<p><strong>Name:</strong> ${name}</p><p><strong>E-Mail:</strong> ${email}</p><p><strong>Telefon:</strong> ${phone || 'Nicht angegeben'}</p><p><strong>Nachricht:</strong><br>${message.replace(/\n/g, '<br>')}</p>`,
       }),

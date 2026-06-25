@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Flame, Wifi, Car, Sun, Trees, Tv, WashingMachine, Wind,
-  UtensilsCrossed, Coffee, Microwave, Refrigerator, Heart, Baby, Thermometer,
+  UtensilsCrossed, Coffee, Microwave, Refrigerator, Heart, Baby, Thermometer, ThermometerSun,
   Droplets, Scissors, Shirt, Bed, Lock, Briefcase, Moon, Archive, KeyRound,
   ChevronDown, ChevronUp, Sparkles, Volume2, Home, DoorOpen,
 } from 'lucide-react';
@@ -21,7 +21,7 @@ type AmenityDef = {
 
 // Mapping Hostaway → Icon + DE/EN-Label, sortiert nach Buchungs-Relevanz
 const AMENITY_MAP: AmenityDef[] = [
-  { match: /private sauna|^sauna$/i, icon: Flame, label: 'Private Sauna', labelEn: 'Private Sauna', highlight: true, priority: 1 },
+  { match: /private sauna|^sauna$/i, icon: ThermometerSun, label: 'Private Sauna', labelEn: 'Private Sauna', highlight: true, priority: 1 },
   { match: /fireplace/i, icon: Flame, label: 'Kamin', labelEn: 'Fireplace', highlight: true, priority: 2 },
   { match: /balcony/i, icon: Sun, label: 'Balkon mit Bergblick', labelEn: 'Balcony with mountain view', highlight: true, priority: 3 },
   { match: /garden|backyard/i, icon: Trees, label: 'Garten & Terrasse', labelEn: 'Garden & terrace', highlight: true, priority: 4 },
@@ -117,7 +117,7 @@ const AmenitiesSection = () => {
 
   if (items.length === 0) return null;
 
-  const VISIBLE_COUNT = 10;
+  const VISIBLE_COUNT = 12;
   const visibleItems = expanded ? items : items.slice(0, VISIBLE_COUNT);
   const hiddenCount = Math.max(0, items.length - VISIBLE_COUNT);
 
@@ -135,7 +135,7 @@ const AmenitiesSection = () => {
         </ScrollReveal>
 
         <ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3 md:gap-y-4 max-w-5xl mx-auto">
             <AnimatePresence initial={false}>
               {visibleItems.map((item, i) => {
                 const Icon = item.icon;
@@ -147,22 +147,18 @@ const AmenitiesSection = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
                     transition={{ duration: 0.25, delay: i < VISIBLE_COUNT ? i * 0.03 : 0 }}
-                    className={`flex items-center gap-3 p-4 rounded-lg border transition-all ${
-                      item.highlight
-                        ? 'border-primary/30 bg-card shadow-soft'
-                        : 'border-border/60 bg-card/60'
-                    }`}
+                    className="flex items-start gap-2.5"
                   >
+                    <Icon
+                      className={`w-5 h-5 mt-0.5 shrink-0 ${
+                        item.highlight ? 'text-alpine-forest' : 'text-muted-foreground'
+                      }`}
+                    />
                     <span
-                      className={`shrink-0 w-10 h-10 rounded-md flex items-center justify-center ${
-                        item.highlight
-                          ? 'bg-primary/10 text-primary'
-                          : 'bg-muted text-foreground/70'
+                      className={`text-sm leading-snug ${
+                        item.highlight ? 'text-foreground font-medium' : 'text-foreground/80'
                       }`}
                     >
-                      <Icon className="w-5 h-5" />
-                    </span>
-                    <span className="text-sm md:text-[15px] text-foreground leading-snug">
                       {item.label}
                     </span>
                   </motion.div>
