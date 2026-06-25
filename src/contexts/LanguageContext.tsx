@@ -23,13 +23,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     'hero.title': 'ACHZEIT',
-    'hero.subtitle': 'Family Retreat',
+    'hero.subtitle': 'Family & Friends Retreat',
    'hero.tagline': 'Dein modernes Ferienhaus im Allgäu',
    'hero.description': 'Wir haben ACHZEIT so gestaltet, wie wir selbst Urlaub machen möchten – ruhig, hochwertig und einladend für Familien wie Freunde.',
     'hero.cta.availability': 'Verfügbarkeit prüfen',
-    'hero.chip': 'ACHZEIT Family Retreat · Fischen im Allgäu · Nahe Oberstdorf',
+    'hero.chip': 'ACHZEIT Family & Friends Retreat · Fischen im Allgäu · Nahe Oberstdorf',
     'hero.headline.1': 'ACHZEIT – Auszeit im Allgäu für bis zu 7 Gäste',
-    'hero.sub': 'Modernes Ferienhaus in Fischen mit Sauna, Kamin, Holzkohlegrill und viel Platz – ideal für Familien, befreundete Paare und gemeinsame Auszeiten im Allgäu.',
+    'hero.sub': 'Modernes Ferienhaus in Fischen mit Sauna, Kamin, Outdoor-Grill und viel Platz – ideal für Familien, befreundete Paare und gemeinsame Auszeiten im Allgäu.',
     'hero.capacityNote': 'Komfortabel für bis zu 6 Erwachsene oder Familien mit bis zu 7 Gästen.',
     'hero.benefit.sauna': 'Private Sauna & Kamin',
     'hero.benefit.terrace': 'Terrasse & Balkon',
@@ -41,7 +41,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.usp.sauna.sub': 'Für entspannte Abende',
     'hero.usp.fireplace.title': 'Kamin',
     'hero.usp.fireplace.sub': 'Für gemütliche Abende',
-    'hero.usp.grill.title': 'Holzkohlegrill',
+    'hero.usp.grill.title': 'Outdoor-Grill',
     'hero.usp.grill.sub': 'Für Sommerabende auf der Terrasse',
     'hero.usp.allgaeu.title': 'Allgäu erleben',
     'hero.usp.allgaeu.sub': 'Wandern, Skifahren & Natur vor der Tür',
@@ -109,8 +109,8 @@ const translations: Record<Language, Record<string, string>> = {
     'why.4.text': 'Ruhig gelegen nahe Oberstdorf, Bergen, Natur und Ausflugszielen.',
     'why.5.title': 'Terrasse, Balkon & Garten',
     'why.5.text': 'Draußen frühstücken, entspannen und die Allgäuer Luft genießen.',
-    'why.6.title': 'Holzkohlegrill & Terrasse',
-    'why.6.text': 'Gemauerter Stein-Grill für Holzkohle und viel Platz für entspannte Sommerabende draußen.',
+    'why.6.title': 'Outdoor-Grill & Terrasse',
+    'why.6.text': 'Gemauerter Outdoor-Grill und viel Platz für entspannte Sommerabende draußen.',
 
     // Audience – "Für wen ist ACHZEIT ideal?"
     'audience.title': 'Für wen ist ACHZEIT ideal?',
@@ -229,7 +229,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.whatsapp': 'WhatsApp',
     'footer.legal.agb': 'AGB & Stornierungsbedingungen',
 
-    // Kurtaxe Danke
+    // Kurbeitrag Danke
     'kurbeitrag.thanksTitle': 'Vielen Dank!',
     'kurbeitrag.thanksMessage': 'Dein Kurbeitrag wurde erfolgreich gezahlt. Wir wünschen dir einen wunderbaren Aufenthalt in Fischen und erholsame Tage im Allgäu.',
     'kurbeitrag.backHome': 'Zurück zur Startseite',
@@ -248,13 +248,13 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     'hero.title': 'ACHZEIT',
-    'hero.subtitle': 'Family Retreat',
+    'hero.subtitle': 'Family & Friends Retreat',
     'hero.tagline': 'Your Modern Holiday Home in the Allgäu',
     'hero.description': 'We designed ACHZEIT the way we ourselves want to vacation – peaceful, high-quality and welcoming for families and friends alike.',
     'hero.cta.availability': 'Check Availability',
-    'hero.chip': 'ACHZEIT Family Retreat · Fischen im Allgäu · Near Oberstdorf',
+    'hero.chip': 'ACHZEIT Family & Friends Retreat · Fischen im Allgäu · Near Oberstdorf',
     'hero.headline.1': 'ACHZEIT – Your Allgäu getaway for up to 7 guests',
-    'hero.sub': 'Modern holiday home in Fischen with sauna, fireplace, charcoal grill and plenty of space – ideal for families, couples and shared getaways in the Allgäu.',
+    'hero.sub': 'Modern holiday home in Fischen with sauna, fireplace, outdoor grill and plenty of space – ideal for families, couples and shared getaways in the Allgäu.',
     'hero.capacityNote': 'Comfortable for up to 6 adults, or families with up to 7 guests.',
     'hero.benefit.sauna': 'Private sauna & fireplace',
     'hero.benefit.terrace': 'Terrace & balcony',
@@ -266,7 +266,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.usp.sauna.sub': 'For relaxing evenings',
     'hero.usp.fireplace.title': 'Fireplace',
     'hero.usp.fireplace.sub': 'For cozy evenings',
-    'hero.usp.grill.title': 'Charcoal grill',
+    'hero.usp.grill.title': 'Outdoor grill',
     'hero.usp.grill.sub': 'For summer evenings on the terrace',
     'hero.usp.allgaeu.title': 'Experience the Allgäu',
     'hero.usp.allgaeu.sub': 'Hiking, skiing & nature at your door',
@@ -334,8 +334,8 @@ const translations: Record<Language, Record<string, string>> = {
     'why.4.text': 'Quietly located near Oberstdorf, mountains, nature and excursions.',
     'why.5.title': 'Terrace, Balcony & Garden',
     'why.5.text': 'Breakfast outside, relax and enjoy the Allgäu air.',
-    'why.6.title': 'Charcoal Grill & Terrace',
-    'why.6.text': 'A built-in stone charcoal grill and plenty of space for relaxed summer evenings outdoors.',
+    'why.6.title': 'Outdoor Grill & Terrace',
+    'why.6.text': 'A built-in outdoor grill and plenty of space for relaxed summer evenings outdoors.',
 
     // Audience – "Who is ACHZEIT ideal for?"
     'audience.title': 'Who is ACHZEIT ideal for?',
@@ -454,7 +454,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.whatsapp': 'WhatsApp',
     'footer.legal.agb': 'Terms & cancellation policy',
 
-    // Kurtaxe Danke
+    // Kurbeitrag Danke
     'kurbeitrag.thanksTitle': 'Thank You!',
     'kurbeitrag.thanksMessage': 'Your tourist contribution has been successfully paid. We wish you a wonderful stay in Fischen and relaxing days in the Allgäu.',
     'kurbeitrag.backHome': 'Back to Home',

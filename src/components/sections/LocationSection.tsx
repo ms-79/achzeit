@@ -102,7 +102,7 @@ const LocationSection = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="ACHZEIT Family Retreat – Fischen im Allgäu (Google Maps)"
+                  title="ACHZEIT Family & Friends Retreat – Fischen im Allgäu (Google Maps)"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-muted">

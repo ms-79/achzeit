@@ -36,7 +36,7 @@ const Footer = () => {
                 className="h-14 w-auto brightness-0 invert hover:opacity-80 transition-opacity"
               />
             </Link>
-            <p className="mt-4 font-display text-xl text-alpine-snow">ACHZEIT Family Retreat</p>
+            <p className="mt-4 font-display text-xl text-alpine-snow">ACHZEIT Family &amp; Friends Retreat</p>
             <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-alpine-snow/70">
               <MapPin className="h-4 w-4" aria-hidden="true" />
               {t('footer.location')}
@@ -77,7 +77,7 @@ const Footer = () => {
         {/* Divider */}
         <div className="mt-12 border-t border-alpine-snow/15 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <p className="text-sm text-alpine-snow/60">
-            © {currentYear} ACHZEIT – Family Retreat. {t('footer.rights')}.
+            © {currentYear} ACHZEIT – Family &amp; Friends Retreat. {t('footer.rights')}.
           </p>
           <nav>
             <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">

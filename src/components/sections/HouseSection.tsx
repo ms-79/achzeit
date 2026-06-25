@@ -26,9 +26,13 @@ const HouseSection = () => {
     })();
   }, [language]);
 
-  // Normalize: convert <b> → <strong>; if HTML lacks block tags, wrap paragraphs.
+  // Normalize: convert <b> → <strong>; website wording tweaks (Kurtaxe → Kurbeitrag);
+  // if HTML lacks block tags, wrap paragraphs.
   const normalized = (() => {
-    let html = description.replace(/<b(\s[^>]*)?>/gi, '<strong>').replace(/<\/b>/gi, '</strong>');
+    let html = description
+      .replace(/<b(\s[^>]*)?>/gi, '<strong>')
+      .replace(/<\/b>/gi, '</strong>')
+      .replace(/Kurtaxe/g, 'Kurbeitrag');
     if (!/<(h3|p|ul|li)\b/i.test(html)) {
       html = html
         .split(/\n{2,}/)

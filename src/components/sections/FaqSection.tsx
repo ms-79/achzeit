@@ -24,8 +24,8 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
       a: 'Check-in ist ab 16:00 Uhr möglich, Check-out bis 11:00 Uhr. Du erhältst rechtzeitig vor Anreise alle Infos zum Self-Check-in inkl. PIN-Code und digitalem Gästeleitfaden.',
     },
     {
-      q: 'Ist die Kurtaxe / der Gästebeitrag bereits enthalten?',
-      a: 'Nein, der Kur- bzw. Gästebeitrag der Gemeinde Fischen wird separat fällig und kann bequem online beglichen werden. Mit der Allgäu-Walser-Card erhältst du dafür freien ÖPNV und viele Ermäßigungen.',
+      q: 'Ist der Kurbeitrag bereits enthalten?',
+      a: 'Nein, der Kurbeitrag (Gästebeitrag) der Gemeinde Fischen wird separat fällig und kann bequem online beglichen werden. Mit der Allgäu-Walser-Card erhältst du dafür freien ÖPNV und viele Ermäßigungen.',
     },
     {
       q: 'Wie viele Personen passen ins Haus?',
