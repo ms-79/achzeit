@@ -96,13 +96,13 @@ const LocationSection = () => {
             >
               {mapLoaded ? (
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2700.5!2d10.2655!3d47.4605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479c7f9c8d8e8e8e%3A0xabcdef1234567890!2sAchweg%205a%2C%2087538%20Fischen%20im%20Allg%C3%A4u%2C%20Germany!5e0!3m2!1sde!2sde!4v1705000000000!5m2!1sde!2sde"
+                  src="https://www.google.com/maps?q=ACHZEIT%20Family%20Retreat.%2C%20Achweg%205a%2C%2087538%20Fischen%20im%20Allg%C3%A4u&ftid=0x479c9b8c7fe4e8bb:0x17310beaa05b6bb&z=15&hl=de&output=embed"
                   className="w-full h-full pointer-events-none"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="ACHZEIT - Achweg 5a, Fischen im Allgäu"
+                  title="ACHZEIT Family Retreat – Fischen im Allgäu (Google Maps)"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-muted">
