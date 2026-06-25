@@ -19,6 +19,24 @@ import galleryLivingSofa from '@/assets/gallery-living-sofa.webp';
 import gallerySaunaInterior from '@/assets/gallery-sauna-interior.webp';
 import galleryTerrace from '@/assets/gallery-terrasse.webp';
 import galleryDiningFireplace from '@/assets/gallery-dining-fireplace.webp';
+// Additional images for the full mobile swipe gallery (incl. location)
+import galleryLiving from '@/assets/gallery-living.webp';
+import gallerySauna from '@/assets/gallery-sauna.webp';
+import galleryHouseExterior from '@/assets/house-exterior.webp';
+import galleryBedroomMain from '@/assets/gallery-bedroom-main.webp';
+import galleryWorkspace from '@/assets/gallery-workspace.jpg';
+import galleryBathroom from '@/assets/gallery-bathroom.webp';
+import galleryBathroomShower from '@/assets/gallery-bathroom-shower.jpg';
+import galleryBedroom2 from '@/assets/gallery-bedroom2.webp';
+import galleryBedroom3 from '@/assets/gallery-bedroom3.webp';
+import galleryBedroomSingle from '@/assets/gallery-bedroom-single.webp';
+import galleryBalconyView from '@/assets/gallery-balcony-view.jpg';
+import galleryLaundry from '@/assets/gallery-laundry.jpg';
+import galleryGamesNight from '@/assets/gallery-games-night.jpg';
+import locationSwans from '@/assets/location-swans.jpg';
+import locationVillage from '@/assets/location-village.webp';
+import locationRiver from '@/assets/location-river.webp';
+import locationCountryside from '@/assets/location-countryside.jpg';
 import HeroBookingBox from '@/components/sections/HeroBookingBox';
 import BrandCard from '@/components/sections/BrandCard';
 import { AIRBNB_RATING } from '@/constants/site';
@@ -37,8 +55,31 @@ const HeroSection = () => {
     { src: galleryDiningFireplace, alt: t('gallery.diningfireplace') },
   ];
 
-  // Mobile hero is a native swipe carousel through all hero images.
-  const heroImages = [{ src: galleryBalcony, alt: t('gallery.balcony') }, ...thumbs];
+  // Mobile hero is a native swipe carousel through all images (incl. location).
+  const heroImages = [
+    { src: galleryBalcony, alt: t('gallery.balcony') },
+    { src: galleryLivingSofa, alt: t('gallery.livingsofa') },
+    { src: galleryLiving, alt: t('gallery.living') },
+    { src: gallerySauna, alt: t('gallery.sauna') },
+    { src: gallerySaunaInterior, alt: t('gallery.saunainterior') },
+    { src: galleryDiningFireplace, alt: t('gallery.diningfireplace') },
+    { src: galleryTerrace, alt: t('gallery.terrace') },
+    { src: galleryHouseExterior, alt: t('gallery.exterior') },
+    { src: galleryBedroomMain, alt: t('gallery.bedroom1') },
+    { src: galleryWorkspace, alt: t('gallery.workspace') },
+    { src: galleryBathroom, alt: t('gallery.bathrooms') },
+    { src: galleryBathroomShower, alt: t('gallery.showerbed1') },
+    { src: galleryBedroom2, alt: t('gallery.bedroom2') },
+    { src: galleryBedroom3, alt: t('gallery.bedroom3') },
+    { src: galleryBedroomSingle, alt: t('gallery.bedroomsingle') },
+    { src: galleryBalconyView, alt: t('gallery.balconyview') },
+    { src: galleryLaundry, alt: t('gallery.laundry') },
+    { src: galleryGamesNight, alt: t('gallery.games') },
+    { src: locationSwans, alt: 'Schwanenfamilie am Grundbach in Fischen im Allgäu mit Bergpanorama' },
+    { src: locationVillage, alt: 'St. Verena Kirche, Fischen im Allgäu' },
+    { src: locationRiver, alt: 'Iller bei Fischen im Allgäu' },
+    { src: locationCountryside, alt: 'Allgäuer Bergwiesen bei Fischen' },
+  ];
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const onCarouselScroll = () => {
@@ -164,16 +205,9 @@ const HeroSection = () => {
                   {t('hero.gallery.cta')}
                   <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </button>
-                {/* Swipe dots */}
-                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
-                  {heroImages.map((_, i) => (
-                    <span
-                      key={i}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        i === activeSlide ? 'w-4 bg-alpine-snow' : 'w-1.5 bg-alpine-snow/50'
-                      }`}
-                    />
-                  ))}
+                {/* Slide counter */}
+                <div className="absolute bottom-4 left-4 z-20 rounded-full bg-alpine-charcoal/55 text-alpine-snow text-xs font-medium px-2.5 py-1 tabular-nums backdrop-blur-sm">
+                  {activeSlide + 1} / {heroImages.length}
                 </div>
               </div>
 

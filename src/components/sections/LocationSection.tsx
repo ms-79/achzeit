@@ -4,6 +4,7 @@ import { MapPin, Mountain, TreePine, Snowflake } from 'lucide-react';
 import locationVillage from '@/assets/location-village.webp';
 import locationRiver from '@/assets/location-river.webp';
 import locationCountryside from '@/assets/location-countryside.jpg';
+import locationSwans from '@/assets/location-swans.jpg';
 import ScrollReveal from '@/components/ScrollReveal';
 import { motion } from 'framer-motion';
 
@@ -41,6 +42,7 @@ const LocationSection = () => {
     { src: locationVillage, alt: 'St. Verena Kirche, Fischen im Allgäu' },
     { src: locationRiver, alt: 'Iller River, Fischen im Allgäu' },
     { src: locationCountryside, alt: 'Alpine Meadows, Fischen im Allgäu' },
+    { src: locationSwans, alt: 'Schwanenfamilie am Grundbach in Fischen im Allgäu mit Bergpanorama' },
   ];
 
   return (
@@ -59,7 +61,7 @@ const LocationSection = () => {
         </ScrollReveal>
 
         {/* Location Images Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-12">
           {locationImages.map((image, index) => (
             <motion.div
               key={index}
