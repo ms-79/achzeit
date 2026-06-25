@@ -110,7 +110,7 @@ const translations: Record<Language, Record<string, string>> = {
     'why.5.title': 'Terrasse, Balkon & Garten',
     'why.5.text': 'Draußen frühstücken, entspannen und die Allgäuer Luft genießen.',
     'why.6.title': 'Komfortabel anreisen',
-    'why.6.text': 'Carport, moderne Küche, Waschmaschine und Trockner.',
+    'why.6.text': 'Eigener Stellplatz am Haus, moderne Küche, Grill, Waschmaschine und Trockner.',
 
     // Audience – "Für wen ist ACHZEIT ideal?"
     'audience.title': 'Für wen ist ACHZEIT ideal?',
@@ -118,7 +118,7 @@ const translations: Record<Language, Record<string, string>> = {
     'audience.families.title': 'Familien',
     'audience.families.text': 'Viel Platz, drei Schlafzimmer, Garten, moderne Küche und kurze Wege zu Ausflügen im Allgäu – ideal für entspannte Familienzeit.',
     'audience.friends.title': 'Freunde & befreundete Paare',
-    'audience.friends.text': 'Zwei großzügige Schlafzimmer mit 200 × 200 cm Doppelbetten, Sauna, Kamin und gemütliche Gemeinschaftsbereiche – perfekt für gemeinsame Tage im Allgäu.',
+    'audience.friends.text': 'Zwei großzügige Schlafzimmer mit 200 × 200 cm Doppelbetten und ein drittes Zimmer mit Etagenbett (90 × 200 cm) und kleinem Einzelbett (80 × 180 cm). Dazu private Sauna, Kamin, moderne Küche und Garten mit Grill – plus großzügige Gemeinschaftsbereiche für lange Abende. Perfekt für gemeinsame Tage im Allgäu.',
     'audience.active.title': 'Aktive Genießer',
     'audience.active.text': 'Wandern, Radfahren, Skifahren, Wellness und Abende am Kamin – ACHZEIT ist der passende Rückzugsort für aktive Auszeiten in Fischen.',
     'audience.note': 'Bis zu 7 Gäste insgesamt – komfortabel für bis zu 6 Erwachsene. Das dritte Schlafzimmer (Etagenbett 90 × 200 cm + Einzelbett 80 × 180 cm) ist besonders für Kinder und Jugendliche geeignet.',
@@ -334,7 +334,7 @@ const translations: Record<Language, Record<string, string>> = {
     'why.5.title': 'Terrace, Balcony & Garden',
     'why.5.text': 'Breakfast outside, relax and enjoy the Allgäu air.',
     'why.6.title': 'Comfortable Stay',
-    'why.6.text': 'Carport, modern kitchen, washing machine and dryer.',
+    'why.6.text': 'Private parking space at the house, modern kitchen, BBQ grill, washing machine and dryer.',
 
     // Audience – "Who is ACHZEIT ideal for?"
     'audience.title': 'Who is ACHZEIT ideal for?',
@@ -342,7 +342,7 @@ const translations: Record<Language, Record<string, string>> = {
     'audience.families.title': 'Families',
     'audience.families.text': 'Plenty of space, three bedrooms, garden, modern kitchen and short trips to Allgäu adventures – ideal for relaxed family time.',
     'audience.friends.title': 'Friends & couples',
-    'audience.friends.text': 'Two spacious bedrooms with 200 × 200 cm double beds, sauna, fireplace and cozy shared spaces – perfect for days together in the Allgäu.',
+    'audience.friends.text': 'Two spacious bedrooms with 200 × 200 cm double beds and a third room with a bunk bed (90 × 200 cm) and a small single bed (80 × 180 cm). Plus a private sauna, fireplace, modern kitchen and garden with grill – and generous shared spaces for long evenings. Perfect for days together in the Allgäu.',
     'audience.active.title': 'Active souls',
     'audience.active.text': 'Hiking, cycling, skiing, wellness and evenings by the fire – ACHZEIT is the right retreat for active getaways in Fischen.',
     'audience.note': 'Up to 7 guests in total – comfortable for up to 6 adults. The third bedroom (bunk bed 90 × 200 cm + single bed 80 × 180 cm) is especially suited to children and teenagers.',

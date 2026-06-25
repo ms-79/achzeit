@@ -33,15 +33,15 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
     },
     {
       q: 'Wie sind die Schlafzimmer aufgeteilt?',
-      a: 'Es gibt 3 Schlafzimmer: Schlafzimmer 1 mit Doppelbett (200 × 200 cm), Schlafzimmer 2 mit Doppelbett (200 × 200 cm) und Schlafzimmer 3 mit Etagenbett (90 × 200 cm) sowie einem zusätzlichen Einzelbett (80 × 180 cm). Das dritte Schlafzimmer ist besonders gut für Kinder und Jugendliche geeignet – für Erwachsenengruppen empfehlen wir ACHZEIT komfortabel für bis zu 6 Erwachsene.',
+      a: 'Es gibt 3 Schlafzimmer: Schlafzimmer 1 mit Doppelbett (200 × 200 cm), Schlafzimmer 2 mit Doppelbett (200 × 200 cm) und Schlafzimmer 3 mit Etagenbett (90 × 200 cm) sowie einem kleinen zusätzlichen Einzelbett (80 × 180 cm). Das dritte Schlafzimmer ist besonders gut für Kinder und Jugendliche geeignet – für Erwachsenengruppen empfehlen wir ACHZEIT komfortabel für bis zu 6 Erwachsene.',
     },
     {
       q: 'Gibt es Parkplätze und WLAN?',
       a: 'Ja – kostenfreie Privatparkplätze direkt am Haus und schnelles WLAN in allen Räumen.',
     },
     {
-      q: 'Ist das Haus auch im Sommer attraktiv?',
-      a: 'Absolut. Sauna und Kamin sorgen im Winter für Gemütlichkeit, im Sommer locken Balkon, Terrasse, Wandern, Baden und die ganze Bergwelt rund um Oberstdorf.',
+      q: 'Ist das Haus im Sommer wie im Winter attraktiv?',
+      a: 'Absolut – ACHZEIT ist ganzjährig ein Erlebnis. Im Winter sorgen Sauna und Kamin für Gemütlichkeit, die Skigebiete und Loipen rund um Oberstdorf sind schnell erreicht. Im Sommer locken Balkon, Terrasse, Garten mit Grill, Wandern, Baden und die ganze Bergwelt.',
     },
   ],
   en: [
@@ -71,15 +71,15 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
     },
     {
       q: 'How are the bedrooms arranged?',
-      a: 'There are 3 bedrooms: bedroom 1 with a double bed (200 × 200 cm), bedroom 2 with a double bed (200 × 200 cm), and bedroom 3 with a bunk bed (90 × 200 cm) plus an additional single bed (80 × 180 cm). The third bedroom is especially well suited to children and teenagers – for groups of adults we recommend ACHZEIT comfortably for up to 6 adults.',
+      a: 'There are 3 bedrooms: bedroom 1 with a double bed (200 × 200 cm), bedroom 2 with a double bed (200 × 200 cm), and bedroom 3 with a bunk bed (90 × 200 cm) plus a small additional single bed (80 × 180 cm). The third bedroom is especially well suited to children and teenagers – for groups of adults we recommend ACHZEIT comfortably for up to 6 adults.',
     },
     {
       q: 'Is there parking and Wi-Fi?',
       a: 'Yes – free private parking right at the house and fast Wi-Fi throughout.',
     },
     {
-      q: 'Is the house attractive in summer too?',
-      a: 'Absolutely. Sauna and fireplace make it cozy in winter, while balcony, terrace, hiking, swimming and the whole mountain world around Oberstdorf shine in summer.',
+      q: 'Is the house attractive in both summer and winter?',
+      a: 'Absolutely – ACHZEIT is a year-round experience. In winter, sauna and fireplace make it cozy, and the ski areas and cross-country trails around Oberstdorf are quickly reached. In summer, the balcony, terrace, garden with grill, hiking, swimming and the whole mountain world await.',
     },
   ],
 };
