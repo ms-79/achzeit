@@ -30,7 +30,7 @@ const AMENITY_MAP: AmenityDef[] = [
   { match: /free parking|^parking/i, icon: Car, label: 'Kostenfreier Parkplatz', labelEn: 'Free parking', highlight: true, priority: 7 },
   { match: /smart tv/i, icon: Tv, label: 'Smart TV', labelEn: 'Smart TV', highlight: true, priority: 8 },
   { match: /sound system/i, icon: Volume2, label: 'Soundsystem', labelEn: 'Sound system', priority: 9 },
-  { match: /family/i, icon: Heart, label: 'Familienfreundlich', labelEn: 'Family friendly', highlight: true, priority: 10 },
+  { match: /family/i, icon: Heart, label: 'Familien & Freunde willkommen', labelEn: 'Families & friends welcome', highlight: true, priority: 10 },
   { match: /suitable for children/i, icon: Baby, label: 'Geeignet für Kinder', labelEn: 'Suitable for children', priority: 11 },
   { match: /suitable for infants/i, icon: Baby, label: 'Geeignet für Kleinkinder', labelEn: 'Suitable for infants', priority: 12 },
   { match: /baby crib/i, icon: Baby, label: 'Babybett', labelEn: 'Baby crib', priority: 13 },

@@ -76,6 +76,9 @@ const HeroSection = () => {
                 className="mt-5 md:mt-6 max-w-2xl text-base md:text-lg text-foreground/80 leading-relaxed [&_strong]:font-semibold [&_strong]:text-foreground"
                 dangerouslySetInnerHTML={{ __html: t('hero.sub') }}
               />
+              <p className="mt-3 text-sm text-muted-foreground">
+                {t('hero.capacityNote')}
+              </p>
             </motion.div>
 
             {/* Social proof + USP strip */}

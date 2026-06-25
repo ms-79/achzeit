@@ -10,6 +10,7 @@ import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
 const WelcomeSection = lazy(() => import('@/components/sections/WelcomeSection'));
 const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
 const WhySection = lazy(() => import('@/components/sections/WhySection'));
+const AudienceSection = lazy(() => import('@/components/sections/AudienceSection'));
 const AmenitiesSection = lazy(() => import('@/components/sections/AmenitiesSection'));
 const GallerySection = lazy(() => import('@/components/sections/GallerySection'));
 const ReviewsSection = lazy(() => import('@/components/sections/ReviewsSection'));
@@ -36,6 +37,9 @@ const Index = () => {
           </Suspense>
           <Suspense fallback={<SectionSkeleton />}>
             <WhySection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <AudienceSection />
           </Suspense>
           <Suspense fallback={<SectionSkeleton />}>
             <HouseSection />

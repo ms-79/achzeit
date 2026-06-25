@@ -61,7 +61,7 @@ const GallerySection = () => {
     { src: galleryBedroom1, labelKey: 'gallery.workspace', visibleInGrid: true }, // 5. Arbeitsplatz direkt an Schlafzimmer 1
     { src: galleryBathroom, labelKey: 'gallery.bathrooms', visibleInGrid: true }, // 6. Badezimmer en Suite (Schlafzimmer 1)
     { src: galleryBedroom2, labelKey: 'gallery.bedroom2', visibleInGrid: true }, // 7. Schlafzimmer 2 – Doppelbett
-    { src: galleryBedroom3, labelKey: 'gallery.bedroom3', visibleInGrid: true }, // 8. Schlafzimmer 3 (Kinderzimmer) – Etagenbett
+    { src: galleryBedroom3, labelKey: 'gallery.bedroom3', visibleInGrid: true }, // 8. Schlafzimmer 3 – Etagenbett & Einzelbett
     { src: galleryBedroomSingle, labelKey: 'gallery.bedroomsingle', visibleInGrid: true }, // 9. Einzelbett in Schlafzimmer 3
     
     // Only in lightbox (positions 10-19)

@@ -29,7 +29,11 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
     },
     {
       q: 'Wie viele Personen passen ins Haus?',
-      a: 'Bis zu 7 Gäste: 4 Erwachsene + 3 Kinder oder 6 Erwachsene. Es gibt 3 Schlafzimmer (Doppelbett, Doppelbett, Etagenbett + Einzelbett).',
+      a: 'ACHZEIT bietet Platz für bis zu 7 Gäste und ist komfortabel für bis zu 6 Erwachsene. Ideal für Familien sowie für befreundete Paare und kleine Gruppen.',
+    },
+    {
+      q: 'Wie sind die Schlafzimmer aufgeteilt?',
+      a: 'Es gibt 3 Schlafzimmer: Schlafzimmer 1 mit Doppelbett (200 × 200 cm), Schlafzimmer 2 mit Doppelbett (200 × 200 cm) und Schlafzimmer 3 mit Etagenbett (90 × 200 cm) sowie einem zusätzlichen Einzelbett (80 × 180 cm). Das dritte Schlafzimmer ist besonders gut für Kinder und Jugendliche geeignet – für Erwachsenengruppen empfehlen wir ACHZEIT komfortabel für bis zu 6 Erwachsene.',
     },
     {
       q: 'Gibt es Parkplätze und WLAN?',
@@ -63,7 +67,11 @@ const FAQS: Record<'de' | 'en', Faq[]> = {
     },
     {
       q: 'How many people fit in the house?',
-      a: 'Up to 7 guests: 4 adults + 3 children, or 6 adults. There are 3 bedrooms (double, double, bunk + single).',
+      a: 'ACHZEIT sleeps up to 7 guests and is comfortable for up to 6 adults. Ideal for families as well as friends, couples and small groups.',
+    },
+    {
+      q: 'How are the bedrooms arranged?',
+      a: 'There are 3 bedrooms: bedroom 1 with a double bed (200 × 200 cm), bedroom 2 with a double bed (200 × 200 cm), and bedroom 3 with a bunk bed (90 × 200 cm) plus an additional single bed (80 × 180 cm). The third bedroom is especially well suited to children and teenagers – for groups of adults we recommend ACHZEIT comfortably for up to 6 adults.',
     },
     {
       q: 'Is there parking and Wi-Fi?',
