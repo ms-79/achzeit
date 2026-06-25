@@ -32,6 +32,9 @@ import gallerySauna from '@/assets/gallery-sauna.webp';
 import gallerySaunaInterior from '@/assets/gallery-sauna-interior.jpg';
 import gallerySaunaShower from '@/assets/gallery-sauna-shower.jpg';
 
+// Exterior
+import galleryHouseExterior from '@/assets/house-exterior.webp';
+
 // Garden & Nature
 import galleryGarden from '@/assets/gallery-garden.jpg';
 
@@ -57,7 +60,9 @@ const GallerySection = () => {
     { src: galleryLivingSofa, labelKey: 'gallery.livingsofa', visibleInGrid: true }, // 1. Gemütliche Sitzecke im Wohnzimmer
     { src: galleryLiving, labelKey: 'gallery.living', visibleInGrid: true }, // 2. Kamin im Wohnzimmer
     { src: gallerySauna, labelKey: 'gallery.sauna', visibleInGrid: true }, // 3. Private Sauna
-    { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', visibleInGrid: true }, // 4. Schlafzimmer 1
+    { src: galleryTerrace, labelKey: 'gallery.terrace', visibleInGrid: true }, // 4. Terrasse & Garten
+    { src: galleryHouseExterior, labelKey: 'gallery.exterior', visibleInGrid: true }, // 5. Außenansicht des Hauses
+    { src: galleryBedroomMain, labelKey: 'gallery.bedroom1', visibleInGrid: true }, // 6. Schlafzimmer 1
     { src: galleryBedroom1, labelKey: 'gallery.workspace', visibleInGrid: true }, // 5. Arbeitsplatz direkt an Schlafzimmer 1
     { src: galleryBathroom, labelKey: 'gallery.bathrooms', visibleInGrid: true }, // 6. Badezimmer en Suite (Schlafzimmer 1)
     { src: galleryBedroom2, labelKey: 'gallery.bedroom2', visibleInGrid: true }, // 7. Schlafzimmer 2 – Doppelbett
@@ -75,8 +80,7 @@ const GallerySection = () => {
     { src: galleryBoraCooktop, labelKey: 'gallery.boracooktop', visibleInGrid: false }, // 17. BORA Kochfeld
     { src: galleryKitchenSmeg, labelKey: 'gallery.kitchendetails', visibleInGrid: false }, // 18. SMEG Ausstattung
     { src: galleryGarden, labelKey: 'gallery.garden', visibleInGrid: false }, // 19. Natur & Umgebung
-    { src: galleryTerrace, labelKey: 'gallery.terrace', visibleInGrid: true }, // 20. Terrasse
-    { src: galleryBalcony, labelKey: 'gallery.balcony', visibleInGrid: true }, // 21. Balkon Dachgeschoss
+    { src: galleryBalcony, labelKey: 'gallery.balcony', visibleInGrid: true }, // 20. Balkon Dachgeschoss
     { src: galleryGames, labelKey: 'gallery.games', visibleInGrid: false }, // 22. Spielesammlung
   ];
 

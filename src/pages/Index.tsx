@@ -8,9 +8,9 @@ import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
 
 // Lazy load below-the-fold sections for faster initial page load
 const WelcomeSection = lazy(() => import('@/components/sections/WelcomeSection'));
-const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
 const WhySection = lazy(() => import('@/components/sections/WhySection'));
 const AudienceSection = lazy(() => import('@/components/sections/AudienceSection'));
+const HouseSection = lazy(() => import('@/components/sections/HouseSection'));
 const AmenitiesSection = lazy(() => import('@/components/sections/AmenitiesSection'));
 const GallerySection = lazy(() => import('@/components/sections/GallerySection'));
 const ReviewsSection = lazy(() => import('@/components/sections/ReviewsSection'));

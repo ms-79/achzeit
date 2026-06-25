@@ -2,8 +2,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import {
   Flame,
+  FlameKindling,
   ThermometerSun,
-  Users,
   Mountain,
   Star,
   MapPin,
@@ -39,7 +39,7 @@ const HeroSection = () => {
   const usps = [
     { icon: ThermometerSun, title: t('hero.usp.sauna.title'), sub: t('hero.usp.sauna.sub') },
     { icon: Flame, title: t('hero.usp.fireplace.title'), sub: t('hero.usp.fireplace.sub') },
-    { icon: Users, title: t('hero.usp.capacity.title'), sub: t('hero.usp.capacity.sub') },
+    { icon: FlameKindling, title: t('hero.usp.grill.title'), sub: t('hero.usp.grill.sub') },
     { icon: Mountain, title: t('hero.usp.allgaeu.title'), sub: t('hero.usp.allgaeu.sub') },
   ];
 
