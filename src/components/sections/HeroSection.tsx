@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Flame,
@@ -35,6 +36,16 @@ const HeroSection = () => {
     { src: galleryTerrace, alt: t('gallery.terrace') },
     { src: galleryDiningFireplace, alt: t('gallery.diningfireplace') },
   ];
+
+  // Mobile hero is a native swipe carousel through all hero images.
+  const heroImages = [{ src: galleryBalcony, alt: t('gallery.balcony') }, ...thumbs];
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const onCarouselScroll = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    setActiveSlide(Math.round(el.scrollLeft / el.clientWidth));
+  };
 
   const usps = [
     { icon: ThermometerSun, title: t('hero.usp.sauna.title'), sub: t('hero.usp.sauna.sub') },
@@ -104,12 +115,71 @@ const HeroSection = () => {
 
             {/* Photo collage */}
             <motion.div
-              className="relative grid grid-cols-4 grid-rows-2 gap-2.5 rounded-3xl overflow-hidden h-[58vh] min-h-[460px] max-h-[620px] 2xl:max-h-[700px]"
+              className="relative rounded-3xl overflow-hidden h-[58vh] min-h-[460px] max-h-[620px] 2xl:max-h-[700px]"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
             >
-              <div className="col-span-4 md:col-span-2 row-span-2 relative group overflow-hidden">
+              {/* Mobile: native swipe carousel through all hero images */}
+              <div className="md:hidden h-full">
+                <div
+                  ref={carouselRef}
+                  onScroll={onCarouselScroll}
+                  className="flex h-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+                >
+                  {heroImages.map((img, i) => (
+                    <div key={i} className="snap-center shrink-0 w-full h-full">
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        fetchPriority={i === 0 ? 'high' : undefined}
+                        draggable={false}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+                {/* Airbnb badge → reviews */}
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('#reviews')}
+                  aria-label={`${AIRBNB_RATING} ${t('hero.social.rating')}`}
+                  className="absolute top-4 left-4 z-20 inline-flex items-center gap-1.5 bg-alpine-snow/95 text-alpine-charcoal text-xs font-medium px-3 py-1.5 rounded-lg shadow-soft backdrop-blur-sm"
+                >
+                  <span className="flex items-center gap-0.5">
+                    {Array.from({ length: 5 }).map((_, s) => (
+                      <Star key={s} className="w-3.5 h-3.5 fill-alpine-gold text-alpine-gold" />
+                    ))}
+                  </span>
+                  <span className="font-semibold tabular-nums">{AIRBNB_RATING}</span>
+                  <span className="text-alpine-charcoal/70">{t('hero.social.rating')}</span>
+                </button>
+                {/* Gallery CTA */}
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('#gallery')}
+                  className="absolute bottom-4 right-4 z-20 inline-flex items-center gap-1.5 bg-alpine-snow text-alpine-charcoal text-xs font-medium px-3.5 py-2 rounded-lg shadow-soft"
+                >
+                  {t('hero.gallery.cta')}
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </button>
+                {/* Swipe dots */}
+                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
+                  {heroImages.map((_, i) => (
+                    <span
+                      key={i}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        i === activeSlide ? 'w-4 bg-alpine-snow' : 'w-1.5 bg-alpine-snow/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop: collage grid */}
+              <div className="hidden md:grid grid-cols-4 grid-rows-2 gap-2.5 h-full">
+                <div className="col-span-2 row-span-2 relative group overflow-hidden">
                 <img
                   src={galleryBalcony}
                   alt={t('gallery.balcony')}
@@ -169,6 +239,7 @@ const HeroSection = () => {
                   )}
                 </button>
               ))}
+              </div>
             </motion.div>
 
             {/* Booking box + brand card – in flow below the collage on < xl */}

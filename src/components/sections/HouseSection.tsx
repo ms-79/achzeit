@@ -32,7 +32,8 @@ const HouseSection = () => {
     let html = description
       .replace(/<b(\s[^>]*)?>/gi, '<strong>')
       .replace(/<\/b>/gi, '</strong>')
-      .replace(/Kurtaxe/g, 'Kurbeitrag');
+      .replace(/Kurtaxe/g, 'Kurbeitrag')
+      .replace(/malerischen Dorf Fischen/g, 'malerischen Fischen');
     if (!/<(h3|p|ul|li)\b/i.test(html)) {
       html = html
         .split(/\n{2,}/)
