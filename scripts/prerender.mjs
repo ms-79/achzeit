@@ -122,11 +122,24 @@ async function run() {
   // Imported lazily so a missing/broken puppeteer install never blocks the build.
   const { default: puppeteer } = await import('puppeteer');
 
-  const server = await startServer();
-  const browser = await puppeteer.launch({
+  // On Vercel the build container lacks the shared libs full Chromium needs
+  // (libnspr4.so etc.), so use the serverless-ready @sparticuz/chromium binary
+  // there. Locally, puppeteer's own bundled Chromium is used.
+  let launchOptions = {
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+  };
+  if (process.env.VERCEL) {
+    const chromium = (await import('@sparticuz/chromium')).default;
+    launchOptions = {
+      args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    };
+  }
+
+  const server = await startServer();
+  const browser = await puppeteer.launch(launchOptions);
 
   try {
     for (const route of ROUTES) {
