@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Seo from '@/components/Seo';
 import { CheckCircle } from 'lucide-react';
 import achzeitLogo from '@/assets/achzeit-logo.png';
 
@@ -10,6 +11,7 @@ const KurbeitragDanke = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
+      <Seo title="Vielen Dank – ACHZEIT" path="/kurbeitrag-danke" noindex />
       <div className="max-w-lg w-full text-center">
         <div className="flex justify-center mb-10">
           <img

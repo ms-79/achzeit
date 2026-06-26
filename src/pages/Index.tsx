@@ -1,10 +1,24 @@
 import { lazy, Suspense } from 'react';
+import Seo from '@/components/Seo';
+import { FAQS } from '@/data/faq';
 import Header from '@/components/Header';
 import HeroSection from '@/components/sections/HeroSection';
 import Footer from '@/components/Footer';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
+
+// FAQPage structured data — built from the same source as the visible FAQ so the
+// markup and on-page content always match (Google requirement for FAQ rich results).
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.de.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
 
 // Lazy load below-the-fold sections for faster initial page load
 const WelcomeSection = lazy(() => import('@/components/sections/WelcomeSection'));
@@ -28,6 +42,12 @@ const SectionSkeleton = () => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title="ACHZEIT Family & Friends Retreat – Ferienhaus im Allgäu für Familien & Freunde"
+        description="Modernes Ferienhaus in Fischen im Allgäu mit Sauna, Kamin, Outdoor-Grill, Garten und Platz für bis zu 7 Gäste. Ideal für Familien, Freunde und Gruppen bis 6 Erwachsene."
+        path="/"
+        jsonLd={faqJsonLd}
+      />
       <Header />
       <main className="relative">
         <HeroSection />
